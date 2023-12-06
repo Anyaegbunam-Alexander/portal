@@ -1,0 +1,312 @@
+body{
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    background-color: var(--purple);
+
+}
+
+//image
+$background-image: '../../assets/company_x-1.jpg';
+
+// src/Register.scss
+.register--container {
+    margin: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .register--container-register{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--background-color-2);
+        box-shadow: -4px 9px 30px -10px rgba(0,0,0,0.8);
+        -webkit-box-shadow: -4px 9px 30px -10px rgba(0,0,0,0.8);
+        -moz-box-shadow: -4px 9px 30px -10px rgba(0,0,0,0.8);
+    }
+
+    .top{
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 70px;
+        color: var(--text-color-white);
+        background: url($background-image) rgba(0, 0, 0, 0.7) no-repeat center center;
+        background-size: cover;
+        background-blend-mode: multiply;
+        gap: 20px;
+
+        h2{
+            font-size: 60px;
+        }
+
+        p{
+            font-size: 20px;
+            letter-spacing: 5px;
+            font-weight: 100;
+        }
+        span{
+            font-size: 20px;
+            font-weight: 400;
+            border-bottom: 1px solid var(--text-color-white);
+        }
+
+        .buttons{
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+
+            button{
+                border: none;
+                padding: 10px 30px;
+                font-size: 18px;
+                font-weight: 500;
+                background-color: var(--purple);
+                color: var(--text-color-white);
+                transition: ease-in 0.3s;
+            }
+
+            button:hover{
+                background-color: transparent;
+                color: var(--text-color-white);
+                border: 1px solid var(--text-color-white);
+            }
+
+            button:active{
+                background-color: var(--blue);
+            }
+        }
+    }
+
+    .bottom{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 40px;
+        gap: 30px;
+
+        h2{
+            font-weight: bold;
+            border-bottom: 5px solid black;
+            padding-bottom: 15px;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 80%;
+
+
+            input{
+                outline: none;
+                border: none;
+                font-size: 10px;
+                padding: 0 0 15px;
+                color: black;
+                border-bottom: 1px solid black;
+                background-color: transparent;
+                font-size: 20px;
+            }
+            input::placeholder {
+                color: black;
+                font-weight: 400;
+            }
+
+            .password-field{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+
+                .password{
+                    width: 85%;
+                }
+                
+                .input-group-append{
+                    width: 10%;
+                    border: none;
+                    background-color: transparent;
+
+                    .input-group-text{
+                        background-color: var(--purple);
+                        justify-content: center;
+                        cursor: pointer;
+                        color: white;
+                    }
+                }
+            }
+
+            .file{
+                border: none;
+                outline: none;
+            }
+
+            .file::before{
+                display: block;
+                content: 'Upload your CAC document';
+                margin-bottom: 15px;
+            }
+
+            .file::file-selector-button{
+                border-radius: 4px;
+                padding: 0 16px;
+                height: 40px;
+                cursor: pointer;
+                color: var(--text-color-white);
+                background-color: var(--purple);
+                border: 1px solid rgba(0, 0, 0, 0.16);
+                box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+                margin-right: 16px;
+                transition: background-color 200ms;
+            }
+
+            .btn{
+                text-align: left;
+                margin: 0;
+                font-weight: 400;
+                background-color: transparent;
+                color: black;
+                border-bottom: 1px solid black;
+                border-radius: 0;
+            }
+            .btn:hover{
+                background-color: transparent;
+                color: black;
+            }
+            .scrollable-menu {                
+                height: auto;
+                max-height: 200px;
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .register-checkbox{
+                display: flex;
+                gap: 12px;
+            }
+
+            button{
+                border: none;
+                width: 50%;
+                padding: 10px;
+                margin-bottom: 30px;
+                font-size: 18px;
+                font-weight: 500;
+                color: var(--text-color-white);
+                background-color: var(--purple);
+                transition: ease-in 0.3s;
+            }
+
+            button:hover{
+                background-color: var(--blue);
+                color: var(--text-color-white);
+            }
+
+            p{
+                margin-top: -15px;
+                a{
+                    margin-left: 5px;
+                    color: black;
+                    transition: ease-in 0.1s;
+                }
+                a:hover{
+                    color: var(--purple);
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .register--container{
+        margin: 30px 0;
+        
+        .register--container-register{
+            flex-direction: column;
+            width: 90% !important;
+    
+            .top{
+                width: 100%;
+                flex-direction: column;
+    
+                h2{
+                    font-size: 30px;
+                }
+    
+                p{
+                    font-size: 15px;
+                    letter-spacing: 2px;
+                    font-weight: 100;
+                }
+                
+                span{
+                    border-bottom: 2px solid var(--text-color-white);
+                }
+    
+                .buttons{
+                    flex-direction: column;
+                    justify-content: space-between;
+                    gap: 20px;
+                    width: 100%;
+
+                    
+                    button{
+                        width: 100%;
+                    }
+                }
+            }
+    
+            .bottom{
+                padding: 10px;
+            }
+        }
+    }
+}
+
+
+@media screen and (min-width: 760px) and (max-width: 1250px) {
+    .register--container{
+        margin: 30px 0 !important;
+        
+        .register--container-register{
+            flex-direction: column;
+            width: 80%;
+    
+            .top{
+                width: 100%;
+                flex-direction: column;
+    
+                h2{
+                    font-size: 50px;
+                }
+    
+                p{
+                    font-size: 25px;
+                    letter-spacing: 3px;
+                    font-weight: 100;
+                }
+                
+                span{
+                    border-bottom: 2px solid var(--text-color-white);
+                }
+    
+                .buttons{
+                    gap: 15px;
+                    width: 100%;
+                }
+            }
+    
+            .bottom{
+                padding: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,348 @@
+// src/Login.scss
+.main--container {
+    //margin: 50px 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--purple);
+
+    .main--container-login{
+        width: 70%;
+        display: flex;
+        background-color: var(--background-color-2);
+        box-shadow: -4px 9px 30px -10px rgba(0,0,0,0.8);
+        -webkit-box-shadow: -4px 9px 30px -10px rgba(0,0,0,0.8);
+        -moz-box-shadow: -4px 9px 30px -10px rgba(0,0,0,0.8);
+    }
+
+    .left{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 40px;
+
+        img{
+            //padding: 10px;
+            width: 80%;
+            height: 80%;
+        }
+
+        p{
+            text-align: center;
+            padding: 5px;
+            border-radius: 10px;
+            border: 1px solid var(--purple);
+            width: 50%;
+            color: var(--purple);
+        }
+
+        h5{
+            color: var(--purple);
+        }
+
+
+        .buttons{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 25px;
+            width: 100%;
+
+            button{
+                border: none;
+                width: 100%;
+                padding: 10px 25px;
+                font-size: 18px;
+                font-weight: 500;
+                background-color: var(--purple);
+                color: var(--text-color-white);
+                transition: ease-in 0.3s;
+            }
+
+            button:hover{
+                background-color: transparent;
+                color: var(--purple);
+                border: 1px solid var(--purple);
+            }
+
+            button:active{
+                background-color: var(--blue);
+            }
+        }
+    }
+
+    .right{
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        padding: 40px;
+        color: var(--text-color-white);
+        background-color: var(--purple);
+
+        .right--social-signin{
+            display: flex;
+            justify-content: space-between;
+
+            p{
+                font-size: 20px;
+            }
+
+            .right--social-signin-icons{
+
+                button{
+                    margin-right: 10px;
+                    border: none;
+                    background-color: transparent;
+                    color: var(--text-color-white);
+                    transition: ease-out .5s;
+                }
+                button:hover{
+                    opacity: 0.6;
+                }
+            }
+        }
+
+        h4{
+            margin: 25px 0;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+
+            input{
+                outline: none;
+                padding: 15px;
+                margin-bottom: 30px;
+                border: none;
+                font-size: 16px;
+                color: var(--background-color-1);
+                border-bottom: 1px solid var(--text-color-white);
+                background-color: transparent;
+                font-size: 20px;
+            }
+            input::placeholder {
+                color: var(--text-color-white);
+                font-weight: 100;
+            }
+
+            .password-field{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+
+                .password{
+                    width: 90%;
+                }
+                
+                .input-group-append{
+                    width: 10%;
+                    border: none;
+                    background-color: transparent;
+
+                    .input-group-text{
+                        background-color: var(--purple);
+                        border: none;
+                        justify-content: center;
+                        cursor: pointer;
+                        color: white;
+                    }
+                }
+            }
+
+            
+            .login--confirm{
+                display: flex;
+                justify-content: space-between;
+                
+                .login--confirm-checkbox{
+                    
+                    input{
+                        margin-right: 10px;
+                    }
+                    label{
+                        font-weight: 400;
+                        font-size: 18px;
+                    }
+                }
+            }
+
+            button{
+                border: none;
+                width: 50%;
+                padding: 10px;
+                margin-bottom: 30px;
+                font-size: 18px;
+                font-weight: 500;
+                color: var(--purple);
+                background-color: var(--text-color-white);
+                transition: ease-in 0.3s;
+            }
+
+            button:hover{
+                background-color: var(--blue);
+                color: var(--text-color-white);
+            }
+
+            a{
+                margin-left: 5px;
+                color: var(--background-color-1);
+                transition: ease-in 0.1s;
+            }
+            a:hover{
+                color: var(--text-color-white);
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .main--container{
+        margin: 50px 0;
+        height: auto;
+
+        .main--container-login{
+            flex-direction: column;
+            width: 80% !important;
+    
+            .left{
+                margin: 0;
+                width: 100%;
+
+                p{
+                    width: 100%;
+                    font-size: 13px;
+                }
+    
+                .buttons{
+                    display: block;
+                       
+                    button{
+                        font-weight: 400;
+                        font-size: 15px !important;
+                        width: 100%;
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+            .right{
+                .right--social-signin{
+                    justify-content: space-between;
+                    p{
+                        font-size: 15px;
+                    }
+                }
+                width: 100%;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+    
+                h4{
+                    text-align: center;
+                    font-size: 15px;
+                }
+
+                form{
+                    input{
+                        font-size: 18px;
+                    }
+
+                    input::placeholder {
+                        color: var(--text-color-white);
+                        font-weight: 100;
+                        font-size: 18px;
+                    }
+
+                    .login--confirm{
+                        display: grid;
+
+                        .login--confirm-checkbox{
+                            //gap: 10px;
+                            a{
+                                margin-bottom: 20px;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 410px) {
+    .main--container{
+        margin: 50px 0;
+        height: auto;
+
+        .main--container-login{
+            
+            .left{
+
+                p{
+                    width: 100%;
+                    font-size: 13px;
+                }
+                
+                .buttons{
+                    display: block;
+                       
+                    button{
+                        font-weight: 400;
+                        font-size: 15px !important;
+                        width: 100%;
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+            .login--confirm{
+                flex-direction: column;
+        
+                a{
+                    margin: -15px 0 20px 0;
+                }
+            }
+        }
+
+    }
+}
+
+@media screen and (min-width: 760px) and (max-width: 1250px) {
+    .main--container{
+        margin: 50px 0;
+        height: auto;
+
+       .main--container-login{
+           width: 80% !important;
+           flex-direction: column;
+   
+           .left{
+                padding: 60px;
+               img{
+                width: 70%;
+                height: 70%;
+               }
+           }
+   
+           .right{
+               width: 100%;
+               padding: 50px;
+   
+               h4{
+                   text-align: center;
+               }
+           }
+       }
+   }
+}
