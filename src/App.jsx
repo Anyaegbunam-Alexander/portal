@@ -26,14 +26,11 @@ import Customer from './components/register/customer/customerRegistration';
 import Agent from './components/register/agent/agent';
 import Agency from './components/register/agency/agency';
 import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard'
-import useLoginLogic from './components/login/methods';
 
 const App = () => {
-  const {
-    redirectToDashboard
-  } = useLoginLogic('https://realestate.api.sites.name.ng/auth/customers/login/');
+  
 
-  const currentUser = redirectToDashboard('/dashboard/:id');
+  const currentUser = false
 
   const Layout = () => {
     return (
