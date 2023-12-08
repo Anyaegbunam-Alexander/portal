@@ -8,6 +8,7 @@
     align-items: center;
 
     .main--container-login{
+        //height: 100%;
         width: 70%;
         display: flex;
         background-color: var(--background-color-2);
@@ -27,13 +28,13 @@
         padding: 40px;
 
         img{
-            //padding: 10px;
-            width: 80%;
-            height: 80%;
+            width: 70%;
+            height: 70%;
         }
 
         p{
             text-align: center;
+            font-size: 14px;
             padding: 5px;
             border-radius: 10px;
             border: 1px solid var(--purple);
@@ -42,6 +43,7 @@
         }
 
         h5{
+            font-size: 17px;
             color: var(--purple);
         }
 
@@ -57,7 +59,7 @@
                 border: none;
                 width: 100%;
                 padding: 10px 25px;
-                font-size: 18px;
+                font-size: 12px;
                 font-weight: 500;
                 background-color: var(--purple);
                 color: var(--text-color-white);
@@ -91,12 +93,13 @@
             justify-content: space-between;
 
             p{
-                font-size: 20px;
+                font-size: 16px;
             }
 
             .right--social-signin-icons{
 
                 button{
+                    //width: 10px;
                     margin-right: 10px;
                     border: none;
                     background-color: transparent;
