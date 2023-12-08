@@ -45,6 +45,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       name: '', //name of agency
       agreement: true,
     });
+    
   
   
     //Handle change in the values of user's input
@@ -54,10 +55,10 @@ const useRegistrationMethod = (apiEndpoint) => {
     };
 
     const handleFileChange = (e) => {
-      const fileName = e.target.files[0]?.name || null;
+      const file = e.target.files[0]
       setFormData((prevFormData) => ({
         ...prevFormData,
-        cac_document: fileName,
+        cac_document: file,
       }));
     };
   
@@ -202,11 +203,10 @@ const useRegistrationMethod = (apiEndpoint) => {
         const response = await fetch(apiEndpoint, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
             "Referer": "https://realestate.api.sites.name.ng/",
             "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
           },
-          body: JSON.stringify(formData),
+          body: formDataObj,
         });
   
         if (response.ok) {
@@ -216,6 +216,7 @@ const useRegistrationMethod = (apiEndpoint) => {
           setError(null);
         } else {
           const errorResponse = await response.json();
+          console.log(errorResponse);
           for (const field in errorResponse.extra.fields) {
             // Check if the field has a truthy value
             if (errorResponse.extra.fields[field]) {
