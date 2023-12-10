@@ -47,17 +47,11 @@ const App = () => {
 
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/*",
       element: 
         <ProtectedRoute>
           <Layout />
-        </ProtectedRoute>,
-      children: [
-        {
-          path: '/dashboard/:id',
-          element: <UserDashboard />
-        }
-      ]
+        </ProtectedRoute>
     },
     {
       path: "/login/customer",
