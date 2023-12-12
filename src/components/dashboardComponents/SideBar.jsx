@@ -21,14 +21,15 @@ const SideBar = () => {
       {activeMenu && (
         <>
           <div className='flex justify-between items-center'>
-            <Link to='/' onClick={() => {}} className='items-center gap-3 ml-3 mt-4 flex text-xl font-bold
+            <Link to='/' onClick={() => setActivemenu(false)} 
+              className='items-center gap-3 ml-3 mt-4 flex text-xl font-bold
               dark:text-white text-slate-900 text-decoration-none
             '>
               <SiShopware /> <span>Company X</span>
             </Link>
             <TooltipComponent content='Menu' position='BottomCenter'>
               <button type='button'
-                onClick={() => {}}
+                onClick={() => setActivemenu((prevActiveMenu) => !prevActiveMenu )}
                 className='text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden'
               >
                 <MdOutlineCancel />
