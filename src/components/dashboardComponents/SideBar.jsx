@@ -9,7 +9,7 @@ import { useStateContext } from '../../contexts/ContextProvider';
 
 const SideBar = () => {
 
-  const { activeMenu, setActivemenu } = useStateContext();
+  const { activeMenu, setActiveMenu } = useStateContext();
 
   const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2';
 
@@ -21,7 +21,7 @@ const SideBar = () => {
       {activeMenu && (
         <>
           <div className='flex justify-between items-center'>
-            <Link to='/' onClick={() => setActivemenu(false)} 
+            <Link to='/' onClick={() => setActiveMenu(false)} 
               className='items-center gap-3 ml-3 mt-4 flex text-xl font-bold
               dark:text-white text-slate-900 text-decoration-none
             '>
@@ -29,7 +29,7 @@ const SideBar = () => {
             </Link>
             <TooltipComponent content='Menu' position='BottomCenter'>
               <button type='button'
-                onClick={() => setActivemenu((prevActiveMenu) => !prevActiveMenu )}
+                onClick={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu )}
                 className='text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden'
               >
                 <MdOutlineCancel />
