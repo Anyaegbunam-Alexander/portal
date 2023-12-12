@@ -24,10 +24,11 @@ import {
   Editor
 } from '../../Dashboards/index';
 
+import { useStateContext } from '../../../contexts/ContextProvider';
 
 
 const UserDashboard = () => {
-  const activeMenu = true;
+  const { activeMenu } = useStateContext();
 
   return (
     <div>
