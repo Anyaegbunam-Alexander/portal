@@ -1,5 +1,5 @@
 import { useState, useEffect} from 'react';
-//import { Navigate } from 'react-router-dom';
+//import { useAuth } from '../../contexts/AuthContext';
 
 const useLoginLogic = (apiEndpoint) => { 
     const [error, setError] = useState(null);
@@ -19,7 +19,6 @@ const useLoginLogic = (apiEndpoint) => {
           { ...prevData, [name]: value }
         )
       );
-      console.log("Clicked");
     };
 
     // closes the error pop up
@@ -56,6 +55,8 @@ const useLoginLogic = (apiEndpoint) => {
       // Redirect to the specified URL
       window.location.href = url;
     };
+
+   // const { login } = useAuth();
   
     const useHandleLogin = async (e) => {
       e.preventDefault()
@@ -73,7 +74,7 @@ const useLoginLogic = (apiEndpoint) => {
         const responseData = await response.json();
         
         if (!response.ok) {
-          // Handle non-successful response (HTTP status code other than 2xx)
+          // Handle non-successful response (HTTP status code other than 200)
             setError(responseData.message);
             console.error(responseData.message)
 
@@ -92,15 +93,19 @@ const useLoginLogic = (apiEndpoint) => {
 
         const { object, id } = responseData;
 
+        // Call the login function with user details
+        //console.log(login({ id, object, first_name }));
+
+
         switch (object) {
           case 'customer':
             redirectToDashboard(`/dashboard/${id}`);
             break;
           case 'agent':
-            redirectToDashboard('/agent-dashboard');
+            redirectToDashboard(`/dashboard/${id}`);
             break;
           case 'agency':
-            redirectToDashboard('/agency-dashboard');
+            redirectToDashboard(`/dashboard/${id}`);
             break;
           default:
             console.error('Unknown role:', object);

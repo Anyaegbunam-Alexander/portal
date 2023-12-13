@@ -24,12 +24,18 @@ import AgencyLogin from './components/login/agency/agency';
 import Customer from './components/register/customer/customerRegistration';
 import Agent from './components/register/agent/agent';
 import Agency from './components/register/agency/agency';
-import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard'
+import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
+
+import { useAuth } from './contexts/AuthContext';
+
 
 const App = () => {
+
+  //const { user } = useAuth();
   
 
-  const currentUser = true
+  const currentUser = true;
+  //console.log(currentUser);
 
   const Layout = () => {
     return (
@@ -38,6 +44,7 @@ const App = () => {
   }
 
   const ProtectedRoute = ({children}) =>  {
+    //console.log('Current User:', currentUser);
     if(!currentUser) {
       return <Navigate to='/login/customer'/>
     }
