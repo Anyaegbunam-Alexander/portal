@@ -9,6 +9,8 @@ const useRegistrationMethod = (apiEndpoint) => {
     const [selectedState, setSelectedState] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
+    const [isCityDropdownOpen, setisCityDropdownOpen] = useState(false)
     const [error, setError] = useState(null);
   
     //Fetches the API for state and city dynamically
@@ -61,6 +63,16 @@ const useRegistrationMethod = (apiEndpoint) => {
         cac_document: file,
       }));
     };
+
+    const toggleStateDropdown = () => {
+      setisCityDropdownOpen(false)
+      setIsStateDropdownOpen(!isStateDropdownOpen);
+    };
+
+    const toggleCityDropdown = () => {
+      setisCityDropdownOpen(!isCityDropdownOpen);
+      setIsStateDropdownOpen(false);
+    };
   
     // Handle state selection
     const handleStateClick = (state) => {
@@ -74,7 +86,8 @@ const useRegistrationMethod = (apiEndpoint) => {
           ...formData,
           state: state.name,
         });
-  
+
+        return state.name === '' ? setIsStateDropdownOpen(true) : setIsStateDropdownOpen(false);
         
       } catch (error) {
         console.error(error)
@@ -86,11 +99,14 @@ const useRegistrationMethod = (apiEndpoint) => {
     const handleCityClick = (city) => {
       try {
         setSelectedCity(city);
+        setError(null); // Clear any previous errors
         setFormData({
           ...formData,
           city: city,
         });
-        setError(null); // Clear any previous errors
+        
+        return city === '' ? setisCityDropdownOpen(true) : setisCityDropdownOpen(false);
+
       } catch (error) {
         setError('An error occurred while selecting the city. Please check internet connection.');
       }
@@ -239,7 +255,11 @@ const useRegistrationMethod = (apiEndpoint) => {
       selectedState,
       selectedCity,
       isModalOpen,
+      isStateDropdownOpen,
+      isCityDropdownOpen,
       error,
+      toggleStateDropdown,
+      toggleCityDropdown,
       handleStateClick,
       handleCityClick,
       handleChange,

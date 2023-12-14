@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import useRegistrationMethod from '../methods';
 import Header from '../header';
 
+
 //Icons
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -16,7 +17,11 @@ const CustomerRegistration = () => {
     selectedState,
     selectedCity,
     isModalOpen,
+    isStateDropdownOpen,
+    isCityDropdownOpen,
     error,
+    toggleStateDropdown,
+    toggleCityDropdown,
     handleStateClick,
     handleCityClick,
     handleChange,
@@ -25,6 +30,8 @@ const CustomerRegistration = () => {
     handleSubmit,
     closeModal,
   } = useRegistrationMethod('https://realestate.api.sites.name.ng/auth/customers/signup/');
+
+
 
   return (  
 
@@ -67,58 +74,106 @@ const CustomerRegistration = () => {
             <input type="text" id="first_name" name='first_name' value={formData.first_name} onChange={handleChange} placeholder='Firstname' required/>
             <input type="text" id="last_name" name='last_name' value={formData.last_name} onChange={handleChange} placeholder='Lastname' required/>
             <input type="text" id="street_address" name='street_address' value={formData.street_address} onChange={handleChange} placeholder='Street address' required/>
-            
-            {/* State */}
-            <div className="btn-group" >
-              <button 
-                className="btn btn-sm btn-dark dropdown-toggle" 
-                type="button" 
-                data-bs-toggle="dropdown" 
-                aria-expanded="true"
+
+
+            {/* Select State */}
+            <div className="relative inline-block text-left">
+              <button
+                type="button"
+                className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+                onClick={toggleStateDropdown}
+                id="options-menu"
+                aria-haspopup="true"
+                aria-expanded={isStateDropdownOpen}
               >
                 {selectedState ? selectedState.name : 'Select State'}
+                <svg
+                  className="-mr-1 ml-2 h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 11.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
               </button>
 
-              <ul className="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuButton">
-                {data.map(state => (
+              <div
+                className={`origin-top-left relative -mt-3 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 ${
+                  isStateDropdownOpen ? '' : 'hidden'
+                }`}
+                id="dropdown-menu"
+              >
+                <ul className="py-2 scrollable-menu" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    {data.map(state => (
 
-                  <li 
-                    key={state.state_code} 
-                    className='dropdown-item' 
-                    onClick={() => handleStateClick(state)}
-                  >
-                    {state.name}
+                        <li 
+                            key={state.state_code} 
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                            role="menuitem"
+                            onClick={() => handleStateClick(state)}
+                        >
+                            {state.name}
 
-                    {console.log(formData.state)}
-                  </li>                    
-                ))}
-              </ul>
+                            {console.log(formData.state)}
+                        </li>
+                                           
+                    ))}
+                </ul>
+              </div>
             </div>
+
 
             {/* City */}
             {selectedState && selectedState.towns && (
-              <div className="btn-group"  aria-required="true">
+              <div className="relative inline-block text-left">
                 <button
-                  className="btn btn-sm btn-dark dropdown-toggle"
                   type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="true"
+                  className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm -mt-56 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+                  onClick={toggleCityDropdown}
+                  id="options-menu"
+                  aria-haspopup="true"
+                  aria-expanded={isCityDropdownOpen}
                 >
                   {selectedCity ? selectedCity : 'Select City'}
+                  <svg
+                    className="-mr-1 ml-2 h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 11.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
                 </button>
 
-                <ul className="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuButton">
-                  {selectedState.towns.map((town) => (
-                    <li 
-                      key={town.name} 
-                      className="dropdown-item" 
-                      onClick={() => handleCityClick(town.name)}
-                    >
-                      {town.name}
-                      {/* {console.log(town.name)} */}
-                    </li>
-                  ))}
-                </ul>
+                <div
+                  className={`origin-top-left relative -mt-3 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 ${
+                    isCityDropdownOpen ? '' : 'hidden'
+                  }`}
+                  id="dropdown-menu"
+                >
+                  <ul className="py-1 scrollable-menu" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    {selectedState.towns.map((town) => (
+                      <li 
+                        key={town.name} 
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        role="menuitem"
+                        onClick={() => handleCityClick(town.name)}
+                      >
+                        {town.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             )}
 
