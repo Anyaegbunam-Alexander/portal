@@ -3,6 +3,7 @@ import '../register.scss';
 import { Link } from 'react-router-dom';
 import useRegistrationMethod from '../methods';
 import Header from '../header';
+//import Popup from '../Popup';
 
 
 //Icons
@@ -14,11 +15,11 @@ const CustomerRegistration = () => {
   const {
     data,
     formData,
+    isStateDropdownOpen,
+    isCityDropdownOpen,
     selectedState,
     selectedCity,
     isModalOpen,
-    isStateDropdownOpen,
-    isCityDropdownOpen,
     error,
     toggleStateDropdown,
     toggleCityDropdown,
@@ -38,6 +39,8 @@ const CustomerRegistration = () => {
     <div className="register--container">    
       <div className="register--container-register">
         <Header/>
+
+        {/* <Popup/> */}
 
         {/* Error Modal */}
         {isModalOpen && (
@@ -61,7 +64,6 @@ const CustomerRegistration = () => {
               </div>
             </div>
             <div className="modal-backdrop fade show"></div>
-            {/* <div className={`modal-backdrop ${isModalOpen ? 'fade show' : ''}`}></div> */}
           </div>
         )}
 
@@ -83,7 +85,6 @@ const CustomerRegistration = () => {
                 className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
                 onClick={toggleStateDropdown}
                 id="options-menu"
-                aria-haspopup="true"
                 aria-expanded={isStateDropdownOpen}
               >
                 {selectedState ? selectedState.name : 'Select State'}
@@ -136,7 +137,6 @@ const CustomerRegistration = () => {
                   className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm -mt-56 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
                   onClick={toggleCityDropdown}
                   id="options-menu"
-                  aria-haspopup="true"
                   aria-expanded={isCityDropdownOpen}
                 >
                   {selectedCity ? selectedCity : 'Select City'}
