@@ -131,7 +131,7 @@ const Agent = () => {
               <div className="input-group-append">
                 <span className="input-group-text" onClick={password_show_hide}>
                   <VisibilityIcon id="show_eye"/>
-                  <VisibilityOffIcon id="hide_eye" className='d-none'/>
+                  <VisibilityOffIcon id="hide_eye" style={{display: 'none'}}/>
                 </span>
               </div>
             </div>
@@ -141,7 +141,7 @@ const Agent = () => {
               <div className="input-group-append">
                 <span className="input-group-text" onClick={confirmPassword_show_hide}>
                   <VisibilityIcon id="CP_show_eye"/>
-                  <VisibilityOffIcon id="CP_hide_eye" className='d-none'/>
+                  <VisibilityOffIcon id="CP_hide_eye" style={{display: 'none'}}/>
                 </span>
               </div>
             </div>

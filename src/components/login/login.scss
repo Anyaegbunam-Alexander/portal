@@ -1,3 +1,6 @@
+//@import url('bootstrap/dist/css/bootstrap.min.css');
+
+
 // src/Login.scss
 .main--container {
     //margin: 50px 0;
@@ -148,12 +151,10 @@
                 }
                 
                 .input-group-append{
-                    width: 10%;
                     border: none;
                     background-color: transparent;
 
                     .input-group-text{
-                        background-color: var(--purple);
                         border: none;
                         justify-content: center;
                         cursor: pointer;

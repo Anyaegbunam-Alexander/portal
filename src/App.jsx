@@ -1,12 +1,6 @@
 import React from 'react';
 import './app.css';
 
-// Bootstrap CSS
-import "bootstrap/dist/css/bootstrap.min.css";
-// Bootstrap Bundle JS
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "bootstrap/js/dist/modal";
-
 
 //react-router
 import {

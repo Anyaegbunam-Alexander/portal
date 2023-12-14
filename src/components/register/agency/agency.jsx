@@ -126,13 +126,14 @@ const Agency = () => {
 
             <input type="email" id="login-email" name='email' value={formData.email} onChange={handleChange} placeholder='Email' required/>
             <input type="tel" id="phone-number" name='phone_number' value={formData.phone_number} onChange={handleChange} placeholder='Phone number' required/>
+           
             {/* password functionality */}
             <div className="password-field">
               <input type="password" className='password' id="password" name='password' value={formData.password} onChange={handleChange} placeholder='Password' required/>
               <div className="input-group-append">
                 <span className="input-group-text" onClick={password_show_hide}>
                   <VisibilityIcon id="show_eye"/>
-                  <VisibilityOffIcon id="hide_eye" className='d-none'/>
+                  <VisibilityOffIcon id="hide_eye" style={{display: 'none'}}/>
                 </span>
               </div>
             </div>
@@ -142,7 +143,7 @@ const Agency = () => {
               <div className="input-group-append">
                 <span className="input-group-text" onClick={confirmPassword_show_hide}>
                   <VisibilityIcon id="CP_show_eye"/>
-                  <VisibilityOffIcon id="CP_hide_eye" className='d-none'/>
+                  <VisibilityOffIcon id="CP_hide_eye" style={{display: 'none'}}/>
                 </span>
               </div>
             </div>

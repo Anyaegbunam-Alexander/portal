@@ -66,7 +66,8 @@ const CustomerRegistration = () => {
           <form onSubmit={handleSubmit}>
             <input type="text" id="first_name" name='first_name' value={formData.first_name} onChange={handleChange} placeholder='Firstname' required/>
             <input type="text" id="last_name" name='last_name' value={formData.last_name} onChange={handleChange} placeholder='Lastname' required/>
-            <input type="text" id="street_address" name='street_address' value={formData.street_address} onChange={handleChange} placeholder='Street address' required/>              
+            <input type="text" id="street_address" name='street_address' value={formData.street_address} onChange={handleChange} placeholder='Street address' required/>
+            
             {/* State */}
             <div className="btn-group" >
               <button 
@@ -130,7 +131,7 @@ const CustomerRegistration = () => {
               <div className="input-group-append">
                 <span className="input-group-text" onClick={password_show_hide}>
                   <VisibilityIcon id="show_eye"/>
-                  <VisibilityOffIcon id="hide_eye" className='d-none'/>
+                  <VisibilityOffIcon id="hide_eye" style={{display: 'none'}}/>
                 </span>
               </div>
             </div>
@@ -140,7 +141,7 @@ const CustomerRegistration = () => {
               <div className="input-group-append">
                 <span className="input-group-text" onClick={confirmPassword_show_hide}>
                   <VisibilityIcon id="CP_show_eye"/>
-                  <VisibilityOffIcon id="CP_hide_eye" className='d-none'/>
+                  <VisibilityOffIcon id="CP_hide_eye" style={{display: 'none'}}/>
                 </span>
               </div>
             </div>

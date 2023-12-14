@@ -114,7 +114,6 @@ const useRegistrationMethod = (apiEndpoint) => {
       var x = document.getElementById("password");
       var show_eye = document.getElementById("show_eye");
       var hide_eye = document.getElementById("hide_eye");
-      hide_eye.classList.remove("d-none");
       if (x.type === "password") {
         x.type = "text";
         show_eye.style.display = "none";
@@ -130,11 +129,10 @@ const useRegistrationMethod = (apiEndpoint) => {
       var x = document.getElementById("confirm_password");
       var show_eye = document.getElementById("CP_show_eye");
       var hide_eye = document.getElementById("CP_hide_eye");
-      hide_eye.classList.remove("d-none");
       if (x.type === "password") {
         x.type = "text";
         show_eye.style.display = "none";
-        hide_eye.style.display = "grid";
+        hide_eye.style.display = "block";
       } else {
         x.type = "password";
         show_eye.style.display = "block";
