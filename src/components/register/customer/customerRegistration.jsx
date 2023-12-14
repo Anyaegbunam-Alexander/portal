@@ -70,7 +70,7 @@ const CustomerRegistration = () => {
 
         {/* Bottom code */}
         <div className="bottom">
-          <h2>Register</h2>
+          <h2>Customer Register</h2>
 
           <form onSubmit={handleSubmit}>
             <input type="text" id="first_name" name='first_name' value={formData.first_name} onChange={handleChange} placeholder='Firstname' required/>
