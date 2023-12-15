@@ -107,8 +107,31 @@ const Properties = () => {
                 </div>
 
                 <div className="mt-5">
-                  <SparkLine />
+                  <SparkLine 
+                    currentColor='purple'
+                    id='sparkline'
+                    type='Line'
+                    height='80px'
+                    width='250px'
+                    data={ SparklineAreaData }
+                    color='purple'
+                  />
                 </div>
+
+                <div className="mt-10">
+                  <Button 
+                    color='white'
+                    bgColor='purple'
+                    text='Download Report'
+                    borderRadius='10px'
+                  />
+                </div>
+              </div>
+              <div>
+                <Stacked 
+                  width='320px'
+                  height='360px'
+                />
               </div>
             </div>
         </div>
