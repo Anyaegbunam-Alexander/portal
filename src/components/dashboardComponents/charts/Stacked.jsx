@@ -15,7 +15,7 @@ const Stacked = ({ width, height}) => {
       tooltip={{ enable: true }}
       legendSettings={{ background: 'white'}}
     >
-      <Inject services={[Legend, Category, StackingColumnSeries, Tooltip,]}/>
+      <Inject services={[Legend, Category, StackingColumnSeries, Tooltip]}/>
       <SeriesCollectionDirective>
         {stackedCustomSeries.map((item, index) => <SeriesDirective key={index} {...item}/>)}
       </SeriesCollectionDirective>

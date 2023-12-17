@@ -68,7 +68,7 @@ const UserDashboard = () => {
                     <Navbar />
                 </div> 
                 <div>
-                    <Routes debug>
+                    <Routes>
                         {/* Dashboard */}
                         <Route path="/" element={<Properties />} />
                         <Route path="/properties" element={<Properties />} />
