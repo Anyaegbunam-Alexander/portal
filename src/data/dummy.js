@@ -5,7 +5,7 @@ import { BsKanban, BsBarChart, BsHouseCheck, BsCurrencyDollar, BsShield, BsChatL
 import { BiColorFill } from 'react-icons/bi';
 import { IoMdContacts } from 'react-icons/io';
 import { RiContactsLine, RiStockLine } from 'react-icons/ri';
-import { MdOutlineSupervisorAccount } from 'react-icons/md';
+import { MdOutlineSupervisorAccount, MdDashboard } from 'react-icons/md';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { TiTick } from 'react-icons/ti';
 import { GiLouvrePyramid } from 'react-icons/gi';
@@ -263,7 +263,7 @@ export const barCustomSeries = [
     dataSource: barChartData[0],
     xName: 'x',
     yName: 'y',
-    name: 'Gold',
+    name: 'Listed',
     type: 'Column',
     marker: {
       dataLabel: {
@@ -277,7 +277,7 @@ export const barCustomSeries = [
     dataSource: barChartData[1],
     xName: 'x',
     yName: 'y',
-    name: 'Silver',
+    name: 'Sold',
     type: 'Column',
     marker: {
       dataLabel: {
@@ -291,7 +291,7 @@ export const barCustomSeries = [
     dataSource: barChartData[2],
     xName: 'x',
     yName: 'y',
-    name: 'Bronze',
+    name: 'Customers',
     type: 'Column',
     marker: {
       dataLabel: {
@@ -473,6 +473,10 @@ export const links = [
   {
     title: 'Dashboard',
     links: [
+      {
+        name: 'overview',
+        icon: <MdDashboard />,
+      },
       {
         name: 'properties',
         icon: <FiShoppingBag />,

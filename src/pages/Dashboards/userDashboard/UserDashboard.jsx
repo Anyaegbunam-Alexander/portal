@@ -10,6 +10,7 @@ import {
   Orders, 
   Calendar, 
   Employees, 
+  Overview,
   Stacked, 
   Pyramid, 
   Customers,
@@ -28,13 +29,13 @@ import { useStateContext } from '../../../contexts/ContextProvider';
 
 
 const UserDashboard = () => {
-  const { activeMenu } = useStateContext();
+  const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
 
   return (
-    <div>
+    <div className={currentMode === 'Dark' ? 'dark' : ''}>
         <div className="flex relative dark:bg-main-dark-bg">
             <div className="fixed right-4 bottom-4" style={{zIndex: '1000'}}>
-                <TooltipComponent content="Settings" position='Top'>
+                <TooltipComponent content="Settings" position='Top' onClick={() => setThemeSettings(true)}>
                     <button 
                         type='button'
                         className='text-3xl p-3 
@@ -42,7 +43,7 @@ const UserDashboard = () => {
                         hover:bg-light-gray
                         text-white'
                         style={{
-                            background: 'purple',
+                            background: currentColor,
                             borderRadius: '50%',
                         }}
                     >
@@ -60,18 +61,21 @@ const UserDashboard = () => {
                 </div>
             )}
             <div className={
-                `dark:bg-main-bg bg-main-bg min-h-screen w-full
-                ${activeMenu ? 
-                ' md:ml-72' :  'flex-2'}`
+                `dark:bg-main-dark-bg bg-main-bg min-h-screen w-full
+                ${activeMenu ? ' md:ml-72' :  'flex-2'}`
             }>
                 <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
                     <Navbar />
                 </div> 
                 <div>
+                    {themeSettings && <ThemeSettings />}
+
                     <Routes>
                         {/* Dashboard */}
-                        <Route path="/" element={<Properties />} />
+                        <Route path="/" element={<Overview />} />
                         <Route path="/properties" element={<Properties />} />
+                        <Route path="/overview" element={<Overview />} />
+
 
                         {/* Pages */}
                         <Route path="/orders" element={<Orders />} />
@@ -95,6 +99,8 @@ const UserDashboard = () => {
                         <Route path="/stacked" element={<Stacked />} />
                     </Routes>
                 </div>
+
+                <Footer />
             </div>
         </div>
     </div>

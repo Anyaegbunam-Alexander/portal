@@ -1,8 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <div className='text-2xl'>
+      {/* <p>{new Date().getFullYear()}</p> */}
+    </div>
   )
 }
 

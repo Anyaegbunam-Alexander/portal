@@ -11,7 +11,7 @@ const useRegistrationMethod = (apiEndpoint) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
     const [isCityDropdownOpen, setisCityDropdownOpen] = useState(false)
-    const [error, setError] = useState(null);
+    //const [error, setError] = useState(null);
   
     //Fetches the API for state and city dynamically
     useEffect(() => {
@@ -47,6 +47,14 @@ const useRegistrationMethod = (apiEndpoint) => {
       name: '', //name of agency
       agreement: true,
     });
+
+    const [error, setError] = useState({
+      first_name: '',
+      last_name: '',
+      street_address: '',
+      email: '',
+      // ... (add more properties for each input field)
+    });
     
   
   
@@ -54,6 +62,9 @@ const useRegistrationMethod = (apiEndpoint) => {
     const handleChange = (e) => {
       const { name, value } = e.target;
       setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+      // Clear the error for the current field when the user types
+      setError({ ...error, [e.target.name]: '' });
     };
 
     const handleFileChange = (e) => {
@@ -194,57 +205,75 @@ const useRegistrationMethod = (apiEndpoint) => {
         setError("Password does not match")
         return;
       }
+
+      // Validate your form data here and set errors if any
+      const newErrors = {};
+      if (!formData.first_name) {
+        newErrors.first_name = 'First name is required';
+      }
+
+      if (!formData.email) {
+        newErrors.email = 'email error';
+      }
+
+      if (Object.keys(newErrors).length > 0) {
+        // If there are errors, update the state to display them
+        setError(newErrors);
+      } else {
+        // Your existing submit logic
+        try {
+          const formDataObj = new FormData();
   
-  
-      try {
-        const formDataObj = new FormData();
-
-        for (const key in formData) {
-          // Append all form data except the file directly
-          if (key !== 'cac_document') {
-            formDataObj.append(key, formData[key]);
-          }
-        }
-
-        // Append the file separately
-        formDataObj.append('cac_document', formData.cac_document);
-
-        // Log the FormData content before sending
-        for (const pair of formDataObj.entries()) {
-          console.log(pair[0], pair[1]);
-        }
-
-        const response = await fetch(apiEndpoint, {
-          method: 'POST',
-          headers: {
-            "Referer": "https://realestate.api.sites.name.ng/",
-            "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
-          },
-          body: formDataObj,
-        });
-  
-        if (response.ok) {
-          // Handle successful registration, e.g., redirect to a success page
-          console.log('Registration successful');
-          console.log(formData);
-          setError(null);
-        } else {
-          const errorResponse = await response.json();
-          console.log(errorResponse);
-          for (const field in errorResponse.extra.fields) {
-            // Check if the field has a truthy value
-            if (errorResponse.extra.fields[field]) {
-              // Output the value contained in the field
-              setError(`${errorResponse.extra.fields[field]}`)
-              console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+          for (const key in formData) {
+            // Append all form data except the file directly
+            if (key !== 'cac_document') {
+              formDataObj.append(key, formData[key]);
             }
           }
-        }   
-      } catch (error) {
-        // Catches all other types of errors
-        console.error('Error during registration:', error);
-        setError('An error occurred during registration. Please try again.');
+  
+          // Append the file separately
+          formDataObj.append('cac_document', formData.cac_document);
+  
+          // Log the FormData content before sending
+          for (const pair of formDataObj.entries()) {
+            console.log(pair[0], pair[1]);
+          }
+  
+          const response = await fetch(apiEndpoint, {
+            method: 'POST',
+            headers: {
+              "Referer": "https://realestate.api.sites.name.ng/",
+              "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
+            },
+            body: formDataObj,
+          });
+    
+          if (response.ok) {
+            // Handle successful registration, e.g., redirect to a success page
+            console.log('Registration successful');
+            console.log(formData);
+            setError(null);
+          } else {
+            const errorResponse = await response.json();
+            console.log(errorResponse);
+            for (const field in errorResponse.extra.fields) {
+              // Check if the field has a truthy value
+              if (errorResponse.extra.fields[field]) {
+                // Output the value contained in the field
+                setError(`${errorResponse.extra.fields[field]}`)
+                console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+              }
+            }
+          }   
+        } catch (error) {
+          // Catches all other types of errors
+          console.error('Error during registration:', error);
+          setError('An error occurred during registration. Please try again.');
+        }
       }
+
+  
+  
     };
   
     
@@ -257,6 +286,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       isModalOpen,
       isStateDropdownOpen,
       isCityDropdownOpen,
+      //errors,
       error,
       toggleStateDropdown,
       toggleCityDropdown,

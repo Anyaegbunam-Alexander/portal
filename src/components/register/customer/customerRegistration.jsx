@@ -20,6 +20,7 @@ const CustomerRegistration = () => {
     selectedState,
     selectedCity,
     isModalOpen,
+    //errors,
     error,
     toggleStateDropdown,
     toggleCityDropdown,
@@ -74,6 +75,7 @@ const CustomerRegistration = () => {
 
           <form onSubmit={handleSubmit}>
             <input type="text" id="first_name" name='first_name' value={formData.first_name} onChange={handleChange} placeholder='Firstname' required/>
+            {error.first_name && <p className="error-message">{error.first_name}</p>}
             <input type="text" id="last_name" name='last_name' value={formData.last_name} onChange={handleChange} placeholder='Lastname' required/>
             <input type="text" id="street_address" name='street_address' value={formData.street_address} onChange={handleChange} placeholder='Street address' required/>
 
@@ -179,6 +181,7 @@ const CustomerRegistration = () => {
 
 
             <input type="email" id="login-email" name='email' value={formData.email} onChange={handleChange} placeholder='Email' required/>
+            {error.email && <p className="error-message">{error.email}</p>}
             <input type="tel" id="phone-number" name='phone_number' value={formData.phone_number} onChange={handleChange} placeholder='Phone number' required/>
             {/* password functionality */}
             <div className="password-field">
