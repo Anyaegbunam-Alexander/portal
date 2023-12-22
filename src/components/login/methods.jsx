@@ -88,28 +88,32 @@ const useLoginLogic = (apiEndpoint) => {
                   console.log(`${field}: ${responseData.extra.fields[field]}`);
                 }
             }
+            return;
         }
 
         //login successful
         console.log('Login successful', responseData);
 
-        const { object } = responseData;
+        redirectToDashboard(`/overview`)
 
-        switch (object) {
-          case 'customer':
-            redirectToDashboard(`/overview`);
-            break;
-          case 'agent':
-            redirectToDashboard(`/overview`);
-            break;
-          case 'agency':
-            redirectToDashboard(`/overview`);
-            break;
-          default:
-            console.error('Unknown role:', object);
-            setErrors('An error occured');
-            openPopup(); // Open the popup
-        }
+
+        //const { object } = responseData;
+
+        // switch (object) {
+        //   case 'customer':
+        //     redirectToDashboard(`/overview`);
+        //     break;
+        //   case 'agent':
+        //     redirectToDashboard(`/overview`);
+        //     break;
+        //   case 'agency':
+        //     redirectToDashboard(`/overview`);
+        //     break;
+        //   default:
+        //     console.error('Unknown role:', object);
+        //     setErrors('An error occured');
+        //     openPopup(); // Open the popup
+        // }
       } catch (error) {
         // Handle errors, e.g., display an error message to the user
         console.error('Login failed', error);

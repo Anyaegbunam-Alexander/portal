@@ -12,7 +12,7 @@ const UserProfile = () => {
   const { currentColor } = useStateContext();
   const { logout } = useAuth();
 
-  const redirectToDashboard = (url) => {
+  const redirectToLogin = (url) => {
     // Redirect to the specified URL
     window.location.href = url;
   };
@@ -20,7 +20,7 @@ const UserProfile = () => {
   const handleLogout = () => {
     logout(); // Call the logout function
     // Redirect to the specified URL using React Router
-    redirectToDashboard('/login/customer');
+    redirectToLogin('/login/customer');
   };
 
   return (
@@ -67,12 +67,12 @@ const UserProfile = () => {
       </div>
       <div className="mt-5">
         <Button
+          onClick={() => handleLogout()}
           color="white"
           bgColor={currentColor}
           text="Logout"
           borderRadius="10px"
           width="full"
-          onClick={handleLogout}
         />
       </div>
     </div>
