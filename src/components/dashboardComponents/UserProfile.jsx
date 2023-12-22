@@ -4,10 +4,24 @@ import { MdOutlineCancel } from 'react-icons/md';
 import { Button } from '../dashboardComponents';
 import { userProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
-import avatar from '../../data/avatar.jpg'
+import avatar from '../../data/avatar.jpg';
+import { useAuth } from '../../contexts/AuthContext';
+
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
+  const { logout } = useAuth();
+
+  const redirectToDashboard = (url) => {
+    // Redirect to the specified URL
+    window.location.href = url;
+  };
+
+  const handleLogout = () => {
+    logout(); // Call the logout function
+    // Redirect to the specified URL using React Router
+    redirectToDashboard('/login/customer');
+  };
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white shadow-xl dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -58,6 +72,7 @@ const UserProfile = () => {
           text="Logout"
           borderRadius="10px"
           width="full"
+          onClick={handleLogout}
         />
       </div>
     </div>

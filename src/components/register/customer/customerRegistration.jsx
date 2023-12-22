@@ -19,9 +19,8 @@ const CustomerRegistration = () => {
     isCityDropdownOpen,
     selectedState,
     selectedCity,
-    isModalOpen,
-    //errors,
     error,
+    isPopupOpen, 
     toggleStateDropdown,
     toggleCityDropdown,
     handleStateClick,
@@ -30,7 +29,7 @@ const CustomerRegistration = () => {
     password_show_hide,
     confirmPassword_show_hide,
     handleSubmit,
-    closeModal,
+    closePopup,
   } = useRegistrationMethod('https://realestate.api.sites.name.ng/auth/customers/signup/');
 
 
@@ -41,30 +40,56 @@ const CustomerRegistration = () => {
       <div className="register--container-register">
         <Header/>
 
-        {/* <Popup/> */}
+        {/* Error Popup */}
+        {isPopupOpen && (
+          <div className="fixed inset-0 overflow-y-auto z-50">
+            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+              <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+              </div>
 
-        {/* Error Modal */}
-        {isModalOpen && (
-          <div>
-            <div className='modal' tabIndex="-1" role="dialog" style={{display: 'block'}}>
-              <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title">Error</h5>
-                    <button type="button" className="btn-close" onClick={closeModal}></button>
+              <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+              <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div className="sm:flex sm:items-start">
+                    <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                      {/* Heroicon name: outline/exclamation */}
+                      <svg
+                        className="h-6 w-6 text-red-600"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M12 9v2m0 4h.01m-6-6h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V11a2 2 0 012-2z"
+                        />
+                      </svg>
+                    </div>
+                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <h3 className="text-lg leading-6 font-medium text-gray-900">Error</h3>
+                      <div className="mt-2">
+                        <p className="text-sm text-gray-500">{error}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="modal-body">
-                    {error && <div style={{ color: 'red' }}>{error}</div>}
-                  </div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-light" onClick={closeModal}>
-                      Close
-                    </button>
-                  </div>
+                </div>
+                <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                  <button
+                    type="button"
+                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                    onClick={closePopup}
+                  >
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="modal-backdrop fade show"></div>
           </div>
         )}
 
@@ -75,7 +100,7 @@ const CustomerRegistration = () => {
 
           <form onSubmit={handleSubmit}>
             <input type="text" id="first_name" name='first_name' value={formData.first_name} onChange={handleChange} placeholder='Firstname' required/>
-            {error.first_name && <p className="error-message">{error.first_name}</p>}
+            {/* {error.first_name && <p className="error-message">{error.first_name}</p>} */}
             <input type="text" id="last_name" name='last_name' value={formData.last_name} onChange={handleChange} placeholder='Lastname' required/>
             <input type="text" id="street_address" name='street_address' value={formData.street_address} onChange={handleChange} placeholder='Street address' required/>
 
@@ -181,7 +206,7 @@ const CustomerRegistration = () => {
 
 
             <input type="email" id="login-email" name='email' value={formData.email} onChange={handleChange} placeholder='Email' required/>
-            {error.email && <p className="error-message">{error.email}</p>}
+            {/* {error.email && <p className="error-message">{error.email}</p>} */}
             <input type="tel" id="phone-number" name='phone_number' value={formData.phone_number} onChange={handleChange} placeholder='Phone number' required/>
             {/* password functionality */}
             <div className="password-field">

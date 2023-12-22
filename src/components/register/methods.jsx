@@ -8,10 +8,21 @@ const useRegistrationMethod = (apiEndpoint) => {
     const [data, setData] = useState([]);
     const [selectedState, setSelectedState] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
     const [isCityDropdownOpen, setisCityDropdownOpen] = useState(false)
-    //const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+
+    // New function to set errors
+    const setErrors = (newError) => {
+      setError(newError);
+    };
+
+    const redirectToDashboard = (url) => {
+      // Redirect to the specified URL
+      window.location.href = url;
+    };
   
     //Fetches the API for state and city dynamically
     useEffect(() => {
@@ -47,14 +58,6 @@ const useRegistrationMethod = (apiEndpoint) => {
       name: '', //name of agency
       agreement: true,
     });
-
-    const [error, setError] = useState({
-      first_name: '',
-      last_name: '',
-      street_address: '',
-      email: '',
-      // ... (add more properties for each input field)
-    });
     
   
   
@@ -64,7 +67,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       setFormData((prevData) => ({ ...prevData, [name]: value }));
 
       // Clear the error for the current field when the user types
-      setError({ ...error, [e.target.name]: '' });
+      setErrors({ ...error, [e.target.name]: '' });
     };
 
     const handleFileChange = (e) => {
@@ -90,7 +93,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       try {
         setSelectedState(state);
         setSelectedCity(null); // Reset city when state changes
-        setError(null); // Clear any previous errors
+        setErrors(null); // Clear any previous errors
   
         //Sets the specific state name to be assigned to the form data
         setFormData({
@@ -102,7 +105,8 @@ const useRegistrationMethod = (apiEndpoint) => {
         
       } catch (error) {
         console.error(error)
-        setError('An error occurred while selecting the state');
+        setErrors('An error occurred while selecting the state');
+        openPopup(); // Open the popup
       }
     };
   
@@ -110,7 +114,7 @@ const useRegistrationMethod = (apiEndpoint) => {
     const handleCityClick = (city) => {
       try {
         setSelectedCity(city);
-        setError(null); // Clear any previous errors
+        setErrors(null); // Clear any previous errors
         setFormData({
           ...formData,
           city: city,
@@ -119,23 +123,18 @@ const useRegistrationMethod = (apiEndpoint) => {
         return city === '' ? setisCityDropdownOpen(true) : setisCityDropdownOpen(false);
 
       } catch (error) {
-        setError('An error occurred while selecting the city. Please check internet connection.');
+        setErrors('An error occurred while selecting the city. Please check internet connection.');
+        openPopup(); // Open the popup
       }
     };
   
-    // closes the error pop up
-    const closeModal = () => {
-      setIsModalOpen(false);
-      setError(null)
+    const openPopup = () => {
+      setIsPopupOpen(true);
     };
   
-    useEffect(() => {
-      if (error) {
-        setIsModalOpen(true);
-      } else {
-        setIsModalOpen(false);
-      }
-    }, [error]);
+    const closePopup = () => {
+      setIsPopupOpen(false);
+    };
 
     const password_show_hide = () => {
       var x = document.getElementById("password");
@@ -177,103 +176,111 @@ const useRegistrationMethod = (apiEndpoint) => {
       if (!formData.state) {
         // Handle the case where the selected state is empty
         console.error('State is empty');
-        setError('State cannot be empty');
+        setErrors('State cannot be empty');
+        openPopup(); // Open the popup
         return;
       } else if (!formData.city){
         console.log('City is empty');
-        setError('City cannot be empty');
+        setErrors('City cannot be empty');
+        openPopup(); // Open the popup
         return;
       };
   
       //checks phone number length
       if (formData.phone_number.length > 11 || formData.phone_number.length < 11) {
         console.log("Phone number error");
-        setError('Phone number cannot be less or greater than 11 digits e.g 08123456789');
+        setErrors('Phone number cannot be less or greater than 11 digits e.g 08123456789');
+        openPopup(); // Open the popup
         return;
       }
   
       // Checks password length
       if (formData.password.length && formData.confirm_password.length < 8) {
         console.error('Password cannot be less than 8 characters.');
-        setError("Password cannot be less than 8 characters.")
+        setErrors("Password cannot be less than 8 characters.")
+        openPopup(); // Open the popup
         return;
       }
   
       // Check if passwords match
       if (formData.password !== formData.confirm_password) {
         console.error('Passwords do not match');
-        setError("Password does not match")
+        setErrors("Password does not match");
+        openPopup(); // Open the popup
         return;
       }
 
-      // Validate your form data here and set errors if any
-      const newErrors = {};
-      if (!formData.first_name) {
-        newErrors.first_name = 'First name is required';
-      }
+      
+      try {
+        const formDataObj = new FormData();
 
-      if (!formData.email) {
-        newErrors.email = 'email error';
-      }
-
-      if (Object.keys(newErrors).length > 0) {
-        // If there are errors, update the state to display them
-        setError(newErrors);
-      } else {
-        // Your existing submit logic
-        try {
-          const formDataObj = new FormData();
-  
-          for (const key in formData) {
-            // Append all form data except the file directly
-            if (key !== 'cac_document') {
-              formDataObj.append(key, formData[key]);
-            }
+        for (const key in formData) {
+          // Append all form data except the file directly
+          if (key !== 'cac_document') {
+            formDataObj.append(key, formData[key]);
           }
-  
-          // Append the file separately
-          formDataObj.append('cac_document', formData.cac_document);
-  
-          // Log the FormData content before sending
-          for (const pair of formDataObj.entries()) {
-            console.log(pair[0], pair[1]);
-          }
-  
-          const response = await fetch(apiEndpoint, {
-            method: 'POST',
-            headers: {
-              "Referer": "https://realestate.api.sites.name.ng/",
-              "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
-            },
-            body: formDataObj,
-          });
-    
-          if (response.ok) {
-            // Handle successful registration, e.g., redirect to a success page
-            console.log('Registration successful');
-            console.log(formData);
-            setError(null);
-          } else {
-            const errorResponse = await response.json();
-            console.log(errorResponse);
-            for (const field in errorResponse.extra.fields) {
-              // Check if the field has a truthy value
-              if (errorResponse.extra.fields[field]) {
-                // Output the value contained in the field
-                setError(`${errorResponse.extra.fields[field]}`)
-                console.log(`${field}: ${errorResponse.extra.fields[field]}`);
-              }
-            }
-          }   
-        } catch (error) {
-          // Catches all other types of errors
-          console.error('Error during registration:', error);
-          setError('An error occurred during registration. Please try again.');
         }
-      }
 
+        // Append the file separately
+        formDataObj.append('cac_document', formData.cac_document);
+
+        // Log the FormData content before sending
+        for (const pair of formDataObj.entries()) {
+          console.log(pair[0], pair[1]);
+        }
+
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            "Referer": "https://realestate.api.sites.name.ng/",
+            "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
+          },
+          body: formDataObj,
+        });
   
-  
+        if (response.ok) {
+          // Handle successful registration, e.g., redirect to a success page
+          redirectToDashboard(`/overview`);
+
+          // const { object } = response;
+
+          // switch (object) {
+          //   case 'customer':
+          //     redirectToDashboard(`/overview`);
+          //     break;
+          //   case 'agent':
+          //     redirectToDashboard(`/overview`);
+          //     break;
+          //   case 'agency':
+          //     redirectToDashboard(`/overview`);
+          //     break;
+          //   default:
+          //     console.error('Unknown role:', object);
+          //     setErrors('An error occured');
+          //     openPopup(); // Open the popup
+          // }
+          console.log('Registration successful');
+          console.log(formData);
+          setErrors(null);
+        } else {
+          const errorResponse = await response.json();
+          console.log(errorResponse);
+          for (const field in errorResponse.extra.fields) {
+            // Check if the field has a truthy value
+            if (errorResponse.extra.fields[field]) {
+              // Output the value contained in the field
+              setErrors(`${errorResponse.extra.fields[field]}`)
+              openPopup(); // Open the popup
+              console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+            }
+          }
+        }   
+      } catch (error) {
+        // Catches all other types of errors
+        console.error('Error during registration:', error);
+        setErrors('An error occurred during registration. Please try again.');
+        openPopup(); // Open the popup
+      }
     };
   
     
@@ -283,11 +290,13 @@ const useRegistrationMethod = (apiEndpoint) => {
       formData,
       selectedState,
       selectedCity,
-      isModalOpen,
       isStateDropdownOpen,
       isCityDropdownOpen,
       //errors,
+      setErrors,
       error,
+      isPopupOpen, 
+      setIsPopupOpen,
       toggleStateDropdown,
       toggleCityDropdown,
       handleStateClick,
@@ -297,7 +306,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       password_show_hide,
       confirmPassword_show_hide,
       handleSubmit,
-      closeModal,
+      closePopup,
     };
 }
   

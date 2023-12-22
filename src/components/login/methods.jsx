@@ -3,7 +3,21 @@ import { useState, useEffect} from 'react';
 
 const useLoginLogic = (apiEndpoint) => { 
     const [error, setError] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+
+    // New function to set errors
+    const setErrors = (newError) => {
+      setError(newError);
+    };
+
+    const openPopup = () => {
+      setIsPopupOpen(true);
+    };
+  
+    const closePopup = () => {
+      setIsPopupOpen(false);
+    };
     
     //Hadle form data i.e user input
     const [userInput, setUserInput] = useState({
@@ -21,19 +35,6 @@ const useLoginLogic = (apiEndpoint) => {
       );
     };
 
-    // closes the error pop up
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setError(null)
-    };
-    
-    useEffect(() => {
-        if (error) {
-            setIsModalOpen(true);
-        } else {
-            setIsModalOpen(false);
-        }
-    }, [error]);
 
     const password_show_hide = () => {
       var x = document.getElementById("password");
@@ -75,14 +76,15 @@ const useLoginLogic = (apiEndpoint) => {
         
         if (!response.ok) {
           // Handle non-successful response (HTTP status code other than 200)
-            setError(responseData.message);
-            console.error(responseData.message)
+            setErrors(responseData.message);
+            openPopup(); // Open the popup
 
             for (const field in responseData.extra.fields) {
             // Check if the field has a truthy value
                 if (responseData.extra.fields[field]) {
                   // Output the value contained in the field
-                  setError(`${responseData.extra.fields[field]}`)
+                  setErrors(`${responseData.extra.fields[field]}`)
+                  openPopup(); // Open the popup
                   console.log(`${field}: ${responseData.extra.fields[field]}`);
                 }
             }
@@ -91,39 +93,39 @@ const useLoginLogic = (apiEndpoint) => {
         //login successful
         console.log('Login successful', responseData);
 
-        const { object, id } = responseData;
-
-        // Call the login function with user details
-        //console.log(login({ id, object, first_name }));
-
+        const { object } = responseData;
 
         switch (object) {
           case 'customer':
-            redirectToDashboard(`/dashboard/${id}`);
+            redirectToDashboard(`/overview`);
             break;
           case 'agent':
-            redirectToDashboard(`/dashboard/${id}`);
+            redirectToDashboard(`/overview`);
             break;
           case 'agency':
-            redirectToDashboard(`/dashboard/${id}`);
+            redirectToDashboard(`/overview`);
             break;
           default:
             console.error('Unknown role:', object);
-            setError('Unknown role');
+            setErrors('An error occured');
+            openPopup(); // Open the popup
         }
       } catch (error) {
         // Handle errors, e.g., display an error message to the user
         console.error('Login failed', error);
-        setError('Login failed', error)
+        setErrors('Login failed', error);
+        openPopup(); // Open the popup
       }
     };
   
     return{   
       userInput,
       error,
-      isModalOpen,
+      isPopupOpen, 
+      setIsPopupOpen,
+      openPopup,
+      closePopup,
       handleChange,
-      closeModal,
       password_show_hide,
       redirectToDashboard,
       useHandleLogin,
