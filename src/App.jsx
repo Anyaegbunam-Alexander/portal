@@ -25,10 +25,10 @@ import { useAuth } from './contexts/AuthContext';
 
 const App = () => {
 
-  //const { user } = useAuth();
+  const { login } = useAuth();
   
 
-  const currentUser = true;
+  const currentUser = login;
   //console.log(currentUser);
 
   const Layout = () => {
