@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
-
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../dashboardComponents';
 import { userProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
@@ -11,16 +11,12 @@ import { useAuth } from '../../contexts/AuthContext';
 const UserProfile = () => {
   const { currentColor } = useStateContext();
   const { logout } = useAuth();
-
-  const redirectToLogin = (url) => {
-    // Redirect to the specified URL
-    window.location.href = url;
-  };
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     logout(); // Call the logout function
     // Redirect to the specified URL using React Router
-    redirectToLogin('/login/customer');
+    navigate('/login/customer');
   };
 
   return (

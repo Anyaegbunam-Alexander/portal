@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
@@ -72,7 +72,7 @@ const UserDashboard = () => {
 
                     <Routes>
                         {/* Dashboard */}
-                        <Route path="/" element={<Overview />} />
+                        <Route path="/" element={<Navigate to='/overview' />} />
                         <Route path="/properties" element={<Properties />} />
                         <Route path="/overview" element={<Overview />} />
 

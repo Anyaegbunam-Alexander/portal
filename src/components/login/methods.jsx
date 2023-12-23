@@ -1,4 +1,6 @@
 import { useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
+import UserDashboard from '../../pages/Dashboards/userDashboard/UserDashboard';
 //import { useAuth } from '../../contexts/AuthContext';
 
 const useLoginLogic = (apiEndpoint) => { 
@@ -52,13 +54,12 @@ const useLoginLogic = (apiEndpoint) => {
       }
     }
 
-    const redirectToDashboard = (url) => {
-      // Redirect to the specified URL
-      window.location.href = url;
-    };
+    const navigate = useNavigate();
 
-   // const { login } = useAuth();
-  
+    const userLoggedIn = (value) => {
+      return value
+    }
+    
     const useHandleLogin = async (e) => {
       e.preventDefault()
       try {
@@ -92,9 +93,12 @@ const useLoginLogic = (apiEndpoint) => {
         }
 
         //login successful
+        userLoggedIn(true)
+        navigate('/')
+        //window.location.href = '/';
+        console.log('Navigating to /'); // Add this line
         console.log('Login successful', responseData);
-
-        redirectToDashboard(`/overview`)
+        
 
 
         //const { object } = responseData;
@@ -131,7 +135,7 @@ const useLoginLogic = (apiEndpoint) => {
       closePopup,
       handleChange,
       password_show_hide,
-      redirectToDashboard,
+      //redirectToDashboard,
       useHandleLogin,
     }
   }

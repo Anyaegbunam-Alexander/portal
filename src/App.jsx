@@ -1,17 +1,8 @@
 import React from 'react';
-import './app.css';
-
-
-//react-router
 import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
-
-
-
-//pages
+  Routes,
+  Route
+} from 'react-router-dom';
 import CustomerLogin from './components/login/customer/login';
 import AgentLogin from './components/login/agent/agent';
 import AgencyLogin from './components/login/agency/agency';
@@ -19,70 +10,31 @@ import Customer from './components/register/customer/customerRegistration';
 import Agent from './components/register/agent/agent';
 import Agency from './components/register/agency/agency';
 import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
+import useLoginLogic from './components/login/methods';
+import './app.css';
 
-import { useAuth } from './contexts/AuthContext';
-
+// const custApi = 'https://realestate.api.sites.name.ng/auth/customers/login/';
+// const agentApi = 'https://realestate.api.sites.name.ng/auth/agents/login/';
+// const agencyApi = 'https://realestate.api.sites.name.ng/auth/agencies/login/';
 
 const App = () => {
+  const { userLoggedIn } = useLoginLogic();
+  //const { useHandleLogin } = useLoginLogic(custApi || agentApi || agencyApi);
 
-  const { login } = useAuth();
+  console.log(userLoggedIn);
   
 
-  const currentUser = login;
-  //console.log(currentUser);
-
-  const Layout = () => {
-    return (
-      <UserDashboard />
-    );
-  }
-
-  const ProtectedRoute = ({children}) =>  {
-    //console.log('Current User:', currentUser);
-    if(!currentUser) {
-      return <Navigate to='/login/customer'/>
-    }
-
-    return children
-  }
-
-  const router = createBrowserRouter([
-    {
-      path: "/*",
-      element: 
-        <ProtectedRoute>
-          <Layout />
-        </ProtectedRoute>
-    },
-    {
-      path: "/login/customer",
-      element: <CustomerLogin />,
-    },
-    {
-      path: "/login/agent",
-      element: <AgentLogin />,
-    },
-    {
-      path: "/login/agency",
-      element: <AgencyLogin />,
-    },
-    {
-      path: "/register/customer",
-      element: <Customer />,
-    },
-    {
-      path: "/register/agent",
-      element: <Agent />,
-    },
-    {
-      path: "/register/agency",
-      element: <Agency />,
-    }
-  ]);
-
   return (
-    <RouterProvider router={router} />
-  )
+    <Routes>
+      <Route path="/*" element={true ? <UserDashboard/> : <CustomerLogin/>} />
+      <Route path="/login/customer" element={<CustomerLogin />} />
+      <Route path="/login/agent" element={<AgentLogin />} />
+      <Route path="/login/agency" element={<AgencyLogin />} />
+      <Route path="/register/customer" element={<Customer />} />
+      <Route path="/register/agent" element={<Agent />} />
+      <Route path="/register/agency" element={<Agency />} />
+    </Routes>
+  );
 }
 
 export default App;
