@@ -54,6 +54,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       password: '',
       confirm_password: '',
       cac_document: null,
+      identification: null,
       link: '',
       name: '', //name of agency
       agreement: true,
@@ -75,6 +76,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       setFormData((prevFormData) => ({
         ...prevFormData,
         cac_document: file,
+        identification: file
       }));
     };
 
@@ -216,13 +218,14 @@ const useRegistrationMethod = (apiEndpoint) => {
 
         for (const key in formData) {
           // Append all form data except the file directly
-          if (key !== 'cac_document') {
+          if (key !== 'cac_document' || 'identification') {
             formDataObj.append(key, formData[key]);
           }
         }
 
         // Append the file separately
         formDataObj.append('cac_document', formData.cac_document);
+        formDataObj.append('identification', formData.identification);
 
         // Log the FormData content before sending
         for (const pair of formDataObj.entries()) {
@@ -292,10 +295,9 @@ const useRegistrationMethod = (apiEndpoint) => {
       selectedCity,
       isStateDropdownOpen,
       isCityDropdownOpen,
-      //errors,
-      setErrors,
       error,
       isPopupOpen, 
+      setErrors,
       setIsPopupOpen,
       toggleStateDropdown,
       toggleCityDropdown,

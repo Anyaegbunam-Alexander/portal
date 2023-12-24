@@ -150,6 +150,10 @@ $background-image: '../../assets/company_x-1.jpg';
                 margin-bottom: 15px;
             }
 
+            .file-content::before{
+                content: 'Upload your mean of Identification here:';
+            }
+
             .file::file-selector-button{
                 border-radius: 4px;
                 padding: 0 16px;

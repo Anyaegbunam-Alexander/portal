@@ -26,6 +26,7 @@ const Agent = () => {
     handleStateClick,
     handleCityClick,
     handleChange,
+    handleFileChange,
     password_show_hide,
     confirmPassword_show_hide,
     handleSubmit,
@@ -96,6 +97,7 @@ const Agent = () => {
           <h2>Agent Register</h2>
 
           <form onSubmit={handleSubmit}>
+            <input type="file" id="identification" name='identification' onChange={handleFileChange} placeholder='Identification Doc.' required className='file file-content'/>
             <input type="text" id="first_name" name='first_name' value={formData.first_name} onChange={handleChange} placeholder='Firstname' required/>
             <input type="text" id="last_name" name='last_name' value={formData.last_name} onChange={handleChange} placeholder='Lastname' required/>
             <input type="text" id="street_address" name='street_address' value={formData.street_address} onChange={handleChange} placeholder='Street address' required/>              

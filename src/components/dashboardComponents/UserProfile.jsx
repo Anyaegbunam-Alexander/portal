@@ -1,22 +1,22 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Button } from '../dashboardComponents';
 import { userProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import avatar from '../../data/avatar.jpg';
-import { useAuth } from '../../contexts/AuthContext';
+import CustomerLogin from '../../components/login/customer/login';
+//import { useAuth } from '../../contexts/AuthContext';
 
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
-  const { logout } = useAuth();
-  const navigate = useNavigate();
+  //const { logout } = useAuth();
+  // const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout(); // Call the logout function
-    // Redirect to the specified URL using React Router
-    navigate('/login/customer');
+    <Navigate to={<CustomerLogin/>} />
+    return true
   };
 
   return (
@@ -63,7 +63,7 @@ const UserProfile = () => {
       </div>
       <div className="mt-5">
         <Button
-          onClick={() => handleLogout()}
+          onClick={handleLogout()}
           color="white"
           bgColor={currentColor}
           text="Logout"
