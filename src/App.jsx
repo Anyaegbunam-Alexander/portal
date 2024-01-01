@@ -21,7 +21,7 @@ const App = () => {
   const { userLoggedIn } = useLoginLogic();
   //const { useHandleLogin } = useLoginLogic(custApi || agentApi || agencyApi);
 
-  console.log(userLoggedIn);
+  //console.log(userLoggedIn);
   
 
   return (
