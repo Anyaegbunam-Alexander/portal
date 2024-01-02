@@ -70,6 +70,7 @@ const useLoginLogic = (apiEndpoint) => {
             "Referer": "https://realestate.api.sites.name.ng/",
             "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
           },
+          credentials: true,
           body: JSON.stringify(userInput)
         });
 
