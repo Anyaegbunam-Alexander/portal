@@ -11,7 +11,7 @@ import Agent from './components/register/agent/agent';
 import Agency from './components/register/agency/agency';
 import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
 import useLoginLogic from './components/login/methods';
-import axios from 'axios';
+import NotFound from './pages/errorPages/404';
 import './app.css';
 
  const custApi = 'https://realestate.api.sites.name.ng/auth/customers/login/';
@@ -40,13 +40,15 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={true ? <UserDashboard/> : <CustomerLogin/>} />
+      <Route path="/*" element={false ? <UserDashboard/> : <CustomerLogin/>} />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />
       <Route path="/register/customer" element={<Customer />} />
       <Route path="/register/agent" element={<Agent />} />
       <Route path="/register/agency" element={<Agency />} />
+      {/* 404 Route - Catch-all */}
+      {/* <Route path="/*" element={<NotFound />} /> */}
     </Routes>
   );
 }
