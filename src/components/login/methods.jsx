@@ -59,22 +59,33 @@ const useLoginLogic = (apiEndpoint) => {
     const userLoggedIn = (value) => {
       return value
     }
+
+    // Function to get a specific cookie value by name
+    const getCookie = (name) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    };
     
     const useHandleLogin = async (e) => {
       e.preventDefault()
       try {
         const response = await fetch(apiEndpoint, {
+          //credentials: "include",
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             "Referer": "https://realestate.api.sites.name.ng/",
-            "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
+            "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi",
           },
-          credentials: true,
           body: JSON.stringify(userInput)
         });
 
         const responseData = await response.json();
+
+        // Check if the session ID is present in cookies
+        const sessionId = getCookie('sessionid');
+        console.log(sessionId);
         
         if (!response.ok) {
           // Handle non-successful response (HTTP status code other than 200)
