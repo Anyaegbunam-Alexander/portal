@@ -11,7 +11,6 @@ import Customer from './components/register/customer/customerRegistration';
 import Agent from './components/register/agent/agent';
 import Agency from './components/register/agency/agency';
 import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
-import useLoginLogic from './components/login/methods';
 import NotFound from './pages/errorPages/404';
 import './app.css';
 
@@ -21,20 +20,7 @@ import './app.css';
 
 const App = () => {
   //const [auth, setAuth] = useState(false)
-  const { userLoggedIn } = useLoginLogic();
   //const { useHandleLogin } = useLoginLogic(custApi || agentApi || agencyApi);
-
-  // useEffect(() => {
-  //   axios.get(custApi)
-  //   .then(res => {
-  //     if (res.data.Status === "Success") {
-  //       console.log("useeffect login method test")
-  //       setAuth(true);
-  //     }else{
-  //       setAuth(false)
-  //     }
-  //   })
-  // }, [])
   
 
   

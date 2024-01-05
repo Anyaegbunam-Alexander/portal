@@ -56,10 +56,6 @@ const useLoginLogic = (apiEndpoint) => {
 
     const navigate = useNavigate();
 
-    const userLoggedIn = (value) => {
-      return value
-    }
-
     // Function to get a specific cookie value by name
     const getCookie = (name) => {
       const value = `; ${document.cookie}`;
@@ -70,13 +66,16 @@ const useLoginLogic = (apiEndpoint) => {
     const useHandleLogin = async (e) => {
       e.preventDefault()
       try {
-        const response = await fetch(apiEndpoint, {
-          //credentials: "include",
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify(userInput);
+
+        var requestOptions = {
           method: 'POST',
           headers: myHeaders,
           body: raw,
-        },
-        
+        };
+
         const response = await fetch(apiEndpoint, requestOptions)
 
         const responseData = await response.json();
@@ -102,32 +101,10 @@ const useLoginLogic = (apiEndpoint) => {
             return;
         }
 
-        //login successful
-        userLoggedIn(true)
         navigate('/')
-        //window.location.href = '/';
         console.log('Navigating to /'); // Add this line
         console.log('Login successful', responseData);
         
-
-
-        //const { object } = responseData;
-
-        // switch (object) {
-        //   case 'customer':
-        //     redirectToDashboard(`/overview`);
-        //     break;
-        //   case 'agent':
-        //     redirectToDashboard(`/overview`);
-        //     break;
-        //   case 'agency':
-        //     redirectToDashboard(`/overview`);
-        //     break;
-        //   default:
-        //     console.error('Unknown role:', object);
-        //     setErrors('An error occured');
-        //     openPopup(); // Open the popup
-        // }
       } catch (error) {
         // Handle errors, e.g., display an error message to the user
         console.error('Login failed', error);
@@ -145,8 +122,7 @@ const useLoginLogic = (apiEndpoint) => {
       closePopup,
       handleChange,
       password_show_hide,
-      //redirectToDashboard,
-      useHandleLogin,
+      useHandleLogin
     }
   }
 
