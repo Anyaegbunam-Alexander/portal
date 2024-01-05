@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
@@ -30,6 +30,13 @@ import { useStateContext } from '../../../contexts/ContextProvider';
 
 const UserDashboard = () => {
   const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
+  // Get the navigate function from useNavigate
+  const navigate = useNavigate();
+
+  // useEffect to navigate to '/dashboard/overview' on component mount
+  useEffect(() => {
+    navigate('/dashboard/overview');
+  }, [navigate]);
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
@@ -72,31 +79,31 @@ const UserDashboard = () => {
 
                     <Routes>
                         {/* Dashboard */}
-                        <Route path="/" element={<Navigate to='/overview' />} />
-                        <Route path="/properties" element={<Properties />} />
-                        <Route path="/overview" element={<Overview />} />
+                        {/* <Route index element={<Navigate to='/dashboard/overview' />} /> */}
+                        <Route path="/dashboard/properties" element={<Properties />} />
+                        <Route path="/dashboard/overview" element={<Overview />} />
 
 
                         {/* Pages */}
-                        <Route path="/orders" element={<Orders />} />
-                        <Route path="/agents" element={<Employees />} />
-                        <Route path="/customers" element={<Customers />} />
+                        <Route path="/dashboard/orders" element={<Orders />} />
+                        <Route path="/dashboard/agents" element={<Employees />} />
+                        <Route path="/dashboard/customers" element={<Customers />} />
 
                         {/* Apps */}
-                        <Route path="/kanban" element={<Kanban />} />
-                        <Route path="/editor" element={<Editor />} />
-                        <Route path="/calendar" element={<Calendar />} />
-                        <Route path="/color-picker" element={<ColorPicker />} />
+                        <Route path="/dashboard/kanban" element={<Kanban />} />
+                        <Route path="/dashboard/editor" element={<Editor />} />
+                        <Route path="/dashboard/calendar" element={<Calendar />} />
+                        <Route path="/dashboard/color-picker" element={<ColorPicker />} />
 
                         {/* charts */}
-                        <Route path="/line" element={<Line />} />
-                        <Route path="/area" element={<Area />} />
-                        <Route path="/bar" element={<Bar />} />
-                        <Route path="/pie" element={<Pie />} />
-                        <Route path="/financial" element={<Financial />} />
-                        <Route path="/color-mapping" element={<ColorMapping />} />
-                        <Route path="/pyramid" element={<Pyramid />} />
-                        <Route path="/stacked" element={<Stacked />} />
+                        <Route path="/dashboard/line" element={<Line />} />
+                        <Route path="/dashboard/area" element={<Area />} />
+                        <Route path="/dashboard/bar" element={<Bar />} />
+                        <Route path="/dashboard/pie" element={<Pie />} />
+                        <Route path="/dashboard/financial" element={<Financial />} />
+                        <Route path="/dashboard/color-mapping" element={<ColorMapping />} />
+                        <Route path="/dashboard/pyramid" element={<Pyramid />} />
+                        <Route path="/dashboard/stacked" element={<Stacked />} />
                     </Routes>
                 </div>
 

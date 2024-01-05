@@ -71,7 +71,7 @@ const useLoginLogic = (apiEndpoint) => {
       e.preventDefault()
       try {
         const response = await fetch(apiEndpoint, {
-          //credentials: "include",
+          credentials: "include",
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

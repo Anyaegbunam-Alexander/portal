@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   Routes,
-  Route
+  Route,
+  Navigate
 } from 'react-router-dom';
 import CustomerLogin from './components/login/customer/login';
 import AgentLogin from './components/login/agent/agent';
@@ -40,7 +41,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/*" element={false ? <UserDashboard/> : <CustomerLogin/>} />
+      <Route path="/" element={true ? <UserDashboard /> : <Navigate to="/login/customer" />} />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />
@@ -48,7 +49,7 @@ const App = () => {
       <Route path="/register/agent" element={<Agent />} />
       <Route path="/register/agency" element={<Agency />} />
       {/* 404 Route - Catch-all */}
-      {/* <Route path="/*" element={<NotFound />} /> */}
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   );
 }

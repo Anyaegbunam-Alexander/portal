@@ -51,7 +51,7 @@ const SideBar = () => {
                 
                 {item.links.map((link) => (
                   <NavLink
-                    to={`/${link.name}`}
+                    to={`/dashboard/${link.name}`}
                     key={link.name}
                     onClick={handleCloseSideBar}
                     style={({isActive}) => ({backgroundColor: isActive ? currentColor : ''})}
