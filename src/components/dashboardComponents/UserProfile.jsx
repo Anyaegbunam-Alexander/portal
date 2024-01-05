@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Button } from '../dashboardComponents';
 import { userProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
@@ -10,14 +10,15 @@ import CustomerLogin from '../../components/login/customer/login';
 
 
 const UserProfile = () => {
+  const navigate = useNavigate();
+  console.log("In the user profile page");
   const { currentColor } = useStateContext();
-  //const { logout } = useAuth();
-  // const navigate = useNavigate();
 
   const handleLogout = () => {
-    <Navigate to={<CustomerLogin/>} />
-    return true
+    localStorage.removeItem('token');
+    navigate('/login/customer');
   };
+  
 
   return (
     <div className="nav-item absolute right-1 top-16 bg-white shadow-xl dark:bg-[#42464D] p-8 rounded-lg w-96">
@@ -62,14 +63,20 @@ const UserProfile = () => {
         ))}
       </div>
       <div className="mt-5">
-        <Button
-          onClick={handleLogout()}
-          color="white"
-          bgColor={currentColor}
-          text="Logout"
-          borderRadius="10px"
-          width="full"
-        />
+        {console.log("About to click logout btn")}
+
+        <button
+          type='button'
+          onClick={(e) => {
+            console.log('Button clicked');
+            handleLogout(e);
+          }}
+          style={{ color: 'white', backgroundColor: currentColor, borderRadius: '10px' }}
+          className={` p-3 w-full hover:drop-shadow-xl hover:bg-light-gray `}
+        >
+          Logout
+        </button>
+
       </div>
     </div>
 

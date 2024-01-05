@@ -55,13 +55,6 @@ const useLoginLogic = (apiEndpoint) => {
     }
 
     const navigate = useNavigate();
-
-    // Function to get a specific cookie value by name
-    const getCookie = (name) => {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    };
     
     const useHandleLogin = async (e) => {
       e.preventDefault()
@@ -76,13 +69,8 @@ const useLoginLogic = (apiEndpoint) => {
           body: raw,
         };
 
-        const response = await fetch(apiEndpoint, requestOptions)
-
+        const response = await fetch(apiEndpoint, requestOptions);
         const responseData = await response.json();
-
-        // Check if the session ID is present in cookies
-        const sessionId = getCookie('sessionid');
-        console.log(sessionId);
         
         if (!response.ok) {
           // Handle non-successful response (HTTP status code other than 200)
@@ -102,8 +90,8 @@ const useLoginLogic = (apiEndpoint) => {
         }
 
         navigate('/')
-        console.log('Navigating to /'); // Add this line
-        console.log('Login successful', responseData);
+        localStorage.setItem('token', responseData.token)
+        console.log('Login successful');
         
       } catch (error) {
         // Handle errors, e.g., display an error message to the user

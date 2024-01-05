@@ -31,12 +31,12 @@ import { useStateContext } from '../../../contexts/ContextProvider';
 const UserDashboard = () => {
   const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
   // Get the navigate function from useNavigate
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
-  // useEffect to navigate to '/dashboard/overview' on component mount
-  useEffect(() => {
-    navigate('/dashboard/overview');
-  }, [navigate]);
+//   // useEffect to navigate to '/dashboard/overview' on component mount
+//   useEffect(() => {
+//     navigate('/dashboard/overview');
+//   }, [navigate]);
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>

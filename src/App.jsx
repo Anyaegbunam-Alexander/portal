@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {
   Routes,
   Route,
-  Navigate
+  Navigate,
+  useNavigate
 } from 'react-router-dom';
 import CustomerLogin from './components/login/customer/login';
 import AgentLogin from './components/login/agent/agent';
@@ -21,13 +22,22 @@ import './app.css';
 const App = () => {
   //const [auth, setAuth] = useState(false)
   //const { useHandleLogin } = useLoginLogic(custApi || agentApi || agencyApi);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/login/customer')
+    }
+  }, [])
+  
   
 
   
 
   return (
     <Routes>
-      <Route path="/" element={true ? <UserDashboard /> : <Navigate to="/login/customer" />} />
+      <Route path="/*" element={true ? <UserDashboard /> : <Navigate to="/login/customer" />} />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />
