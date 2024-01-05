@@ -27,17 +27,16 @@ const App = () => {
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
-      navigate('/login/customer')
+      navigate('/login/customer');
     }
   }, [])
-  
   
 
   
 
   return (
     <Routes>
-      <Route path="/*" element={true ? <UserDashboard /> : <Navigate to="/login/customer" />} />
+      <Route path="/" element={true ? <UserDashboard /> : <Navigate to="/login/customer" />} />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />

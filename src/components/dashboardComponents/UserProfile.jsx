@@ -10,9 +10,8 @@ import CustomerLogin from '../../components/login/customer/login';
 
 
 const UserProfile = () => {
-  const navigate = useNavigate();
-  console.log("In the user profile page");
   const { currentColor } = useStateContext();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -63,8 +62,6 @@ const UserProfile = () => {
         ))}
       </div>
       <div className="mt-5">
-        {console.log("About to click logout btn")}
-
         <button
           type='button'
           onClick={(e) => {

@@ -90,11 +90,11 @@ const useLoginLogic = (apiEndpoint) => {
         }
 
         navigate('/')
+        localStorage.setItem('name', responseData.last_name)
         localStorage.setItem('token', responseData.token)
-        console.log('Login successful');
+        console.log('Login successful', responseData);
         
       } catch (error) {
-        // Handle errors, e.g., display an error message to the user
         console.error('Login failed', error);
         setErrors('Login failed', error);
         openPopup(); // Open the popup
