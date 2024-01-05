@@ -70,16 +70,16 @@ const useLoginLogic = (apiEndpoint) => {
     const useHandleLogin = async (e) => {
       e.preventDefault()
       try {
-        const response = await fetch(apiEndpoint, {
-          //credentials: "include",
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify(userInput);
+
+        var requestOptions = {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            "Referer": "https://realestate.api.sites.name.ng/",
-            "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi",
-          },
-          body: JSON.stringify(userInput)
-        });
+          headers: myHeaders,
+          body: raw,
+        };
+        const response = await fetch(apiEndpoint, requestOptions)
 
         const responseData = await response.json();
 
