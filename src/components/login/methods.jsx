@@ -71,15 +71,13 @@ const useLoginLogic = (apiEndpoint) => {
       e.preventDefault()
       try {
         const response = await fetch(apiEndpoint, {
-          credentials: "include",
+          //credentials: "include",
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            "Referer": "https://realestate.api.sites.name.ng/",
-            "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi",
-          },
-          body: JSON.stringify(userInput)
-        });
+          headers: myHeaders,
+          body: raw,
+        },
+        
+        const response = await fetch(apiEndpoint, requestOptions)
 
         const responseData = await response.json();
 
