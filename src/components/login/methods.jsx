@@ -1,12 +1,11 @@
-import { useState, useEffect} from 'react';
+import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import UserDashboard from '../../pages/Dashboards/userDashboard/UserDashboard';
 import { useAuth } from '../../contexts/AuthContext';
 
 const useLoginLogic = (apiEndpoint) => { 
     const [error, setError] = useState(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
-    const { isLoggedIn,login } = useAuth();
+    const { login } = useAuth();
 
 
     // New function to set errors

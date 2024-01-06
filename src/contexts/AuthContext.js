@@ -4,11 +4,6 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  console.log("AuthContext is mounted and working");
-
-  useEffect(() => {
-    console.log("isLoggedIn after state update:", isLoggedIn);
-  }, [isLoggedIn]);
 
   const login = (userData) => {
     console.log("About to login");
@@ -17,21 +12,20 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       localStorage.setItem('name', last_name);
       localStorage.setItem('token', token);
-      setLoggedIn(prevState => !prevState);
+      setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
   };
 
-  useEffect(() => {
-    console.log("Login successful. isLoggedIn:", isLoggedIn);
-  }, [isLoggedIn]);
-
   const logout = () => {
     localStorage.clear();
     setLoggedIn(false);
-    console.log("isLoggedIn after logout:", isLoggedIn); // Log the state after update
   };
+
+  useEffect(() => {
+    console.log("isLoggedIn after state update:", isLoggedIn);
+  }, [isLoggedIn]);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
@@ -41,7 +35,6 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => {
-  // return useContext(AuthContext);
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
