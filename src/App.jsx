@@ -12,6 +12,7 @@ import Customer from './components/register/customer/customerRegistration';
 import Agent from './components/register/agent/agent';
 import Agency from './components/register/agency/agency';
 import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/errorPages/404';
 import './app.css';
 
@@ -25,18 +26,26 @@ const App = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      navigate('/login/customer');
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!localStorage.getItem('token')) {
+  //     navigate('/login/customer');
+  //   }
+  // }, [])
   
 
   
 
   return (
     <Routes>
-      <Route path="/" element={true ? <UserDashboard /> : <Navigate to="/login/customer" />} />
+      {/* <Route path="/" element={true ? <UserDashboard /> : <Navigate to="/login/customer" />} /> */}
+      <Route 
+        path="*" 
+        element={
+          <ProtectedRoute>
+            <UserDashboard />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />

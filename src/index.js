@@ -6,16 +6,16 @@ import './index.css';
 import App from './App';
 
 import { ContextProvider } from './contexts/ContextProvider';
-import { AuthContextProvider } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Router>
         <ContextProvider>
-            {/* <AuthContextProvider>
-            </AuthContextProvider> */}
-            <App />
+            <AuthProvider>
+                <App />
+            </AuthProvider>
         </ContextProvider>
     </Router>
 );

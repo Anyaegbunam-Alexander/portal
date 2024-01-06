@@ -1,11 +1,12 @@
 import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserDashboard from '../../pages/Dashboards/userDashboard/UserDashboard';
-//import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 const useLoginLogic = (apiEndpoint) => { 
     const [error, setError] = useState(null);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const { isLoggedIn,login } = useAuth();
 
 
     // New function to set errors
@@ -89,11 +90,19 @@ const useLoginLogic = (apiEndpoint) => {
             return;
         }
 
-        navigate('/')
-        localStorage.setItem('name', responseData.last_name)
-        localStorage.setItem('token', responseData.token)
-        console.log('Login successful', responseData);
-        
+        // Check if the token exists before calling login
+        if (responseData.token) {
+          // Call login with user data after updating local storage
+          login(responseData);
+          console.log('Login successful', responseData);
+
+          // Navigate after the state is updated
+          //navigate('/');
+        } else {
+          console.error('Token not found in response data');
+          setErrors('Login failed: Token not found');
+          openPopup(); // Open the popup
+        }
       } catch (error) {
         console.error('Login failed', error);
         setErrors('Login failed', error);
