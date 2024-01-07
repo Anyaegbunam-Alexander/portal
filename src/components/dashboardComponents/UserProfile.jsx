@@ -1,21 +1,21 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
-import { Navigate, useNavigate } from 'react-router-dom';
 import { Button } from '../dashboardComponents';
 import { userProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import avatar from '../../data/avatar.jpg';
-import CustomerLogin from '../../components/login/customer/login';
-//import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 
 const UserProfile = () => {
   const { currentColor } = useStateContext();
-  const navigate = useNavigate();
+  const firstname = localStorage.getItem('firstname');
+  const lastname = localStorage.getItem('lastname');
+  const { logout } = useAuth();
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login/customer');
+    logout();
+    alert('Logout successful');
   };
   
 
@@ -38,7 +38,7 @@ const UserProfile = () => {
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> Lanre Ezeche </p>
+          <p className="font-semibold text-xl dark:text-gray-200"> {lastname} {firstname} </p>
           <p className="text-gray-500 text-sm dark:text-gray-400">  Administrator   </p>
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> info@shop.com </p>
         </div>

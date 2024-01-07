@@ -89,14 +89,11 @@ const useLoginLogic = (apiEndpoint) => {
             return;
         }
 
-        // Check if the token exists before calling login
+        
         if (responseData.token) {
-          // Call login with user data after updating local storage
           login(responseData);
           console.log('Login successful', responseData);
-
-          // Navigate after the state is updated
-          //navigate('/');
+          navigate('/');
         } else {
           console.error('Token not found in response data');
           setErrors('Login failed: Token not found');

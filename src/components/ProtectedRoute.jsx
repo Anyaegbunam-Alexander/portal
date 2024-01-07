@@ -19,17 +19,8 @@ const ProtectedRoute = ({ children }) => {
     return <LoadingSpinner />;
   }
 
-//   if (isLoggedIn) {
-//     console.log('Rendering children');
-//     return <>{children}</>;
-//   } else {
-//     console.log('The else statement in protected route is executed and the routing is not working correctly!');
-//     alert('Not logged in');
-//     return <Navigate to="/login/customer" />;
-//   }
-
   console.log('Rendering children. isLoggedIn:', isLoggedIn);
-  return isLoggedIn ? <>{children}</> : <Navigate to="/login/customer" />;
+  return isLoggedIn || localStorage.getItem('token') ? <>{children}</> : <Navigate to="/login/customer" />;
 };
 
 export default ProtectedRoute;

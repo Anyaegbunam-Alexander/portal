@@ -21,31 +21,22 @@ import './app.css';
 // const agencyApi = 'https://realestate.api.sites.name.ng/auth/agencies/login/';
 
 const App = () => {
-  //const [auth, setAuth] = useState(false)
-  //const { useHandleLogin } = useLoginLogic(custApi || agentApi || agencyApi);
-
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!localStorage.getItem('token')) {
-  //     navigate('/login/customer');
-  //   }
-  // }, [])
+  const navigate = useNavigate();  
   
-
-  
+  const Layout = () => {
+    return (
+      <ProtectedRoute>
+        <Routes>
+          <Route path="/*" element={<UserDashboard />} />
+          {/* <Route index element={<Navigate to= '/dashboard/overview'/>} /> */}
+        </Routes>
+      </ProtectedRoute>
+    );
+  };
 
   return (
     <Routes>
-      {/* <Route path="/" element={true ? <UserDashboard /> : <Navigate to="/login/customer" />} /> */}
-      <Route 
-        path="*" 
-        element={
-          <ProtectedRoute>
-            <UserDashboard />
-          </ProtectedRoute>
-        }
-      />
+      <Route path="/" element={<Layout />} />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />
@@ -53,7 +44,7 @@ const App = () => {
       <Route path="/register/agent" element={<Agent />} />
       <Route path="/register/agency" element={<Agency />} />
       {/* 404 Route - Catch-all */}
-      <Route path="/*" element={<NotFound />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
