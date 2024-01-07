@@ -28,7 +28,6 @@ const App = () => {
       <ProtectedRoute>
         <Routes>
           <Route path="/*" element={<UserDashboard />} />
-          {/* <Route index element={<Navigate to= '/dashboard/overview'/>} /> */}
         </Routes>
       </ProtectedRoute>
     );

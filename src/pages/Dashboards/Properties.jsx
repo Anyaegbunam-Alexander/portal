@@ -3,7 +3,6 @@ import { IoIosMore } from 'react-icons/io';
 
 
 import { Button } from '../../components/dashboardComponents';
-import { earningData, medicalproBranding, recentTransactions, weeklyStats, dropdownData, SparklineAreaData, ecomPieChartData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import house1 from '../../data/company_x-1.jpg';
 
