@@ -36,7 +36,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />} />
+      <Route path="/*" element={<Layout />} />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />
@@ -44,7 +44,7 @@ const App = () => {
       <Route path="/register/agent" element={<Agent />} />
       <Route path="/register/agency" element={<Agency />} />
       {/* 404 Route - Catch-all */}
-      <Route path="*" element={<NotFound />} />
+      <Route path="/404" element={<NotFound />} />
     </Routes>
   );
 }
