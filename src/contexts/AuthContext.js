@@ -9,11 +9,13 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     console.log("About to login");
-    const { token, last_name, first_name } = userData;
+    const { token, last_name, first_name, email, object } = userData;
 
     if (token) {
       localStorage.setItem('firstname', first_name);
       localStorage.setItem('lastname', last_name);
+      localStorage.setItem('email', email);
+      localStorage.setItem('role', object);
       localStorage.setItem('token', token);
       setLoggedIn(true);
     } else {

@@ -11,6 +11,8 @@ const UserProfile = () => {
   const { currentColor } = useStateContext();
   const firstname = localStorage.getItem('firstname');
   const lastname = localStorage.getItem('lastname');
+  const role = localStorage.getItem('role');
+  const email = localStorage.getItem('email');
   const { logout } = useAuth();
 
   const handleLogout = () => {
@@ -39,8 +41,8 @@ const UserProfile = () => {
         />
         <div>
           <p className="font-semibold text-xl dark:text-gray-200"> {lastname} {firstname} </p>
-          <p className="text-gray-500 text-sm dark:text-gray-400">  Administrator   </p>
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> info@shop.com </p>
+          <p className="text-gray-500 text-sm dark:text-gray-400"> {role} </p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {email} </p>
         </div>
       </div>
       <div>
