@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
@@ -23,10 +23,9 @@ import {
   ColorPicker, 
   ColorMapping, 
   Editor
-} from '../../Dashboards/index';
+} from './index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
-
 
 const UserDashboard = () => {
   const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
@@ -70,34 +69,32 @@ const UserDashboard = () => {
                 <div>
                     {themeSettings && <ThemeSettings />}
 
-                    <Routes>
-                        {/* Dashboard */}
-                        <Route index element={<Navigate to='/overview' />} />
-                        <Route path="/properties" element={<Properties />} />
-                        <Route path="/overview" element={<Overview />} />
+                    {/* Dashboard */}
+                    <a href="/user/overview">{<Overview />}</a>
 
+                    {/* Pages */}
+                    <a href="/user/properties">{<Properties />}</a>
+                    <a href="/user/overview">{<Overview />}</a>
+                    <a href="/user/orders">{<Orders />}</a>
+                    <a href="/user/agents">{<Employees />}</a>
+                    <a href="/user/customers">{<Customers />}</a>
 
-                        {/* Pages */}
-                        <Route path="/orders" element={<Orders />} />
-                        <Route path="/agents" element={<Employees />} />
-                        <Route path="/customers" element={<Customers />} />
+                    {/* Apps */}
+                    <a href="/user/kanban">{<Kanban />}</a>
+                    <a href="/user/editor">{<Editor />}</a>
+                    <a href="/user/calendar">{<Calendar />}</a>
+                    <a href="/user/color-picker">{<ColorPicker />}</a>
 
-                        {/* Apps */}
-                        <Route path="/kanban" element={<Kanban />} />
-                        <Route path="/editor" element={<Editor />} />
-                        <Route path="/calendar" element={<Calendar />} />
-                        <Route path="/color-picker" element={<ColorPicker />} />
+                    {/* Charts */}
+                    <a href="/user/line">{<Line />}</a>
+                    <a href="/user/area">{<Area />}</a>
+                    <a href="/user/bar">{<Bar />}</a>
+                    <a href="/user/pie">{<Pie />}</a>
+                    <a href="/user/financial">{<Financial />}</a>
+                    <a href="/user/color-mapping">{<ColorMapping />}</a>
+                    <a href="/user/pyramid">{<Pyramid />}</a>
+                    <a href="/user/stacked">{<Stacked />}</a>
 
-                        {/* charts */}
-                        <Route path="/line" element={<Line />} />
-                        <Route path="/area" element={<Area />} />
-                        <Route path="/bar" element={<Bar />} />
-                        <Route path="/pie" element={<Pie />} />
-                        <Route path="/financial" element={<Financial />} />
-                        <Route path="/color-mapping" element={<ColorMapping />} />
-                        <Route path="/pyramid" element={<Pyramid />} />
-                        <Route path="/stacked" element={<Stacked />} />
-                    </Routes>
                 </div>
 
                 <Footer />

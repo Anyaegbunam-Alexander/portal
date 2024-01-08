@@ -90,7 +90,7 @@ const useLoginLogic = (apiEndpoint) => {
         }
 
         
-        if (responseData.token) {
+        if (responseData.token && responseData.object === 'customer') {
           login(responseData);
           console.log('Login successful', responseData);
           navigate('/');

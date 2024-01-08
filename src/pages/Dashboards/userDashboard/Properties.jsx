@@ -2,9 +2,9 @@ import React from 'react';
 import { IoIosMore } from 'react-icons/io';
 
 
-import { Button } from '../../components/dashboardComponents';
-import { useStateContext } from '../../contexts/ContextProvider';
-import house1 from '../../data/company_x-1.jpg';
+import { Button } from '../../../components/dashboardComponents';
+import { useStateContext } from '../../../contexts/ContextProvider';
+import house1 from '../../../data/company_x-1.jpg';
 
 const Properties = () => {
   const { currentColor } = useStateContext();

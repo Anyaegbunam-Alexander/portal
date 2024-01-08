@@ -26,16 +26,14 @@ const App = () => {
   const Layout = () => {
     return (
       <ProtectedRoute>
-        <Routes>
-          <Route path="/*" element={<UserDashboard />} />
-        </Routes>
+        <UserDashboard />
       </ProtectedRoute>
     );
   };
 
   return (
     <Routes>
-      <Route path="/*" element={<Layout />} />
+      <Route path="/" element={<Layout />} />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />
@@ -43,7 +41,7 @@ const App = () => {
       <Route path="/register/agent" element={<Agent />} />
       <Route path="/register/agency" element={<Agency />} />
       {/* 404 Route - Catch-all */}
-      <Route path="/404" element={<NotFound />} />
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   );
 }

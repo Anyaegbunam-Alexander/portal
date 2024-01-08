@@ -12,8 +12,8 @@ import { GridComponent,
   Filter 
 } from '@syncfusion/ej2-react-grids';
 
-import { customersData, customersGrid } from '../../data/dummy';
-import { Header } from '../../components/dashboardComponents';
+import { customersData, customersGrid } from '../../../data/dummy';
+import { Header } from '../../../components/dashboardComponents';
 
 
 const Customers = () => {

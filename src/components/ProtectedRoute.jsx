@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
-import LoadingSpinner from './LoadingSpinner';
+import LoadingSpinner from './loader/LoadingSpinner';
+
 
 const ProtectedRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();

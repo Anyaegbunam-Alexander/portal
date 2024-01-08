@@ -13,8 +13,8 @@ import { GridComponent,
   Inject 
 } from '@syncfusion/ej2-react-grids';
 
-import { ordersData, contextMenuItems, ordersGrid } from '../../data/dummy';
-import { Header } from '../../components/dashboardComponents';
+import { ordersData, contextMenuItems, ordersGrid } from '../../../data/dummy';
+import { Header } from '../../../components/dashboardComponents';
 
 const Orders = () => {
   return (

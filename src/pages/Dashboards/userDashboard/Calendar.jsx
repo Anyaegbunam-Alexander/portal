@@ -11,8 +11,8 @@ import { ScheduleComponent,
   DragAndDrop 
 } from '@syncfusion/ej2-react-schedule';
 
-import { scheduleData } from '../../data/dummy';
-import { Header } from '../../components/dashboardComponents';
+import { scheduleData } from '../../../data/dummy';
+import { Header } from '../../../components/dashboardComponents';
 
 const Calendar = () => {
   return (

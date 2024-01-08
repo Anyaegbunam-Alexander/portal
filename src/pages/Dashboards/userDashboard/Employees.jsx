@@ -8,8 +8,8 @@ import { GridComponent,
   Inject 
 } from '@syncfusion/ej2-react-grids';
 
-import { employeesData, employeesGrid } from '../../data/dummy';
-import { Header } from '../../components/dashboardComponents';
+import { employeesData, employeesGrid } from '../../../data/dummy';
+import { Header } from '../../../components/dashboardComponents';
 
 const Employees = () => {
   return (

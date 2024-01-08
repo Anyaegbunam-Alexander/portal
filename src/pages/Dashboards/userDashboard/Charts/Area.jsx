@@ -1,9 +1,9 @@
 import React from 'react';
 import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, DateTime, SplineAreaSeries, Legend } from '@syncfusion/ej2-react-charts';
 
-import { ChartsHeader } from '../../../components/dashboardComponents';
-import { areaCustomSeries, areaPrimaryXAxis, areaPrimaryYAxis } from '../../../data/dummy';
-import { useStateContext } from '../../../contexts/ContextProvider';
+import { ChartsHeader } from '../../../../components/dashboardComponents';
+import { areaCustomSeries, areaPrimaryXAxis, areaPrimaryYAxis } from '../../../../data/dummy';
+import { useStateContext } from '../../../../contexts/ContextProvider';
 
 const Area = () => {
   const { currentMode } = useStateContext();
