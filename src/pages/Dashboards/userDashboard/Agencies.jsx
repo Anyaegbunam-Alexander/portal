@@ -11,10 +11,10 @@ import { GridComponent,
 import { employeesData, employeesGrid } from '../../../data/dummy';
 import { Header } from '../../../components/dashboardComponents';
 
-const Employees = () => {
+const Agencies = () => {
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl">
-      <Header category="Page" title="Employees"/>
+      <Header category="Page" title="Agencies"/>
       <GridComponent
         dataSource={employeesData}
         allowPaging
@@ -33,4 +33,4 @@ const Employees = () => {
   )
 }
 
-export default Employees
+export default Agencies;

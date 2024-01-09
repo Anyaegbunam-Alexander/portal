@@ -4,12 +4,13 @@ import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md'
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-import { links } from '../../data/dummy';
+import { agencylinks } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 
 const SideBar = () => {
 
   const { activeMenu, setActiveMenu, screenSize, currentColor } = useStateContext();
+  const agencyName = localStorage.getItem('agencyname');
 
   const handleCloseSideBar = () => {
     if (activeMenu && screenSize <= 900) {
@@ -31,7 +32,7 @@ const SideBar = () => {
               className='items-center gap-3 ml-3 mt-4 flex text-xl font-bold
               dark:text-white text-slate-900 text-decoration-none
             '>
-              <SiShopware /> <span>Company X</span>
+              <SiShopware /> <span>{agencyName}</span>
             </Link>
             <TooltipComponent content='Menu' position='BottomCenter'>
               <button type='button'
@@ -43,7 +44,7 @@ const SideBar = () => {
             </TooltipComponent>
           </div>
           <div className='mt-10'>
-            {links.map((item) => (
+            {agencylinks.map((item) => (
               <div key={item.title}>
                 <p className="text-gray-400 m-3 mt-4 uppercase">
                   {item.title}
@@ -51,7 +52,7 @@ const SideBar = () => {
                 
                 {item.links.map((link) => (
                   <NavLink
-                    to={`/${link.name}`}
+                    to={`/agency/${link.name}`}
                     key={link.name}
                     onClick={handleCloseSideBar}
                     style={({isActive}) => ({backgroundColor: isActive ? currentColor : ''})}

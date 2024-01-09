@@ -17,21 +17,12 @@ import './app.css';
 import AgencyDashboard from './pages/Dashboards/agencyDashboard/agencyDashboard';
 
 
- const custApi = 'https://realestate.api.sites.name.ng/auth/customers/login/';
-// const agentApi = 'https://realestate.api.sites.name.ng/auth/agents/login/';
-// const agencyApi = 'https://realestate.api.sites.name.ng/auth/agencies/login/';
-
 const App = () => {
   
   const role = localStorage.getItem('role');
 
   const DashboardsOptions = () => {
-    alert(role);
-    if(role === 'agency') {
-      return <AgencyDashboard />
-    } else if (role === 'customer') {
-      return <UserDashboard /> 
-    }
+    return <AgencyDashboard />
   }
   
   const Layout = () => {

@@ -10,7 +10,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const AgencyProfile = () => {
   const { currentColor } = useStateContext();
   const role = localStorage.getItem('role');
-  const email = "Testing Email";
+  const email = localStorage.getItem('email');
   const agencyname = localStorage.getItem('agencyname');
   const { logout } = useAuth();
 
@@ -23,7 +23,7 @@ const AgencyProfile = () => {
   return (
     <div className="nav-item absolute right-1 top-16 bg-white shadow-xl dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg dark:text-gray-200">User Profile</p>
+        <p className="font-semibold text-lg dark:text-gray-200">Agency Profile</p>
         <Button
           icon={<MdOutlineCancel />}
           color="rgb(153, 171, 180)"

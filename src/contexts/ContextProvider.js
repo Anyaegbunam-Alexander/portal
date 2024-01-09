@@ -32,7 +32,6 @@ export const  ContextProvider = ({ children }) => {
 
 
     const handleClick = (clicked) => {
-        console.log("clicked handleClick", clicked);
         setIsClicked({
             ...initialState, [clicked] : true
         })

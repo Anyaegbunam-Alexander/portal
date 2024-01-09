@@ -93,10 +93,10 @@ const useLoginLogic = (apiEndpoint) => {
         const role = responseData.object;
 
         
-        if (token && (role === 'customer' || role === 'agent' || role === 'agency')) {
+        if (token) {
           login(responseData);
           console.log('Login successful', responseData);
-          navigate('/');
+          navigate(`/`);
         } else {
           console.error('Token not found in response data');
           setErrors('Login failed: Token not found');

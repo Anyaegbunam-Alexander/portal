@@ -496,12 +496,8 @@ export const links = [
         icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'Agents',
+        name: 'agencies',
         icon: <IoMdContacts />,
-      },
-      {
-        name: 'customers',
-        icon: <RiContactsLine />,
       },
     ],
   },
@@ -513,16 +509,8 @@ export const links = [
         icon: <AiOutlineCalendar />,
       },
       {
-        name: 'kanban',
-        icon: <BsKanban />,
-      },
-      {
         name: 'editor',
         icon: <FiEdit />,
-      },
-      {
-        name: 'color-picker',
-        icon: <BiColorFill />,
       },
     ],
   },
@@ -534,11 +522,6 @@ export const links = [
         icon: <AiOutlineStock />,
       },
       {
-        name: 'area',
-        icon: <AiOutlineAreaChart />,
-      },
-
-      {
         name: 'bar',
         icon: <AiOutlineBarChart />,
       },
@@ -549,18 +532,6 @@ export const links = [
       {
         name: 'financial',
         icon: <RiStockLine />,
-      },
-      {
-        name: 'color-mapping',
-        icon: <BsBarChart />,
-      },
-      {
-        name: 'pyramid',
-        icon: <GiLouvrePyramid />,
-      },
-      {
-        name: 'stacked',
-        icon: <AiOutlineBarChart />,
       },
     ],
   },
@@ -715,6 +686,27 @@ export const chatData = [
 ];
 
 export const earningData = [
+  {
+    icon: <BsHouseCheck />,
+    amount: '4,396',
+    percentage: '+23%',
+    title: 'Listings',
+    iconColor: 'rgb(255, 244, 229)',
+    iconBg: 'rgb(254, 201, 15)',
+    pcColor: 'green-600',
+  },
+  {
+    icon: <HiOutlineRefresh />,
+    amount: '39,354',
+    percentage: '-12%',
+    title: 'Refunds',
+    iconColor: 'rgb(0, 194, 146)',
+    iconBg: 'rgb(235, 250, 242)',
+    pcColor: 'red-600',
+  },
+];
+
+export const agencyEarningData = [
   {
     icon: <MdOutlineSupervisorAccount />,
     amount: '39,354',
@@ -974,21 +966,21 @@ export const userProfileData = [
 export const agencyProfileData = [
   {
     icon: <BsCurrencyDollar />,
-    title: 'My Profile',
+    title: 'Profile',
     desc: 'Account Settings',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
   },
   {
     icon: <BsShield />,
-    title: 'My Inbox',
+    title: 'Inbox',
     desc: 'Messages & Emails',
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
   },
   {
     icon: <FiCreditCard />,
-    title: 'My Tasks',
+    title: 'Tasks',
     desc: 'To-do and Daily Tasks',
     iconColor: 'rgb(255, 244, 229)',
     iconBg: 'rgb(254, 201, 15)',

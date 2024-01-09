@@ -4,7 +4,7 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
 import { useStateContext } from '../../contexts/ContextProvider';
 import { cartData } from '../../data/dummy';
-import { Button } from '../dashboardComponents';
+import { Button } from '../agencyDashboardComponent';
 
 const Cart = () => {
   const { currentColor } = useStateContext();
