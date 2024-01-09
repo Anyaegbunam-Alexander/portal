@@ -94,9 +94,13 @@ const useLoginLogic = (apiEndpoint) => {
 
         
         if (token) {
+          localStorage.setItem('role', role);
+          // Ensure localStorage is updated before navigating
+          //await new Promise(resolve => setTimeout(resolve, 0));
+
           login(responseData);
-          console.log('Login successful', responseData);
-          navigate(`/`);
+          console.log('Login successful');
+          window.location.href = `/${role}/overview`;
         } else {
           console.error('Token not found in response data');
           setErrors('Login failed: Token not found');

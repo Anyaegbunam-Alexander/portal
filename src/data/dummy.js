@@ -546,7 +546,7 @@ export const agencylinks = [
         icon: <MdDashboard />,
       },
       {
-        name: 'properties',
+        name: 'listings',
         icon: <FiShoppingBag />,
       },
     ],

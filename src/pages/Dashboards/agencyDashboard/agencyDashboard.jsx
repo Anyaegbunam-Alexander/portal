@@ -72,7 +72,7 @@ const AgencyDashboard = () => {
 
                     <Routes>
                         {/* Dashboard */}
-                        <Route path="properties" element={<Properties />} />
+                        <Route path="listings" element={<Properties />} />
                         <Route path="overview" element={<Overview />} />
 
                         {/* Pages */}

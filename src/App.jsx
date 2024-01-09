@@ -22,7 +22,10 @@ const App = () => {
   const role = localStorage.getItem('role');
 
   const DashboardsOptions = () => {
-    return <AgencyDashboard />
+    if (role === 'customer') return <UserDashboard />
+    if (role === 'agent') return <UserDashboard />
+    if (role === 'agency') return <AgencyDashboard />
+    else return null
   }
   
   const Layout = () => {
