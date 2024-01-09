@@ -22,26 +22,30 @@ import AgencyDashboard from './pages/Dashboards/agencyDashboard/agencyDashboard'
 // const agencyApi = 'https://realestate.api.sites.name.ng/auth/agencies/login/';
 
 const App = () => {
+  
+  const role = localStorage.getItem('role');
 
-  const roles = localStorage.getItem('role');
+  const DashboardsOptions = () => {
+    alert(role);
+    if(role === 'agency') {
+      return <AgencyDashboard />
+    } else if (role === 'customer') {
+      return <UserDashboard /> 
+    }
+  }
   
   const Layout = () => {
     return (
       <ProtectedRoute>
-        {
-          roles === 'customer' ? <UserDashboard /> : 
-          // roles === 'agent' ? <AgentDashboard /> : 
-          roles === 'agency' ? <AgencyDashboard /> :
-          null
-        }
+        <DashboardsOptions />
       </ProtectedRoute>
     );
   };
 
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/user/overview" replace />} />
-      <Route path="/user/*" element={<Layout />} />
+      <Route path="/" element={<Navigate to={`/${role}/overview`} replace />} />
+      <Route path={`/${role}/*`} element={<Layout />} />
       <Route path="/login/customer" element={<CustomerLogin />} />
       <Route path="/login/agent" element={<AgentLogin />} />
       <Route path="/login/agency" element={<AgencyLogin />} />

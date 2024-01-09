@@ -4,7 +4,7 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 
-import { Navbar, Footer, SideBar,ThemeSettings } from '../../../components/dashboardComponents/index';
+import { Navbar, Footer, SideBar,ThemeSettings } from '../../../components/agencyDashboardComponent/index';
 import {
   Properties, 
   Orders, 

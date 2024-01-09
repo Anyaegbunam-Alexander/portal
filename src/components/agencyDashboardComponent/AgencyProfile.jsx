@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
-import { Button } from '../dashboardComponents';
+import { Button } from '../agencyDashboardComponent';
 import { agencyProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import avatar from '../../data/avatar.jpg';
@@ -10,7 +10,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const AgencyProfile = () => {
   const { currentColor } = useStateContext();
   const role = localStorage.getItem('role');
-  const email = localStorage.getItem('email');
+  const email = "Testing Email";
   const agencyname = localStorage.getItem('agencyname');
   const { logout } = useAuth();
 
@@ -66,7 +66,6 @@ const AgencyProfile = () => {
         <button
           type='button'
           onClick={(e) => {
-            console.log('Button clicked');
             handleLogout(e);
           }}
           style={{ color: 'white', backgroundColor: currentColor, borderRadius: '10px' }}

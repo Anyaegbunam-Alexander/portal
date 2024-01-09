@@ -89,8 +89,11 @@ const useLoginLogic = (apiEndpoint) => {
             return;
         }
 
+        const token = responseData.token;
+        const role = responseData.object;
+
         
-        if (responseData.token && responseData.object === 'customer') {
+        if (token && (role === 'customer' || role === 'agent' || role === 'agency')) {
           login(responseData);
           console.log('Login successful', responseData);
           navigate('/');

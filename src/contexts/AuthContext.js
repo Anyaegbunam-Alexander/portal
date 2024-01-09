@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
@@ -30,11 +30,6 @@ export const AuthProvider = ({ children }) => {
     navigate('/login/customer');
   };
 
-  useEffect(() => {
-    console.log("isLoggedIn after state update:", isLoggedIn);
-  }, [isLoggedIn]);
-
-  // Make sure to return an object instead of directly updating the state
   const contextValue = {
     isLoggedIn,
     login,
