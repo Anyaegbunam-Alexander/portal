@@ -23,7 +23,7 @@ import {
   ColorPicker, 
   ColorMapping, 
   Editor
-} from '../../Dashboards/index';
+} from '../../Dashboards/agencyDashboard/index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
 
@@ -72,31 +72,32 @@ const AgencyDashboard = () => {
 
                     <Routes>
                         {/* Dashboard */}
-                        <Route index element={<Navigate to='/overview' />} />
-                        <Route path="/properties" element={<Properties />} />
-                        <Route path="/overview" element={<Overview />} />
-
+                        <Route path="properties" element={<Properties />} />
+                        <Route path="overview" element={<Overview />} />
 
                         {/* Pages */}
-                        <Route path="/orders" element={<Orders />} />
-                        <Route path="/agents" element={<Employees />} />
-                        <Route path="/customers" element={<Customers />} />
+                        <Route path="orders" element={<Orders />} />
+                        <Route path="agents" element={<Employees />} />
+                        <Route path="customers" element={<Customers />} />
 
                         {/* Apps */}
-                        <Route path="/kanban" element={<Kanban />} />
-                        <Route path="/editor" element={<Editor />} />
-                        <Route path="/calendar" element={<Calendar />} />
-                        <Route path="/color-picker" element={<ColorPicker />} />
+                        <Route path="kanban" element={<Kanban />} />
+                        <Route path="editor" element={<Editor />} />
+                        <Route path="calendar" element={<Calendar />} />
+                        <Route path="color-picker" element={<ColorPicker />} />
 
                         {/* charts */}
-                        <Route path="/line" element={<Line />} />
-                        <Route path="/area" element={<Area />} />
-                        <Route path="/bar" element={<Bar />} />
-                        <Route path="/pie" element={<Pie />} />
-                        <Route path="/financial" element={<Financial />} />
-                        <Route path="/color-mapping" element={<ColorMapping />} />
-                        <Route path="/pyramid" element={<Pyramid />} />
-                        <Route path="/stacked" element={<Stacked />} />
+                        <Route path="line" element={<Line />} />
+                        <Route path="area" element={<Area />} />
+                        <Route path="bar" element={<Bar />} />
+                        <Route path="pie" element={<Pie />} />
+                        <Route path="financial" element={<Financial />} />
+                        <Route path="color-mapping" element={<ColorMapping />} />
+                        <Route path="pyramid" element={<Pyramid />} />
+                        <Route path="stacked" element={<Stacked />} />
+                        
+                        {/* Default route */}
+                        <Route index element={<Navigate to="overview" />} />
                     </Routes>
                 </div>
 

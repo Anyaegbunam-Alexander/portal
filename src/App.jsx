@@ -14,6 +14,7 @@ import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/errorPages/404';
 import './app.css';
+import AgencyDashboard from './pages/Dashboards/agencyDashboard/agencyDashboard';
 
 
  const custApi = 'https://realestate.api.sites.name.ng/auth/customers/login/';
@@ -21,11 +22,18 @@ import './app.css';
 // const agencyApi = 'https://realestate.api.sites.name.ng/auth/agencies/login/';
 
 const App = () => {
+
+  const roles = localStorage.getItem('role');
   
   const Layout = () => {
     return (
       <ProtectedRoute>
-        <UserDashboard />
+        {
+          roles === 'customer' ? <UserDashboard /> : 
+          // roles === 'agent' ? <AgentDashboard /> : 
+          roles === 'agency' ? <AgencyDashboard /> :
+          null
+        }
       </ProtectedRoute>
     );
   };
