@@ -537,6 +537,70 @@ export const links = [
   },
 ];
 
+export const agentlinks = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'overview',
+        icon: <MdDashboard />,
+      },
+      {
+        name: 'properties',
+        icon: <FiShoppingBag />,
+      },
+    ],
+  },
+
+  {
+    title: 'Pages',
+    links: [
+      {
+        name: 'referral-link',
+        icon: <AiOutlineShoppingCart />,
+      },
+      {
+        name: 'agencies',
+        icon: <IoMdContacts />,
+      },
+    ],
+  },
+  {
+    title: 'Apps',
+    links: [
+      {
+        name: 'calendar',
+        icon: <AiOutlineCalendar />,
+      },
+      {
+        name: 'editor',
+        icon: <FiEdit />,
+      },
+    ],
+  },
+  {
+    title: 'Charts',
+    links: [
+      {
+        name: 'line',
+        icon: <AiOutlineStock />,
+      },
+      {
+        name: 'bar',
+        icon: <AiOutlineBarChart />,
+      },
+      {
+        name: 'pie',
+        icon: <FiPieChart />,
+      },
+      {
+        name: 'financial',
+        icon: <RiStockLine />,
+      },
+    ],
+  },
+];
+
 export const agencylinks = [
   {
     title: 'Dashboard',
@@ -928,6 +992,30 @@ export const themeColors = [
 ];
 
 export const userProfileData = [
+  {
+    icon: <BsCurrencyDollar />,
+    title: 'My Profile',
+    desc: 'Account Settings',
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
+  },
+  {
+    icon: <BsShield />,
+    title: 'My Inbox',
+    desc: 'Messages & Emails',
+    iconColor: 'rgb(0, 194, 146)',
+    iconBg: 'rgb(235, 250, 242)',
+  },
+  {
+    icon: <FiCreditCard />,
+    title: 'My Tasks',
+    desc: 'To-do and Daily Tasks',
+    iconColor: 'rgb(255, 244, 229)',
+    iconBg: 'rgb(254, 201, 15)',
+  },
+];
+
+export const agentProfileData = [
   {
     icon: <BsCurrencyDollar />,
     title: 'My Profile',

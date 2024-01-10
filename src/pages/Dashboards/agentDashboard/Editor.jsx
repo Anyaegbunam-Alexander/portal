@@ -9,7 +9,7 @@ import { HtmlEditor,
 } from '@syncfusion/ej2-react-richtexteditor';
 
 import { EditorData } from '../../../data/dummy';
-import { Header } from '../../../components/dashboardComponents';
+import { Header } from '../../../components/agentDashboardComponent';
 
 
 const Editor = () => {

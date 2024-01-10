@@ -2,7 +2,7 @@ import React from 'react';
 import { IoIosMore } from 'react-icons/io';
 
 
-import { Button } from '../../../components/dashboardComponents';
+import { Button } from '../../../components/agentDashboardComponent';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import house1 from '../../../data/company_x-1.jpg';
 

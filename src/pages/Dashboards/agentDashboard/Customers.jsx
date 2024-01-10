@@ -13,7 +13,7 @@ import { GridComponent,
 } from '@syncfusion/ej2-react-grids';
 
 import { customersData, customersGrid } from '../../../data/dummy';
-import { Header } from '../../../components/dashboardComponents';
+import { Header } from '../../../components/agentDashboardComponent';
 
 
 const Customers = () => {

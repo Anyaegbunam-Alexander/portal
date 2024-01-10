@@ -1,13 +1,13 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
-import { Button } from '../dashboardComponents';
-import { userProfileData } from '../../data/dummy';
+import { Button } from '../agentDashboardComponent';
+import { agentProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import avatar from '../../data/avatar.jpg';
 import { useAuth } from '../../contexts/AuthContext';
 
 
-const UserProfile = () => {
+const AgentProfile = () => {
   const { currentColor } = useStateContext();
   const firstname = localStorage.getItem('firstname');
   const lastname = localStorage.getItem('lastname');
@@ -46,7 +46,7 @@ const UserProfile = () => {
         </div>
       </div>
       <div>
-        {userProfileData.map((item, index) => (
+        {agentProfileData.map((item, index) => (
           <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
               type="button"
@@ -82,4 +82,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default AgentProfile;

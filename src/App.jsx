@@ -10,10 +10,11 @@ import AgencyLogin from './components/login/agency/agency';
 import Customer from './components/register/customer/customerRegistration';
 import Agent from './components/register/agent/agent';
 import Agency from './components/register/agency/agency';
-import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/errorPages/404';
 import './app.css';
+import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
+import AgentDashboard from './pages/Dashboards/agentDashboard/AgentDashboard';
 import AgencyDashboard from './pages/Dashboards/agencyDashboard/agencyDashboard';
 
 
@@ -23,7 +24,7 @@ const App = () => {
 
   const DashboardsOptions = () => {
     if (role === 'customer') return <UserDashboard />
-    if (role === 'agent') return <UserDashboard />
+    if (role === 'agent') return <AgentDashboard />
     if (role === 'agency') return <AgencyDashboard />
     else return null
   }

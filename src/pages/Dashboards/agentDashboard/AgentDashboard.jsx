@@ -4,10 +4,10 @@ import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 
-import { Navbar, Footer, SideBar,ThemeSettings } from '../../../components/dashboardComponents/index';
+import { Navbar, Footer, SideBar,ThemeSettings } from '../../../components/agentDashboardComponent/index';
 import {
   Properties, 
-  Orders,
+  Referral,
   Calendar,
   Agencies, 
   Overview,
@@ -68,7 +68,7 @@ const UserDashboard = () => {
                         <Route path="overview" element={<Overview />} />
 
                         {/* Pages */}
-                        <Route path="orders" element={<Orders />} />
+                        <Route path="referral-link" element={<Referral />} />
                         <Route path="agencies" element={<Agencies />} />
 
                         {/* Apps */}

@@ -4,7 +4,7 @@ import { SiShopware } from 'react-icons/si';
 import { MdOutlineCancel } from 'react-icons/md'
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
-import { links } from '../../data/dummy';
+import { agentlinks } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 
 const SideBar = () => {
@@ -43,7 +43,7 @@ const SideBar = () => {
             </TooltipComponent>
           </div>
           <div className='mt-10'>
-            {links.map((item) => (
+            {agentlinks.map((item) => (
               <div key={item.title}>
                 <p className="text-gray-400 m-3 mt-4 uppercase">
                   {item.title}
@@ -51,7 +51,7 @@ const SideBar = () => {
                 
                 {item.links.map((link) => (
                   <NavLink
-                    to={`/customer/${link.name}`}
+                    to={`/agent/${link.name}`}
                     key={link.name}
                     onClick={handleCloseSideBar}
                     style={({isActive}) => ({backgroundColor: isActive ? currentColor : ''})}

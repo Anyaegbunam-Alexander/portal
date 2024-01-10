@@ -1,5 +1,5 @@
 export { default as Properties } from './Properties';
-export { default as Orders } from './Orders';
+export { default as Referral } from './Referral';
 export { default as Agencies } from './Agencies';
 export { default as Editor } from './Editor';
 export { default as Overview } from './Overview';

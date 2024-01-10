@@ -12,7 +12,7 @@ import { ScheduleComponent,
 } from '@syncfusion/ej2-react-schedule';
 
 import { scheduleData } from '../../../data/dummy';
-import { Header } from '../../../components/dashboardComponents';
+import { Header } from '../../../components/agentDashboardComponent';
 
 const Calendar = () => {
   return (
