@@ -28,8 +28,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 
 const Navbar = () => {
   const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
-  const lastname = localStorage.getItem('lastname');
-  const agencyname = localStorage.getItem('agencyname');
+  const agencyname = localStorage.getItem('agencyName');
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);

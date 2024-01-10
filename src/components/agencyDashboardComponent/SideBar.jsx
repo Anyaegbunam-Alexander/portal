@@ -10,7 +10,7 @@ import { useStateContext } from '../../contexts/ContextProvider';
 const SideBar = () => {
 
   const { activeMenu, setActiveMenu, screenSize, currentColor } = useStateContext();
-  const agencyName = localStorage.getItem('agencyname');
+  const agencyName = localStorage.getItem('agencyName');
 
   const handleCloseSideBar = () => {
     if (activeMenu && screenSize <= 900) {

@@ -11,7 +11,7 @@ const AgencyProfile = () => {
   const { currentColor } = useStateContext();
   const role = localStorage.getItem('role');
   const email = localStorage.getItem('email');
-  const agencyname = localStorage.getItem('agencyname');
+  const agencyname = localStorage.getItem('agencyName');
   const { logout } = useAuth();
 
   const handleLogout = () => {
