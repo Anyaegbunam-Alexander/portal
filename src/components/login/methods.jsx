@@ -1,5 +1,4 @@
 import { useState} from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 const useLoginLogic = (apiEndpoint) => { 
@@ -53,8 +52,6 @@ const useLoginLogic = (apiEndpoint) => {
         hide_eye.style.display = "none";
       }
     }
-
-    const navigate = useNavigate();
     
     const useHandleLogin = async (e) => {
       e.preventDefault()
@@ -95,9 +92,6 @@ const useLoginLogic = (apiEndpoint) => {
         
         if (token) {
           localStorage.setItem('role', role);
-          // Ensure localStorage is updated before navigating
-          //await new Promise(resolve => setTimeout(resolve, 0));
-
           login(responseData);
           console.log('Login successful');
           window.location.href = `/${role}/overview`;

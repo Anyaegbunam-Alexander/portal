@@ -19,10 +19,6 @@ const useRegistrationMethod = (apiEndpoint) => {
       setError(newError);
     };
 
-    const redirectToDashboard = (url) => {
-      // Redirect to the specified URL
-      window.location.href = url;
-    };
   
     //Fetches the API for state and city dynamically
     useEffect(() => {
@@ -130,6 +126,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       }
     };
   
+    // Handles the popup errors for users
     const openPopup = () => {
       setIsPopupOpen(true);
     };
@@ -138,6 +135,7 @@ const useRegistrationMethod = (apiEndpoint) => {
       setIsPopupOpen(false);
     };
 
+    // Functionality to show or hide the password
     const password_show_hide = () => {
       var x = document.getElementById("password");
       var show_eye = document.getElementById("show_eye");
@@ -243,27 +241,10 @@ const useRegistrationMethod = (apiEndpoint) => {
   
         if (response.ok) {
           // Handle successful registration, e.g., redirect to a success page
-          redirectToDashboard(`/overview`);
-
-          // const { object } = response;
-
-          // switch (object) {
-          //   case 'customer':
-          //     redirectToDashboard(`/overview`);
-          //     break;
-          //   case 'agent':
-          //     redirectToDashboard(`/overview`);
-          //     break;
-          //   case 'agency':
-          //     redirectToDashboard(`/overview`);
-          //     break;
-          //   default:
-          //     console.error('Unknown role:', object);
-          //     setErrors('An error occured');
-          //     openPopup(); // Open the popup
-          // }
+          const role = formDataObj.object;
+          alert('Registration Successful, please kindly proceed to login');
+          window.location.href = `/login/${role}`;
           console.log('Registration successful');
-          console.log(formData);
           setErrors(null);
         } else {
           const errorResponse = await response.json();
