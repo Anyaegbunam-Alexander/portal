@@ -1,17 +1,18 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import { Button } from '../dashboardComponents';
-import { agencyProfileData } from '../../data/dummy';
+import { userProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import avatar from '../../data/avatar.jpg';
 import { useAuth } from '../../contexts/AuthContext';
 
 
-const AgencyProfile = () => {
+const UserProfile = () => {
   const { currentColor } = useStateContext();
+  const firstname = localStorage.getItem('firstname');
+  const lastname = localStorage.getItem('lastname');
   const role = localStorage.getItem('role');
   const email = localStorage.getItem('email');
-  const agencyname = localStorage.getItem('agencyname');
   const { logout } = useAuth();
 
   const handleLogout = () => {
@@ -39,13 +40,13 @@ const AgencyProfile = () => {
           alt="user-profile"
         />
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> {agencyname} </p>
+          <p className="font-semibold text-xl dark:text-gray-200"> {lastname} {firstname} </p>
           <p className="text-gray-500 text-sm dark:text-gray-400"> {role} </p>
           <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {email} </p>
         </div>
       </div>
       <div>
-        {agencyProfileData.map((item, index) => (
+        {userProfileData.map((item, index) => (
           <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
               type="button"
@@ -81,4 +82,4 @@ const AgencyProfile = () => {
   );
 };
 
-export default AgencyProfile;
+export default UserProfile;
