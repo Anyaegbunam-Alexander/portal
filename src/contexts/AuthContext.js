@@ -24,9 +24,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    const role = localStorage.getItem('role');
+    navigate(`/login/${role}`);
+    
     localStorage.clear();
     setLoggedIn(false);
-    navigate('/login/customer');
   };
 
   const contextValue = {
