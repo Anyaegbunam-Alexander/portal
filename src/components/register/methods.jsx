@@ -241,10 +241,9 @@ const useRegistrationMethod = (apiEndpoint) => {
   
         if (response.ok) {
           // Handle successful registration, e.g., redirect to a success page
-          const role = formDataObj.object;
           alert('Registration Successful, please kindly proceed to login');
-          window.location.href = `/login/${role}`;
-          console.log('Registration successful');
+          window.location.href = `/login/customer`;
+          console.log('Registration successful', formDataObj);
           setErrors(null);
         } else {
           const errorResponse = await response.json();
