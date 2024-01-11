@@ -9,6 +9,8 @@ import house1 from '../../../data/company_x-1.jpg';
 const Properties = () => {
   const { currentColor } = useStateContext();
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [selectedVideos, setSelectedVideos] = useState([]);
+  const maxFileSize = 10 * 1024 * 1024; // 10MB
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -19,6 +21,21 @@ const Properties = () => {
     const updatedFiles = [...selectedFiles];
     updatedFiles.splice(index, 1);
     setSelectedFiles(updatedFiles);
+  };
+
+  const handleVideoChange = (e) => {
+    const videos = Array.from(e.target.files);
+
+    // Check video size before adding it to the state
+    const validVideos = videos.filter((video) => video.size <= maxFileSize);
+
+    setSelectedVideos((prevVideos) => [...prevVideos, ...validVideos]);
+  };
+
+  const handleRemoveVideo = (index) => {
+    const updatedVideos = [...selectedVideos];
+    updatedVideos.splice(index, 1);
+    setSelectedVideos(updatedVideos);
   };
 
   return (
@@ -290,8 +307,12 @@ const Properties = () => {
                 </div>
               </div>
 
+              {/* uploading of property pictures */}
               <div>
-                <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-md shadow-md">
+                  <label htmlFor="duration" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Upload pictures of property
+                  </label>
+                <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
                   <input
                     type="file"
                     className="hidden"
@@ -301,9 +322,9 @@ const Properties = () => {
                   />
                   <label
                     htmlFor="fileInput"
-                    className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md inline-block mb-4"
+                    className="cursor-pointer bg-[#8840E6] text-white py-2 px-4 rounded-md inline-block mb-4"
                   >
-                    Select Files
+                    Select Pictures
                   </label>
                   {selectedFiles.length > 0 && (
                     <div className="mt-4">
@@ -324,6 +345,50 @@ const Properties = () => {
                             </li>
                           ))}
                         </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Video upload */}
+              <div>
+                  <label htmlFor="duration" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Upload videos(s) of property
+                  </label>
+                <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
+                  <input
+                    type="file"
+                    accept="video/*"
+                    className="hidden"
+                    id="videoInput"
+                    multiple
+                    onChange={handleVideoChange}
+                  />
+                  <label
+                    htmlFor="videoInput"
+                    className="cursor-pointer bg-[#8840E6] text-white py-2 px-4 rounded-md inline-block mb-4"
+                  >
+                    Select Videos
+                  </label>
+                  {selectedVideos.length > 0 && (
+                    <div className="mt-4">
+                      <p className="text-lg font-semibold mb-2">Selected Videos:</p>
+                      <ul>
+                        {selectedVideos.map((video, index) => (
+                          <li
+                            key={index}
+                            className="flex items-center justify-between bg-gray-100 p-2 mb-2 rounded-md"
+                          >
+                            <span className="truncate">{video.name}</span>
+                            <button
+                              className="text-red-500 hover:text-red-700"
+                              onClick={() => handleRemoveVideo(index)}
+                            >
+                              Remove
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   )}
                 </div>
