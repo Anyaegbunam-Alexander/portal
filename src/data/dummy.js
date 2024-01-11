@@ -645,7 +645,7 @@ export const agencylinks = [
         icon: <BsKanban />,
       },
       {
-        name: 'editor',
+        name: 'add-property',
         icon: <FiEdit />,
       },
       {

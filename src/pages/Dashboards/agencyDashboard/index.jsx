@@ -2,7 +2,7 @@ export { default as Properties } from './Properties';
 export { default as Kanban } from './Kanban';
 export { default as Orders } from './Orders';
 export { default as Employees } from './Employees';
-export { default as Editor } from './Editor';
+export { default as AddProperty } from './AddProperty';
 export { default as Customers } from './Customers';
 export { default as ColorPicker } from './ColorPicker';
 export { default as Overview } from './Overview';
