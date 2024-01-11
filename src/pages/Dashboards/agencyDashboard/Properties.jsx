@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { IoIosMore } from 'react-icons/io';
 
 
-import { Button } from '../../../components/agencyDashboardComponent';
+import { Button, Header } from '../../../components/agencyDashboardComponent';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import house1 from '../../../data/company_x-1.jpg';
 
@@ -57,10 +57,11 @@ const Properties = () => {
   return (
     <div className="mt-12">
       <div className='flex flex-wrap justify-center'>
-        <div className="w-full bg-white dark:text-gray-600 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
-          <div className="w-6/12 max-sm:w-5/6 mx-auto mt-8">
-            <h2 className="text-2xl font-semibold mb-4 dark:text-gray-200">Add Property</h2>
-            <form  className="space-y-4">
+        <div className="md:m-10 md:p-10 bg-white dark:text-gray-600 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+          <Header category="Page" title="Add Property"/>
+          <div className="w-4/5 m-auto max-sm:w-5/6 mt-8">
+            {/* <h2 className="text-2xl font-semibold mb-4 dark:text-gray-200">Add Property</h2> */}
+            <form  className="space-y-8">
               {/* Property */}
               <div>
                 <label htmlFor="propertyName" className="block text-base font-medium text-gray-700 dark:text-gray-200">
@@ -87,6 +88,22 @@ const Properties = () => {
                   id="address"
                   name="address"
                   //value={propertyData.address}
+                  //onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                  required
+                />
+              </div>
+
+              {/* Nearest Landmark */}
+              <div>
+                <label htmlFor="landmark" className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                  Nearest Landmark
+                </label>
+                <input
+                  type='text'
+                  id="landmark"
+                  name="landmark"
+                  //value={propertyData.price}
                   //onChange={handleChange}
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
                   required
@@ -126,6 +143,7 @@ const Properties = () => {
                 </div>
               </div>
 
+              {/* Price */}
               <div>
                 <label htmlFor="price" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                   Price (₦)
@@ -141,6 +159,7 @@ const Properties = () => {
                 />
               </div>
 
+              {/* Bathrooms and Bedrooms */}
               <div className="flex space-x-6">
                 <div className='w-6/12'>
                   <label htmlFor="bathrooms" className="block text-base font-medium text-gray-700 dark:text-gray-200">
@@ -173,38 +192,7 @@ const Properties = () => {
                 </div>
               </div>
 
-              <div className="flex space-x-6">
-                <div className='w-6/12'>
-                  <label htmlFor="property-type" className="block text-base font-medium text-gray-700 dark:text-gray-200">
-                    Property Type
-                  </label>
-                  <input
-                    type='text'
-                    id="property-type"
-                    name="property-type"
-                    //value={propertyData.price}
-                    //onChange={handleChange}
-                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
-                    required
-                  />
-                </div>
-
-                <div className='w-6/12'>
-                  <label htmlFor="landmark" className="block text-base font-medium text-gray-700 dark:text-gray-200">
-                    Nearest Landmark
-                  </label>
-                  <input
-                    type='text'
-                    id="landmark"
-                    name="landmark"
-                    //value={propertyData.price}
-                    //onChange={handleChange}
-                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
-                    required
-                  />
-                </div>
-              </div>
-
+              {/* Availability Date */}
               <div className="flex space-x-6">
                 <div className='w-6/12'>
                   <label htmlFor="availability" className="block text-base font-medium text-gray-700 dark:text-gray-200">
@@ -325,6 +313,7 @@ const Properties = () => {
                 </div>
               </div>
 
+              {/* Square footage and property type */}
               <div className="flex space-x-6">
                 <div className='w-6/12'>
                   <label htmlFor="availability" className="block text-base font-medium text-gray-700 dark:text-gray-200">
@@ -576,29 +565,31 @@ const Properties = () => {
                 <label htmlFor="legal" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                   Legal and Compliance
                 </label>
-                <p className='text-sm text-gray-600 dark:text-gray-300'>
+                <p className='text-sm text-gray-600 dark:text-gray-300 text-justify'>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus nisi molestiae veniam temporibus 
+                  itaque quibusdam corporis quis repellat adipisci recusandae necessitatibus, mollitia fugit debitis 
+                  doloremque asperiores, libero officiis, doloribus dicta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus nisi molestiae veniam temporibus 
                   itaque quibusdam corporis quis repellat adipisci recusandae necessitatibus, mollitia fugit debitis 
                   doloremque asperiores, libero officiis, doloribus dicta.
                 </p>
 
                 {/* Purchase Type */}
                 <div>
-                    {/* Checkboxes for Amenities */}
-                    <div className='mb-8'>
-                      <label className="inline-flex items-center">
-                        <input
-                          type="checkbox"
-                          name="agreement"
-                          value="agreement"
-                          //checked={propertyData.amenities.includes('free wifi')}
-                          //onChange={handleChange}
-                        />
-                        <span className="ml-2 dark:text-gray-200">Agreement to the Terms and Conditions</span>
-                      </label>
-                    </div>
-                    
+                  {/* Checkboxes for Amenities */}
+                  <div className='mb-8'>
+                    <label className="inline-flex items-center">
+                      <input
+                        type="checkbox"
+                        name="agreement"
+                        value="agreement"
+                        //checked={propertyData.amenities.includes('free wifi')}
+                        //onChange={handleChange}
+                      />
+                      <span className="ml-2 dark:text-gray-200">Agreement to the Terms and Conditions</span>
+                    </label>
                   </div>
+                  
+                </div>
               </div>
 
               <div>
