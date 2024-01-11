@@ -9,12 +9,22 @@ import house1 from '../../../data/company_x-1.jpg';
 const Properties = () => {
   const { currentColor } = useStateContext();
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [selectedVideos, setSelectedVideos] = useState([]);
-  const maxFileSize = 10 * 1024 * 1024; // 10MB
+  const [selectedFloorPlan, setSelectedFloorPlan] = useState([]);
+  const maxFileSize = 2 * 1024 * 1024; // 10MB
+  // const [selectedVideos, setSelectedVideos] = useState([]);
+  // const maxFileSize = 10 * 1024 * 1024; // 10MB
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
+  };
+
+  const handleFloorPlanFileChange = (e) => {
+    const PDFs = Array.from(e.target.files);
+    // Check PDF size before adding it to the state
+    const validPdfs = PDFs.filter((pdf) => pdf.size <= maxFileSize);
+
+    setSelectedFloorPlan((prevPDFs) => [...prevPDFs, ...PDFs]);
   };
 
   const handleRemoveFile = (index) => {
@@ -23,20 +33,26 @@ const Properties = () => {
     setSelectedFiles(updatedFiles);
   };
 
-  const handleVideoChange = (e) => {
-    const videos = Array.from(e.target.files);
-
-    // Check video size before adding it to the state
-    const validVideos = videos.filter((video) => video.size <= maxFileSize);
-
-    setSelectedVideos((prevVideos) => [...prevVideos, ...validVideos]);
+  const handleRemoveFloorPlan = (index) => {
+    const updatedPDFs = [...selectedFloorPlan];
+    updatedPDFs.splice(index, 1);
+    setSelectedFloorPlan(updatedPDFs);
   };
 
-  const handleRemoveVideo = (index) => {
-    const updatedVideos = [...selectedVideos];
-    updatedVideos.splice(index, 1);
-    setSelectedVideos(updatedVideos);
-  };
+  // const handleVideoChange = (e) => {
+  //   const videos = Array.from(e.target.files);
+
+  //   // Check video size before adding it to the state
+  //   const validVideos = videos.filter((video) => video.size <= maxFileSize);
+
+  //   setSelectedVideos((prevVideos) => [...prevVideos, ...validVideos]);
+  // };
+
+  // const handleRemoveVideo = (index) => {
+  //   const updatedVideos = [...selectedVideos];
+  //   updatedVideos.splice(index, 1);
+  //   setSelectedVideos(updatedVideos);
+  // };
 
   return (
     <div className="mt-12">
@@ -47,7 +63,7 @@ const Properties = () => {
             <form  className="space-y-4">
               {/* Property */}
               <div>
-                <label htmlFor="propertyName" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                <label htmlFor="propertyName" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                   Property Name
                 </label>
                 <input
@@ -61,8 +77,9 @@ const Properties = () => {
                 />
               </div>
 
+              {/* Address */}
               <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                <label htmlFor="address" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                   Address
                 </label>
                 <input
@@ -76,8 +93,41 @@ const Properties = () => {
                 />
               </div>
 
+              {/* City and State */}
+              <div className="flex space-x-6">
+                <div className='w-6/12'>
+                  <label htmlFor="state" className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                    State
+                  </label>
+                  <input
+                    type='text'
+                    id="state"
+                    name="state"
+                    //value={propertyData.price}
+                    //onChange={handleChange}
+                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    required
+                  />
+                </div>
+
+                <div className='w-6/12'>
+                  <label htmlFor="city" className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                    City
+                  </label>
+                  <input
+                    type='text'
+                    id="city"
+                    name="city"
+                    //value={propertyData.price}
+                    //onChange={handleChange}
+                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    required
+                  />
+                </div>
+              </div>
+
               <div>
-                <label htmlFor="price" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                <label htmlFor="price" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                   Price (₦)
                 </label>
                 <input
@@ -93,7 +143,7 @@ const Properties = () => {
 
               <div className="flex space-x-6">
                 <div className='w-6/12'>
-                  <label htmlFor="bathrooms" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="bathrooms" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Bathrooms
                   </label>
                   <input
@@ -108,7 +158,7 @@ const Properties = () => {
                 </div>
 
                 <div className='w-6/12'>
-                  <label htmlFor="bedrooms" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="bedrooms" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Bedrooms
                   </label>
                   <input
@@ -125,7 +175,7 @@ const Properties = () => {
 
               <div className="flex space-x-6">
                 <div className='w-6/12'>
-                  <label htmlFor="property-type" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="property-type" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Property Type
                   </label>
                   <input
@@ -140,7 +190,7 @@ const Properties = () => {
                 </div>
 
                 <div className='w-6/12'>
-                  <label htmlFor="landmark" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="landmark" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Nearest Landmark
                   </label>
                   <input
@@ -157,7 +207,7 @@ const Properties = () => {
 
               <div className="flex space-x-6">
                 <div className='w-6/12'>
-                  <label htmlFor="availability" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="availability" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Availability Date
                   </label>
                   <input
@@ -172,7 +222,7 @@ const Properties = () => {
                 </div>
 
                 <div className='w-6/12'>
-                  <label htmlFor="duration" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="duration" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Duration of availability
                   </label>
                   <input
@@ -189,7 +239,7 @@ const Properties = () => {
 
               {/* Amenities offered by the property */}
               <div className='space-y-3'>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                <label className="block text-base font-medium text-gray-700 dark:text-gray-200">
                   Features and Amenities
                 </label>
                 <div className="columns-3">
@@ -277,7 +327,7 @@ const Properties = () => {
 
               <div className="flex space-x-6">
                 <div className='w-6/12'>
-                  <label htmlFor="availability" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="availability" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Square Footage (km&sup2;)
                   </label>
                   <input
@@ -292,16 +342,17 @@ const Properties = () => {
                 </div>
 
                 <div className='w-6/12'>
-                  <label htmlFor="duration" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                    Duration
+                  <label htmlFor="property-type" className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                    Property Type
                   </label>
                   <input
-                    type='number'
-                    id="duration"
-                    name="duration"
+                    type='text'
+                    id="property-type"
+                    name="property-type"
                     //value={propertyData.price}
                     //onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    placeholder='e.g Duplex'
                     required
                   />
                 </div>
@@ -309,7 +360,7 @@ const Properties = () => {
 
               {/* uploading of property pictures */}
               <div>
-                  <label htmlFor="duration" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="PropertyPictures" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Upload pictures of property
                   </label>
                 <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
@@ -350,9 +401,52 @@ const Properties = () => {
                 </div>
               </div>
 
-              {/* Video upload */}
+              {/* uploading of Floor Plan */}
               <div>
-                  <label htmlFor="duration" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  <label htmlFor="floorPlanFiles" className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                    Floor Plan
+                  </label>
+                <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="floorPlan"
+                    multiple
+                    onChange={handleFloorPlanFileChange}
+                  />
+                  <label
+                    htmlFor="floorPlan"
+                    className="cursor-pointer bg-[#8840E6] text-white py-2 px-4 rounded-md inline-block mb-4"
+                  >
+                    Select Files
+                  </label>
+                  {selectedFloorPlan.length > 0 && (
+                    <div className="mt-4">
+                        <p className="text-lg font-semibold mb-2">Selected Files:</p>
+                        <ul>
+                          {selectedFloorPlan.map((file, index) => (
+                            <li
+                              key={index}
+                              className="flex items-center justify-between bg-gray-100 p-2 mb-2 rounded-md"
+                            >
+                              <span className="truncate">{file.name}</span>
+                              <button
+                                className="text-red-500 hover:text-red-700"
+                                onClick={() => handleRemoveFloorPlan(index)}
+                              >
+                                Remove
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Video upload */}
+              {/* <div>
+                  <label htmlFor="duration" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                     Upload videos(s) of property
                   </label>
                 <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
@@ -392,10 +486,10 @@ const Properties = () => {
                     </div>
                   )}
                 </div>
-              </div>
+              </div> */}
 
               <div>
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                <label htmlFor="description" className="block text-base font-medium text-gray-700 dark:text-gray-200">
                   Description
                 </label>
                 <textarea
@@ -408,10 +502,109 @@ const Properties = () => {
                 />
               </div>
 
+              {/* Additionals */}
+              <div className="flex space-x-6">
+                <div className='w-6/12'>
+                  <label htmlFor="fees" className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                    Additional Fees (₦)
+                  </label>
+                  <input
+                    type='number'
+                    id="fees"
+                    name="fees"
+                    //value={propertyData.price}
+                    //onChange={handleChange}
+                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    required
+                  />
+                </div>
+
+                <div className='w-6/12'>
+                  <label htmlFor="note" className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                    Additional Note
+                  </label>
+                  <input
+                    type='text'
+                    id="note"
+                    name="note"
+                    //value={propertyData.price}
+                    //onChange={handleChange}
+                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Purchase Type */}
+              <div className='space-y-3'>
+                <label className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                  Purchase Type
+                </label>
+                <div className="columns-2">
+                  {/* Checkboxes for Amenities */}
+                  <div>
+                    <label className="inline-flex items-center">
+                      <input
+                        type="checkbox"
+                        name="purchase"
+                        value="Sale"
+                        //checked={propertyData.amenities.includes('free wifi')}
+                        //onChange={handleChange}
+                      />
+                      <span className="ml-2 dark:text-gray-200">Sale</span>
+                    </label>
+                  </div>
+
+                  <div>
+                    <label className="inline-flex items-center">
+                      <input
+                        type="checkbox"
+                        name="purchase"
+                        value="rent"
+                        //checked={propertyData.amenities.includes('free wifi')}
+                        //onChange={handleChange}
+                      />
+                      <span className="ml-2 dark:text-gray-200">Rent</span>
+                    </label>
+                  </div>
+                  
+                </div>
+              </div>
+
+              {/* Legal and compliance */}
+              <div className='space-y-5'>
+                <label htmlFor="legal" className="block text-base font-medium text-gray-700 dark:text-gray-200">
+                  Legal and Compliance
+                </label>
+                <p className='text-sm text-gray-600 dark:text-gray-300'>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus nisi molestiae veniam temporibus 
+                  itaque quibusdam corporis quis repellat adipisci recusandae necessitatibus, mollitia fugit debitis 
+                  doloremque asperiores, libero officiis, doloribus dicta.
+                </p>
+
+                {/* Purchase Type */}
+                <div>
+                    {/* Checkboxes for Amenities */}
+                    <div className='mb-8'>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="checkbox"
+                          name="agreement"
+                          value="agreement"
+                          //checked={propertyData.amenities.includes('free wifi')}
+                          //onChange={handleChange}
+                        />
+                        <span className="ml-2 dark:text-gray-200">Agreement to the Terms and Conditions</span>
+                      </label>
+                    </div>
+                    
+                  </div>
+              </div>
+
               <div>
                 <button
                   type="submit"
-                  className="w-full bg-purple-500 text-white p-3 rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:border-purple-300"
+                  className="w-full bg-[#8840E6] text-white p-3 rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:border-purple-300"
                 >
                   Add Property
                 </button>
