@@ -499,7 +499,7 @@ const AddProperties = () => {
                 <label htmlFor="description" className="text-base font-medium text-gray-700">
                   Description
                 </label>
-                {/* <div className=" max-w-md">
+                {/* <div className="m-2 md:m-10 md:p-10">
                   <RichTextEditorComponent>
                     <Inject services={[HtmlEditor, Toolbar, Link, QuickToolbar]}/>
                   </RichTextEditorComponent>
