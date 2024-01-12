@@ -619,7 +619,7 @@ const AddProperties = () => {
                     <label className="inline-flex items-center">
                       <input
                         type="checkbox"
-                        name="agreement"
+                        name="legal_info"
                         value="legal_info"
                         checked={propertyData.legal_info}
                         onChange={handleChange}
