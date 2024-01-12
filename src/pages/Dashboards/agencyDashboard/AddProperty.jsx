@@ -112,6 +112,7 @@ const AddProperties = () => {
   
       if (!response.ok) {
         // Handle the case where the request was not successful
+        alert('Under maintenance')
         throw new Error(`Failed to add property. Status: ${response.status}`);
       }
   
