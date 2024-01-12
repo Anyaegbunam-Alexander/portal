@@ -10,7 +10,7 @@ const Properties = () => {
   const { currentColor } = useStateContext();
 
   return (
-    <div className="mt-12">
+    <div className="mt-16">
       <div className='flex flex-wrap justify-center'>
         <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
           <div className="flex justify-between">

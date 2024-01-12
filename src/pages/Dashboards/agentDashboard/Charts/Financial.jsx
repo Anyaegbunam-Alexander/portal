@@ -20,7 +20,7 @@ const Financial = () => {
   const { currentMode } = useStateContext();
 
   return (
-    <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
+    <div className="m-4 md:m-10 mt-16 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
       <ChartsHeader category="Financial" title="Agency Historical" />
       <div className="w-full">
         <ChartComponent
