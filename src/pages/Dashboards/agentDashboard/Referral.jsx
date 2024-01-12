@@ -20,7 +20,7 @@ const Referral = () => {
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl mt-16">
       <Header category="Page" title="Referral Link"/>
-      <GridComponent
+      {/* <GridComponent
         id='gridcomp'
         dataSource={ordersData}
         allowPaging
@@ -32,7 +32,9 @@ const Referral = () => {
           ))}
         </ColumnsDirective>
         <Inject services={[Resize, ContextMenu, ExcelExport, PdfExport, Sort, Edit, Page, Filter ]}/>
-      </GridComponent>
+      </GridComponent> */}
+
+      <a href="#" className='text-2xl'>Coming soon</a>
     </div>
   )
 }
