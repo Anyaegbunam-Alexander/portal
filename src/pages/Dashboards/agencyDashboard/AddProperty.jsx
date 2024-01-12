@@ -127,11 +127,11 @@ const AddProperties = () => {
   
 
   return (
-    <div className="mt-12">
+    <div className="mt-16">
       <div className='flex flex-wrap justify-center'>
-        <div className="md:m-10 md:p-10 bg-white rounded-2xl p-6 m-3">
+        <div className="md:m-10 md:p-10 bg-white rounded-3xl m-2 p-2">
           <Header category="Page" title="Add Property"/>
-          <div className="w-4/5 m-auto max-sm:w-5/6 mt-8">
+          <div className="w-full p-4">
             {/* <h2 className="text-2xl font-semibold mb-4">Add Property</h2> */}
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Property */}
@@ -152,18 +152,18 @@ const AddProperties = () => {
 
               {/* Address */}
               <div>
-                <label htmlFor="address" className="block text-base font-medium text-gray-700">
-                  Address
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  name="street_address"
-                  value={propertyData.street_address}
-                  onChange={handleChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
-                  required
-                />
+              <label htmlFor="address" className="block text-base font-medium text-gray-700">
+                Address
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="street_address"
+                value={propertyData.street_address}
+                onChange={handleChange}
+                className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                required
+              />
               </div>
 
               {/* Nearest Landmark */}
@@ -217,7 +217,7 @@ const AddProperties = () => {
 
               {/* Price */}
               <div>
-                <label htmlFor="price" className="block text-base font-medium text-gray-700">
+                <label htmlFor="price" className="text-base font-medium text-gray-700">
                   Price (₦)
                 </label>
                 <input
@@ -300,98 +300,98 @@ const AddProperties = () => {
 
               {/* Amenities offered by the property */}
               <div className='space-y-3'>
-                <label className="block text-base font-medium text-gray-700">
+                  <label className="block text-base font-medium text-gray-700">
                   Features and Amenities
-                </label>
-                <div className="columns-3">
-                  {/* Checkboxes for Amenities */}
-                  <div>
-                    <label className="inline-flex items-center">
-                      <input
-                        type="checkbox"
-                        name="amenities"
-                        value="pool"
-                        checked={propertyData.amenities.includes('pool')}
-                        onChange={handleChange}
-                      />
-                      <span className="ml-2">Pool</span>
-                    </label>
-                  </div>
+                  </label>
+                  <div className="columns-3">
+                    {/* Checkboxes for Amenities */}
+                    <div>
+                        <label className="inline-flex items-center">
+                        <input
+                            type="checkbox"
+                            name="amenities"
+                            value="pool"
+                            checked={propertyData.amenities.includes('pool')}
+                            onChange={handleChange}
+                        />
+                        <span className="ml-2">Pool</span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label className="inline-flex items-center">
+                        <input
+                            type="checkbox"
+                            name="amenities"
+                            value="gym"
+                            checked={propertyData.amenities.includes('gym')}
+                            onChange={handleChange}
+                        />
+                        <span className="ml-2">Gym</span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label className="inline-flex items-center">
+                        <input
+                            type="checkbox"
+                            name="amenities"
+                            value="free-wifi"
+                            checked={propertyData.amenities.includes('free-wifi')}
+                            onChange={handleChange}
+                        />
+                        <span className="ml-2">Free WiFi</span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label className="inline-flex items-center">
+                        <input
+                            type="checkbox"
+                            name="amenities"
+                            value="parking-lot"
+                            checked={propertyData.amenities.includes('parking-lot')}
+                            onChange={handleChange}
+                        />
+                        <span className="ml-2">Parking Lot</span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <label className="inline-flex items-center">
+                        <input
+                            type="checkbox"
+                            name="amenities"
+                            value="garden"
+                            checked={propertyData.amenities.includes('garden')}
+                            onChange={handleChange}
+                        />
+                        <span className="ml-2">Garden</span>
+                        </label>
+                    </div>
 
                   <div>
-                    <label className="inline-flex items-center">
+                      <label className="inline-flex items-center">
                       <input
-                        type="checkbox"
-                        name="amenities"
-                        value="gym"
-                        checked={propertyData.amenities.includes('gym')}
-                        onChange={handleChange}
-                      />
-                      <span className="ml-2">Gym</span>
-                    </label>
-                  </div>
-
-                  <div>
-                    <label className="inline-flex items-center">
-                      <input
-                        type="checkbox"
-                        name="amenities"
-                        value="free-wifi"
-                        checked={propertyData.amenities.includes('free-wifi')}
-                        onChange={handleChange}
-                      />
-                      <span className="ml-2">Free WiFi</span>
-                    </label>
-                  </div>
-
-                  <div>
-                    <label className="inline-flex items-center">
-                      <input
-                        type="checkbox"
-                        name="amenities"
-                        value="parking-lot"
-                        checked={propertyData.amenities.includes('parking-lot')}
-                        onChange={handleChange}
-                      />
-                      <span className="ml-2">Parking Lot</span>
-                    </label>
-                  </div>
-
-                  <div>
-                    <label className="inline-flex items-center">
-                      <input
-                        type="checkbox"
-                        name="amenities"
-                        value="garden"
-                        checked={propertyData.amenities.includes('garden')}
-                        onChange={handleChange}
-                      />
-                      <span className="ml-2">Garden</span>
-                    </label>
-                  </div>
-
-                  <div>
-                    <label className="inline-flex items-center">
-                      <input
-                        type="checkbox"
-                        name="amenities"
-                        value="security"
-                        checked={propertyData.amenities.includes('security')}
-                        onChange={handleChange}
+                          type="checkbox"
+                          name="amenities"
+                          value="security"
+                          checked={propertyData.amenities.includes('security')}
+                          onChange={handleChange}
                       />
                       <span className="ml-2">Security</span>
-                    </label>
+                      </label>
                   </div>
                   
-                </div>
+                  </div>
               </div>
 
               {/* Square footage and property type */}
               <div>
-                <label htmlFor="availability" className="block text-base font-medium text-gray-700">
+                  <label htmlFor="availability" className="block text-base font-medium text-gray-700">
                   Square Footage (km&sup2;)
-                </label>
-                <input
+                  </label>
+                  <input
                   type='number'
                   id="availability"
                   name="square_footage"
@@ -399,153 +399,119 @@ const AddProperties = () => {
                   onChange={handleChange}
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
                   required
-                />
+                  />
               </div>
 
               {/* uploading of property pictures */}
               <div>
-                  <label htmlFor="PropertyPictures" className="block text-base font-medium text-gray-700">
-                    Upload pictures of property
-                  </label>
-                <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
-                  <input
-                    type="file"
-                    className="hidden"
-                    id="fileInput"
-                    multiple
-                    onChange={handleFileChange}
-                  />
-                  <label
-                    htmlFor="fileInput"
-                    style={{
-                      backgroundColor: currentColor
-                    }}
-                    className="cursor-pointer text-white py-2 px-4 rounded-md inline-block mb-4"
-                  >
-                    Select Pictures
-                  </label>
-                  {selectedFiles.length > 0 && (
-                    <div className="mt-4">
-                        <p className="text-lg font-semibold mb-2">Selected Files:</p>
-                        <ul>
-                          {selectedFiles.map((file, index) => (
-                            <li
-                              key={index}
-                              className="flex items-center justify-between bg-gray-100 p-2 mb-2 rounded-md"
-                            >
-                              <span className="truncate">{file.name}</span>
-                              <button
-                                className="text-red-500 hover:text-red-700"
-                                onClick={() => handleRemoveFile(index)}
-                              >
-                                Remove
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* uploading of Floor Plan */}
-              <div>
-                  <label htmlFor="floorPlanFiles" className="block text-base font-medium text-gray-700">
-                    Floor Plan
-                  </label>
-                <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
-                  <input
-                    type="file"
-                    className="hidden"
-                    id="floorPlan"
-                    multiple
-                    onChange={handleFloorPlanFileChange}
-                  />
-                  <label
-                    htmlFor="floorPlan"
-                    style={{
-                      backgroundColor: currentColor
-                    }}
-                    className="cursor-pointer text-white py-2 px-4 rounded-md inline-block mb-4"
-                  >
-                    Select Files
-                  </label>
-                  {selectedFloorPlan.length > 0 && (
-                    <div className="mt-4">
-                        <p className="text-lg font-semibold mb-2">Selected Files:</p>
-                        <ul>
-                          {selectedFloorPlan.map((file, index) => (
-                            <li
-                              key={index}
-                              className="flex items-center justify-between bg-gray-100 p-2 mb-2 rounded-md"
-                            >
-                              <span className="truncate">{file.name}</span>
-                              <button
-                                className="text-red-500 hover:text-red-700"
-                                onClick={() => handleRemoveFloorPlan(index)}
-                              >
-                                Remove
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Video upload */}
-              {/* <div>
-                  <label htmlFor="duration" className="block text-base font-medium text-gray-700">
-                    Upload videos(s) of property
-                  </label>
-                <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
-                  <input
-                    type="file"
-                    accept="video/*"
-                    className="hidden"
-                    id="videoInput"
-                    multiple
-                    onChange={handleVideoChange}
-                  />
-                  <label
-                    htmlFor="videoInput"
-                    className="cursor-pointer bg-[#8840E6] text-white py-2 px-4 rounded-md inline-block mb-4"
-                  >
-                    Select Videos
-                  </label>
-                  {selectedVideos.length > 0 && (
-                    <div className="mt-4">
-                      <p className="text-lg font-semibold mb-2">Selected Videos:</p>
+                <label htmlFor="PropertyPictures" className="block text-base font-medium text-gray-700">
+                  Upload pictures of property
+                </label>
+              <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
+                <input
+                  type="file"
+                  className="hidden"
+                  id="fileInput"
+                  multiple
+                  onChange={handleFileChange}
+                />
+                <label
+                  htmlFor="fileInput"
+                  style={{
+                    backgroundColor: currentColor
+                  }}
+                  className="cursor-pointer text-white py-2 px-4 rounded-md inline-block mb-4"
+                >
+                  Select Pictures
+                </label>
+                {selectedFiles.length > 0 && (
+                  <div className="mt-4">
+                      <p className="text-lg font-semibold mb-2">Selected Files:</p>
                       <ul>
-                        {selectedVideos.map((video, index) => (
+                        {selectedFiles.map((file, index) => (
                           <li
                             key={index}
                             className="flex items-center justify-between bg-gray-100 p-2 mb-2 rounded-md"
                           >
-                            <span className="truncate">{video.name}</span>
+                            <span className="truncate">{file.name}</span>
                             <button
                               className="text-red-500 hover:text-red-700"
-                              onClick={() => handleRemoveVideo(index)}
+                              onClick={() => handleRemoveFile(index)}
                             >
                               Remove
                             </button>
                           </li>
                         ))}
                       </ul>
-                    </div>
-                  )}
-                </div>
-              </div> */}
+                  </div>
+                )}
+              </div>
+              </div>
+
+              {/* uploading of Floor Plan */}
+              <div>
+                <label htmlFor="floorPlanFiles" className="block text-base font-medium text-gray-700">
+                  Floor Plan
+                </label>
+              <div className="w-full mt-1 p-6 bg-white rounded-md shadow-md">
+                <input
+                  type="file"
+                  className="hidden"
+                  id="floorPlan"
+                  multiple
+                  onChange={handleFloorPlanFileChange}
+                />
+                <label
+                  htmlFor="floorPlan"
+                  style={{
+                    backgroundColor: currentColor
+                  }}
+                  className="cursor-pointer text-white py-2 px-4 rounded-md inline-block mb-4"
+                >
+                  Select Files
+                </label>
+                {selectedFloorPlan.length > 0 && (
+                  <div className="mt-4">
+                      <p className="text-lg font-semibold mb-2">Selected Files:</p>
+                      <ul>
+                        {selectedFloorPlan.map((file, index) => (
+                          <li
+                            key={index}
+                            className="flex items-center justify-between bg-gray-100 p-2 mb-2 rounded-md"
+                          >
+                            <span className="truncate">{file.name}</span>
+                            <button
+                              className="text-red-500 hover:text-red-700"
+                              onClick={() => handleRemoveFloorPlan(index)}
+                            >
+                              Remove
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                  </div>
+                )}
+              </div>
+              </div>
 
               {/* Description */}
               <div>
-                <label htmlFor="description" className="block text-base font-medium text-gray-700">
+                <label htmlFor="description" className="text-base font-medium text-gray-700">
                   Description
                 </label>
-                <RichTextEditorComponent>
-                  <Inject services={[HtmlEditor, Toolbar, Link, QuickToolbar]}/>
-                </RichTextEditorComponent>
+                {/* <div className=" max-w-md">
+                  <RichTextEditorComponent>
+                    <Inject services={[HtmlEditor, Toolbar, Link, QuickToolbar]}/>
+                  </RichTextEditorComponent>
+                </div> */}
+                <textarea
+                  id="description"
+                  name="description"
+                  value={propertyData.description}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full h-72 outline-none"
+                  required
+                />
               </div>
 
               {/* Additionals */}
@@ -588,15 +554,15 @@ const AddProperties = () => {
                   Purchase Type
                 </label>
                 <input
-                    type='text'
-                    id="type"
-                    name="transaction_type"
-                    value={propertyData.transaction_type}
-                    onChange={handleChange}
-                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
-                    placeholder='E.g Sale or Rental'
-                    required
-                  />
+                  type='text'
+                  id="type"
+                  name="transaction_type"
+                  value={propertyData.transaction_type}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                  placeholder='E.g Sale or Rental'
+                  required
+                />
               </div>
 
               {/* Legal and compliance */}
