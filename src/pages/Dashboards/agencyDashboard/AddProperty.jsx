@@ -113,10 +113,11 @@ const AddProperties = () => {
       if (!response.ok) {
         // Handle the case where the request was not successful
         alert('Under maintenance')
-        throw new Error(`Failed to add property. Status: ${response.status}`);
+        throw new Error(`Failed to add property. Status: ${response}`);
       }
   
       // Display success message or redirect to confirmation page
+      console.log(response)
       alert('Property added successfully!');
     } catch (error) {
       // Handle errors (display an error message to the user, log the error, etc.)
