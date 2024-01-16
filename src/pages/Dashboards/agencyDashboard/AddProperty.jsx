@@ -17,6 +17,7 @@ const AddProperties = () => {
   const [propertyData, setPropertyData] = useState({
     additional_fees: '',
     additional_notes: '',
+    agent: '',
     street_address: '',
     country: 'Nigeria',
     state: '',
@@ -36,7 +37,7 @@ const AddProperties = () => {
     sold: false,
     square_footage: '',
     transaction_type: '',
-    type: '',
+    type: '', // name of the property
   })
   const maxFileSize = 2 * 1024 * 1024; // 10MB
   // const [selectedVideos, setSelectedVideos] = useState([]);
@@ -88,7 +89,11 @@ const AddProperties = () => {
 
     setPropertyData((prevData) => {
       if (type === 'checkbox') {
-        return { ...prevData, [name]: checked ? [...prevData[name], value] : prevData[name].filter(item => item !== value) };
+        return { 
+          ...prevData, 
+          [name]: checked ? [...prevData[name], value] 
+          : prevData[name].filter(item => item !== value) 
+        };
       }
 
       return { ...prevData, [name]: value };
@@ -229,6 +234,7 @@ const AddProperties = () => {
                   value={propertyData.price}
                   onChange={handleChange}
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                  min='0'
                   required
                 />
               </div>
@@ -246,6 +252,7 @@ const AddProperties = () => {
                     value={propertyData.bathrooms}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    min='0'
                     required
                   />
                 </div>
@@ -261,6 +268,7 @@ const AddProperties = () => {
                     value={propertyData.bedrooms}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    min='0'
                     required
                   />
                 </div>
@@ -294,6 +302,7 @@ const AddProperties = () => {
                     value={propertyData.duration}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    min='0'
                     placeholder='Calculated in months'
                     required
                   />
@@ -400,6 +409,7 @@ const AddProperties = () => {
                   value={propertyData.square_footage}
                   onChange={handleChange}
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                  min='0'
                   required
                   />
               </div>
@@ -529,8 +539,8 @@ const AddProperties = () => {
                     value={propertyData.additional_fees}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    min='0'
                     placeholder='e.g. Taxes'
-                    required
                   />
                 </div>
 
@@ -545,7 +555,6 @@ const AddProperties = () => {
                     value={propertyData.additional_notes}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
-                    required
                   />
                 </div>
               </div>
