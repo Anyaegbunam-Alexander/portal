@@ -17,7 +17,7 @@ const AddProperties = () => {
   const [propertyData, setPropertyData] = useState({
     additional_fees: '',
     additional_notes: '',
-    agent: '',
+    agent: null,
     street_address: '',
     country: 'Nigeria',
     state: '',
@@ -31,6 +31,7 @@ const AddProperties = () => {
     floor_plans: [],
     images: [],
     is_compliant: false,
+    interested_customers: null,
     legal_info: false,
     nearby_landmark: '',
     price: '',
@@ -106,6 +107,40 @@ const AddProperties = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+
+    for (const key in propertyData) {
+      // Append all form data except the file directly
+      // if (key !== 'images' || 'floor_plans') {
+      //   propertyDataObj.append(key, propertyData[key]);
+      // }
+      if (propertyData.hasOwnProperty(key)) {
+        if (Array.isArray(propertyData[key])) {
+          // If it's an array (like amenities), append each item separately
+          propertyData[key].forEach((item) => {
+            formData.append(key, item);
+          });
+        } else {
+          formData.append(key, propertyData[key]);
+        }
+      }
+    }
+
+    // Append image files
+    selectedFiles.forEach((file) => {
+      formData.append('images', file);
+    });
+
+    // Append floor plan files
+    selectedFloorPlan.forEach((file) => {
+      formData.append('floor_plans', file);
+    });
+
+    // Log the FormData content before sending
+    for (const pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
   
     try {
       // Send a request to your backend to add the property
@@ -116,7 +151,7 @@ const AddProperties = () => {
           "Referer": "https://realestate.api.sites.name.ng/",
           "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
         },
-        body: console.log(JSON.stringify(propertyData)),
+        body: formData,
       });
       //console.log(response);
       
