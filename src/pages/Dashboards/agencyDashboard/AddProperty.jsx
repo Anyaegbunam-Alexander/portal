@@ -31,7 +31,7 @@ const AddProperties = () => {
     floor_plans: [],
     images: [],
     is_compliant: false,
-    legal_info: '',
+    legal_info: false,
     nearby_landmark: '',
     price: '',
     sold: false,
@@ -89,6 +89,9 @@ const AddProperties = () => {
 
     setPropertyData((prevData) => {
       if (type === 'checkbox') {
+        if (name === 'legal_info') {
+          return { ...prevData, [name]: !prevData[name] };
+        }
         return { 
           ...prevData, 
           [name]: checked ? [...prevData[name], value] 
@@ -99,6 +102,7 @@ const AddProperties = () => {
       return { ...prevData, [name]: value };
     });
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -112,13 +116,14 @@ const AddProperties = () => {
           "Referer": "https://realestate.api.sites.name.ng/",
           "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
         },
-        body: JSON.stringify(propertyData),
+        body: console.log(JSON.stringify(propertyData)),
       });
-  
+      //console.log(response);
+      
       if (!response.ok) {
         // Handle the case where the request was not successful
         alert('Under maintenance')
-        throw new Error(`Failed to add property. Status: ${response}`);
+        throw new Error(`Failed to add property. Status: ${response.status}`);
       }
   
       // Display success message or redirect to confirmation page
@@ -136,7 +141,7 @@ const AddProperties = () => {
   return (
     <div className="mt-16">
       <div className='flex flex-wrap justify-center'>
-        <div className="md:m-10 md:p-10 bg-white rounded-3xl m-2 p-2">
+        <div className="md:m-10 md:p-10 bg-white rounded-3xl m-2 p-4">
           <Header category="Page" title="Add Property"/>
           <div className="w-full p-4">
             {/* <h2 className="text-2xl font-semibold mb-4">Add Property</h2> */}
