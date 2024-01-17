@@ -19,10 +19,13 @@ const AddProperties = () => {
     additional_fees: '',
     additional_notes: '',
     agent: null,
-    street_address: '',
-    country: 'Nigeria',
-    state: '',
-    city: '',
+    address: {
+      street_address: '',
+      country: 'Nigeria',
+      state: '',
+      city: '',
+    },
+    // street_address: '',
     amenities: [],
     availability: '',
     bathrooms: '',
@@ -114,7 +117,14 @@ const AddProperties = () => {
 
     for (const key in propertyData) {
       if (propertyData.hasOwnProperty(key)) {
-        if (Array.isArray(propertyData[key])) {
+        if (key === 'address' && typeof propertyData[key] === 'object') {
+          const address = propertyData[key];
+          for (const addressKey in address) {
+            if (address.hasOwnProperty(addressKey)) {
+              formData.append(`address.${addressKey}`, address[addressKey]);
+            }
+          }
+        } else if (Array.isArray(propertyData[key])) {
           // If it's an array (like amenities), append each item separately
           if (key === 'amenities') {
             formData.append(key, JSON.stringify(propertyData[key]));
@@ -126,12 +136,7 @@ const AddProperties = () => {
             formData.append(key, propertyData[key]);
           }          
         } else {
-          // Fix: Correct the field name to "street_address" instead of "address"
-          if (key === 'street_address') {
-            formData.append('address', propertyData[key]);
-          } else {
-            formData.append(key, propertyData[key]);
-          }
+          formData.append(key, propertyData[key]);
         }
       }
     }
@@ -163,8 +168,6 @@ const AddProperties = () => {
         body: formData,
       });
 
-      const responseText = await response.text();
-      console.log('Response Text:', responseText);
       
       if (!response.ok) {
         // Handle the case where the request was not successful
@@ -177,6 +180,7 @@ const AddProperties = () => {
             alert(`${errorResponse.extra.fields[field]}`)
             // openPopup(); // Open the popup
             console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+            return
           }
         }
       }
@@ -220,18 +224,18 @@ const AddProperties = () => {
 
               {/* street_address */}
               <div>
-              <label htmlFor="street_address" className="block text-base font-medium text-gray-700">
-                Address
-              </label>
-              <input
-                type="text"
-                id="street_address"
-                name="street_address"
-                value={propertyData.street_address}
-                onChange={handleChange}
-                className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
-                required
-              />
+                <label htmlFor="street_address" className="block text-base font-medium text-gray-700">
+                  Address
+                </label>
+                <input
+                  type="text"
+                  id="street_address"
+                  name="address"
+                  value={propertyData.address.street_address}
+                  onChange={handleChange}
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                  required
+                />
               </div>
 
               {/* Nearest Landmark */}
@@ -259,8 +263,8 @@ const AddProperties = () => {
                   <input
                     type='text'
                     id="state"
-                    name="state"
-                    value={propertyData.state}
+                    name="address"
+                    value={propertyData.address.state}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
                     required
@@ -274,8 +278,8 @@ const AddProperties = () => {
                   <input
                     type='text'
                     id="city"
-                    name="city"
-                    value={propertyData.city}
+                    name="address"
+                    value={propertyData.address.city}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
                     required
