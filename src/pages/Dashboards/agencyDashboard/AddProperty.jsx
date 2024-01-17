@@ -1,15 +1,8 @@
 import React, {useState} from 'react';
-import { HtmlEditor, 
-  Inject, 
-  Link, 
-  QuickToolbar, 
-  RichTextEditorComponent, 
-  Toolbar 
-} from '@syncfusion/ej2-react-richtexteditor';
 import {useNavigate} from 'react-router-dom'
-
 import { Header } from '../../../components/agencyDashboardComponent';
 import { useStateContext } from '../../../contexts/ContextProvider';
+
 
 const AddProperties = () => {
   const { currentColor } = useStateContext();
@@ -44,6 +37,8 @@ const AddProperties = () => {
     type: '', // name of the property
   })
   const maxFileSize = 2 * 1024 * 1024; // 10MB
+  const accessToken = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
   const navigate = useNavigate();
   // const [selectedVideos, setSelectedVideos] = useState([]);
   // const maxFileSize = 10 * 1024 * 1024; // 10MB
@@ -57,7 +52,6 @@ const AddProperties = () => {
     const PDFs = Array.from(e.target.files);
     // Check PDF size before adding it to the state
     const validPdfs = PDFs.filter((pdf) => pdf.size <= maxFileSize);
-
     setSelectedFloorPlan((prevPDFs) => [...prevPDFs, ...validPdfs]);
   };
 
@@ -104,22 +98,19 @@ const AddProperties = () => {
           : prevData[name].filter(item => item !== value) 
         };
       } else if (name.startsWith('address.')) {
-        console.log('Updating address field:', name, value);
         const addressKey = name.split('.')[1];
-
-          // Update the address object correctly
-          updatedData = {
-            ...prevData,
-            address: {
-              ...prevData.address,
-              [addressKey]: value,
-            },
-          };
+        // Update the address object correctly
+        updatedData = {
+          ...prevData,
+          address: {
+            ...prevData.address,
+            [addressKey]: value,
+          },
+        };
       } else {
         updatedData = { ...prevData, [name]: value };
       }
   
-      console.log('Updated propertyData:', updatedData); // Log the updated propertyData
       return updatedData;
     });
   };
@@ -165,15 +156,8 @@ const AddProperties = () => {
     selectedFloorPlan.forEach((file) => {
       formData.append('floor_plans', file);
     });
-
-    // Log the FormData content before sending
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
   
     try {
-      const accessToken = localStorage.getItem('token');
-      // Send a request to your backend to add the property
       const response = await fetch('https://realestate.api.sites.name.ng/properties/', {
         method: 'POST',
         headers: {
@@ -185,11 +169,9 @@ const AddProperties = () => {
 
       
       if (!response.ok) {
-        // Handle the case where the request was not successful
         const errorResponse = await response.json();
-        console.log(errorResponse);
+
         for (const field in errorResponse.extra.fields) {
-          // Check if the field has a truthy value
           if (errorResponse.extra.fields[field]) {
             // Output the value contained in the field
             alert(`${errorResponse.extra.fields[field]}`)
@@ -201,9 +183,9 @@ const AddProperties = () => {
       }
   
       // Display success message or redirect to confirmation page
-      console.log(response);
-      //navigate('/');
+      navigate(`/${role}/listings`);
       alert('Property added successfully!');
+      console.log(response.body);
     } catch (error) {
       // Handle errors (display an error message to the user, log the error, etc.)
       console.error('Error adding property:', error.message);
