@@ -6,6 +6,7 @@ import { HtmlEditor,
   RichTextEditorComponent, 
   Toolbar 
 } from '@syncfusion/ej2-react-richtexteditor';
+import {useNavigate} from 'react-router-dom'
 
 import { Header } from '../../../components/agencyDashboardComponent';
 import { useStateContext } from '../../../contexts/ContextProvider';
@@ -41,6 +42,7 @@ const AddProperties = () => {
     type: '', // name of the property
   })
   const maxFileSize = 2 * 1024 * 1024; // 10MB
+  const navigate = useNavigate();
   // const [selectedVideos, setSelectedVideos] = useState([]);
   // const maxFileSize = 10 * 1024 * 1024; // 10MB
 
@@ -54,7 +56,7 @@ const AddProperties = () => {
     // Check PDF size before adding it to the state
     const validPdfs = PDFs.filter((pdf) => pdf.size <= maxFileSize);
 
-    setSelectedFloorPlan((prevPDFs) => [...prevPDFs, ...PDFs]);
+    setSelectedFloorPlan((prevPDFs) => [...prevPDFs, ...validPdfs]);
   };
 
   const handleRemoveFile = (index) => {
@@ -111,18 +113,25 @@ const AddProperties = () => {
     const formData = new FormData();
 
     for (const key in propertyData) {
-      // Append all form data except the file directly
-      // if (key !== 'images' || 'floor_plans') {
-      //   propertyDataObj.append(key, propertyData[key]);
-      // }
       if (propertyData.hasOwnProperty(key)) {
         if (Array.isArray(propertyData[key])) {
           // If it's an array (like amenities), append each item separately
-          propertyData[key].forEach((item) => {
-            formData.append(key, item);
-          });
+          if (key === 'amenities') {
+            formData.append(key, JSON.stringify(propertyData[key]));
+          } else if (Array.isArray(propertyData[key])) {
+            propertyData[key].forEach((item) => {
+              formData.append(key, item);
+            });
+          } else {
+            formData.append(key, propertyData[key]);
+          }          
         } else {
-          formData.append(key, propertyData[key]);
+          // Fix: Correct the field name to "street_address" instead of "address"
+          if (key === 'street_address') {
+            formData.append('address', propertyData[key]);
+          } else {
+            formData.append(key, propertyData[key]);
+          }
         }
       }
     }
@@ -143,26 +152,38 @@ const AddProperties = () => {
     }
   
     try {
+      const accessToken = localStorage.getItem('token');
       // Send a request to your backend to add the property
       const response = await fetch('https://realestate.api.sites.name.ng/properties/', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           "Referer": "https://realestate.api.sites.name.ng/",
-          "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
+          'Authorization': `Bearer ${accessToken}`,
         },
         body: formData,
       });
-      //console.log(response);
+
+      const responseText = await response.text();
+      console.log('Response Text:', responseText);
       
       if (!response.ok) {
         // Handle the case where the request was not successful
-        alert('Under maintenance')
-        throw new Error(`Failed to add property. Status: ${response.status}`);
+        const errorResponse = await response.json();
+        console.log(errorResponse);
+        for (const field in errorResponse.extra.fields) {
+          // Check if the field has a truthy value
+          if (errorResponse.extra.fields[field]) {
+            // Output the value contained in the field
+            alert(`${errorResponse.extra.fields[field]}`)
+            // openPopup(); // Open the popup
+            console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+          }
+        }
       }
   
       // Display success message or redirect to confirmation page
-      console.log(response)
+      console.log(response);
+      navigate('/');
       alert('Property added successfully!');
     } catch (error) {
       // Handle errors (display an error message to the user, log the error, etc.)
@@ -180,7 +201,7 @@ const AddProperties = () => {
           <Header category="Page" title="Add Property"/>
           <div className="w-full p-4">
             {/* <h2 className="text-2xl font-semibold mb-4">Add Property</h2> */}
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8" encType="multipart/form-data">
               {/* Property */}
               <div>
                 <label htmlFor="propertyName" className="block text-base font-medium text-gray-700">
@@ -197,14 +218,14 @@ const AddProperties = () => {
                 />
               </div>
 
-              {/* Address */}
+              {/* street_address */}
               <div>
-              <label htmlFor="address" className="block text-base font-medium text-gray-700">
+              <label htmlFor="street_address" className="block text-base font-medium text-gray-700">
                 Address
               </label>
               <input
                 type="text"
-                id="address"
+                id="street_address"
                 name="street_address"
                 value={propertyData.street_address}
                 onChange={handleChange}
@@ -551,11 +572,6 @@ const AddProperties = () => {
                 <label htmlFor="description" className="text-base font-medium text-gray-700">
                   Description
                 </label>
-                {/* <div className="m-2 md:m-10 md:p-10">
-                  <RichTextEditorComponent>
-                    <Inject services={[HtmlEditor, Toolbar, Link, QuickToolbar]}/>
-                  </RichTextEditorComponent>
-                </div> */}
                 <textarea
                   id="description"
                   name="description"

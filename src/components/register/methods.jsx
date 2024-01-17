@@ -243,7 +243,6 @@ const useRegistrationMethod = (apiEndpoint) => {
           // Handle successful registration, e.g., redirect to a success page
           alert('Registration Successful, please kindly proceed to login');
           window.location.href = `/login/customer`;
-          console.log('Registration successful', formDataObj);
           setErrors(null);
         } else {
           const errorResponse = await response.json();
