@@ -25,7 +25,6 @@ const AddProperties = () => {
       state: '',
       city: '',
     },
-    // street_address: '',
     amenities: [],
     availability: '',
     bathrooms: '',
@@ -94,6 +93,7 @@ const AddProperties = () => {
     const { name, type, value, checked } = e.target;
 
     setPropertyData((prevData) => {
+      let updatedData;
       if (type === 'checkbox') {
         if (name === 'legal_info') {
           return { ...prevData, [name]: !prevData[name] };
@@ -103,9 +103,24 @@ const AddProperties = () => {
           [name]: checked ? [...prevData[name], value] 
           : prevData[name].filter(item => item !== value) 
         };
-      }
+      } else if (name.startsWith('address.')) {
+        console.log('Updating address field:', name, value);
+        const addressKey = name.split('.')[1];
 
-      return { ...prevData, [name]: value };
+          // Update the address object correctly
+          updatedData = {
+            ...prevData,
+            address: {
+              ...prevData.address,
+              [addressKey]: value,
+            },
+          };
+      } else {
+        updatedData = { ...prevData, [name]: value };
+      }
+  
+      console.log('Updated propertyData:', updatedData); // Log the updated propertyData
+      return updatedData;
     });
   };
 
@@ -117,15 +132,15 @@ const AddProperties = () => {
 
     for (const key in propertyData) {
       if (propertyData.hasOwnProperty(key)) {
-        if (key === 'address' && typeof propertyData[key] === 'object') {
-          const address = propertyData[key];
-          for (const addressKey in address) {
-            if (address.hasOwnProperty(addressKey)) {
-              formData.append(`address.${addressKey}`, address[addressKey]);
+        if (key === 'address') {
+          // Serialize the address object manually
+          const addressObj = propertyData[key];
+          for (const addressKey in addressObj) {
+            if (addressObj.hasOwnProperty(addressKey)) {
+              formData.append(`address.${addressKey}`, addressObj[addressKey]);
             }
           }
         } else if (Array.isArray(propertyData[key])) {
-          // If it's an array (like amenities), append each item separately
           if (key === 'amenities') {
             formData.append(key, JSON.stringify(propertyData[key]));
           } else if (Array.isArray(propertyData[key])) {
@@ -187,7 +202,7 @@ const AddProperties = () => {
   
       // Display success message or redirect to confirmation page
       console.log(response);
-      navigate('/');
+      //navigate('/');
       alert('Property added successfully!');
     } catch (error) {
       // Handle errors (display an error message to the user, log the error, etc.)
@@ -230,7 +245,7 @@ const AddProperties = () => {
                 <input
                   type="text"
                   id="street_address"
-                  name="address"
+                  name="address.street_address"
                   value={propertyData.address.street_address}
                   onChange={handleChange}
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
@@ -263,7 +278,7 @@ const AddProperties = () => {
                   <input
                     type='text'
                     id="state"
-                    name="address"
+                    name="address.state"
                     value={propertyData.address.state}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
@@ -278,7 +293,7 @@ const AddProperties = () => {
                   <input
                     type='text'
                     id="city"
-                    name="address"
+                    name="address.city"
                     value={propertyData.address.city}
                     onChange={handleChange}
                     className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
@@ -689,3 +704,4 @@ const AddProperties = () => {
 }
 
 export default AddProperties
+
