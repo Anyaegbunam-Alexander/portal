@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoIosMore } from 'react-icons/io';
+import { LuBedDouble } from "react-icons/lu";
+import { LuShowerHead } from "react-icons/lu";
+
+
 
 
 import { Button } from '../../../components/agencyDashboardComponent';
@@ -58,14 +62,14 @@ const Properties = () => {
                 {/* Used a container with a fixed height */}
                 <div className="image-container" style={{ height: '200px', overflow: 'hidden' }}>
                   <img
-                    className="md:w-96 h-full object-cover"
+                    className="md:w-96 h-full w-full object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
                     src={property.images[0].image}
                     alt="Property"
                   />
                 </div>
                 <div className="mt-8">
-                  <p className="font-semibold text-xl hover:text-purple-500"> {property.type}</p>
-                  <p className="py-4">
+                  <p className="font-extrabold text-xl hover:text-gray-600"> {property.type}</p>
+                  <p className="py-4 font-normal">
                     Added: 
                     <span className="ml-2 text-gray-400">
                       {
@@ -73,16 +77,40 @@ const Properties = () => {
                       }
                     </span>
                   </p>
-                  <p className="text-lg">
-                    {new Intl.NumberFormat('en-NG', {
-                      style: 'currency',
-                      currency: 'NGN',
-                    }).format(property.price)}
-                  </p>
-                  <p className="mt-4 text-sm text-gray-400">
+
+                  <div className="py-2">
+                    <div className="flex items-center space-x-6">
+                      <div>
+                        <p className='font-semibold'>Bedrooms</p>
+                        <div className='flex items-center space-x-4 py-3'>
+                          <LuBedDouble className='text-3xl'/>
+                          <span>{property.bedrooms}</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className='font-semibold'>Bathrooms</p>
+                        <div className='flex items-center space-x-4 py-3'>
+                          <LuShowerHead className='text-3xl'/>
+                          <span>{property.bathrooms}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='py-3'>
+                    <p className='text-base'>For {property.transaction_type}</p>
+                    <p className="text-xl font-medium text-gray-800 dark:text-gray-200">
+                      {new Intl.NumberFormat('en-NG', {
+                        style: 'currency',
+                        currency: 'NGN',
+                      }).format(property.price)}
+                    </p>
+                  </div>
+                  {/* <p className="py-4 text-sm text-gray-400">
                     {property.description}
-                  </p>
-                  <div className="mt-3">
+                  </p> */}
+                  <div className="py-4">
                     <Button
                       color="white"
                       bgColor={currentColor}
