@@ -5,7 +5,6 @@ import { IoIosMore } from 'react-icons/io';
 
 import { Button } from '../../../components/agencyDashboardComponent';
 import { useStateContext } from '../../../contexts/ContextProvider';
-import house1 from '../../../data/company_x-1.jpg';
 
 const Properties = () => {
   const { currentColor } = useStateContext();
@@ -50,20 +49,29 @@ const Properties = () => {
           properties.map(property => (
             <div key={property.id} className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
               <div className="flex justify-between">
-                <p className="text-xl font-semibold">Listing</p>
+                <p className="text-xl font-semibold">{property.agency.name}</p>
                 <button type="button" className="text-xl font-semibold text-gray-500">
                   <IoIosMore />
                 </button>
               </div>
               <div className="mt-10">
-                <img
-                  className="md:w-96 h-50"
-                  src={house1}
-                  alt=""
-                />
+                {/* Use a container with a fixed height */}
+                <div className="image-container" style={{ height: '200px', overflow: 'hidden' }}>
+                  {/* Use object-fit to control how the image fits within the container */}
+                  <img
+                    className="md:w-96 h-full object-cover"
+                    src={property.images[0].image}
+                    alt="Property"
+                  />
+                </div>
                 <div className="mt-8">
                   <p className="font-semibold text-lg"> {property.type}</p>
-                  <p className="text-gray-400 ">Agency 1</p>
+                  <p className="text-gray-400 ">
+                    {new Intl.NumberFormat('en-NG', {
+                      style: 'currency',
+                      currency: 'NGN',
+                    }).format(property.price)}
+                  </p>
                   <p className="mt-8 text-sm text-gray-400">
                     {property.description}
                   </p>
@@ -82,7 +90,7 @@ const Properties = () => {
         ) : (
             <div className='flex items-center justify-center h-screen w-full -mt-16'>
               <div className="text-center">
-                <p class="mb-4 text-xl dark:text-gray-200">No properties available.</p>
+                <p className="mb-4 text-xl dark:text-gray-200">No properties available.</p>
                 <button
                   className=' w-full'
                   style={{

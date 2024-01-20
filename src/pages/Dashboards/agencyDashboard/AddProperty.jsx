@@ -198,7 +198,7 @@ const AddProperties = () => {
   return (
     <div className="mt-16">
       <div className='flex flex-wrap justify-center'>
-        <div className="md:m-10 md:p-10 bg-white rounded-3xl m-2 p-4">
+        <div className="md:m-10 md:p-10 bg-white rounded-3xl p-4">
           <Header category="Page" title="Add Property"/>
           <div className="w-full p-4">
             {/* <h2 className="text-2xl font-semibold mb-4">Add Property</h2> */}
