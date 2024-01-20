@@ -48,12 +48,12 @@ const Properties = () => {
 
   return (
     <div className="mt-16">
-      <div className='flex flex-wrap justify-center'>
+      <div className='flex flex-wrap flex-1 justify-around'>
         {properties && properties.length > 0 ? (
           properties.map(property => (
-            <div key={property.id} className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+            <div key={property.id} className="w-500 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
               <div className="flex justify-between">
-                <p className="text-xl font-semibold">{property.agency.name}</p>
+                <p className="text-lg font-medium">{property.agency.name}</p>
                 <button type="button" className="text-xl font-semibold text-gray-500">
                   <IoIosMore />
                 </button>
@@ -68,7 +68,7 @@ const Properties = () => {
                   />
                 </div>
                 <div className="mt-8">
-                  <p className="font-extrabold text-xl hover:text-gray-600"> {property.type}</p>
+                  <p className="font-bold text-xl hover:text-gray-600"> {property.type}</p>
                   <p className="py-4 font-normal">
                     Added: 
                     <span className="ml-2 text-gray-400">
