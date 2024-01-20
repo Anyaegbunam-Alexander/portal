@@ -55,9 +55,8 @@ const Properties = () => {
                 </button>
               </div>
               <div className="mt-10">
-                {/* Use a container with a fixed height */}
+                {/* Used a container with a fixed height */}
                 <div className="image-container" style={{ height: '200px', overflow: 'hidden' }}>
-                  {/* Use object-fit to control how the image fits within the container */}
                   <img
                     className="md:w-96 h-full object-cover"
                     src={property.images[0].image}
@@ -65,14 +64,22 @@ const Properties = () => {
                   />
                 </div>
                 <div className="mt-8">
-                  <p className="font-semibold text-lg"> {property.type}</p>
-                  <p className="text-gray-400 ">
+                  <p className="font-semibold text-xl hover:text-purple-500"> {property.type}</p>
+                  <p className="py-4">
+                    Added: 
+                    <span className="ml-2 text-gray-400">
+                      {
+                        new Date(property.availability).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+                      }
+                    </span>
+                  </p>
+                  <p className="text-lg">
                     {new Intl.NumberFormat('en-NG', {
                       style: 'currency',
                       currency: 'NGN',
                     }).format(property.price)}
                   </p>
-                  <p className="mt-8 text-sm text-gray-400">
+                  <p className="mt-4 text-sm text-gray-400">
                     {property.description}
                   </p>
                   <div className="mt-3">
