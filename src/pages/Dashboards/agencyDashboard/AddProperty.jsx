@@ -462,7 +462,7 @@ const AddProperties = () => {
               {/* Square footage and property type */}
               <div>
                   <label htmlFor="availability" className="block text-base font-medium text-gray-700">
-                  Square Footage (km&sup2;)
+                  Square Footage (sqft)
                   </label>
                   <input
                   type='number'

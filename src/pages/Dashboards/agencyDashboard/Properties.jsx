@@ -99,8 +99,8 @@ const Properties = () => {
                       <div>
                         <p className='font-semibold'>Size</p>
                         <div className='flex items-center space-x-4 py-3'>
-                          <SlSizeFullscreen className='text-3xl'/>
-                          <span>{property.bathrooms}</span>
+                          <SlSizeFullscreen className='text-2xl'/>
+                          <span>{property.square_footage} sqft</span>
                         </div>
                       </div>
                     </div>
