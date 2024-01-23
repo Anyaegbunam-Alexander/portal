@@ -59,7 +59,7 @@ const Properties = () => {
           <p className="font-black text-white text-3xl">Your Properties</p>
 
           <TooltipComponent content="Filter" position='Bottom'>
-            <IoFilter className='text-white text-2xl'/>
+            <IoFilter className='text-white text-2xl hover:opacity-80'/>
           </TooltipComponent>
         </div>
         
