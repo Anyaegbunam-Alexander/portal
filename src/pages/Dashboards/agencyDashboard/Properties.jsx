@@ -9,6 +9,9 @@ import { SlSizeFullscreen } from "react-icons/sl";
 
 import { Button } from '../../../components/agencyDashboardComponent';
 import { useStateContext } from '../../../contexts/ContextProvider';
+import { SparkLine } from '../../../components/dashboardComponents';
+import { SparklineAreaData } from '../../../data/dummy';
+
 
 const Properties = () => {
   const { currentColor } = useStateContext();
@@ -48,6 +51,24 @@ const Properties = () => {
 
   return (
     <div className="mt-16">
+      <div
+        className=" rounded-2xl md:w-400 p-4 lg:w-4/5 m-auto"
+        style={{ backgroundColor: currentColor }}
+      >
+        <div className="flex justify-between items-center ">
+          <p className="font-semibold text-white text-2xl">Earnings</p>
+
+          <div>
+            <p className="text-2xl text-white font-semibold mt-8">₦0.00</p>
+            <p className="text-gray-200">Monthly revenue</p>
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <SparkLine currentColor={currentColor} id="column-sparkLine" height="100px" type="Column" data={SparklineAreaData} width="320" color="rgb(242, 252, 253)" />
+        </div>
+      </div>
+
       <div className='flex flex-wrap flex-1 justify-around'>
         {properties && properties.length > 0 ? (
           properties.map(property => (
