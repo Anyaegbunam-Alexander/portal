@@ -4,13 +4,13 @@ import { IoIosMore } from 'react-icons/io';
 import { LuBedDouble } from "react-icons/lu";
 import { LuShowerHead } from "react-icons/lu";
 import { SlSizeFullscreen } from "react-icons/sl";
+import { IoFilter } from "react-icons/io5";
 
 
 
 import { Button } from '../../../components/agencyDashboardComponent';
 import { useStateContext } from '../../../contexts/ContextProvider';
-import { SparkLine } from '../../../components/dashboardComponents';
-import { SparklineAreaData } from '../../../data/dummy';
+import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
 
 const Properties = () => {
@@ -52,20 +52,28 @@ const Properties = () => {
   return (
     <div className="mt-16">
       <div
-        className=" rounded-2xl md:w-400 p-4 lg:w-4/5 m-auto"
+        className=" rounded-2xl w-500 p-4 m-4 shadow-lg"
         style={{ backgroundColor: currentColor }}
       >
         <div className="flex justify-between items-center ">
-          <p className="font-semibold text-white text-2xl">Earnings</p>
+          <p className="font-black text-white text-3xl">Your Properties</p>
 
-          <div>
-            <p className="text-2xl text-white font-semibold mt-8">₦0.00</p>
-            <p className="text-gray-200">Monthly revenue</p>
-          </div>
+          <TooltipComponent content="Filter" position='Bottom'>
+            <IoFilter className='text-white text-2xl'/>
+          </TooltipComponent>
         </div>
+        
+        <div className="my-6 bg-white p-4 m-auto rounded-xl w-full lg:w-1/2">
+          <div className="flex outline-none border-solid border-2 border-[#8840E6]-500 rounded-lg">
+            <input type="text" name="" id="" className='w-full outline-none p-2 text-slate-700' placeholder='Filter your properties...'/>
 
-        <div className="mt-4">
-          <SparkLine currentColor={currentColor} id="column-sparkLine" height="100px" type="Column" data={SparklineAreaData} width="320" color="rgb(242, 252, 253)" />
+            <button 
+              type="button" 
+              className='p-4 text-white font-semibold outline-none hover:opacity-75' 
+              style={{ backgroundColor: currentColor }}>
+                Search
+            </button>
+          </div>
         </div>
       </div>
 
