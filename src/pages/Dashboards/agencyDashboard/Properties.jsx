@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IoIosMore } from 'react-icons/io';
 import { LuBedDouble } from "react-icons/lu";
 import { LuShowerHead } from "react-icons/lu";
-
+import { SlSizeFullscreen } from "react-icons/sl";
 
 
 
@@ -90,6 +90,14 @@ const Properties = () => {
 
                       <div>
                         <p className='font-semibold'>Bathrooms</p>
+                        <div className='flex items-center space-x-4 py-3'>
+                          <LuShowerHead className='text-3xl'/>
+                          <span>{property.bathrooms}</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className='font-semibold'>Size</p>
                         <div className='flex items-center space-x-4 py-3'>
                           <LuShowerHead className='text-3xl'/>
                           <span>{property.bathrooms}</span>
