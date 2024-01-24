@@ -25,6 +25,7 @@ const Properties = () => {
   
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
+  
 
   const handleClick = () => {
     return navigate(`/${role}/add-property`);
@@ -35,7 +36,7 @@ const Properties = () => {
   // Fetch properties from your API here
   const fetchProperties = async (page = 1) => {
     try {
-      const response = await fetch(`https://realestate.api.sites.name.ng/properties/?page=${page}&limit=6`, {
+      const response = await fetch(`https://realestate.api.sites.name.ng/properties/`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -43,9 +44,12 @@ const Properties = () => {
       });
 
       const data = await response.json();
+      
       console.log('API response:', data); // Log the response
 
       setProperties(data.results);
+
+      console.log(data.links);
       setPaginationLinks(data.links);
     } catch (error) {
       console.error('Error fetching properties:', error);
@@ -53,9 +57,9 @@ const Properties = () => {
   };
 
 
-  const handlePagination = async (page) => {
-    setCurrentPage(page);
-    fetchProperties(page);
+  const handlePagination = () => {
+    // setCurrentPage() // Parse the next page as an integer
+    console.log('next page');
   };
 
   useEffect(() => {
@@ -96,7 +100,7 @@ const Properties = () => {
 
           <div>
             <TooltipComponent content="Filter" position='Top'>
-              <IoFilter className='text-white text-2xl hover:opacity-80 mr-12 md:mr-0'/>
+              <IoFilter className='text-white text-2xl hover:opacity-80 lg:mr-12'/>
             </TooltipComponent>
           </div>
         </div>
@@ -170,9 +174,7 @@ const Properties = () => {
                       }).format(property.price)}
                     </p>
                   </div>
-                  {/* <p className="py-4 text-sm text-gray-400">
-                    {property.description}
-                  </p> */}
+
                   <div className="py-4">
                     <Button
                       color="white"
@@ -210,15 +212,16 @@ const Properties = () => {
         {paginationLinks && (
           <div className="flex justify-center my-10 space-x-4">
             <button 
-              onClick={() => handlePagination(currentPage - 1)} disabled={!paginationLinks.previous}
-              className={`text-white p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
+              onClick={() => handlePagination()} disabled={!paginationLinks.previous}
+              className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
             >
               <GrLinkPrevious className='mr-4'/>
               Previous
             </button>
+            
             <button 
-              onClick={() => handlePagination(currentPage + 1)} disabled={!paginationLinks.next}
-              className={`text-white p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
+              onClick={() => handlePagination()} disabled={!paginationLinks.next}
+              className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
             >
               Next
               <GrLinkNext className='ml-4'/>
