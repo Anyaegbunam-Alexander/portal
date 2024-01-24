@@ -77,11 +77,6 @@ const Properties = () => {
           <p className="font-bold text-5xl">Your Properties</p>
           <p className=' tracking-widest'>View your listed properties here.</p>
         </div>
-
-        <div className="flex justify-between items-center ">
-
-          
-        </div>
         
         <div className="flex justify-center items-center my-10 w-full">
           <div className="bg-white p-4 m-auto rounded-xl lg:w-3/4">
@@ -100,7 +95,7 @@ const Properties = () => {
 
           <div>
             <TooltipComponent content="Filter" position='Top'>
-              <IoFilter className='text-white text-2xl hover:opacity-80 lg:mr-12'/>
+              <IoFilter className='text-white text-2xl hover:opacity-80 lg:mr-12 max-sm:hidden'/>
             </TooltipComponent>
           </div>
         </div>
@@ -208,6 +203,7 @@ const Properties = () => {
         )}
       </div>
 
+      {/* Pagination */}
       <div>
         {paginationLinks && (
           <div className="flex justify-center my-10 space-x-4">
