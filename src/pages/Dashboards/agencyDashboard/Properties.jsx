@@ -5,6 +5,9 @@ import { LuBedDouble } from "react-icons/lu";
 import { LuShowerHead } from "react-icons/lu";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { IoFilter } from "react-icons/io5";
+import { GrLinkPrevious } from "react-icons/gr";
+import { GrLinkNext } from "react-icons/gr";
+import { IoSearchOutline } from "react-icons/io5";
 
 
 
@@ -16,6 +19,9 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 const Properties = () => {
   const { currentColor } = useStateContext();
   const [properties, setProperties] = useState([]);
+  const [paginationLinks, setPaginationLinks] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1); // Add current page state
+
   
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
@@ -24,29 +30,37 @@ const Properties = () => {
     return navigate(`/${role}/add-property`);
   }
   
+
+  const accessToken = localStorage.getItem('token');
+  // Fetch properties from your API here
+  const fetchProperties = async (page = 1) => {
+    try {
+      const response = await fetch(`https://realestate.api.sites.name.ng/properties/?page=${page}&limit=6`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const data = await response.json();
+      console.log('API response:', data); // Log the response
+
+      setProperties(data.results);
+      setPaginationLinks(data.links);
+    } catch (error) {
+      console.error('Error fetching properties:', error);
+    }
+  };
+
+
+  const handlePagination = async (page) => {
+    setCurrentPage(page);
+    fetchProperties(page);
+  };
+
   useEffect(() => {
-    const accessToken = localStorage.getItem('token');
-    // Fetch properties from your API here
-    const fetchProperties = async () => {
-      try {
-        const response = await fetch('https://realestate.api.sites.name.ng/properties/', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-          }
-        });
-
-        const data = await response.json();
-        console.log('API response:', data); // Log the response
-        
-        setProperties(data.results);
-      } catch (error) {
-        console.error('Error fetching properties:', error);
-      }
-    };
-
-    fetchProperties();
-  }, []);
+    fetchProperties(currentPage); // Fetch properties for the initial page
+  }, [currentPage]);
 
 
   return (
@@ -55,26 +69,38 @@ const Properties = () => {
         className=" rounded-2xl w-500 p-4 m-4 shadow-lg"
         style={{ backgroundColor: currentColor }}
       >
-        <div className="flex justify-between items-center ">
-          <p className="font-black text-white text-3xl">Your Properties</p>
+        <div className="text-center text-white space-y-4 mt-8">
+          <p className="font-bold text-5xl">Your Properties</p>
+          <p className=' tracking-widest'>View your listed properties here.</p>
+        </div>
 
-          <TooltipComponent content="Filter" position='Bottom'>
-            <IoFilter className='text-white text-2xl hover:opacity-80'/>
-          </TooltipComponent>
+        <div className="flex justify-between items-center ">
+
+          
         </div>
         
-        <div className="my-6 bg-white p-4 m-auto rounded-xl w-full lg:w-1/2">
-          <div className="flex outline-none border-solid border-2 border-[#8840E6]-500 rounded-lg">
-            <input type="text" name="" id="" className='w-full outline-none p-2 text-slate-700' placeholder='Filter your properties...'/>
+        <div className="flex justify-center items-center my-10 w-full">
+          <div className="bg-white p-4 m-auto rounded-xl lg:w-3/4">
+            <div className="flex outline-none border-solid border-2 border-[#8840E6]-500 rounded-lg">
+              <input type="text" name="" id="" className='w-full outline-none p-2 text-slate-700' placeholder='Filter your properties...'/>
 
-            <button 
-              type="button" 
-              className='p-4 text-white font-semibold outline-none hover:opacity-75' 
-              style={{ backgroundColor: currentColor }}>
+              <button 
+                type="button" 
+                className={`p-4 text-white font-semibold outline-none hover:opacity-75 bg-[${currentColor}] flex items-center`}
+              >
+                <IoSearchOutline className=' text-2xl mr-2'/>
                 Search
-            </button>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <TooltipComponent content="Filter" position='Top'>
+              <IoFilter className='text-white text-2xl hover:opacity-80 mr-12 md:mr-0'/>
+            </TooltipComponent>
           </div>
         </div>
+
       </div>
 
       <div className='flex flex-wrap flex-1 justify-around'>
@@ -97,7 +123,7 @@ const Properties = () => {
                   />
                 </div>
                 <div className="mt-8">
-                  <p className="font-bold text-xl hover:text-gray-600"> {property.type}</p>
+                  <p className="font-bold text-xl hover:text-gray-600 w-80"> {property.type}</p>
                   <p className="py-4 font-normal">
                     Added: 
                     <span className="ml-2 text-gray-400">
@@ -177,6 +203,27 @@ const Properties = () => {
                 </button>
               </div>
             </div>
+        )}
+      </div>
+
+      <div>
+        {paginationLinks && (
+          <div className="flex justify-center my-10 space-x-4">
+            <button 
+              onClick={() => handlePagination(currentPage - 1)} disabled={!paginationLinks.previous}
+              className={`text-white p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
+            >
+              <GrLinkPrevious className='mr-4'/>
+              Previous
+            </button>
+            <button 
+              onClick={() => handlePagination(currentPage + 1)} disabled={!paginationLinks.next}
+              className={`text-white p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
+            >
+              Next
+              <GrLinkNext className='ml-4'/>
+            </button>
+          </div>
         )}
       </div>
     </div>
