@@ -21,6 +21,8 @@ const Properties = () => {
   const [properties, setProperties] = useState([]);
   const [paginationLinks, setPaginationLinks] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // Add current page state
+  const [dropdownVisible, setDropdownVisible] = useState(false); 
+  const [selectedProperty, setSelectedProperty] = useState(null);
 
   
   const navigate = useNavigate();
@@ -61,6 +63,20 @@ const Properties = () => {
     // setCurrentPage() // Parse the next page as an integer
     console.log('next page');
   };
+
+  const toggleDropdown = (propertyId) => {
+    setDropdownVisible(!dropdownVisible);
+    setSelectedProperty(propertyId);
+  };
+
+  const handleOption = (option) => {
+    // Implement logic to handle the selected option for the given property
+    console.log(`Property ID: ${selectedProperty}, Selected Option: ${option}`);
+
+    // Close the dropdown after handling the option
+    setDropdownVisible(false);
+  };
+
 
   useEffect(() => {
     fetchProperties(currentPage); // Fetch properties for the initial page
@@ -108,9 +124,31 @@ const Properties = () => {
             <div key={property.id} className="w-500 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
               <div className="flex justify-between">
                 <p className="text-lg font-medium">{property.agency.name}</p>
-                <button type="button" className="text-xl font-semibold text-gray-500">
+                <button type="button" className="text-xl font-semibold text-gray-500" onClick={toggleDropdown}>
                   <IoIosMore />
                 </button>
+                {dropdownVisible && (
+                  <div className="absolute p-4 mt-2 bg-white dark:bg-secondary-dark-bg rounded-md shadow-lg">
+                    {/* Dropdown options */}
+                    <ul>
+                      <li>
+                        <button type="button" onClick={() => handleOption(property.id, 'view')}>
+                          View
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" onClick={() => handleOption(property.id, 'edit')}>
+                          Edit
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" onClick={() => handleOption(property.id, 'delete')}>
+                          Delete
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
               <div className="mt-10">
                 {/* Used a container with a fixed height */}
