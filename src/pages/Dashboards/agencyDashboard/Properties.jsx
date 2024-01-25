@@ -123,7 +123,7 @@ const Properties = () => {
             <div key={property.id} className="w-500 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
               <div className="flex justify-between">
                 <p className="text-lg font-medium">{property.agency.name}</p>
-                <button type="button" className="text-xl font-semibold text-gray-500" onClick={handleDropdown}>
+                <button type="button" className="text-xl font-semibold text-gray-500 outline-none" onClick={handleDropdown}>
                   <IoIosMore />
                 </button>
                 {showDropdown && (
