@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { IoIosMore } from 'react-icons/io';
 import { LuBedDouble } from "react-icons/lu";
 import { LuShowerHead } from "react-icons/lu";
@@ -15,71 +14,22 @@ import { CiShare2 } from "react-icons/ci";
 
 
 
-import { Button } from '../../../components/agencyDashboardComponent';
-import { useStateContext } from '../../../contexts/ContextProvider';
+// import { Button } from '../../../components/agencyDashboardComponent';
+import PropertyDetails from './ShowProperty';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+import UsePropertyLogic from './methods';
 
 
 const Properties = () => {
-  const { currentColor } = useStateContext();
-  const [properties, setProperties] = useState([]);
-  const [paginationLinks, setPaginationLinks] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1); // Add current page state
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
-
-  
-  const navigate = useNavigate();
-  const role = localStorage.getItem('role');
-  
-
-  const handleClick = () => {
-    return navigate(`/${role}/add-property`);
-  }
-
-  const handleDropdown = (event) => {
-    const rect = event.target.getBoundingClientRect();
-    setDropdownPosition({
-      top: rect.bottom + window.scrollY,
-      left: rect.left + window.scrollX,
-    });
-    setShowDropdown(!showDropdown);
-  };
-  
-
-  const accessToken = localStorage.getItem('token');
-  // Fetch properties from your API here
-  const fetchProperties = async (page = 1) => {
-    try {
-      const response = await fetch(`https://realestate.api.sites.name.ng/properties/`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      const data = await response.json();
-      
-      console.log('API response:', data); // Log the response
-
-      setProperties(data.results);
-
-      console.log(data.links);
-      setPaginationLinks(data.links);
-    } catch (error) {
-      console.error('Error fetching properties:', error);
-    }
-  };
-
-
-  const handlePagination = (page) => {
-    setCurrentPage(page);
-  };
-
-
-  useEffect(() => {
-    fetchProperties(currentPage); // Fetch properties for the initial page
-  }, [currentPage]);
+  const{
+    properties,
+    paginationLinks,
+    dropdownPosition, 
+    showDropdown,
+    currentColor,
+    UsehandleClick,
+    UsehandleDropdown,
+  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`)
 
 
   return (
@@ -121,9 +71,10 @@ const Properties = () => {
         {properties && properties.length > 0 ? (
           properties.map(property => (
             <div key={property.id} className="w-500 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+              {/* Card dropdown */}
               <div className="flex justify-between">
                 <p className="text-lg font-medium">{property.agency.name}</p>
-                <button type="button" className="text-xl font-semibold text-gray-500 outline-none" onClick={handleDropdown}>
+                <button type="button" className="text-xl font-semibold text-gray-500 outline-none" onClick={UsehandleDropdown}>
                   <IoIosMore />
                 </button>
                 {showDropdown && (
@@ -151,6 +102,7 @@ const Properties = () => {
                   </div>
                 )}
               </div>
+
               {/* Card containing property details */}
               <div className="mt-10">
                 {/* Used a container with a fixed height */}
@@ -165,6 +117,7 @@ const Properties = () => {
                     <p>For {property.transaction_type}</p>
                   </div>
                 </div>
+
                 <div className="mt-8">
                   <p className="font-bold text-xl hover:text-gray-600 w-80"> {property.type}</p>
                   <p className="py-4 font-normal">
@@ -215,12 +168,13 @@ const Properties = () => {
                   </div>
 
                   <div className="py-4">
-                    <Button
-                      color="white"
-                      bgColor={currentColor}
-                      text="View Property"
-                      borderRadius="10px"
-                    />
+                    <button 
+                      type="button"
+                      className={`rounded-xl text-white bg-[${currentColor}] p-4`}
+                      onClick={PropertyDetails}
+                    >
+                      View Property
+                    </button>
                   </div>
                 </div>
               </div>
@@ -238,7 +192,7 @@ const Properties = () => {
                     borderRadius: '10px',
                     padding: '15px',
                   }}
-                  onClick={handleClick}
+                  onClick={UsehandleClick}
                 >
                   Add Property
                 </button>
@@ -252,7 +206,7 @@ const Properties = () => {
         {paginationLinks && (
           <div className="flex justify-center my-10 space-x-4">
             <button 
-              onClick={() => handlePagination()} disabled={!paginationLinks.previous}
+              //onClick={() => handlePagination()} disabled={!paginationLinks.previous}
               className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
             >
               <GrLinkPrevious className='mr-4'/>
@@ -260,7 +214,7 @@ const Properties = () => {
             </button>
             
             <button 
-              onClick={() => handlePagination()} disabled={!paginationLinks.next}
+              //onClick={() => handlePagination()} disabled={!paginationLinks.next}
               className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
             >
               Next
