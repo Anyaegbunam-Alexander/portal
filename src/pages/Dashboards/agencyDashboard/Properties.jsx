@@ -8,6 +8,10 @@ import { IoFilter } from "react-icons/io5";
 import { GrLinkPrevious } from "react-icons/gr";
 import { GrLinkNext } from "react-icons/gr";
 import { IoSearchOutline } from "react-icons/io5";
+import { CiViewTimeline } from "react-icons/ci";
+import { CiEdit } from "react-icons/ci";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { CiShare2 } from "react-icons/ci";
 
 
 
@@ -21,8 +25,8 @@ const Properties = () => {
   const [properties, setProperties] = useState([]);
   const [paginationLinks, setPaginationLinks] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // Add current page state
-  const [dropdownVisible, setDropdownVisible] = useState(false); 
-  const [selectedProperty, setSelectedProperty] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
   
   const navigate = useNavigate();
@@ -32,6 +36,15 @@ const Properties = () => {
   const handleClick = () => {
     return navigate(`/${role}/add-property`);
   }
+
+  const handleDropdown = (event) => {
+    const rect = event.target.getBoundingClientRect();
+    setDropdownPosition({
+      top: rect.bottom + window.scrollY,
+      left: rect.left + window.scrollX,
+    });
+    setShowDropdown(!showDropdown);
+  };
   
 
   const accessToken = localStorage.getItem('token');
@@ -59,22 +72,8 @@ const Properties = () => {
   };
 
 
-  const handlePagination = () => {
-    // setCurrentPage() // Parse the next page as an integer
-    console.log('next page');
-  };
-
-  const toggleDropdown = (propertyId) => {
-    setDropdownVisible(!dropdownVisible);
-    setSelectedProperty(propertyId);
-  };
-
-  const handleOption = (option) => {
-    // Implement logic to handle the selected option for the given property
-    console.log(`Property ID: ${selectedProperty}, Selected Option: ${option}`);
-
-    // Close the dropdown after handling the option
-    setDropdownVisible(false);
+  const handlePagination = (page) => {
+    setCurrentPage(page);
   };
 
 
@@ -124,29 +123,31 @@ const Properties = () => {
             <div key={property.id} className="w-500 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
               <div className="flex justify-between">
                 <p className="text-lg font-medium">{property.agency.name}</p>
-                <button type="button" className="text-xl font-semibold text-gray-500" onClick={toggleDropdown}>
+                <button type="button" className="text-xl font-semibold text-gray-500" onClick={handleDropdown}>
                   <IoIosMore />
                 </button>
-                {dropdownVisible && (
-                  <div className="absolute p-4 mt-2 bg-white dark:bg-secondary-dark-bg rounded-md shadow-lg">
-                    {/* Dropdown options */}
-                    <ul>
-                      <li>
-                        <button type="button" onClick={() => handleOption(property.id, 'view')}>
-                          View
-                        </button>
-                      </li>
-                      <li>
-                        <button type="button" onClick={() => handleOption(property.id, 'edit')}>
-                          Edit
-                        </button>
-                      </li>
-                      <li>
-                        <button type="button" onClick={() => handleOption(property.id, 'delete')}>
-                          Delete
-                        </button>
-                      </li>
-                    </ul>
+                {showDropdown && (
+                  <div
+                    className="absolute z-10 bg-white shadow-sm rounded-md mt-2 p-4 w-40"
+                    style={{ top: dropdownPosition.top, left: dropdownPosition.left }}
+                  >
+                    {/* Dropdown content goes here */}
+                    <div>
+                      <ul className="space-y-4">
+                        <li className='flex items-center border-b border-solid py-3'>
+                          <CiShare2 className='text-xl mr-3'/> Share
+                        </li>
+                        <li className='flex items-center'>
+                          <CiViewTimeline className='text-xl mr-3'/> View
+                        </li>
+                        <li className='flex items-center'>
+                          <CiEdit className='text-xl mr-3'/> Edit
+                        </li>
+                        <li className='flex items-center'>
+                          <RiDeleteBin6Line className='text-xl mr-3'/> Delete
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 )}
               </div>
