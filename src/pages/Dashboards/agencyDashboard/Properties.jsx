@@ -151,14 +151,19 @@ const Properties = () => {
                   </div>
                 )}
               </div>
+              {/* Card containing property details */}
               <div className="mt-10">
                 {/* Used a container with a fixed height */}
-                <div className="image-container" style={{ height: '200px', overflow: 'hidden' }}>
+                <div className="image-container relative" style={{ height: '200px', overflow: 'hidden' }}>
                   <img
                     className="md:w-96 h-full w-full object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
                     src={property.images[0].image}
                     alt="Property"
                   />
+                  {/* "For Sale" tag */}
+                  <div className="absolute bottom-0 right-0 bg-green-600 text-white px-3 py-2 rounded-sm">
+                    <p>For {property.transaction_type}</p>
+                  </div>
                 </div>
                 <div className="mt-8">
                   <p className="font-bold text-xl hover:text-gray-600 w-80"> {property.type}</p>

@@ -1,6 +1,3 @@
-//@import url('bootstrap/dist/css/bootstrap.min.css');
-
-
 // src/Login.scss
 .main--container {
     //margin: 50px 0;
@@ -132,8 +129,9 @@
                 font-size: 18px;
                 color: var(--background-color-1);
                 border-bottom: 1px solid var(--text-color-white);
-                background-color: transparent;
+                background-color: transparent !important;
             }
+            
             input::placeholder {
                 color: var(--text-color-white);
                 font-weight: 300;
