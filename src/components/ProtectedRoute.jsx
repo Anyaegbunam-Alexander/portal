@@ -16,11 +16,10 @@ const ProtectedRoute = ({ children }) => {
 
   // Render a loading state or null while the context is being initialized
   if (!isContextInitialized) {
-    console.log('loading this state');
+    console.log('loading...');
     return <LoadingSpinner />;
   }
 
-  console.log('Rendering children. isLoggedIn:', isLoggedIn);
   return isLoggedIn || localStorage.getItem('token') ? <>{children}</> : <Navigate to="/login/customer" />;
 };
 
