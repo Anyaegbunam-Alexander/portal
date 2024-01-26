@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
@@ -61,6 +61,7 @@ const AgencyDashboard = () => {
                     <SideBar />
                 </div>
             )}
+            
             <div className={
                 `dark:bg-main-dark-bg bg-main-bg min-h-screen w-full
                 ${activeMenu ? ' md:ml-72' :  'flex-2'}`
@@ -73,7 +74,9 @@ const AgencyDashboard = () => {
 
                     <Routes>
                         {/* Dashboard */}
-                        <Route path="listings" element={<Properties />} />
+                        <Route path="listings" element={<Properties />}>
+                            <Route path="show-property/:propertyId" element={<PropertyDetails />} />
+                        </Route>
                         <Route path="overview" element={<Overview />} />
 
                         {/* Pages */}
@@ -95,9 +98,7 @@ const AgencyDashboard = () => {
                         <Route path="financial" element={<Financial />} />
                         <Route path="color-mapping" element={<ColorMapping />} />
                         <Route path="pyramid" element={<Pyramid />} />
-                        <Route path="stacked" element={<Stacked />} />
-
-                        <Route path="show-property" component={<PropertyDetails />} />
+                        <Route path="stacked" element={<Stacked />} />                        
                         
                         {/* Default route */}
                         <Route index element={<Navigate to="overview" />} />

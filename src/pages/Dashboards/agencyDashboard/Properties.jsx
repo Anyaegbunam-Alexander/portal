@@ -13,7 +13,6 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiShare2 } from "react-icons/ci";
 
 
-
 // import { Button } from '../../../components/agencyDashboardComponent';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import UsePropertyLogic from './methods';
@@ -170,7 +169,8 @@ const Properties = () => {
                   <div className="py-4">
                     <button 
                       type="button"
-                      className={`rounded-xl text-white bg-[${currentColor}] p-4`}
+                      className={`rounded-xl text-white p-4`}
+                      style={{ backgroundColor: currentColor }}
                       onClick={() => showProperty(property.id)}
                     >
                       View Property
@@ -207,7 +207,8 @@ const Properties = () => {
           <div className="flex justify-center my-10 space-x-4">
             <button 
               //onClick={() => handlePagination()} disabled={!paginationLinks.previous}
-              className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
+              className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
+              style={{ backgroundColor: currentColor }}
             >
               <GrLinkPrevious className='mr-4'/>
               Previous
@@ -215,7 +216,8 @@ const Properties = () => {
             
             <button 
               //onClick={() => handlePagination()} disabled={!paginationLinks.next}
-              className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md bg-[${currentColor}] hover:opacity-80 flex items-center`}
+              className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
+              style={{ backgroundColor: currentColor }}
             >
               Next
               <GrLinkNext className='ml-4'/>

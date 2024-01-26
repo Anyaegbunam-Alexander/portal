@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useStateContext } from '../../../contexts/ContextProvider';
 
 
@@ -16,6 +16,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
+  const { propertyId } = useParams();
     
     
   const UsehandleClick = () => {
@@ -32,7 +33,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   };
 
   const showProperty = (propertyId) => {
-    navigate(`/${role}/listings/show-property/${propertyId}`)
+    navigate(`/agency/listings/show-property/${propertyId}`) ///${role}/listings/show-property/${propertyId}
   }
     
 
