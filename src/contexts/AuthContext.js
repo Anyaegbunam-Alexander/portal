@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const login = (userData) => {
-    console.log("About to login");
     const { token, last_name, first_name, email, name } = userData;
 
     if (token) {
