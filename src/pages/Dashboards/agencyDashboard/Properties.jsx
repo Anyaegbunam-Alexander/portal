@@ -15,7 +15,6 @@ import { CiShare2 } from "react-icons/ci";
 
 
 // import { Button } from '../../../components/agencyDashboardComponent';
-import PropertyDetails from './ShowProperty';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import UsePropertyLogic from './methods';
 
@@ -27,9 +26,10 @@ const Properties = () => {
     dropdownPosition, 
     showDropdown,
     currentColor,
+    showProperty,
     UsehandleClick,
     UsehandleDropdown,
-  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`)
+  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
 
 
   return (
@@ -171,7 +171,7 @@ const Properties = () => {
                     <button 
                       type="button"
                       className={`rounded-xl text-white bg-[${currentColor}] p-4`}
-                      onClick={PropertyDetails}
+                      onClick={() => showProperty(property.id)}
                     >
                       View Property
                     </button>

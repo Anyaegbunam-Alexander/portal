@@ -22,7 +22,8 @@ import {
   Financial, 
   ColorPicker, 
   ColorMapping, 
-  AddProperty
+  AddProperty,
+  PropertyDetails
 } from '../../Dashboards/agencyDashboard/index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
@@ -95,6 +96,8 @@ const AgencyDashboard = () => {
                         <Route path="color-mapping" element={<ColorMapping />} />
                         <Route path="pyramid" element={<Pyramid />} />
                         <Route path="stacked" element={<Stacked />} />
+
+                        <Route path="show-property" component={<PropertyDetails />} />
                         
                         {/* Default route */}
                         <Route index element={<Navigate to="overview" />} />

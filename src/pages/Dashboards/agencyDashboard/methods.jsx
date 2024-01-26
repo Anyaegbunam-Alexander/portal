@@ -30,6 +30,10 @@ const UsePropertyLogic = (apiEndpoint) => {
       });
       setShowDropdown(!showDropdown);
   };
+
+  const showProperty = (propertyId) => {
+    navigate(`/${role}/listings/show-property/${propertyId}`)
+  }
     
 
   useEffect(() => {
@@ -58,7 +62,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     };
 
     fetchProperties();
-  }, []);
+  }, [apiEndpoint]);
 
   return {
     properties,
@@ -68,6 +72,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     currentColor,
     UsehandleClick,
     UsehandleDropdown,
+    showProperty,
   }
 }
 
