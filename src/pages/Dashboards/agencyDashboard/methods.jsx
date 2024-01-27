@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../../contexts/ContextProvider';
 
 
@@ -8,6 +8,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     
   const { currentColor } = useStateContext();
   const [properties, setProperties] = useState([]);
+  const [property, setproperty] = useState([])
   const [paginationLinks, setPaginationLinks] = useState(null);
   // const [currentPage, setCurrentPage] = useState(1); // Add current page state
   const [showDropdown, setShowDropdown] = useState(false);
@@ -16,7 +17,6 @@ const UsePropertyLogic = (apiEndpoint) => {
     
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
-  const { propertyId } = useParams();
     
     
   const UsehandleClick = () => {
@@ -33,7 +33,9 @@ const UsePropertyLogic = (apiEndpoint) => {
   };
 
   const showProperty = (propertyId) => {
-    navigate(`/agency/listings/show-property/${propertyId}`) ///${role}/listings/show-property/${propertyId}
+    console.log("showProperty function called with propertyId:", propertyId);
+    navigate(`/${role}/listings/show-property/${propertyId}`) 
+    console.log("Navigation Working!!")
   }
     
 
@@ -52,11 +54,8 @@ const UsePropertyLogic = (apiEndpoint) => {
         const data = await response.json();
         
         console.log('API response:', data); // Log the response
-
+        setproperty(data);
         setProperties(data.results);
-
-        console.log(data.links);
-        setPaginationLinks(data.links);
       } catch (error) {
         console.error('Error fetching properties:', error);
       }
@@ -66,6 +65,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   }, [apiEndpoint]);
 
   return {
+    property,
     properties,
     dropdownPosition,
     paginationLinks,

@@ -16,6 +16,7 @@ import './app.css';
 import UserDashboard from './pages/Dashboards/userDashboard/UserDashboard';
 import AgentDashboard from './pages/Dashboards/agentDashboard/AgentDashboard';
 import AgencyDashboard from './pages/Dashboards/agencyDashboard/agencyDashboard';
+import { PropertyDetails } from './pages/Dashboards/agencyDashboard';
 
 
 const App = () => {
@@ -47,6 +48,10 @@ const App = () => {
       <Route path="/register/customer" element={<Customer />} />
       <Route path="/register/agent" element={<Agent />} />
       <Route path="/register/agency" element={<Agency />} />
+
+
+      {/* Show single property */}
+      <Route path={`/${role}/listings/show-property/:propertyId`} element={<PropertyDetails />} />
 
       {/* 404 Route - Catch-all */}
       <Route path="/*" element={<NotFound />} />

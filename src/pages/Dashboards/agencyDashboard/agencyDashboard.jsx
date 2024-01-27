@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
@@ -27,10 +27,17 @@ import {
 } from '../../Dashboards/agencyDashboard/index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
+import NotFound from '../../errorPages/404';
 
 
 const AgencyDashboard = () => {
   const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
+  const role = localStorage.getItem('role');
+  const navigate = useNavigate();
+
+  const handleShowPropertyClick = (propertyId) => {
+    navigate(`/${role}/listings/show-property/${propertyId}`);
+  };
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
@@ -74,9 +81,7 @@ const AgencyDashboard = () => {
 
                     <Routes>
                         {/* Dashboard */}
-                        <Route path="listings" element={<Properties />}>
-                            <Route path="show-property/:propertyId" element={<PropertyDetails />} />
-                        </Route>
+                        <Route path="listings" element={<Properties />} />
                         <Route path="overview" element={<Overview />} />
 
                         {/* Pages */}
@@ -98,13 +103,12 @@ const AgencyDashboard = () => {
                         <Route path="financial" element={<Financial />} />
                         <Route path="color-mapping" element={<ColorMapping />} />
                         <Route path="pyramid" element={<Pyramid />} />
-                        <Route path="stacked" element={<Stacked />} />                        
+                        <Route path="stacked" element={<Stacked />} /> 
                         
                         {/* Default route */}
                         <Route index element={<Navigate to="overview" />} />
                     </Routes>
                 </div>
-
                 <Footer />
             </div>
         </div>

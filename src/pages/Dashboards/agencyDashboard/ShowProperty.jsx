@@ -1,21 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import UsePropertyLogic from './methods';
+import { useParams } from 'react-router-dom';
 
 const PropertyDetails = () => {
-    const{
-        properties,
-    } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties`) //${properties.id}
+  
+  const { propertyId } = useParams();
 
-    // Check if the properties are available
-  if (!properties || properties.length === 0) {
-    return (
-      <div>
-        <p>No property details available</p>
-      </div>
-    );
-  }
-
-  const property = properties[0];
+  const {
+    property,
+  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/${propertyId}`)
+  
 
   return (
     // <div className="container mx-auto mt-8">
@@ -50,8 +44,9 @@ const PropertyDetails = () => {
     //     </div>
     //   </div>
     // </div>
-    <div>
-      <h1 className=''>Hello World</h1>
+    <div className=''>
+      <h1 className=' text-2xl '>Hello World</h1>
+      <h2>{property.type}</h2>
       {console.log("This is working")}
     </div>
   );

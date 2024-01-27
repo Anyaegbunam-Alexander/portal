@@ -16,6 +16,7 @@ import { CiShare2 } from "react-icons/ci";
 // import { Button } from '../../../components/agencyDashboardComponent';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import UsePropertyLogic from './methods';
+import { Outlet } from 'react-router-dom';
 
 
 const Properties = () => {
@@ -222,6 +223,7 @@ const Properties = () => {
               Next
               <GrLinkNext className='ml-4'/>
             </button>
+            <Outlet />
           </div>
         )}
       </div>
