@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../../contexts/ContextProvider';
 
 
@@ -8,11 +8,13 @@ const UsePropertyLogic = (apiEndpoint) => {
     
   const { currentColor } = useStateContext();
   const [properties, setProperties] = useState([]);
-  const [property, setproperty] = useState([])
+  const [property, setproperty] = useState([]);
   const [paginationLinks, setPaginationLinks] = useState(null);
   // const [currentPage, setCurrentPage] = useState(1); // Add current page state
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
     
     
   const navigate = useNavigate();
@@ -37,6 +39,16 @@ const UsePropertyLogic = (apiEndpoint) => {
     navigate(`/${role}/listings/show-property/${propertyId}`) 
     console.log("Navigation Working!!")
   }
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    setIsModalOpen(false);
+  };
     
 
   useEffect(() => {
@@ -54,8 +66,8 @@ const UsePropertyLogic = (apiEndpoint) => {
         const data = await response.json();
         
         console.log('API response:', data); // Log the response
-        setproperty(data);
         setProperties(data.results);
+        setproperty(data);
       } catch (error) {
         console.error('Error fetching properties:', error);
       }
@@ -64,6 +76,8 @@ const UsePropertyLogic = (apiEndpoint) => {
     fetchProperties();
   }, [apiEndpoint]);
 
+
+
   return {
     property,
     properties,
@@ -71,6 +85,10 @@ const UsePropertyLogic = (apiEndpoint) => {
     paginationLinks,
     showDropdown,
     currentColor,
+    selectedImage,
+    isModalOpen,
+    openModal,
+    closeModal,
     UsehandleClick,
     UsehandleDropdown,
     showProperty,
