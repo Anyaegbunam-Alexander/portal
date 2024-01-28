@@ -103,10 +103,10 @@ const Properties = () => {
                 <div className="image-container relative" style={{ height: '200px', overflow: 'hidden' }}>
                   <img
                     className="md:w-96 h-full w-full object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
-                    //src={property.images[0]}
+                    src={property.images[0].image}
                     alt="Property"
                   />
-                    {/* {console.log(property.images[0].image)} */}
+                    {console.log(property.images[0].image)}
                   {/* "For Sale" tag */}
                   <div className="absolute bottom-0 right-0 bg-green-600 text-white px-3 py-2 rounded-sm">
                     <p>For {property.transaction_type}</p>
