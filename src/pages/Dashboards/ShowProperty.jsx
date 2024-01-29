@@ -14,12 +14,14 @@ import { LuParkingCircle } from "react-icons/lu";
 import { GiFlowers } from "react-icons/gi";
 import { MdOutlineSecurity } from "react-icons/md";
 import { GrLocation } from "react-icons/gr";
+import { IoReturnDownBackOutline } from "react-icons/io5";
 
 
 
 const PropertyDetails = () => {
   const { propertyId } = useParams();
   const { 
+    role,
     property, 
     selectedImage,
     isModalOpen, 
@@ -30,12 +32,19 @@ const PropertyDetails = () => {
   console.log(property)
 
   return (
-    <div className="">
+    <div className=" md:p-10">
       {property.agency && (
         <div className="container mx-auto mt-8">
-          <div className="flex">
-            {/* Left Column - Property Pictures */}
-            <div className='bg-purple-800 w-full p-20 rounded-lg'>
+          {/* Back link */}
+          <div>
+            <a href="/agency/listings/" className='flex items-center text-lg mb-4'>
+              <IoReturnDownBackOutline className=' mr-2'/> Back
+            </a>
+          </div>
+
+          {/* Property Pictures */}
+          <div className="flex flex-row md:flex-col-reverse">
+            <div className='bg-purple-800 w-full md:p-10 lg:p-20 rounded-lg'>
               <div className="flex justify-between items-center space-x-20">
                 <div className="text-white space-y-10">
                   <h1 className='text-4xl font-extrabold w-760'>{property.type}</h1>
@@ -99,7 +108,7 @@ const PropertyDetails = () => {
           </div>
           
           {/* Contact Information */}
-          <div className='flex justify-between py-20 bg-white'>
+          <div className='flex justify-between max-md:grid max-md:m-auto py-20 bg-white'>
             <h1 className="text-3xl font-bold">Contact Information</h1>
             
             <div className=" space-y-5">

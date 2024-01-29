@@ -35,9 +35,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   };
 
   const showProperty = (propertyId) => {
-    console.log("showProperty function called with propertyId:", propertyId);
     navigate(`/${role}/listings/show-property/${propertyId}`) 
-    console.log("Navigation Working!!")
   }
 
   const openModal = (image) => {
@@ -79,6 +77,7 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 
   return {
+    role,
     property,
     properties,
     dropdownPosition,

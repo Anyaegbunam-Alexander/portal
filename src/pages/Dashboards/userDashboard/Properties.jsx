@@ -39,14 +39,14 @@ const Properties = () => {
         style={{ backgroundColor: currentColor }}
       >
         <div className="text-center text-white space-y-4 mt-8">
-          <p className="font-bold text-5xl">Your Properties</p>
-          <p className=' tracking-widest'>View your listed properties here.</p>
+          <p className="font-bold text-5xl">Looking for the perfect Property?</p>
+          <p className=' tracking-widest'>Amazing properties are available just for you!</p>
         </div>
         
         <div className="flex justify-center items-center my-10 w-full">
           <div className="bg-white p-4 m-auto rounded-xl lg:w-3/4">
             <div className="flex outline-none border-solid border-2 border-[#8840E6]-500 rounded-lg">
-              <input type="text" name="" id="" className='w-full outline-none p-2 text-slate-700' placeholder='Filter your properties...'/>
+              <input type="text" name="" id="" className='w-full outline-none p-2 text-slate-700' placeholder='Search for properties...'/>
 
               <button 
                 type="button" 

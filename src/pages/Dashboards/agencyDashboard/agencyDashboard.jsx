@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 
@@ -23,21 +23,13 @@ import {
   ColorPicker, 
   ColorMapping, 
   AddProperty,
-  PropertyDetails
 } from '../../Dashboards/agencyDashboard/index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
-import NotFound from '../../errorPages/404';
 
 
 const AgencyDashboard = () => {
   const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
-  const role = localStorage.getItem('role');
-  const navigate = useNavigate();
-
-  const handleShowPropertyClick = (propertyId) => {
-    navigate(`/${role}/listings/show-property/${propertyId}`);
-  };
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
