@@ -27,7 +27,7 @@ const App = () => {
     if (role === 'customer') return <UserDashboard />
     if (role === 'agent') return <AgentDashboard />
     if (role === 'agency') return <AgencyDashboard />
-    else return null
+    else return <CustomerLogin />
   }
   
   const Layout = () => {
