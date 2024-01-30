@@ -63,7 +63,6 @@ const UsePropertyLogic = (apiEndpoint) => {
 
         const data = await response.json();
         
-        console.log('API response:', data); // Log the response
         setProperties(data.results);
         setproperty(data);
       } catch (error) {
