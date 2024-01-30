@@ -80,27 +80,26 @@ const PropertyDetails = () => {
 
                 {/* Display the selected image in a modal */}
                 {selectedImage && (
-                  <div className='z-50'>
-                    <Modal
-                      isOpen={isModalOpen}
-                      onRequestClose={closeModal}
-                      contentLabel="Enlarged Image"
-                      ariaHideApp={false}
-                      className=" bg-secondary-dark-bg h-full flex flex-col justify-center items-center"
-                    >
-                      <button 
-                        onClick={closeModal}
-                        className=' bg-red-600 p-2 text-white rounded-lg fixed top-0'
-                      >Close</button>
-                      <div className=' p-5 m-auto my-5'>
-                        <img
-                          src={selectedImage.image}
-                          alt={`property enlarged`}
-                          className="object-cover rounded-lg w-full h-full md:w-600 md:h-auto p-10"
-                        />
-                      </div>
-                    </Modal>
+                  <Modal
+                    isOpen={isModalOpen}
+                    onRequestClose={closeModal}
+                    contentLabel="Enlarged Image"
+                    ariaHideApp={false}
+                    className=" bg-secondary-dark-bg h-full flex flex-col justify-center items-center"
+                    style={{ overlay: { zIndex: 1000 }, content: { zIndex: 1001 } }}
+                  >
+                  <button 
+                    onClick={closeModal}
+                    className=' bg-red-600 p-2 text-white rounded-lg fixed top-0'
+                  >Close</button>
+                  <div className=' p-5 m-auto my-5'>
+                    <img
+                      src={selectedImage.image}
+                      alt={`property enlarged`}
+                      className="object-cover rounded-lg w-full h-full md:w-600 md:h-auto"
+                    />
                   </div>
+                </Modal>
                 )}
 
                 <img
