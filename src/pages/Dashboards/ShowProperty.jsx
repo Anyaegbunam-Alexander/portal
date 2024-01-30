@@ -32,7 +32,7 @@ const PropertyDetails = () => {
   console.log(property)
 
   return (
-    <div className=" md:p-10">
+    <div className=" sm:p-10">
       {property.agency && (
         <div className="container mx-auto mt-8">
           {/* Back link */}
@@ -43,13 +43,15 @@ const PropertyDetails = () => {
           </div>
 
           {/* Property Pictures */}
-          <div className="flex flex-row md:flex-col-reverse">
-            <div className='bg-purple-800 w-full md:p-10 lg:p-20 rounded-lg'>
-              <div className="flex justify-between items-center space-x-20">
-                <div className="text-white space-y-10">
-                  <h1 className='text-4xl font-extrabold w-760'>{property.type}</h1>
+          <div className="flex flex-row">
+            <div className='bg-purple-800 w-full max-md:p-5 md:p-8 lg:p-20 rounded-lg'>
+              <div className="flex md:flex-col-reverse md:space-x-0 md:p-4 lg:flex xl:flex-row
+                max-md:flex-col-reverse max-md:space-x-0 max-md:p-4 justify-between items-center space-x-20
+              ">
+                <div className="text-white space-y-10 md:mt-5">
+                  <h1 className='text-4xl font-extrabold lg:w-760 max-md:w-full max-md:text-3xl md:w-full'>{property.type}</h1>
 
-                  <p className="text-3xl font-medium">
+                  <p className="text-3xl font-medium max-md:text-2xl">
                     {new Intl.NumberFormat('en-NG', {
                       style: 'currency',
                       currency: 'NGN',
@@ -61,13 +63,15 @@ const PropertyDetails = () => {
                     <p className='text-white text-xl'>{property.agency.name}</p>
                   </div>
 
-                  <div className='flex space-x-10 w-24'>
+                  <div className='flex flex-row items-center space-x-10 w-24 md:w-full md:py-5 md:flex-wrap
+                    max-md:w-full max-md:grid max-md:grid-cols-3 max-md:space-x-0 max-md:py-5
+                  '>
                     {property.images.map((images, index) => (
                       <img
                         key={index}
                         src={images.image}
                         alt={`property ${index + 1}`}
-                        className="flex rounded-xl cursor-pointer md:w-96 h-28 object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
+                        className="flex rounded-xl cursor-pointer w-28 h-28 object-cover transform transition-transform duration-600 ease-in-out hover:scale-110 max-md:my-4 max-md:mr-4"
                         onClick={() => openModal(images)}
                       />
                     ))}
@@ -76,32 +80,37 @@ const PropertyDetails = () => {
 
                 {/* Display the selected image in a modal */}
                 {selectedImage && (
-                  <Modal
-                    isOpen={isModalOpen}
-                    onRequestClose={closeModal}
-                    contentLabel="Enlarged Image"
-                  >
-                    <button 
-                      onClick={closeModal}
-                      className=' bg-red-600 p-2 text-white rounded-lg left-0'
-                    >Close</button>
-                    <div className=' p-14 flex justify-center'>
-                      <img
-                        src={selectedImage.image}
-                        alt={`property enlarged`}
-                        className="object-cover rounded-lg"
-                        style={{width: '700px', height: '700px'}}
-                      />
-                    </div>
-                  </Modal>
+                  <div className='z-50'>
+                    <Modal
+                      isOpen={isModalOpen}
+                      onRequestClose={closeModal}
+                      contentLabel="Enlarged Image"
+                      ariaHideApp={false}
+                      className=" bg-secondary-dark-bg h-full flex flex-col justify-center items-center"
+                    >
+                      <button 
+                        onClick={closeModal}
+                        className=' bg-red-600 p-2 text-white rounded-lg fixed top-0'
+                      >Close</button>
+                      <div className=' p-5 m-auto my-5'>
+                        <img
+                          src={selectedImage.image}
+                          alt={`property enlarged`}
+                          className="object-cover rounded-lg w-full h-full md:w-600 md:h-auto p-10"
+                          //style={{width: '700px', height: '700px'}}
+                        />
+                      </div>
+                    </Modal>
+                  </div>
                 )}
 
                 <img
-                  src={property.images[1].image}
-                  className="rounded-xl cursor-pointer md:w-96 h-96 object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
+                  src={property.images[0].image}
+                  className="rounded-xl cursor-pointer h-96 object-cover transform transition-transform duration-600 ease-in-out hover:scale-110 
+                  max-md:my-10 md:my-8"
                   style={{width: '750px'}}
                   alt="Property" 
-                  onClick={() => openModal(property.images[1])}
+                  onClick={() => openModal(property.images[0])}
                 />
               </div>
             </div>
@@ -144,7 +153,9 @@ const PropertyDetails = () => {
             </div>
           </div>
 
-          <MapComponent />
+          <div className=' -z-50'>
+            <MapComponent />
+          </div>
 
           {/* Property complete details */}
           <div className=" col-span-2 flex justify-between items-center py-16 space-x-3">
