@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import MapComponent from '../../components/MapComponent';
 
 
-import { MdAlternateEmail } from "react-icons/md";
+import { MdAlternateEmail, MdOutlineCancel } from "react-icons/md";
 import { MdAddIcCall } from "react-icons/md";
 import { IoWifiOutline } from "react-icons/io5";
 import { MdOutlinePool } from "react-icons/md";
@@ -90,8 +90,8 @@ const PropertyDetails = () => {
                   >
                   <button 
                     onClick={closeModal}
-                    className=' bg-red-600 p-2 text-white rounded-lg fixed top-0'
-                  >Close</button>
+                    className=' bg-red-600 p-4 text-white rounded-lg fixed top-10 flex items-center text-lg'
+                  ><MdOutlineCancel className='mr-2'/> Close</button>
                   <div className=' p-5 m-auto my-5'>
                     <img
                       src={selectedImage.image}
