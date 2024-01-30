@@ -36,7 +36,7 @@ const PropertyDetails = () => {
       {property.agency && (
         <div className="container mx-auto mt-8">
           {/* Back link */}
-          <div>
+          <div className=' max-md:px-5'>
             <a href="/agency/listings/" className='flex items-center text-lg mb-4'>
               <IoReturnDownBackOutline className=' mr-2'/> Back
             </a>
@@ -97,7 +97,6 @@ const PropertyDetails = () => {
                           src={selectedImage.image}
                           alt={`property enlarged`}
                           className="object-cover rounded-lg w-full h-full md:w-600 md:h-auto p-10"
-                          //style={{width: '700px', height: '700px'}}
                         />
                       </div>
                     </Modal>
@@ -117,7 +116,7 @@ const PropertyDetails = () => {
           </div>
           
           {/* Contact Information */}
-          <div className='flex justify-between max-md:grid max-md:m-auto py-20 bg-white'>
+          <div className='flex justify-between max-md:grid max-md:m-auto max-md:px-10 max-md:space-y-10 py-20 bg-white'>
             <h1 className="text-3xl font-bold">Contact Information</h1>
             
             <div className=" space-y-5">
@@ -146,7 +145,7 @@ const PropertyDetails = () => {
 
             <div>
               <button
-                className=' bg-purple-800 p-5 text-white rounded-xl'
+                className=' bg-purple-800 p-5 text-white rounded-xl w-full max-md:mt-5'
               >
                 View Profile
               </button>
@@ -158,9 +157,9 @@ const PropertyDetails = () => {
           </div>
 
           {/* Property complete details */}
-          <div className=" col-span-2 flex justify-between items-center py-16 space-x-3">
+          <div className=" col-span-2 flex justify-between items-center space-x-3">
             {/* Left side */}
-            <div className='bg-gray-100 p-20 rounded-md text-justify space-y-8'>
+            <div className='bg-gray-100 p-20 rounded-md text-justify space-y-8 max-md:p-10 max-md:py-16'>
               <p className=' font-bold text-2xl capitalize'>{property.type}</p>
               <div className=' space-y-5'>
                 <p className=' font-semibold text-xl mt-6'>Amenities</p>
@@ -172,16 +171,18 @@ const PropertyDetails = () => {
                   <GiFlowers />
                   <MdOutlineSecurity />
                 </div>
-                {property.amenities.map((item, index) => {
-                  return(
-                    <div 
-                      key={index}
-                      className='flex bg-gray-700 text-white p-2 rounded-md text-lg uppercase'
-                    >
-                      <li>{item}</li>
-                    </div>
-                  )
-                })}
+                <div className=' grid grid-flow-col'>
+                  {property.amenities.map((item, index) => {
+                    return(
+                      <div 
+                        key={index}
+                        className='p-2 rounded-md text-lg uppercase'
+                      >
+                        <li>{item}</li>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
 
               <div className='py-5'>
