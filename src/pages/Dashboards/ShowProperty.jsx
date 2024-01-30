@@ -37,7 +37,7 @@ const PropertyDetails = () => {
         <div className="container mx-auto mt-8">
           {/* Back link */}
           <div className=' max-md:px-5'>
-            <a href="/agency/listings/" className='flex items-center text-lg mb-4'>
+            <a href={`/${role}/listings/`} className='flex items-center text-lg mb-4'>
               <IoReturnDownBackOutline className=' mr-2'/> Back
             </a>
           </div>
