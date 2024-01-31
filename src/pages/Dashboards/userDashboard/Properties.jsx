@@ -96,12 +96,6 @@ const Properties = () => {
                         <li className='flex items-center'>
                           <CiViewTimeline className='text-xl mr-3'/> View
                         </li>
-                        <li className='flex items-center'>
-                          <CiEdit className='text-xl mr-3'/> Edit
-                        </li>
-                        <li className='flex items-center'>
-                          <RiDeleteBin6Line className='text-xl mr-3'/> Delete
-                        </li>
                       </ul>
                     </div>
                   </div>
