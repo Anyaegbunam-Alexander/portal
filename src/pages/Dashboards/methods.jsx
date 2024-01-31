@@ -84,47 +84,47 @@ const UsePropertyLogic = (apiEndpoint) => {
     else return navigate(`/${role}/purchases/properties/`)
   }
 
-  useEffect(() => {
-    const PurchaseProperty = async () => {
-      const accessToken = localStorage.getItem('token');
-      try {
-        const response = await fetch(apiEndpoint, {
-          method: 'POST',
-          headers: {
-            "Referer": "https://realestate.api.sites.name.ng/",
-            'Authorization': `Bearer ${accessToken}`,
-          },
-          //body: formData,
-        });
+  // useEffect(() => {
+  //   const PurchaseProperty = async () => {
+  //     const accessToken = localStorage.getItem('token');
+  //     try {
+  //       const response = await fetch(apiEndpoint, {
+  //         method: 'POST',
+  //         headers: {
+  //           "Referer": "https://realestate.api.sites.name.ng/",
+  //           'Authorization': `Bearer ${accessToken}`,
+  //         },
+  //         //body: formData,
+  //       });
   
         
-        if (!response.ok) {
-          const errorResponse = await response.json();
+  //       if (!response.ok) {
+  //         const errorResponse = await response.json();
   
-          for (const field in errorResponse.extra.fields) {
-            if (errorResponse.extra.fields[field]) {
-              // Output the value contained in the field
-              alert(`${field}: ${errorResponse.extra.fields[field]}`)
-              // openPopup(); // Open the popup
-              console.log(`${field}: ${errorResponse.extra.fields[field]}`);
-              return
-            }
-          }
-        }
+  //         for (const field in errorResponse.extra.fields) {
+  //           if (errorResponse.extra.fields[field]) {
+  //             // Output the value contained in the field
+  //             alert(`${field}: ${errorResponse.extra.fields[field]}`)
+  //             // openPopup(); // Open the popup
+  //             console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+  //             return
+  //           }
+  //         }
+  //       }
     
-        // Display success message or redirect to confirmation page
-        //navigate(`/${role}/listings`);
-        //alert('Property added successfully!');
-        console.log(response.body);
-      } catch (error) {
-        // Handle errors (display an error message to the user, log the error, etc.)
-        console.error('Error Occured', error.message);
-        alert("An error occured")
-      }
-    }
+  //       // Display success message or redirect to confirmation page
+  //       //navigate(`/${role}/listings`);
+  //       //alert('Property added successfully!');
+  //       //console.log(response.body);
+  //     } catch (error) {
+  //       // Handle errors (display an error message to the user, log the error, etc.)
+  //       console.error('Error Occured', error.message);
+  //       alert("An error occured")
+  //     }
+  //   }
 
-    PurchaseProperty();
-  }, [apiEndpoint])
+  //   PurchaseProperty();
+  // }, [apiEndpoint])
   
 
 
