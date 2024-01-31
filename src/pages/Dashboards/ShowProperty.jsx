@@ -27,9 +27,11 @@ const PropertyDetails = () => {
     isModalOpen, 
     openModal,
     closeModal,
+    navOptions,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/${propertyId}`);
   
-  console.log(property)
+  console.log(property);
+
 
   return (
     <div className=" sm:p-10">
@@ -37,7 +39,7 @@ const PropertyDetails = () => {
         <div className="container mx-auto mt-8">
           {/* Back link */}
           <div className=' max-md:px-5'>
-            <a href={`/${role}/listings/`} className='flex items-center text-lg mb-4'>
+            <a href={navOptions()} className='flex items-center text-lg mb-4'>
               <IoReturnDownBackOutline className=' mr-2'/> Back
             </a>
           </div>
@@ -106,7 +108,7 @@ const PropertyDetails = () => {
                   src={property.images[0].image}
                   className="rounded-xl cursor-pointer h-96 object-cover transform transition-transform duration-600 ease-in-out hover:scale-110 
                   max-md:my-10 md:my-8"
-                  style={{width: '750px'}}
+                  style={{width: '700px'}}
                   alt="Property" 
                   onClick={() => openModal(property.images[0])}
                 />

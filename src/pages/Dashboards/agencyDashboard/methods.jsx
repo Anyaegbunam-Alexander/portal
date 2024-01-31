@@ -15,6 +15,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
     
     
   const navigate = useNavigate();
@@ -35,7 +36,8 @@ const UsePropertyLogic = (apiEndpoint) => {
   };
 
   const showProperty = (propertyId) => {
-    navigate(`/${role}/listings/show-property/${propertyId}`) 
+    if (role === 'agency') return navigate(`/${role}/listings/show-property/${propertyId}`);
+    else return navigate(`/${role}/properties/show-property/${propertyId}`);
   }
 
   const openModal = (image) => {
@@ -46,6 +48,18 @@ const UsePropertyLogic = (apiEndpoint) => {
   const closeModal = () => {
     setSelectedImage(null);
     setIsModalOpen(false);
+  };
+
+  const navOptions = () => {
+    if (role === 'agency') return `/${role}/listings/`
+    else return `/${role}/properties/`
+  }
+
+  const handleSearch = () => {
+    // Perform the API call with the search query
+    const apiUrl = `${apiEndpoint}/?${searchQuery}`;
+    
+    console.log(apiUrl);
   };
     
 
@@ -85,7 +99,11 @@ const UsePropertyLogic = (apiEndpoint) => {
     currentColor,
     selectedImage,
     isModalOpen,
+    searchQuery,
+    setSearchQuery,
+    handleSearch,
     openModal,
+    navOptions,
     closeModal,
     UsehandleClick,
     UsehandleDropdown,

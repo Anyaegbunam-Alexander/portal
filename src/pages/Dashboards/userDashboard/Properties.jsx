@@ -26,6 +26,9 @@ const Properties = () => {
     dropdownPosition, 
     showDropdown,
     currentColor,
+    setSearchQuery,
+    searchQuery,
+    handleSearch,
     showProperty,
     UsehandleClick,
     UsehandleDropdown,
@@ -39,18 +42,25 @@ const Properties = () => {
         style={{ backgroundColor: currentColor }}
       >
         <div className="text-center text-white space-y-4 mt-8">
-          <p className="font-bold text-5xl">Looking for the perfect Property?</p>
-          <p className=' tracking-widest'>Amazing properties are available just for you!</p>
+          <p className="font-bold text-5xl">Your Properties</p>
+          <p className=' tracking-widest'>View your listed properties here.</p>
         </div>
         
         <div className="flex justify-center items-center my-10 w-full">
           <div className="bg-white p-4 m-auto rounded-xl lg:w-3/4">
             <div className="flex outline-none border-solid border-2 border-[#8840E6]-500 rounded-lg">
-              <input type="text" name="" id="" className='w-full outline-none p-2 text-slate-700' placeholder='Search for properties...'/>
+              <input 
+                type="text" 
+                className='w-full outline-none p-2 text-slate-700' 
+                placeholder='Filter your properties...'
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
 
               <button 
                 type="button" 
                 className={`p-4 text-white font-semibold outline-none hover:opacity-75 bg-[${currentColor}] flex items-center`}
+                onClick={handleSearch}
               >
                 <IoSearchOutline className=' text-2xl mr-2'/>
                 Search
@@ -91,6 +101,12 @@ const Properties = () => {
                         <li className='flex items-center'>
                           <CiViewTimeline className='text-xl mr-3'/> View
                         </li>
+                        <li className='flex items-center'>
+                          <CiEdit className='text-xl mr-3'/> Edit
+                        </li>
+                        <li className='flex items-center'>
+                          <RiDeleteBin6Line className='text-xl mr-3'/> Delete
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -101,12 +117,13 @@ const Properties = () => {
               <div className="mt-10">
                 {/* Used a container with a fixed height */}
                 <div className="image-container relative" style={{ height: '200px', overflow: 'hidden' }}>
-                  <img
-                    className="md:w-96 h-full w-full object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
-                    src={property.images[0].image}
-                    alt="Property"
-                  />
-                    {console.log(property.images[0].image)}
+                  {property.images && property.images.length > 0 && (
+                    <img
+                      className="md:w-96 h-full w-full object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
+                      src={property.images[0].image}
+                      alt="Property"
+                    />
+                  )}
                   {/* "For Sale" tag */}
                   <div className="absolute bottom-0 right-0 bg-green-600 text-white px-3 py-2 rounded-sm">
                     <p>For {property.transaction_type}</p>
@@ -180,6 +197,18 @@ const Properties = () => {
             <div className='flex items-center justify-center h-screen w-full -mt-16'>
               <div className="text-center">
                 <p className="mb-4 text-xl dark:text-gray-200">No properties available.</p>
+                <button
+                  className=' w-full'
+                  style={{
+                    color: 'white',
+                    backgroundColor: currentColor,
+                    borderRadius: '10px',
+                    padding: '15px',
+                  }}
+                  onClick={UsehandleClick}
+                >
+                  Add Property
+                </button>
               </div>
             </div>
         )}
