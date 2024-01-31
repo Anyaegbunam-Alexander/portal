@@ -189,6 +189,7 @@ const AddProperties = () => {
     } catch (error) {
       // Handle errors (display an error message to the user, log the error, etc.)
       console.error('Error adding property:', error.message);
+      alert("An error occured")
     }
   };
   

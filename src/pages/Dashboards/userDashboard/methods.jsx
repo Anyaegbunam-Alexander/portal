@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../../contexts/ContextProvider';
 
@@ -35,7 +35,8 @@ const UsePropertyLogic = (apiEndpoint) => {
   };
 
   const showProperty = (propertyId) => {
-    navigate(`/${role}/listings/show-property/${propertyId}`) 
+    if (role === 'agency') return navigate(`/${role}/listings/show-property/${propertyId}`);
+    else return navigate(`/${role}/properties/show-property/${propertyId}`);
   }
 
   const openModal = (image) => {
@@ -47,8 +48,13 @@ const UsePropertyLogic = (apiEndpoint) => {
     setSelectedImage(null);
     setIsModalOpen(false);
   };
-    
 
+  const navOptions = () => {
+    if (role === 'agency') return `/${role}/listings/`
+    else return `/${role}/properties/`
+  }
+
+  
   useEffect(() => {
     const accessToken = localStorage.getItem('token');
     // Fetch properties from your API here
@@ -74,6 +80,11 @@ const UsePropertyLogic = (apiEndpoint) => {
   }, [apiEndpoint]);
 
 
+  const propertyPurchaseNav = () => {
+    if (role === 'agency') return alert("Agencies are not allowed to purchase property")
+    else return `/${role}/purchases/properties/:propertyId`
+  }
+
 
   return {
     role,
@@ -86,10 +97,12 @@ const UsePropertyLogic = (apiEndpoint) => {
     selectedImage,
     isModalOpen,
     openModal,
+    navOptions,
     closeModal,
     UsehandleClick,
     UsehandleDropdown,
     showProperty,
+    propertyPurchaseNav,
   }
 }
 

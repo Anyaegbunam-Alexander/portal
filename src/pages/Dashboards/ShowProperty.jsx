@@ -30,8 +30,6 @@ const PropertyDetails = () => {
     navOptions,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/${propertyId}`);
   
-  console.log(property);
-
 
   return (
     <div className=" sm:p-10">
@@ -51,7 +49,7 @@ const PropertyDetails = () => {
                 max-md:flex-col-reverse max-md:space-x-0 max-md:p-4 justify-between items-center space-x-20
               ">
                 <div className="text-white space-y-10 md:mt-5">
-                  <h1 className='text-4xl font-extrabold lg:w-760 max-md:w-full max-md:text-3xl md:w-full'>{property.type}</h1>
+                  <h1 className='text-4xl font-extrabold lg:w-760 lg:mr-10 max-md:w-full max-md:text-3xl md:w-full'>{property.type}</h1>
 
                   <p className="text-3xl font-medium max-md:text-2xl">
                     {new Intl.NumberFormat('en-NG', {
