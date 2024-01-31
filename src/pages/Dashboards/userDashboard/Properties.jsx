@@ -191,19 +191,7 @@ const Properties = () => {
         ) : (
             <div className='flex items-center justify-center h-screen w-full -mt-16'>
               <div className="text-center">
-                <p className="mb-4 text-xl dark:text-gray-200">No properties available.</p>
-                <button
-                  className=' w-full'
-                  style={{
-                    color: 'white',
-                    backgroundColor: currentColor,
-                    borderRadius: '10px',
-                    padding: '15px',
-                  }}
-                  onClick={UsehandleClick}
-                >
-                  Add Property
-                </button>
+                <p className="mb-4 text-xl dark:text-gray-200">Kindly reload this page</p>
               </div>
             </div>
         )}
