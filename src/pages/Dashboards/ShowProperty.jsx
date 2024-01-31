@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import UsePropertyLogic from './agencyDashboard/methods';
+import UsePropertyLogic from './methods';
 import { useParams } from 'react-router-dom';
 import Modal from 'react-modal';
 import MapComponent from '../../components/MapComponent';
@@ -28,6 +28,7 @@ const PropertyDetails = () => {
     openModal,
     closeModal,
     navOptions,
+    propertyPurchaseNav,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/${propertyId}`);
   
 
@@ -201,6 +202,7 @@ const PropertyDetails = () => {
 
               <button
                   className=' bg-purple-800 p-4 text-white w-full'
+                  onClick={propertyPurchaseNav}
                 >
                   Purchase
               </button>

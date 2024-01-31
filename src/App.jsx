@@ -53,7 +53,7 @@ const App = () => {
 
       {/* Show single property */}
       <Route path={`/${role}/listings/show-property/:propertyId`} element={<PropertyDetails />} />
-      <Route path={`/${role}/purchases/properties/:propertyId`} element={<PurchaseProperty />} />
+      <Route path={`/${role}/purchases/properties/`} element={<PurchaseProperty />} />
 
       {/* 404 Route - Catch-all */}
       <Route path="/*" element={<NotFound />} />

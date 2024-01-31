@@ -15,7 +15,7 @@ import { CiShare2 } from "react-icons/ci";
 
 // import { Button } from '../../../components/agencyDashboardComponent';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-import UsePropertyLogic from './methods';
+import UsePropertyLogic from '../methods';
 import { Outlet } from 'react-router-dom';
 
 
@@ -39,8 +39,8 @@ const Properties = () => {
         style={{ backgroundColor: currentColor }}
       >
         <div className="text-center text-white space-y-4 mt-8">
-          <p className="font-bold text-5xl">Your Properties</p>
-          <p className=' tracking-widest'>View your listed properties here.</p>
+          <p className="font-bold text-5xl">Looking for a property?</p>
+          <p className=' tracking-widest'>Amazing properties are listed just for you!</p>
         </div>
         
         <div className="flex justify-center items-center my-10 w-full">
