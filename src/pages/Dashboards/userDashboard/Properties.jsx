@@ -26,9 +26,6 @@ const Properties = () => {
     dropdownPosition, 
     showDropdown,
     currentColor,
-    setSearchQuery,
-    searchQuery,
-    handleSearch,
     showProperty,
     UsehandleClick,
     UsehandleDropdown,
@@ -53,14 +50,12 @@ const Properties = () => {
                 type="text" 
                 className='w-full outline-none p-2 text-slate-700' 
                 placeholder='Filter your properties...'
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
               />
 
               <button 
                 type="button" 
-                className={`p-4 text-white font-semibold outline-none hover:opacity-75 bg-[${currentColor}] flex items-center`}
-                onClick={handleSearch}
+                className={`p-4 text-white font-semibold outline-none hover:opacity-75 flex items-center`}
+                style={{ backgroundColor: currentColor }}
               >
                 <IoSearchOutline className=' text-2xl mr-2'/>
                 Search

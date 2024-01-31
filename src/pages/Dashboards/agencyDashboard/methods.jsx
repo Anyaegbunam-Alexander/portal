@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../../contexts/ContextProvider';
 
@@ -15,7 +15,6 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
     
     
   const navigate = useNavigate();
@@ -55,12 +54,6 @@ const UsePropertyLogic = (apiEndpoint) => {
     else return `/${role}/properties/`
   }
 
-  const handleSearch = () => {
-    // Perform the API call with the search query
-    const apiUrl = `${apiEndpoint}/?${searchQuery}`;
-    
-    console.log(apiUrl);
-  };
     
 
   useEffect(() => {
@@ -88,7 +81,6 @@ const UsePropertyLogic = (apiEndpoint) => {
   }, [apiEndpoint]);
 
 
-
   return {
     role,
     property,
@@ -99,9 +91,6 @@ const UsePropertyLogic = (apiEndpoint) => {
     currentColor,
     selectedImage,
     isModalOpen,
-    searchQuery,
-    setSearchQuery,
-    handleSearch,
     openModal,
     navOptions,
     closeModal,

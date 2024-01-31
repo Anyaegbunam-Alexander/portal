@@ -46,11 +46,16 @@ const Properties = () => {
         <div className="flex justify-center items-center my-10 w-full">
           <div className="bg-white p-4 m-auto rounded-xl lg:w-3/4">
             <div className="flex outline-none border-solid border-2 border-[#8840E6]-500 rounded-lg">
-              <input type="text" name="" id="" className='w-full outline-none p-2 text-slate-700' placeholder='Filter your properties...'/>
+              <input 
+                type="text" 
+                className='w-full outline-none p-2 text-slate-700' 
+                placeholder='Filter your properties...'
+              />
 
               <button 
                 type="button" 
-                className={`p-4 text-white font-semibold outline-none hover:opacity-75 bg-[${currentColor}] flex items-center`}
+                className={`p-4 text-white font-semibold outline-none hover:opacity-75 flex items-center`}
+                style={{ backgroundColor: currentColor }}
               >
                 <IoSearchOutline className=' text-2xl mr-2'/>
                 Search
@@ -107,11 +112,13 @@ const Properties = () => {
               <div className="mt-10">
                 {/* Used a container with a fixed height */}
                 <div className="image-container relative" style={{ height: '200px', overflow: 'hidden' }}>
-                  <img
-                    className="md:w-96 h-full w-full object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
-                    src={property.images[0].image}
-                    alt="Property"
-                  />
+                  {property.images && property.images.length > 0 && (
+                    <img
+                      className="md:w-96 h-full w-full object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
+                      src={property.images[0].image}
+                      alt="Property"
+                    />
+                  )}
                   {/* "For Sale" tag */}
                   <div className="absolute bottom-0 right-0 bg-green-600 text-white px-3 py-2 rounded-sm">
                     <p>For {property.transaction_type}</p>
