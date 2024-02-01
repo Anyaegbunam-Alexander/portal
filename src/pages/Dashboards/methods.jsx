@@ -159,7 +159,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         console.error('Error fetching properties:', error);
       }
     }
-  }, [third])
+  }, [])
   
   
 
