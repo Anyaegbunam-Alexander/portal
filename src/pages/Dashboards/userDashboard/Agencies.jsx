@@ -8,22 +8,30 @@ import { GridComponent,
   Inject 
 } from '@syncfusion/ej2-react-grids';
 
-import { employeesData, employeesGrid } from '../../../data/dummy';
+import { agenciesData, agenciesGrid } from '../../../data/dummy';
 import { Header } from '../../../components/dashboardComponents';
+import UsePropertyLogic from '../methods';
 
 const Agencies = () => {
+  
+  const {
+    getAllAgencies,
+  } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/');
+
+  console.log(getAllAgencies)
+ 
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl mt-16">
       <Header category="Page" title="Agencies"/>
       <GridComponent
-        dataSource={employeesData}
+        dataSource={agenciesData}
         allowPaging
         allowSorting
         toolbar={['Search']}
         width="auto"
       >
         <ColumnsDirective>
-          {employeesGrid.map((item, index) => (
+          {agenciesGrid.map((item, index) => (
             <ColumnDirective key={index} {...item} />
           ))}
         </ColumnsDirective>

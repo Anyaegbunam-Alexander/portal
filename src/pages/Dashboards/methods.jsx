@@ -155,11 +155,12 @@ const UsePropertyLogic = (apiEndpoint) => {
         const data = await response.json();
         
         setgetAllAgencies(data.results);
+        console.log(data.results)
       } catch (error) {
         console.error('Error fetching properties:', error);
       }
     }
-  }, [])
+  }, [apiEndpoint])
   
   
 
@@ -174,8 +175,8 @@ const UsePropertyLogic = (apiEndpoint) => {
     currentColor,
     selectedImage,
     isModalOpen,
+    getAllAgencies,
     navigate,
-    navOptions,
     openModal,
     navOptions,
     closeModal,
