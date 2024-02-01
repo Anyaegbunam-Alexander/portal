@@ -15,7 +15,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-    
+  const [getAllAgencies, setgetAllAgencies] = useState([])    
     
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
@@ -70,8 +70,22 @@ const UsePropertyLogic = (apiEndpoint) => {
         
         setProperties(data.results);
         setproperty(data);
+
+        if (!response.ok) {
+          const errorResponse = await response.json();
+  
+          for (const field in errorResponse.extra.fields) {
+            if (errorResponse.extra.fields[field]) {
+              // Output the value contained in the field
+              alert(`${field}: ${errorResponse.extra.fields[field]}`)
+              console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+              return
+            }
+          }
+        }
       } catch (error) {
         console.error('Error fetching properties:', error);
+        alert("An Error Occured");
       }
     };
 
@@ -125,6 +139,28 @@ const UsePropertyLogic = (apiEndpoint) => {
 
   //   PurchaseProperty();
   // }, [apiEndpoint])
+
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('token');
+    const getAllAgencies = async () => {
+      try {
+        const response = await fetch(apiEndpoint, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const data = await response.json();
+        
+        setgetAllAgencies(data.results);
+      } catch (error) {
+        console.error('Error fetching properties:', error);
+      }
+    }
+  }, [third])
+  
   
 
 
