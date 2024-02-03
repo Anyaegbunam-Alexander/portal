@@ -29,6 +29,7 @@ const Properties = () => {
     showProperty,
     UsehandleClick,
     UsehandleDropdown,
+    handlePagination,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
 
 
@@ -196,7 +197,7 @@ const Properties = () => {
         {paginationLinks && (
           <div className="flex justify-center my-10 space-x-4">
             <button 
-              //onClick={() => handlePagination()} disabled={!paginationLinks.previous}
+              onClick={() => handlePagination()} disabled={!paginationLinks.previous}
               className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
               style={{ backgroundColor: currentColor }}
             >
@@ -205,7 +206,7 @@ const Properties = () => {
             </button>
             
             <button 
-              //onClick={() => handlePagination()} disabled={!paginationLinks.next}
+              onClick={() => handlePagination()} disabled={!paginationLinks.next}
               className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
               style={{ backgroundColor: currentColor }}
             >

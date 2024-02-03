@@ -19,8 +19,6 @@ const Agencies = () => {
     agenciesGrid,
   } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/');
 
-  console.log("All Agencies:", getAllAgencies.name);
-
   const agenciesData = getAllAgencies; 
 
   // Map through agenciesData and transform each agency as needed

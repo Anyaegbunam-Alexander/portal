@@ -12,15 +12,17 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [properties, setProperties] = useState([]);
   const [property, setproperty] = useState([]);
   const [paginationLinks, setPaginationLinks] = useState(null);
-  // const [currentPage, setCurrentPage] = useState(1); // Add current page state
+  const [currentPage, setCurrentPage] = useState(1); // Add current page state
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [getAllAgencies, setgetAllAgencies] = useState([])    
+  const [getAllAgencies, setgetAllAgencies] = useState([]); 
+  const [isLoading, setIsLoading] = useState(false);   
     
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
+  const accessToken = localStorage.getItem('token');
     
     
   const UsehandleClick = () => {
@@ -55,43 +57,51 @@ const UsePropertyLogic = (apiEndpoint) => {
     else return `/${role}/properties/`
   }
 
-  
-  useEffect(() => {
-    const accessToken = localStorage.getItem('token');
-    // Fetch properties from your API here
-    const fetchProperties = async () => {
-      try {
-        const response = await fetch(apiEndpoint, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+  // Fetch properties from your API here
+  const fetchProperties = async (apiEndpoint) => {
+    try {
+      const response = await fetch(apiEndpoint, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
-        const data = await response.json();
-        
-        setProperties(data.results);
-        setproperty(data);
-
-        if (!response.ok) {
-          const errorResponse = await response.json();
+      const data = await response.json();
   
-          for (const field in errorResponse.extra.fields) {
-            if (errorResponse.extra.fields[field]) {
-              // Output the value contained in the field
-              alert(`${field}: ${errorResponse.extra.fields[field]}`)
-              console.log(`${field}: ${errorResponse.extra.fields[field]}`);
-              return
-            }
+
+      // gets all properties
+      setProperties(data.results);
+
+      // gets single property
+      setproperty(data);
+
+      // pagination links
+      setPaginationLinks({
+        previous: data.links.previous,
+        next: data.links.next,
+      });
+
+      if (!response.ok) {
+        const errorResponse = await response.json();
+
+        for (const field in errorResponse.extra.fields) {
+          if (errorResponse.extra.fields[field]) {
+            // Output the value contained in the field
+            alert(`${field}: ${errorResponse.extra.fields[field]}`)
+            console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+            return
           }
         }
-      } catch (error) {
-        console.error('Error fetching properties:', error);
-        alert("An Error Occured");
       }
-    };
-
-    fetchProperties();
+    } catch (error) {
+      console.error('Error fetching properties:', error);
+      alert("An Error Occured");
+    }
+  };
+  
+  useEffect(() => {
+    fetchProperties(apiEndpoint);
   }, [apiEndpoint]);
 
 
@@ -237,6 +247,24 @@ const UsePropertyLogic = (apiEndpoint) => {
   ];
 
 
+  // Pagination logic below
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [properties]);
+
+  // Pagination handler
+  const handlePagination = () => {
+    if (paginationLinks) {
+      fetchProperties(
+        currentPage === 1 ? paginationLinks.next : paginationLinks.previous
+      );
+      setCurrentPage(
+        currentPage === 1 ? currentPage + 1 : currentPage - 1
+      );
+    }
+  };
+
+
   return {
     role,
     property,
@@ -257,6 +285,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     UsehandleDropdown,
     showProperty,
     propertyPurchaseNav,
+    handlePagination,
   }
 }
 
