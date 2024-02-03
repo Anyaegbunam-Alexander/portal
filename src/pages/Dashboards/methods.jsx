@@ -96,7 +96,9 @@ const UsePropertyLogic = (apiEndpoint) => {
       }
     } catch (error) {
       console.error('Error fetching properties:', error);
-      alert("An Error Occured");
+      alert("An Error Occured: Unable to fetch properties");
+    } finally {
+      setIsLoading(false); // Set loading to false when the fetch operation completes
     }
   };
   
@@ -176,7 +178,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         setgetAllAgencies(data.results);
       } catch (error) {
         console.error('Error fetching properties:', error);
-      }
+      } 
     }
 
     getAllAgencies();
@@ -254,7 +256,7 @@ const UsePropertyLogic = (apiEndpoint) => {
 
   // Pagination handler
   const handlePagination = () => {
-    if (paginationLinks) {
+    if (!isLoading && paginationLinks) {
       fetchProperties(
         currentPage === 1 ? paginationLinks.next : paginationLinks.previous
       );
@@ -277,6 +279,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     isModalOpen,
     getAllAgencies,
     agenciesGrid,
+    isLoading,
     navigate,
     openModal,
     navOptions,
