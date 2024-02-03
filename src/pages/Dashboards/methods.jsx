@@ -1,8 +1,9 @@
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../contexts/ContextProvider';
-import { GrLocation } from 'react-icons/gr';
 
+// Icons
+import { GrLocation } from 'react-icons/gr';
 
 
 const UsePropertyLogic = (apiEndpoint) => {

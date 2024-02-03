@@ -1,13 +1,12 @@
 import React from 'react';
-import { BsCurrencyDollar } from 'react-icons/bs';
+import { BsCurrencyDollar, BsHouseCheck } from 'react-icons/bs';
 import { GoDotFill } from 'react-icons/go';
-import { IoIosMore } from 'react-icons/io';
+import { HiOutlineRefresh } from 'react-icons/hi';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 
 import { Stacked, Pie, Button, LineChart, SparkLine } from '../../../components/dashboardComponents';
-import { earningData, medicalproBranding, recentTransactions, weeklyStats, dropdownData, SparklineAreaData, ecomPieChartData } from '../../../data/dummy';
+import { recentTransactions, dropdownData, SparklineAreaData, ecomPieChartData } from '../../../data/dummy';
 import { useStateContext } from '../../../contexts/ContextProvider';
-import product9 from '../../../data/product9.jpg';
 
 const DropDown = ({ currentMode }) => (
   <div className="w-28 border-1 border-color px-2 py-1 rounded-md">
@@ -15,8 +14,31 @@ const DropDown = ({ currentMode }) => (
   </div>
 );
 
+// Customer data in the overview page
+const propertyDashboardData = [
+  {
+    icon: <BsHouseCheck />,
+    amount: '4,396',
+    percentage: '+23%',
+    title: 'Property',
+    iconColor: 'rgb(255, 244, 229)',
+    iconBg: 'rgb(254, 201, 15)',
+    pcColor: 'green-600',
+  },
+  {
+    icon: <HiOutlineRefresh />,
+    amount: '39,354',
+    percentage: '-12%',
+    title: 'ROI',
+    iconColor: 'rgb(0, 194, 146)',
+    iconBg: 'rgb(235, 250, 242)',
+    pcColor: 'red-600',
+  },
+];
+
 const Overview = () => {
   const { currentColor, currentMode } = useStateContext();
+
 
   return (
     <div className="mt-16">
@@ -24,7 +46,7 @@ const Overview = () => {
         <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
           <div className="flex justify-between items-center">
             <div>
-              <p className="font-bold text-gray-400">Earnings</p>
+              <p className="font-bold text-gray-400">Expenses</p>
               <p className="text-2xl text-gray-800">₦0.00</p>
             </div>
             <button
@@ -45,7 +67,7 @@ const Overview = () => {
           </div>
         </div>
         <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
-          {earningData.map((item) => (
+          {propertyDashboardData.map((item) => (
             <div key={item.title} className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
               <button
                 type="button"
@@ -125,11 +147,11 @@ const Overview = () => {
             style={{ backgroundColor: currentColor }}
           >
             <div className="flex justify-between items-center ">
-              <p className="font-semibold text-white text-2xl">Earnings</p>
+              <p className="font-semibold text-white text-2xl">Expenses</p>
 
               <div>
                 <p className="text-2xl text-white font-semibold mt-8">₦0.00</p>
-                <p className="text-gray-200">Monthly revenue</p>
+                <p className="text-gray-200">Monthly expenses</p>
               </div>
             </div>
 
@@ -141,7 +163,7 @@ const Overview = () => {
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl md:w-400 p-8 m-3 flex justify-center items-center gap-10">
             <div>
               <p className="text-2xl font-semibold ">₦0.00</p>
-              <p className="text-gray-400">Yearly sales</p>
+              <p className="text-gray-400">Yearly Expenses</p>
             </div>
 
             <div className="w-40">
