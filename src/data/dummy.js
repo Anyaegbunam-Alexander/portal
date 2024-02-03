@@ -76,23 +76,13 @@ const gridEmployeeProfile = (props) => (
   </div>
 );
 
-const gridAgenciesProfile = (props) => (
-  <div className="flex items-center gap-2">
-    <img
-      className="rounded-full w-10 h-10"
-      src={props.EmployeeImage}
-      alt="Agencies"
-    />
-    <p>{props.Name}</p>
-  </div>
-);
-
 const gridEmployeeCountry = (props) => (
   <div className="flex items-center justify-center gap-2">
     <GrLocation />
     <span>{props.Country}</span>
   </div>
 );
+
 export const EditorData = () => (
   <div>
     <h3>
@@ -480,32 +470,6 @@ export const employeesGrid = [
     textAlign: 'Center' },
   { field: 'EmployeeID',
     headerText: 'Employee ID',
-    width: '125',
-    textAlign: 'Center' },
-];
-
-export const agenciesGrid = [
-  { headerText: 'Agencies',
-    width: '150',
-    template: gridAgenciesProfile,
-    textAlign: 'Center' },
-  { field: 'Name',
-    headerText: '',
-    width: '0',
-    textAlign: 'Center',
-  },
-  { field: 'Title',
-    headerText: 'Address',
-    width: '170',
-    textAlign: 'Center',
-  },
-  { headerText: 'Country',
-    width: '120',
-    textAlign: 'Center',
-    template: gridEmployeeCountry },
-    
-  { field: 'Profile',
-    headerText: 'View Profile',
     width: '125',
     textAlign: 'Center' },
 ];
@@ -1714,19 +1678,6 @@ export const customersData = [
 export const employeesData = [
   {
     EmployeeID: 1,
-    Name: 'Nancy Davolio',
-    Title: 'Sales Representative',
-    HireDate: '01/02/2021',
-    Country: 'USA',
-    ReportsTo: 'Carson',
-    EmployeeImage:
-    avatar3,
-  }
-];
-
-export const agenciesData = [
-  {
-    Profile: 1,
     Name: 'Nancy Davolio',
     Title: 'Sales Representative',
     HireDate: '01/02/2021',

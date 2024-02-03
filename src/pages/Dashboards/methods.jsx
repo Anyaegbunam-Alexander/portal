@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../contexts/ContextProvider';
+import { GrLocation } from 'react-icons/gr';
 
 
 
@@ -141,6 +142,12 @@ const UsePropertyLogic = (apiEndpoint) => {
   // }, [apiEndpoint])
 
 
+  /* 
+    The block of code below contains the code for agencies
+    - This gets all the agencies on the platform
+    - Shows the agencies to the agencies tab in the customer's dashboard
+    - Contains data for agencies page.
+  */
   useEffect(() => {
     const accessToken = localStorage.getItem('token');
     const getAllAgencies = async () => {
@@ -154,15 +161,79 @@ const UsePropertyLogic = (apiEndpoint) => {
 
         const data = await response.json();
         
-        setgetAllAgencies(data.results);
         console.log(data.results)
+        setgetAllAgencies(data.results);
       } catch (error) {
         console.error('Error fetching properties:', error);
       }
     }
-  }, [apiEndpoint])
+
+    getAllAgencies();
+  }, [apiEndpoint]);
+
+  const gridAgenciesProfile = (props) => (
+    <div className="flex items-center gap-2">
+      <img
+        className="rounded-full w-10 h-10"
+        src={props.EmployeeImage}
+        alt="Agencies"
+      />
+      <p>{props.Name}</p>
+    </div>
+  );
+
+  const gridAgenciesCountry = (props) => (
+    <div className="flex items-center justify-center gap-2">
+      <GrLocation />
+      <span>{props.Country}</span>
+    </div>
+  );
+
+  const gridAgenciesProfileLink = (props) => (
+    <div className="flex items-center justify-center gap-2">
+      <a href={`${props.Profile}`} className=' underline text-blue-800'>Link to Profile</a>
+    </div>
+  );
   
-  
+  const agenciesGrid = [
+    { headerText: 'Agencies',
+      width: '150',
+      template: gridAgenciesProfile,
+      textAlign: 'Center' 
+    },
+    { field: 'Name',
+      headerText: '',
+      width: '0',
+      textAlign: 'Center',
+    },
+    { field: 'Email',
+      headerText: 'Emaail',
+      width: '120',
+      textAlign: 'Center',
+    },
+    { field: 'Address',
+      headerText: 'Address',
+      width: '170',
+      textAlign: 'Center',
+    },
+    { 
+      field: 'State',
+      headerText: 'State',
+      width: '120',
+      textAlign: 'Center', 
+    },
+    { headerText: 'Country',
+      width: '120',
+      textAlign: 'Center',
+      template: gridAgenciesCountry 
+    },    
+    { 
+      headerText: 'Profile',
+      width: '125',
+      textAlign: 'Center',
+      template: gridAgenciesProfileLink
+    },
+  ];
 
 
   return {
@@ -176,6 +247,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     selectedImage,
     isModalOpen,
     getAllAgencies,
+    agenciesGrid,
     navigate,
     openModal,
     navOptions,
