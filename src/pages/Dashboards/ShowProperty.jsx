@@ -20,6 +20,7 @@ import { IoReturnDownBackOutline } from "react-icons/io5";
 
 const PropertyDetails = () => {
   const { propertyId } = useParams();
+
   const { 
     role,
     property, 

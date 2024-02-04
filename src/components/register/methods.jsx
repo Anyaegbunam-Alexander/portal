@@ -226,9 +226,9 @@ const useRegistrationMethod = (apiEndpoint) => {
         formDataObj.append('identification', formData.identification);
 
         // Log the FormData content before sending
-        for (const pair of formDataObj.entries()) {
-          console.log(pair[0], pair[1]);
-        }
+        // for (const pair of formDataObj.entries()) {
+        //   console.log(pair[0], pair[1]);
+        // }
 
         const response = await fetch(apiEndpoint, {
           method: 'POST',

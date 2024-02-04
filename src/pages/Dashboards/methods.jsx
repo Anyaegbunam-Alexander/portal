@@ -19,8 +19,9 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [getAllAgencies, setgetAllAgencies] = useState([]); 
   const [isLoading, setIsLoading] = useState(false); 
-  const [formData, setFormData] = useState({
-    property: '',
+  const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+  const [propertyPurchaseFormData, setpropertyPurchaseFormData] = useState({
+    property: property.id,
     proof_of_payment: null,
     referral_code: '',
     customer_notes: '',
@@ -117,52 +118,92 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 
   //navigation logic for the property purchase page
-  const propertyPurchaseNav = () => {
+  const propertyPurchaseNav = (propertyId) => {
+    setSelectedPropertyId(propertyId);
     if (role === 'agency') return alert("Agencies are not allowed to purchase property")
     else return navigate(`/${role}/purchases/properties/`)
   }
 
-  useEffect(() => {
-    const PurchaseProperty = async () => {
-      const accessToken = localStorage.getItem('token');
-      try {
-        const response = await fetch(apiEndpoint, {
-          method: 'POST',
-          headers: {
-            "Referer": "https://realestate.api.sites.name.ng/",
-            'Authorization': `Bearer ${accessToken}`,
-          },
-          //body: formData,
-        });
-  
-        
-        if (!response.ok) {
-          const errorResponse = await response.json();
-  
-          for (const field in errorResponse.extra.fields) {
-            if (errorResponse.extra.fields[field]) {
-              // Output the value contained in the field
-              alert(`${field}: ${errorResponse.extra.fields[field]}`)
-              // openPopup(); // Open the popup
-              console.log(`${field}: ${errorResponse.extra.fields[field]}`);
-              return
-            }
+  /* 
+    The code below contains the logic for the property puchase
+    - All logics are contained in different blocks of code below
+      until you get to another comment block
+    - PROPERTY PUCHASE
+  */
+
+  //Handle change in the values of user's input
+  const handleFieldChange = (e) => {
+    const { name, value } = e.target;
+    setpropertyPurchaseFormData((prevData) => ({ ...prevData, [name]: value }));
+
+    // Clear the error for the current field when the user types
+    //setErrors({ ...error, [e.target.name]: '' });
+  };
+
+  const handleTellerChange = (e) => {
+    const file = e.target.files[0]
+    setpropertyPurchaseFormData((prevFormData) => ({
+      ...prevFormData,
+      proof_of_payment: file,
+    }));
+  };
+
+  const PurchaseProperty = async (e) => {
+    e.preventDefault();
+
+    //const accessToken = localStorage.getItem('token');
+    try {
+      const formDataObj = new FormData();
+
+      for (const key in propertyPurchaseFormData) {
+        // Append all form data except the file directly
+        if (key !== 'proof_of_payment') {
+          formDataObj.append(key, propertyPurchaseFormData[key]);
+        }
+      }
+
+      // Append the file separately
+      formDataObj.append('cac_document', propertyPurchaseFormData.proof_of_payment);
+
+       // Log the FormData content before sending
+       for (const pair of formDataObj.entries()) {
+        console.log(pair[0], pair[1]);
+      }
+
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+          "Referer": "https://realestate.api.sites.name.ng/",
+          'Authorization': `Bearer ${accessToken}`,
+          "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi",
+        },
+        body: formDataObj,
+      });
+
+      
+      if (!response.ok) {
+        const errorResponse = await response.json();
+
+        for (const field in errorResponse.extra.fields) {
+          if (errorResponse.extra.fields[field]) {
+            // Output the value contained in the field
+            alert(`${field}: ${errorResponse.extra.fields[field]}`)
+            console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+            return
           }
         }
-    
-        // Display success message or redirect to confirmation page
-        //navigate(`/${role}/listings`);
-        //alert('Property added successfully!');
-        //console.log(response.body);
-      } catch (error) {
-        // Handle errors (display an error message to the user, log the error, etc.)
-        console.error('Error Occured', error.message);
-        alert("An error occured")
       }
-    }
 
-    PurchaseProperty();
-  }, [apiEndpoint])
+      alert('Property purchase successful');
+
+      
+    } catch (error) {
+      // Handle errors (display an error message to the user, log the error, etc.)
+      console.error('Error Occured', error.message);
+      alert("Unable to purchase property. Please contact an admin");
+    }
+  }
+  
 
 
   /* 
@@ -302,6 +343,8 @@ const handlePagination = () => {
     getAllAgencies,
     agenciesGrid,
     isLoading,
+    propertyPurchaseFormData,
+    selectedPropertyId,
     navigate,
     openModal,
     navOptions,
@@ -311,6 +354,9 @@ const handlePagination = () => {
     showProperty,
     propertyPurchaseNav,
     handlePagination,
+    handleFieldChange,
+    handleTellerChange,
+    PurchaseProperty,
   }
 }
 
