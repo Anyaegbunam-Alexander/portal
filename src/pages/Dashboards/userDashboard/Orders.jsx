@@ -20,7 +20,9 @@ const Orders = () => {
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl mt-16">
       <Header category="Page" title="Orders"/>
-      <GridComponent
+      <h1 className='text-5xl py-5'>Coming soon</h1>
+      <p>Purchased property will be shown here</p>
+      {/* <GridComponent
         id='gridcomp'
         dataSource={ordersData}
         allowPaging
@@ -32,7 +34,7 @@ const Orders = () => {
           ))}
         </ColumnsDirective>
         <Inject services={[Resize, ContextMenu, ExcelExport, PdfExport, Sort, Edit, Page, Filter ]}/>
-      </GridComponent>
+      </GridComponent> */}
     </div>
   )
 }
