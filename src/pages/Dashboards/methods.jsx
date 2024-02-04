@@ -18,8 +18,16 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [getAllAgencies, setgetAllAgencies] = useState([]); 
-  const [isLoading, setIsLoading] = useState(false);   
-    
+  const [isLoading, setIsLoading] = useState(false); 
+  const [formData, setFormData] = useState({
+    property: '',
+    proof_of_payment: null,
+    referral_code: '',
+    customer_notes: '',
+  });
+
+  
+  // variables
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
   const accessToken = localStorage.getItem('token');
@@ -29,6 +37,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       return navigate(`/${role}/add-property`);
   }
   
+  // dropdown for the more icon on the property page of each property
   const UsehandleDropdown = (event) => {
       const rect = event.target.getBoundingClientRect();
       setDropdownPosition({
@@ -96,7 +105,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       }
     } catch (error) {
       console.error(error);
-      alert("An Error Occured: Unable to fetch properties");
+      alert("An Error Occured: Unable to fetch properties", error);
     } finally {
       setIsLoading(false); // Set loading to false when the fetch operation completes
     }
@@ -107,52 +116,53 @@ const UsePropertyLogic = (apiEndpoint) => {
   }, [apiEndpoint, fetchProperties]);
 
 
+  //navigation logic for the property purchase page
   const propertyPurchaseNav = () => {
     if (role === 'agency') return alert("Agencies are not allowed to purchase property")
     else return navigate(`/${role}/purchases/properties/`)
   }
 
-  // useEffect(() => {
-  //   const PurchaseProperty = async () => {
-  //     const accessToken = localStorage.getItem('token');
-  //     try {
-  //       const response = await fetch(apiEndpoint, {
-  //         method: 'POST',
-  //         headers: {
-  //           "Referer": "https://realestate.api.sites.name.ng/",
-  //           'Authorization': `Bearer ${accessToken}`,
-  //         },
-  //         //body: formData,
-  //       });
+  useEffect(() => {
+    const PurchaseProperty = async () => {
+      const accessToken = localStorage.getItem('token');
+      try {
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            "Referer": "https://realestate.api.sites.name.ng/",
+            'Authorization': `Bearer ${accessToken}`,
+          },
+          //body: formData,
+        });
   
         
-  //       if (!response.ok) {
-  //         const errorResponse = await response.json();
+        if (!response.ok) {
+          const errorResponse = await response.json();
   
-  //         for (const field in errorResponse.extra.fields) {
-  //           if (errorResponse.extra.fields[field]) {
-  //             // Output the value contained in the field
-  //             alert(`${field}: ${errorResponse.extra.fields[field]}`)
-  //             // openPopup(); // Open the popup
-  //             console.log(`${field}: ${errorResponse.extra.fields[field]}`);
-  //             return
-  //           }
-  //         }
-  //       }
+          for (const field in errorResponse.extra.fields) {
+            if (errorResponse.extra.fields[field]) {
+              // Output the value contained in the field
+              alert(`${field}: ${errorResponse.extra.fields[field]}`)
+              // openPopup(); // Open the popup
+              console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+              return
+            }
+          }
+        }
     
-  //       // Display success message or redirect to confirmation page
-  //       //navigate(`/${role}/listings`);
-  //       //alert('Property added successfully!');
-  //       //console.log(response.body);
-  //     } catch (error) {
-  //       // Handle errors (display an error message to the user, log the error, etc.)
-  //       console.error('Error Occured', error.message);
-  //       alert("An error occured")
-  //     }
-  //   }
+        // Display success message or redirect to confirmation page
+        //navigate(`/${role}/listings`);
+        //alert('Property added successfully!');
+        //console.log(response.body);
+      } catch (error) {
+        // Handle errors (display an error message to the user, log the error, etc.)
+        console.error('Error Occured', error.message);
+        alert("An error occured")
+      }
+    }
 
-  //   PurchaseProperty();
-  // }, [apiEndpoint])
+    PurchaseProperty();
+  }, [apiEndpoint])
 
 
   /* 

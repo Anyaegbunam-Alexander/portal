@@ -640,11 +640,13 @@ const AddProperties = () => {
                   Legal and Compliance
                 </label>
                 <p className='text-sm text-gray-600 dark:text-gray-500 text-justify'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus nisi molestiae veniam temporibus 
-                  itaque quibusdam corporis quis repellat adipisci recusandae necessitatibus, mollitia fugit debitis 
-                  doloremque asperiores, libero officiis, doloribus dicta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus nisi molestiae veniam temporibus 
-                  itaque quibusdam corporis quis repellat adipisci recusandae necessitatibus, mollitia fugit debitis 
-                  doloremque asperiores, libero officiis, doloribus dicta.
+                  By listing your property on our platform, you confirm that you have the 
+                  legal authority to market and sell or rent the property. 
+                  You agree to provide accurate information, comply with all applicable 
+                  laws and regulations, and indemnify our platform against any claims. 
+                  Ensure that your listing respects intellectual property rights and 
+                  refrains from disclosing sensitive personal information. 
+                  Thank you for your cooperation.
                 </p>
 
                 {/* Purchase Type */}
