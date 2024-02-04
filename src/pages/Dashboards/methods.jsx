@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../contexts/ContextProvider';
 
@@ -58,7 +58,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   }
 
   // Fetch properties from your API here
-  const fetchProperties = async (apiEndpoint) => {
+  const fetchProperties = useCallback(async (apiEndpoint) => {
     try {
       const response = await fetch(apiEndpoint, {
         method: 'GET',
@@ -100,11 +100,11 @@ const UsePropertyLogic = (apiEndpoint) => {
     } finally {
       setIsLoading(false); // Set loading to false when the fetch operation completes
     }
-  };
+  }, [accessToken, setIsLoading]);
   
   useEffect(() => {
     fetchProperties(apiEndpoint);
-  }, [apiEndpoint]);
+  }, [apiEndpoint, fetchProperties]);
 
 
   const propertyPurchaseNav = () => {
@@ -255,17 +255,28 @@ const UsePropertyLogic = (apiEndpoint) => {
   }, [properties]);
 
   // Pagination handler
-  const handlePagination = () => {
-    if (!isLoading && paginationLinks) {
-      console.log(isLoading)
-      fetchProperties(
-        currentPage === 1 ? paginationLinks.next : paginationLinks.previous
-      );
-      setCurrentPage(
-        currentPage === 1 ? currentPage + 1 : currentPage - 1
-      );
-    }
-  };
+const handlePagination = () => {
+  if (!isLoading && paginationLinks) {
+    const nextPage = currentPage === 1 ? paginationLinks.next : paginationLinks.previous;
+
+    // Set loading to true before starting the fetch
+    setIsLoading(true);
+
+    fetchProperties(nextPage)
+      .then(() => {
+        setCurrentPage((prevPage) => (prevPage === 1 ? prevPage + 1 : prevPage - 1));
+      })
+      .catch((error) => {
+        console.error('Error during pagination fetch:', error);
+        alert('An error occurred during pagination. Please check the console for details.');
+      })
+      .finally(() => {
+        // Always set loading to false after the fetch, whether it succeeds or fails
+        setIsLoading(false);
+      });
+  }
+};
+
 
 
   return {

@@ -201,8 +201,7 @@ const Properties = () => {
               <div className="flex justify-center my-10 space-x-4">
                 <button 
                   onClick={() => handlePagination()} disabled={!paginationLinks.previous}
-                  className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
-                  style={{ backgroundColor: currentColor }}
+                  className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
                 >
                   <GrLinkPrevious className='mr-4'/>
                   Previous
@@ -210,8 +209,7 @@ const Properties = () => {
                 
                 <button 
                   onClick={() => handlePagination()} disabled={!paginationLinks.next}
-                  className={`text-white cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
-                  style={{ backgroundColor: currentColor }}
+                  className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
                 >
                   Next
                   <GrLinkNext className='ml-4'/>
