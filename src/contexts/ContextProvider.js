@@ -17,6 +17,7 @@ export const  ContextProvider = ({ children }) => {
     const [currentColor, setCurrentColor] = useState('#8840E6');
     const [currentMode, setCurrentMode] = useState('Light');
     const [themeSettings, setThemeSettings] = useState(false);
+    const [selectedPropertyId, setSelectedPropertyId] = useState(null);
 
     const setMode = (e) => {
         setCurrentMode(e.target.value);
@@ -53,7 +54,9 @@ export const  ContextProvider = ({ children }) => {
                 currentMode, 
                 setMode,
                 themeSettings, 
-                setThemeSettings
+                setThemeSettings,
+                selectedPropertyId, 
+                setSelectedPropertyId,
             }}
         >
             { children }

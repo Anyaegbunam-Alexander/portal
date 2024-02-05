@@ -19,10 +19,9 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [getAllAgencies, setgetAllAgencies] = useState([]); 
   const [isLoading, setIsLoading] = useState(false); 
-  const [selectedPropertyId, setSelectedPropertyId] = useState(null);
   const [propertyPurchaseFormData, setpropertyPurchaseFormData] = useState({
     property: property.id,
-    proof_of_payment: null,
+    proof_of_payment: '',
     referral_code: '',
     customer_notes: '',
   });
@@ -32,6 +31,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
   const accessToken = localStorage.getItem('token');
+  const { setSelectedPropertyId } = useStateContext();
     
     
   const UsehandleClick = () => {
@@ -118,10 +118,16 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 
   //navigation logic for the property purchase page
-  const propertyPurchaseNav = (propertyId) => {
-    setSelectedPropertyId(propertyId);
+  const propertyPurchaseNav = () => {
+    //setSelectedPropertyId(propertyId);
+    //alert(propertyId)
     if (role === 'agency') return alert("Agencies are not allowed to purchase property")
-    else return navigate(`/${role}/purchases/properties/`)
+    else {
+      const { id } = property;
+      setSelectedPropertyId(id);
+      navigate(`/${role}/purchases/properties/`)
+      console.log(property.id)
+    }
   }
 
   /* 
@@ -151,6 +157,8 @@ const UsePropertyLogic = (apiEndpoint) => {
   const PurchaseProperty = async (e) => {
     e.preventDefault();
 
+    if (!isLoading) setIsLoading(true);
+
     //const accessToken = localStorage.getItem('token');
     try {
       const formDataObj = new FormData();
@@ -163,7 +171,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       }
 
       // Append the file separately
-      formDataObj.append('cac_document', propertyPurchaseFormData.proof_of_payment);
+      formDataObj.append('proof_of_payment', propertyPurchaseFormData.proof_of_payment);
 
        // Log the FormData content before sending
        for (const pair of formDataObj.entries()) {
@@ -175,7 +183,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         headers: {
           "Referer": "https://realestate.api.sites.name.ng/",
           'Authorization': `Bearer ${accessToken}`,
-          "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi",
+          //"X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi",
         },
         body: formDataObj,
       });
@@ -201,6 +209,8 @@ const UsePropertyLogic = (apiEndpoint) => {
       // Handle errors (display an error message to the user, log the error, etc.)
       console.error('Error Occured', error.message);
       alert("Unable to purchase property. Please contact an admin");
+    } finally {
+      setIsLoading(false);
     }
   }
   
@@ -344,7 +354,6 @@ const handlePagination = () => {
     agenciesGrid,
     isLoading,
     propertyPurchaseFormData,
-    selectedPropertyId,
     navigate,
     openModal,
     navOptions,
