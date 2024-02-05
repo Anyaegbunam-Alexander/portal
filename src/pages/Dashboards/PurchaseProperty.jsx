@@ -5,8 +5,8 @@ import { useStateContext } from '../../contexts/ContextProvider';
 
 
 const PurchaseProperty = () => {
-  const { selectedPropertyId } = useStateContext()
-  console.log("Property", selectedPropertyId);
+  const { selectedPropertyData } = useStateContext()
+  console.log("Property", selectedPropertyData);
 
 
   const { 
@@ -16,6 +16,7 @@ const PurchaseProperty = () => {
     handleFieldChange,
     handleTellerChange,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/purchases/properties/`);
+
 
 
   return (
@@ -35,7 +36,7 @@ const PurchaseProperty = () => {
                     type="text"
                     id='property'
                     name='property'
-                    value={propertyPurchaseFormData.property = selectedPropertyId || ''}
+                    value={propertyPurchaseFormData.property = selectedPropertyData.id || ''}
                     onChange={handleFieldChange}
                     className="w-full p-3 border border-gray-300 rounded outline-none"
                     required

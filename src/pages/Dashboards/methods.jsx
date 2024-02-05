@@ -31,7 +31,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
   const accessToken = localStorage.getItem('token');
-  const { setSelectedPropertyId } = useStateContext();
+  const { setSelectedPropertyData } = useStateContext();
     
     
   const UsehandleClick = () => {
@@ -69,7 +69,7 @@ const UsePropertyLogic = (apiEndpoint) => {
 
   // Fetch properties from your API here
   const fetchProperties = useCallback(async (apiEndpoint) => {
-    if (!isLoading) setIsLoading(true);
+    setIsLoading(true);
 
     try {
       const response = await fetch(apiEndpoint, {
@@ -121,16 +121,15 @@ const UsePropertyLogic = (apiEndpoint) => {
 
   //navigation logic for the property purchase page
   const propertyPurchaseNav = () => {
-    //setSelectedPropertyId(propertyId);
-    //alert(propertyId)
     if (role === 'agency') return alert("Agencies are not allowed to purchase property")
     else {
-      const { id } = property;
-      setSelectedPropertyId(id);
-      navigate(`/${role}/purchases/properties/`)
-      console.log(property.id)
+      // export the generated data to the purchase property page
+      const { id, agent } = property;
+      setSelectedPropertyData(property);
+      navigate(`/${role}/purchases/properties/`);
     }
   }
+
 
   /* 
     The code below contains the logic for the property puchase
@@ -143,9 +142,6 @@ const UsePropertyLogic = (apiEndpoint) => {
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
     setpropertyPurchaseFormData((prevData) => ({ ...prevData, [name]: value }));
-
-    // Clear the error for the current field when the user types
-    //setErrors({ ...error, [e.target.name]: '' });
   };
 
   const handleTellerChange = (e) => {
@@ -159,7 +155,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const PurchaseProperty = async (e) => {
     e.preventDefault();
 
-    if (!isLoading) setIsLoading(true);
+    setIsLoading(true);
 
     //const accessToken = localStorage.getItem('token');
     try {
@@ -176,16 +172,15 @@ const UsePropertyLogic = (apiEndpoint) => {
       formDataObj.append('proof_of_payment', propertyPurchaseFormData.proof_of_payment);
 
        // Log the FormData content before sending
-       for (const pair of formDataObj.entries()) {
-        console.log(pair[0], pair[1]);
-      }
+      //  for (const pair of formDataObj.entries()) {
+      //   console.log(pair[0], pair[1]);
+      // }
 
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           "Referer": "https://realestate.api.sites.name.ng/",
           'Authorization': `Bearer ${accessToken}`,
-          //"X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi",
         },
         body: formDataObj,
       });
@@ -204,9 +199,9 @@ const UsePropertyLogic = (apiEndpoint) => {
         }
       }
 
+      navigate(`/${role}/orders`);
       alert('Property purchase successful');
 
-      
     } catch (error) {
       // Handle errors (display an error message to the user, log the error, etc.)
       console.error('Error Occured', error.message);
@@ -225,7 +220,6 @@ const UsePropertyLogic = (apiEndpoint) => {
     - Contains data for agencies page.
   */
   useEffect(() => {
-    const accessToken = localStorage.getItem('token');
     const getAllAgencies = async () => {
       try {
         const response = await fetch(apiEndpoint, {
@@ -245,7 +239,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     }
 
     getAllAgencies();
-  }, [apiEndpoint]);
+  }, [accessToken, apiEndpoint]);
 
   const gridAgenciesProfile = (props) => (
     <div className="flex items-center gap-2">
