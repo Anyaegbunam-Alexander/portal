@@ -69,6 +69,8 @@ const UsePropertyLogic = (apiEndpoint) => {
 
   // Fetch properties from your API here
   const fetchProperties = useCallback(async (apiEndpoint) => {
+    if (!isLoading) setIsLoading(true);
+
     try {
       const response = await fetch(apiEndpoint, {
         method: 'GET',

@@ -1,27 +1,22 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import UsePropertyLogic from './methods';
 import LoadingSpinner from '../../components/loader/LoadingSpinner';
 import { useStateContext } from '../../contexts/ContextProvider';
 
 
 const PurchaseProperty = () => {
-  const { propertyId } = useParams();
   const { selectedPropertyId } = useStateContext()
+  console.log("Property", selectedPropertyId);
 
 
   const { 
     propertyPurchaseFormData,
     isLoading,
-    navigate,
-    navOptions,
-    propertyPurchaseNav,
     PurchaseProperty,
     handleFieldChange,
     handleTellerChange,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/purchases/properties/`);
 
-  console.log("Property", selectedPropertyId);
 
   return (
     <div>
