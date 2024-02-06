@@ -6,7 +6,10 @@ import { useStateContext } from '../../contexts/ContextProvider';
 
 const PurchaseProperty = () => {
   const { selectedPropertyData } = useStateContext()
-  console.log("Property", selectedPropertyData);
+  //console.log("Property", selectedPropertyData);
+
+  const propertyId = selectedPropertyData?.id;
+
 
 
   const { 
@@ -18,6 +21,16 @@ const PurchaseProperty = () => {
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/purchases/properties/`);
 
 
+  const getPropertyId = (value) => {
+    const storedPropertyId = localStorage.getItem('selectedPropertyId')
+    
+    if (value === propertyId){
+      return value = storedPropertyId;
+    } else {
+      return propertyId;
+    }
+    
+  }
 
   return (
     <div>
@@ -36,7 +49,7 @@ const PurchaseProperty = () => {
                     type="text"
                     id='property'
                     name='property'
-                    value={propertyPurchaseFormData.property = selectedPropertyData.id || ''}
+                    value={getPropertyId(propertyPurchaseFormData.property) || ''}
                     onChange={handleFieldChange}
                     className="w-full p-3 border border-gray-300 rounded outline-none"
                     required

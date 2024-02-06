@@ -123,12 +123,19 @@ const UsePropertyLogic = (apiEndpoint) => {
   const propertyPurchaseNav = () => {
     if (role === 'agency') return alert("Agencies are not allowed to purchase property")
     else {
-      // export the generated data to the purchase property page
-      const { id, agent } = property;
-      setSelectedPropertyData(property);
-      navigate(`/${role}/purchases/properties/`);
+      if (property) {
+        // export the generated data to the purchase property page
+        setSelectedPropertyData(property);
+        const propertyId = property.id;
+        localStorage.setItem('selectedPropertyId', propertyId);
+        navigate(`/${role}/purchases/properties/`);
+      } else {
+        alert ('Unable to find property, please try again!');
+      }
     }
   }
+
+  // -------------- END OF CODE ----------------------------
 
 
   /* 
@@ -157,7 +164,6 @@ const UsePropertyLogic = (apiEndpoint) => {
 
     setIsLoading(true);
 
-    //const accessToken = localStorage.getItem('token');
     try {
       const formDataObj = new FormData();
 
@@ -210,7 +216,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       setIsLoading(false);
     }
   }
-  
+  // -------------- END OF CODE ----------------------------
 
 
   /* 
@@ -333,7 +339,7 @@ const handlePagination = () => {
       });
   }
 };
-
+// -------------- END OF CODE ----------------------------
 
 
   return {
