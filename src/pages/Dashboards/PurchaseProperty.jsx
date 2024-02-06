@@ -11,7 +11,6 @@ const PurchaseProperty = () => {
   const propertyId = selectedPropertyData?.id;
 
 
-
   const { 
     propertyPurchaseFormData,
     isLoading,

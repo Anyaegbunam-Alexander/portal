@@ -12,7 +12,8 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [properties, setProperties] = useState([]);
   const [property, setproperty] = useState([]);
   const [paginationLinks, setPaginationLinks] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1); // Add current page state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const [selectedImage, setSelectedImage] = useState(null);
@@ -68,11 +69,11 @@ const UsePropertyLogic = (apiEndpoint) => {
   }
 
   // Fetch properties from your API here
-  const fetchProperties = useCallback(async (apiEndpoint) => {
+  const fetchProperties = useCallback(async (page) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(apiEndpoint, {
+      const response = await fetch(`${apiEndpoint}?page=${page}`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -84,6 +85,8 @@ const UsePropertyLogic = (apiEndpoint) => {
 
       // gets all properties
       setProperties(data.results);
+      console.log(data);
+      setTotalPages(data.page_count);
 
       // gets single property
       setproperty(data);
@@ -112,11 +115,11 @@ const UsePropertyLogic = (apiEndpoint) => {
     } finally {
       setIsLoading(false); // Set loading to false when the fetch operation completes
     }
-  }, [accessToken, setIsLoading]);
+  }, [apiEndpoint, accessToken, setIsLoading]);
   
   useEffect(() => {
-    fetchProperties(apiEndpoint);
-  }, [apiEndpoint, fetchProperties]);
+    fetchProperties(currentPage);
+  }, [currentPage, fetchProperties]);
 
 
   //navigation logic for the property purchase page
@@ -206,7 +209,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       }
 
       navigate(`/${role}/orders`);
-      alert('Property purchase successful');
+      alert('Property purchase successful, a customer representative from the agency will reach out to you shortly to confirm your payment.');
 
     } catch (error) {
       // Handle errors (display an error message to the user, log the error, etc.)
@@ -347,7 +350,6 @@ const handlePagination = () => {
     property,
     properties,
     dropdownPosition,
-    paginationLinks,
     showDropdown,
     currentColor,
     selectedImage,
@@ -356,6 +358,9 @@ const handlePagination = () => {
     agenciesGrid,
     isLoading,
     propertyPurchaseFormData,
+    currentPage,
+    totalPages,
+    setCurrentPage,
     navigate,
     openModal,
     navOptions,

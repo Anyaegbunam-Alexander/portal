@@ -23,15 +23,18 @@ import LoadingSpinner from '../../../components/loader/LoadingSpinner';
 const Properties = () => {
   const{
     properties,
-    paginationLinks,
     dropdownPosition, 
     showDropdown,
     currentColor,
     isLoading,
+    currentPage,
+    totalPages,
     showProperty,
     UsehandleClick,
     UsehandleDropdown,
+    paginationLinks,
     handlePagination,
+    setCurrentPage,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
 
 
@@ -221,15 +224,19 @@ const Properties = () => {
             {paginationLinks && (
               <div className="flex justify-center my-10 space-x-4">
                 <button 
-                  onClick={() => handlePagination()} disabled={!paginationLinks.previous}
+                  disabled={currentPage === 1}
+                  onClick={() => setCurrentPage(currentPage - 1)}
                   className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
                 >
                   <GrLinkPrevious className='mr-4'/>
                   Previous
                 </button>
+
+                <span>{`Page ${currentPage} of ${totalPages}`}</span>
                 
                 <button 
-                  onClick={() => handlePagination()} disabled={!paginationLinks.next}
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage(currentPage + 1)}
                   className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
                 >
                   Next
