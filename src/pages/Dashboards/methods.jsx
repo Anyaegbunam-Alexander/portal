@@ -69,11 +69,11 @@ const UsePropertyLogic = (apiEndpoint) => {
   }
 
   // Fetch properties from your API here
-  const fetchProperties = useCallback(async (page) => {
+  const fetchProperties = useCallback(async (apiEndpoint) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${apiEndpoint}?page=${page}`, {
+      const response = await fetch(apiEndpoint, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -86,6 +86,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       // gets all properties
       setProperties(data.results);
       console.log(data);
+
       setTotalPages(data.page_count);
 
       // gets single property
@@ -96,6 +97,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         previous: data.links.previous,
         next: data.links.next,
       });
+
 
       if (!response.ok) {
         const errorResponse = await response.json();
@@ -115,11 +117,11 @@ const UsePropertyLogic = (apiEndpoint) => {
     } finally {
       setIsLoading(false); // Set loading to false when the fetch operation completes
     }
-  }, [apiEndpoint, accessToken, setIsLoading]);
+  }, [accessToken, setIsLoading]);
   
   useEffect(() => {
-    fetchProperties(currentPage);
-  }, [currentPage, fetchProperties]);
+    fetchProperties(apiEndpoint);
+  }, [apiEndpoint, fetchProperties]);
 
 
   //navigation logic for the property purchase page
@@ -315,33 +317,35 @@ const UsePropertyLogic = (apiEndpoint) => {
   ];
 
 
-  // Pagination logic below
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [properties]);
 
   // Pagination handler
-const handlePagination = () => {
-  if (!isLoading && paginationLinks) {
-    const nextPage = currentPage === 1 ? paginationLinks.next : paginationLinks.previous;
+  const handlePagination = async () => {
+    const paginationNextLink = localStorage.getItem('nextPageLink');
+    const paginationPrevLink = localStorage.getItem('prevPageLink');
 
-    // Set loading to true before starting the fetch
-    setIsLoading(true);
+    if (!isLoading && paginationLinks) {
+      setIsLoading(true);
 
-    fetchProperties(nextPage)
-      .then(() => {
-        setCurrentPage((prevPage) => (prevPage === 1 ? prevPage + 1 : prevPage - 1));
-      })
-      .catch((error) => {
+      try {
+        // Fetch data for the next or previous page
+        await fetchProperties(
+          currentPage === 1 ? paginationLinks.next : paginationLinks.previous
+        );
+
+        // Update the currentPage state after the fetchProperties completes
+        setCurrentPage(prevPage => {
+          return currentPage === 1 ? prevPage + 1 : prevPage - 1;
+        });
+      } catch (error) {
         console.error('Error during pagination fetch:', error);
-        alert('An error occurred during pagination. Please check the console for details.');
-      })
-      .finally(() => {
-        // Always set loading to false after the fetch, whether it succeeds or fails
+        alert('An error occurred during pagination. Please try again');
+      } finally {
         setIsLoading(false);
-      });
-  }
-};
+      }
+    }
+  };
+
+
 // -------------- END OF CODE ----------------------------
 
 
@@ -358,6 +362,7 @@ const handlePagination = () => {
     agenciesGrid,
     isLoading,
     propertyPurchaseFormData,
+    paginationLinks,
     currentPage,
     totalPages,
     setCurrentPage,

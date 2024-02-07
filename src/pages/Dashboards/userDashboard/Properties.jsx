@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IoIosMore } from 'react-icons/io';
 import { LuBedDouble } from "react-icons/lu";
 import { LuShowerHead } from "react-icons/lu";
@@ -13,12 +13,16 @@ import { CiShare2 } from "react-icons/ci";
 
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import UsePropertyLogic from '../methods';
-import { Outlet } from 'react-router-dom';
 import LoadingSpinner from '../../../components/loader/LoadingSpinner';
 
 
 const Properties = () => {
+
+  //const { currentPage } = UsePropertyLogic();
+  
   const{
+    totalPages,
+    currentPage,
     properties,
     paginationLinks,
     dropdownPosition, 
@@ -28,8 +32,21 @@ const Properties = () => {
     showProperty,
     UsehandleDropdown,
     handlePagination,
-  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
+  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/?page=${localStorage.getItem('currentPage') || 1}`);
 
+
+  useEffect(() => {
+    // Store the current page number in local storage
+    localStorage.setItem('currentPage', currentPage);
+  }, [currentPage]);
+
+
+  console.log("Total page count:", totalPages);
+  console.log("Page Links:", paginationLinks);
+  console.log("Current page:", currentPage);
+
+  localStorage.setItem('nextPageLink', paginationLinks?.next);
+  localStorage.setItem('prevPageLink', paginationLinks?.previous);
 
   return (
     <div className="mt-16">
@@ -195,10 +212,10 @@ const Properties = () => {
           </div>
 
 
-          {/* Pagination */}
+           {/* Pagination */}
           <div>
             {paginationLinks && (
-              <div className="flex justify-center my-10 space-x-4">
+              <div className="flex justify-center items-center my-10 space-x-4">
                 <button 
                   onClick={() => handlePagination()} disabled={!paginationLinks.previous}
                   className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
@@ -207,6 +224,8 @@ const Properties = () => {
                   Previous
                 </button>
                 
+                <span>{`page ${currentPage} of ${totalPages}`}</span>
+
                 <button 
                   onClick={() => handlePagination()} disabled={!paginationLinks.next}
                   className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
@@ -214,7 +233,6 @@ const Properties = () => {
                   Next
                   <GrLinkNext className='ml-4'/>
                 </button>
-                <Outlet />
               </div>
             )}
           </div>

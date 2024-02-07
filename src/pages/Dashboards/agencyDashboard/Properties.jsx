@@ -29,12 +29,12 @@ const Properties = () => {
     isLoading,
     currentPage,
     totalPages,
+    nextPageLink,
     showProperty,
     UsehandleClick,
     UsehandleDropdown,
-    paginationLinks,
-    handlePagination,
-    setCurrentPage,
+    handleNextPage,
+    handlePreviousPage,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
 
 
@@ -220,31 +220,27 @@ const Properties = () => {
           </div>
 
           {/* Pagination */}
-          <div>
-            {paginationLinks && (
-              <div className="flex justify-center my-10 space-x-4">
-                <button 
-                  disabled={currentPage === 1}
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                  className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
-                >
-                  <GrLinkPrevious className='mr-4'/>
-                  Previous
-                </button>
+          <div className="flex justify-center my-10 space-x-4 bg-black">
+            <button 
+              disabled={currentPage === 1}
+              onClick={handlePreviousPage}
+              className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
+            >
+              <GrLinkPrevious className='mr-4'/>
+              Previous
+            </button>
 
-                <span>{`Page ${currentPage} of ${totalPages}`}</span>
-                
-                <button 
-                  disabled={currentPage === totalPages}
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                  className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
-                >
-                  Next
-                  <GrLinkNext className='ml-4'/>
-                </button>
-                <Outlet />
-              </div>
-            )}
+            
+            
+            <button 
+              disabled={!nextPageLink}
+              onClick={handleNextPage}
+              className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
+            >
+              Next
+              <GrLinkNext className='ml-4'/>
+            </button>
+            <Outlet />
           </div>
         </>
       )}
