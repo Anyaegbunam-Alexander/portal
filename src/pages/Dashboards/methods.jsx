@@ -95,8 +95,8 @@ const UsePropertyLogic = (apiEndpoint) => {
 
       // pagination links
       setPaginationLinks({
-        previous: data.links.previous,
-        next: data.links.next,
+        previous: data.links?.previous,
+        next: data.links?.next,
       });
 
 
