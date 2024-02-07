@@ -509,10 +509,6 @@ export const links = [
         name: 'calendar',
         icon: <AiOutlineCalendar />,
       },
-      {
-        name: 'editor',
-        icon: <FiEdit />,
-      },
     ],
   },
   {

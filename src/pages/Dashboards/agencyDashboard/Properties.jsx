@@ -16,25 +16,23 @@ import { CiShare2 } from "react-icons/ci";
 // import { Button } from '../../../components/agencyDashboardComponent';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import UsePropertyLogic from '../methods';
-import { Outlet } from 'react-router-dom';
 import LoadingSpinner from '../../../components/loader/LoadingSpinner';
 
 
 const Properties = () => {
   const{
+    totalPages,
+    currentPage,
+    paginationLinks,
     properties,
     dropdownPosition, 
     showDropdown,
     currentColor,
     isLoading,
-    currentPage,
-    totalPages,
-    nextPageLink,
     showProperty,
     UsehandleClick,
     UsehandleDropdown,
-    handleNextPage,
-    handlePreviousPage,
+    handlePagination,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
 
 
@@ -220,27 +218,28 @@ const Properties = () => {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center my-10 space-x-4 bg-black">
-            <button 
-              disabled={currentPage === 1}
-              onClick={handlePreviousPage}
-              className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
-            >
-              <GrLinkPrevious className='mr-4'/>
-              Previous
-            </button>
+          <div>
+            {paginationLinks && (
+              <div className="flex justify-center items-center my-10 space-x-4">
+                <button 
+                  onClick={() => handlePagination()} disabled={!paginationLinks?.previous}
+                  className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
+                >
+                  <GrLinkPrevious className='mr-4'/>
+                  Previous
+                </button>
+                
+                <span>{`page ${currentPage} of ${totalPages}`}</span>
 
-            
-            
-            <button 
-              disabled={!nextPageLink}
-              onClick={handleNextPage}
-              className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
-            >
-              Next
-              <GrLinkNext className='ml-4'/>
-            </button>
-            <Outlet />
+                <button 
+                  onClick={() => handlePagination()} disabled={!paginationLinks.next}
+                  className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
+                >
+                  Next
+                  <GrLinkNext className='ml-4'/>
+                </button>
+              </div>
+            )}
           </div>
         </>
       )}

@@ -83,7 +83,7 @@ const PurchaseProperty = () => {
                     id='proof_of_payment'
                     name='proof_of_payment'
                     onChange={handleTellerChange}
-                    accept="image/*, application/pdf" // adjust file types as needed
+                    accept="image/*, application/pdf"
                     className="w-full p-3 border border-gray-300 rounded"
                     required
                   />

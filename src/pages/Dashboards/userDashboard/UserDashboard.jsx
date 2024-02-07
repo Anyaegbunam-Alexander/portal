@@ -15,7 +15,6 @@ import {
   Bar, 
   Pie, 
   Financial, 
-  Editor
 } from './index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
@@ -72,7 +71,6 @@ const UserDashboard = () => {
                         <Route path="agencies" element={<Agencies />} />
 
                         {/* Apps */}
-                        <Route path="editor" element={<Editor />} />
                         <Route path="calendar" element={<Calendar />} />
 
                         {/* charts */}

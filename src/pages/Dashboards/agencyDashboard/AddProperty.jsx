@@ -34,7 +34,8 @@ const AddProperties = () => {
     sold: false,
     square_footage: '',
     transaction_type: '',
-    type: '', // name of the property
+    type: '',
+    name: '',
   })
   const maxFileSize = 2 * 1024 * 1024; // 10MB
   const accessToken = localStorage.getItem('token');
@@ -212,8 +213,8 @@ const AddProperties = () => {
                 <input
                   type="text"
                   id="propertyName"
-                  name="type"
-                  value={propertyData.type}
+                  name="name"
+                  value={propertyData.name}
                   onChange={handleChange}
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
                   required
@@ -461,21 +462,40 @@ const AddProperties = () => {
               </div>
 
               {/* Square footage and property type */}
-              <div>
-                  <label htmlFor="availability" className="block text-base font-medium text-gray-700">
-                  Square Footage (sqft)
+              <div className="flex space-x-6">
+                <div className='w-6/12'>
+                  <label htmlFor="square_footage" className="block text-base font-medium text-gray-700">
+                    Square Footage (sqft)
                   </label>
                   <input
-                  type='number'
-                  id="availability"
-                  name="square_footage"
-                  value={propertyData.square_footage}
-                  onChange={handleChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
-                  min='0'
-                  required
+                    type='number'
+                    id="square_footage"
+                    name="square_footage"
+                    value={propertyData.square_footage}
+                    onChange={handleChange}
+                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    min='0'
+                    required
                   />
+                </div>
+
+                <div className='w-6/12'>
+                  <label htmlFor="propertyName" className="block text-base font-medium text-gray-700">
+                    Property type
+                  </label>
+                  <input
+                    type="text"
+                    id="propertyName"
+                    name="type"
+                    value={propertyData.type}
+                    onChange={handleChange}
+                    className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                    placeholder='e.g. Duplex, Mansion, Boys-quater e.t.c.'
+                    required
+                  />
+                </div>
               </div>
+
 
               {/* uploading of property pictures */}
               <div>
@@ -489,6 +509,8 @@ const AddProperties = () => {
                   id="fileInput"
                   multiple
                   onChange={handleFileChange}
+                  accept="image/*"
+                  required
                 />
                 <label
                   htmlFor="fileInput"
@@ -508,7 +530,7 @@ const AddProperties = () => {
                             key={index}
                             className="flex items-center justify-between bg-gray-100 p-2 mb-2 rounded-md"
                           >
-                            <span className="truncate">{file.name}</span>
+                            <span className="truncate w-28">{file.name}</span>
                             <button
                               className="text-red-500 hover:text-red-700"
                               onClick={() => handleRemoveFile(index)}
@@ -535,6 +557,7 @@ const AddProperties = () => {
                   id="floorPlan"
                   multiple
                   onChange={handleFloorPlanFileChange}
+                  accept="image/*, application/pdf"
                 />
                 <label
                   htmlFor="floorPlan"
@@ -554,7 +577,7 @@ const AddProperties = () => {
                             key={index}
                             className="flex items-center justify-between bg-gray-100 p-2 mb-2 rounded-md"
                           >
-                            <span className="truncate">{file.name}</span>
+                            <span className="truncate w-28">{file.name}</span>
                             <button
                               className="text-red-500 hover:text-red-700"
                               onClick={() => handleRemoveFloorPlan(index)}
@@ -622,17 +645,19 @@ const AddProperties = () => {
                 <label className="block text-base font-medium text-gray-700">
                   Purchase Type
                 </label>
-                <input
-                  type='text'
+                <select
                   id="type"
                   name="transaction_type"
                   value={propertyData.transaction_type}
                   onChange={handleChange}
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
-                  placeholder='E.g Sale or Rental'
                   required
-                />
+                >
+                  <option value="Sale">Sale</option>
+                  <option value="Rental">Rental</option>
+                </select>
               </div>
+
 
               {/* Legal and compliance */}
               <div className='space-y-5'>

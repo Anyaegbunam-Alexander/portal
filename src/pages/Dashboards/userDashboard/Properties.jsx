@@ -23,8 +23,8 @@ const Properties = () => {
   const{
     totalPages,
     currentPage,
-    properties,
     paginationLinks,
+    properties,
     dropdownPosition, 
     showDropdown,
     currentColor,
@@ -207,7 +207,7 @@ const Properties = () => {
           </div>
 
 
-           {/* Pagination */}
+          {/* Pagination */}
           <div>
             {paginationLinks && (
               <div className="flex justify-center items-center my-10 space-x-4">
