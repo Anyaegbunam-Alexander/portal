@@ -347,6 +347,44 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 // -------------- END OF CODE ----------------------------
 
+// Fetch properties from your API here
+const deleteProperty = async (propertyId) => {
+  setIsLoading(true);
+  const url = `https://realestate.api.sites.name.ng/properties/${propertyId}`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+
+    if (!response.ok) {
+      const errorResponse = await response.json();
+
+      for (const field in errorResponse.extra.fields) {
+        if (errorResponse.extra.fields[field]) {
+          // Output the value contained in the field
+          alert(`${field}: ${errorResponse.extra.fields[field]}`)
+          console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+          return
+        }
+      }
+    }
+
+    alert('Property deleted successfully');
+    navigate(`/${role}/overview`);
+
+  } catch (error) {
+    console.error(error);
+    alert("An Error Occured: Unable to delete property", error);
+  } finally {
+    setIsLoading(false); // Set loading to false when the fetch operation completes
+  }
+}
+
 
   return {
     role,
@@ -377,6 +415,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     handleFieldChange,
     handleTellerChange,
     PurchaseProperty,
+    deleteProperty,
   }
 }
 

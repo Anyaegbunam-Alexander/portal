@@ -17,8 +17,6 @@ import LoadingSpinner from '../../../components/loader/LoadingSpinner';
 
 
 const Properties = () => {
-
-  //const { currentPage } = UsePropertyLogic();
   
   const{
     totalPages,
@@ -71,6 +69,7 @@ const Properties = () => {
                     type="button" 
                     className={`p-4 text-white font-semibold outline-none hover:opacity-75 flex items-center`}
                     style={{ backgroundColor: currentColor }}
+                    onClick={() => {alert('currently under maintenance')}}
                   >
                     <IoSearchOutline className=' text-2xl mr-2'/>
                     Search
@@ -80,7 +79,10 @@ const Properties = () => {
 
               <div>
                 <TooltipComponent content="Filter" position='Top'>
-                  <IoFilter className='text-white text-2xl hover:opacity-80 lg:mr-12 max-sm:hidden'/>
+                  <IoFilter 
+                    className='text-white text-2xl hover:opacity-80 lg:mr-12 max-sm:hidden'
+                    onClick={() => {alert('currently under maintenance')}}
+                  />
                 </TooltipComponent>
               </div>
             </div>
@@ -135,7 +137,7 @@ const Properties = () => {
                     </div>
 
                     <div className="mt-8">
-                      <p className="font-bold text-xl hover:text-gray-600 w-80"> {property.type}</p>
+                      <p className="font-bold text-xl hover:text-gray-600 w-80"> {property.name || property.type}</p>
                       <p className="py-4 font-normal">
                         Added: 
                         <span className="ml-2 text-gray-400">

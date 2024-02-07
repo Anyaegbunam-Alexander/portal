@@ -90,28 +90,30 @@ const PropertyDetails = () => {
                     className=" bg-secondary-dark-bg h-full flex flex-col justify-center items-center"
                     style={{ overlay: { zIndex: 1000 }, content: { zIndex: 1001 } }}
                   >
-                  <button 
-                    onClick={closeModal}
-                    className=' bg-red-600 p-4 text-white rounded-lg fixed top-10 flex items-center text-lg'
-                  ><MdOutlineCancel className='mr-2'/> Close</button>
-                  <div className=' p-5 m-auto my-5'>
-                    <img
-                      src={selectedImage.image}
-                      alt={`property enlarged`}
-                      className="object-cover rounded-lg w-full h-full md:w-600 md:h-auto"
-                    />
-                  </div>
-                </Modal>
+                    <button 
+                      onClick={closeModal}
+                      className=' bg-red-600 p-4 text-white rounded-lg fixed top-10 flex items-center text-lg'
+                    ><MdOutlineCancel className='mr-2'/> Close</button>
+                    <div className=' p-5 m-auto my-5'>
+                      <img
+                        src={selectedImage.image}
+                        alt={`property enlarged`}
+                        className="object-cover rounded-lg w-full h-full md:w-600 md:h-auto"
+                      />
+                    </div>
+                  </Modal>
                 )}
-
-                <img
-                  src={property.images[0].image}
-                  className="rounded-xl cursor-pointer h-96 object-cover transform transition-transform duration-600 ease-in-out hover:scale-110 
-                  max-md:my-10 md:my-8"
-                  style={{width: '700px'}}
-                  alt="Property" 
-                  onClick={() => openModal(property.images[0])}
-                />
+          
+                {property.images && property.images.length > 0 && (
+                  <img
+                    src={property.images[0].image}
+                    className="rounded-xl cursor-pointer h-96 object-cover transform transition-transform duration-600 ease-in-out hover:scale-110 
+                    max-md:my-10 md:my-8"
+                    style={{width: '700px'}}
+                    alt="Property" 
+                    onClick={() => openModal(property.images[0])}
+                  />
+                )}
               </div>
             </div>
           </div>

@@ -19,7 +19,9 @@ import UsePropertyLogic from '../methods';
 import LoadingSpinner from '../../../components/loader/LoadingSpinner';
 
 
+
 const Properties = () => {
+
   const{
     totalPages,
     currentPage,
@@ -33,7 +35,9 @@ const Properties = () => {
     UsehandleClick,
     UsehandleDropdown,
     handlePagination,
+    deleteProperty,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
+
 
 
   return (
@@ -64,6 +68,7 @@ const Properties = () => {
                     type="button" 
                     className={`p-4 text-white font-semibold outline-none hover:opacity-75 flex items-center`}
                     style={{ backgroundColor: currentColor }}
+                    onClick={() => {alert('currently under maintenance')}}
                   >
                     <IoSearchOutline className=' text-2xl mr-2'/>
                     Search
@@ -73,7 +78,10 @@ const Properties = () => {
 
               <div>
                 <TooltipComponent content="Filter" position='Top'>
-                  <IoFilter className='text-white text-2xl hover:opacity-80 lg:mr-12 max-sm:hidden'/>
+                  <IoFilter 
+                    className='text-white text-2xl hover:opacity-80 lg:mr-12 max-sm:hidden' 
+                    onClick={() => {alert('currently under maintenance')}}
+                  />
                 </TooltipComponent>
               </div>
             </div>
@@ -107,7 +115,10 @@ const Properties = () => {
                             <li className='flex items-center'>
                               <CiEdit className='text-xl mr-3'/> Edit
                             </li>
-                            <li className='flex items-center'>
+                            <li 
+                              className='flex items-center cursor-pointer'
+                              onClick={() => deleteProperty(property.id)}
+                            >
                               <RiDeleteBin6Line className='text-xl mr-3'/> Delete
                             </li>
                           </ul>
@@ -134,7 +145,7 @@ const Properties = () => {
                     </div>
 
                     <div className="mt-8">
-                      <p className="font-bold text-xl hover:text-gray-600 w-80"> {property.type}</p>
+                      <p className="font-bold text-xl hover:text-gray-600 w-80"> {property.name || property.type}</p>
                       <p className="py-4 font-normal">
                         Added: 
                         <span className="ml-2 text-gray-400">
