@@ -650,13 +650,15 @@ const AddProperties = () => {
                   name="transaction_type"
                   value={propertyData.transaction_type}
                   onChange={handleChange}
-                  className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none"
+                  className="mt-1 p-2 border border-gray-300 rounded-md w-full outline-none appearance-none focus:ring-purple-500 focus:border-purple-500"
                   required
                 >
-                  <option value="Sale">Sale</option>
-                  <option value="Rental">Rental</option>
+                  <option value="" disabled>Select option</option>
+                  <option value="Sale" className='py-2'>Sale</option>
+                  <option value="Rental" className='py-2'>Rental</option>
                 </select>
               </div>
+
 
 
               {/* Legal and compliance */}
