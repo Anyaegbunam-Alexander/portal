@@ -5,8 +5,7 @@ import { useStateContext } from '../../contexts/ContextProvider';
 
 
 const PurchaseProperty = () => {
-  const { selectedPropertyData } = useStateContext()
-  //console.log("Property", selectedPropertyData);
+  const { selectedPropertyData } = useStateContext();
 
   const propertyId = selectedPropertyData?.id;
 

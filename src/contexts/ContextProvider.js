@@ -18,6 +18,8 @@ export const  ContextProvider = ({ children }) => {
     const [currentMode, setCurrentMode] = useState('Light');
     const [themeSettings, setThemeSettings] = useState(false);
     const [selectedPropertyData, setSelectedPropertyData] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+
 
     const setMode = (e) => {
         setCurrentMode(e.target.value);
@@ -57,6 +59,8 @@ export const  ContextProvider = ({ children }) => {
                 setThemeSettings,
                 selectedPropertyData, 
                 setSelectedPropertyData,
+                currentPage, 
+                setCurrentPage,
             }}
         >
             { children }

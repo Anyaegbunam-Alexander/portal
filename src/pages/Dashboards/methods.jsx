@@ -12,7 +12,6 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [properties, setProperties] = useState([]);
   const [property, setproperty] = useState([]);
   const [paginationLinks, setPaginationLinks] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [showDropdown, setShowDropdown] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
@@ -26,6 +25,8 @@ const UsePropertyLogic = (apiEndpoint) => {
     referral_code: '',
     customer_notes: '',
   });
+
+  const { currentPage, setCurrentPage } = useStateContext();
 
   
   // variables
@@ -122,6 +123,33 @@ const UsePropertyLogic = (apiEndpoint) => {
   useEffect(() => {
     fetchProperties(apiEndpoint);
   }, [apiEndpoint, fetchProperties]);
+
+
+  // Pagination handler
+  const handlePagination = async () => {
+
+    if (!isLoading && paginationLinks) {
+      setIsLoading(true);
+
+      try {
+        // Fetch data for the next or previous page
+        await fetchProperties(
+          currentPage === 1 ? paginationLinks.next : paginationLinks?.previous
+        );
+
+        // Update the currentPage state after the fetchProperties completes
+        setCurrentPage(prevPage => {
+          return currentPage === 1 ? prevPage + 1 : prevPage - 1;
+        });
+
+      } catch (error) {
+        console.error('Error during pagination fetch:', error);
+        alert('An error occurred during pagination. Please try again');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
 
 
   //navigation logic for the property purchase page
@@ -315,35 +343,6 @@ const UsePropertyLogic = (apiEndpoint) => {
       template: gridAgenciesProfileLink
     },
   ];
-
-
-
-  // Pagination handler
-  const handlePagination = async () => {
-    const paginationNextLink = localStorage.getItem('nextPageLink');
-    const paginationPrevLink = localStorage.getItem('prevPageLink');
-
-    if (!isLoading && paginationLinks) {
-      setIsLoading(true);
-
-      try {
-        // Fetch data for the next or previous page
-        await fetchProperties(
-          currentPage === 1 ? paginationLinks.next : paginationLinks.previous
-        );
-
-        // Update the currentPage state after the fetchProperties completes
-        setCurrentPage(prevPage => {
-          return currentPage === 1 ? prevPage + 1 : prevPage - 1;
-        });
-      } catch (error) {
-        console.error('Error during pagination fetch:', error);
-        alert('An error occurred during pagination. Please try again');
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  };
 
 
 // -------------- END OF CODE ----------------------------

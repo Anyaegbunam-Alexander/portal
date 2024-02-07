@@ -32,18 +32,13 @@ const Properties = () => {
     showProperty,
     UsehandleDropdown,
     handlePagination,
-  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/?page=${localStorage.getItem('currentPage') || 1}`);
+  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`); //?page=${localStorage.getItem('currentPage') || 1}
 
 
   useEffect(() => {
     // Store the current page number in local storage
     localStorage.setItem('currentPage', currentPage);
   }, [currentPage]);
-
-
-  console.log("Total page count:", totalPages);
-  console.log("Page Links:", paginationLinks);
-  console.log("Current page:", currentPage);
 
   localStorage.setItem('nextPageLink', paginationLinks?.next);
   localStorage.setItem('prevPageLink', paginationLinks?.previous);
@@ -217,7 +212,7 @@ const Properties = () => {
             {paginationLinks && (
               <div className="flex justify-center items-center my-10 space-x-4">
                 <button 
-                  onClick={() => handlePagination()} disabled={!paginationLinks.previous}
+                  onClick={() => handlePagination()} disabled={!paginationLinks?.previous}
                   className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
                 >
                   <GrLinkPrevious className='mr-4'/>
