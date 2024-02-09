@@ -6,8 +6,10 @@ import { useStateContext } from '../../contexts/ContextProvider';
 
 const PurchaseProperty = () => {
   const { selectedPropertyData } = useStateContext();
-
+  
   const propertyId = selectedPropertyData?.id;
+  
+  console.log("Property ID: ",propertyId);
 
 
   const { 
@@ -20,7 +22,7 @@ const PurchaseProperty = () => {
 
 
   const getPropertyId = (value) => {
-    const storedPropertyId = localStorage.getItem('selectedPropertyId')
+    const storedPropertyId = localStorage.getItem('selectedPropertyId');
     
     if (value === propertyId){
       return value = storedPropertyId;

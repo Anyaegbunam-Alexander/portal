@@ -153,12 +153,12 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 
   //navigation logic for the property purchase page
-  const propertyPurchaseNav = () => {
+  const propertyPurchaseNav = async() => {
     if (role === 'agency') return alert("Agencies are not allowed to purchase property")
     else {
       if (property) {
         // export the generated data to the purchase property page
-        setSelectedPropertyData(property);
+        await setSelectedPropertyData(property);
         const propertyId = property.id;
         localStorage.setItem('selectedPropertyId', propertyId);
         navigate(`/${role}/purchases/properties/`);
@@ -210,7 +210,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       // Append the file separately
       formDataObj.append('proof_of_payment', propertyPurchaseFormData.proof_of_payment);
 
-       // Log the FormData content before sending
+      // Log the FormData content before sending
       //  for (const pair of formDataObj.entries()) {
       //   console.log(pair[0], pair[1]);
       // }
@@ -218,7 +218,6 @@ const UsePropertyLogic = (apiEndpoint) => {
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
-          "Referer": "https://realestate.api.sites.name.ng/",
           'Authorization': `Bearer ${accessToken}`,
         },
         body: formDataObj,
