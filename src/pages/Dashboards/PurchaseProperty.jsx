@@ -1,16 +1,9 @@
 import React from 'react';
 import UsePropertyLogic from './methods';
 import LoadingSpinner from '../../components/loader/LoadingSpinner';
-import { useStateContext } from '../../contexts/ContextProvider';
 
 
 const PurchaseProperty = () => {
-  const { selectedPropertyData } = useStateContext();
-  
-  const propertyId = selectedPropertyData?.id;
-  
-  console.log("Property ID: ",propertyId);
-
 
   const { 
     propertyPurchaseFormData,
@@ -21,16 +14,12 @@ const PurchaseProperty = () => {
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/purchases/properties/`);
 
 
-  const getPropertyId = (value) => {
+  const getPropertyId = () => {
     const storedPropertyId = localStorage.getItem('selectedPropertyId');
-    
-    if (value === propertyId){
-      return value = storedPropertyId;
-    } else {
-      return propertyId;
-    }
-    
+    console.log("storedPropertyId: ", storedPropertyId);
+    return storedPropertyId;
   }
+
 
   return (
     <div>
@@ -49,7 +38,7 @@ const PurchaseProperty = () => {
                     type="text"
                     id='property'
                     name='property'
-                    value={getPropertyId(propertyPurchaseFormData.property) || ''}
+                    value={propertyPurchaseFormData.property = getPropertyId()}
                     onChange={handleFieldChange}
                     className="w-full p-3 border border-gray-300 rounded outline-none"
                     required

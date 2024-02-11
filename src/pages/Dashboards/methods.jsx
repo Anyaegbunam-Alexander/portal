@@ -20,7 +20,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [getAllAgencies, setgetAllAgencies] = useState([]); 
   const [isLoading, setIsLoading] = useState(false); 
   const [propertyPurchaseFormData, setpropertyPurchaseFormData] = useState({
-    property: property.id,
+    property: '',
     proof_of_payment: '',
     referral_code: '',
     customer_notes: '',
@@ -34,7 +34,6 @@ const UsePropertyLogic = (apiEndpoint) => {
   const role = localStorage.getItem('role');
   const accessToken = localStorage.getItem('token');
   const { setSelectedPropertyData } = useStateContext();
-    
     
   const UsehandleClick = () => {
       return navigate(`/${role}/add-property`);
@@ -86,12 +85,12 @@ const UsePropertyLogic = (apiEndpoint) => {
 
       // gets all properties
       setProperties(data.results);
-      console.log(data);
-
+      
       setTotalPages(data.page_count);
-
+      
       // gets single property
       setproperty(data);
+      console.log("Single Property Data: ", data.id);
 
       // pagination links
       setPaginationLinks({
@@ -181,8 +180,14 @@ const UsePropertyLogic = (apiEndpoint) => {
   //Handle change in the values of user's input
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
-    setpropertyPurchaseFormData((prevData) => ({ ...prevData, [name]: value }));
+    if (name === 'property') {
+      const propertyId = localStorage.getItem('selectedPropertyId');
+      setpropertyPurchaseFormData({ ...propertyPurchaseFormData, property: propertyId });
+    } else {
+      setpropertyPurchaseFormData((prevData) => ({ ...prevData, [name]: value }));
+    }
   };
+
 
   const handleTellerChange = (e) => {
     const file = e.target.files[0]
@@ -194,10 +199,20 @@ const UsePropertyLogic = (apiEndpoint) => {
 
   const PurchaseProperty = async (e) => {
     e.preventDefault();
+    console.log("Purchase property mounted");
 
     setIsLoading(true);
 
     try {
+       // Ensure that the property ID is set
+      const propertyId = propertyPurchaseFormData.property;
+      console.log("Testing: ", propertyId);
+      if (propertyId !== localStorage.getItem('selectedPropertyId')) {
+        console.error('Property ID is null or empty.');
+        alert('Property ID is required.');
+        return;
+      }
+      
       const formDataObj = new FormData();
 
       for (const key in propertyPurchaseFormData) {
@@ -210,17 +225,18 @@ const UsePropertyLogic = (apiEndpoint) => {
       // Append the file separately
       formDataObj.append('proof_of_payment', propertyPurchaseFormData.proof_of_payment);
 
+
       // Log the FormData content before sending
-      //  for (const pair of formDataObj.entries()) {
-      //   console.log(pair[0], pair[1]);
-      // }
+       for (const pair of formDataObj.entries()) {
+        console.log(pair[0], pair[1]);
+      }
 
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
         },
-        body: formDataObj,
+      body: formDataObj,
       });
 
       
@@ -269,7 +285,6 @@ const UsePropertyLogic = (apiEndpoint) => {
 
         const data = await response.json();
         
-        console.log(data.results)
         setgetAllAgencies(data.results);
       } catch (error) {
         console.error('Error fetching properties:', error);
