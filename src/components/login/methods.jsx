@@ -86,7 +86,7 @@ const useLoginLogic = (apiEndpoint) => {
             return;
         }
 
-        const token = responseData.token;
+        const token = responseData.authentication.token;
         const role = responseData.object;
 
         

@@ -8,16 +8,18 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const login = (userData) => {
-    const { token, last_name, first_name, email, name } = userData;
+    const { authentication, last_name, first_name, email, name } = userData;
+    const authData = authentication.token;
 
-    if (token) {
+    if (authData) {
       localStorage.setItem('firstname', first_name);
       localStorage.setItem('lastname', last_name);
       localStorage.setItem('email', email);
       localStorage.setItem('agencyName', name);
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', authData);
       setLoggedIn(true);
     } else {
+      localStorage.clear();
       setLoggedIn(false);
     }
   };
