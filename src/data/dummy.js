@@ -47,6 +47,7 @@ export const gridOrderStatus = (props) => (
   </button>
 );
 
+
 export const kanbanGrid = [
   { headerText: 'To Do',
     keyField: 'Open',
@@ -65,6 +66,7 @@ export const kanbanGrid = [
     keyField: 'Close',
     allowToggle: true },
 ];
+
 const gridEmployeeProfile = (props) => (
   <div className="flex items-center gap-2">
     <img
@@ -2406,6 +2408,7 @@ export const ordersData = [
       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/pop-womens-garmin-watches-1641919013.jpg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*',
   },
 ];
+
 
 export const scheduleData = [
   {

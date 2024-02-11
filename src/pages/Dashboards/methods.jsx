@@ -18,6 +18,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [getAllAgencies, setgetAllAgencies] = useState([]); 
+  const [getAllPropertyPurchases, setgetAllPropertyPurchases] = useState([]); 
   const [isLoading, setIsLoading] = useState(false); 
   const [propertyPurchaseFormData, setpropertyPurchaseFormData] = useState({
     property: '',
@@ -357,47 +358,159 @@ const UsePropertyLogic = (apiEndpoint) => {
       template: gridAgenciesProfileLink
     },
   ];
+  // -------------- END OF CODE ---------------------------- 
+  
+
+  // Fetch properties from your API here
+  const deleteProperty = async (propertyId) => {
+    setIsLoading(true);
+    const url = `https://realestate.api.sites.name.ng/properties/${propertyId}`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
 
-// -------------- END OF CODE ----------------------------
+      if (!response.ok) {
+        const errorResponse = await response.json();
 
-// Fetch properties from your API here
-const deleteProperty = async (propertyId) => {
-  setIsLoading(true);
-  const url = `https://realestate.api.sites.name.ng/properties/${propertyId}`;
+        for (const field in errorResponse.extra.fields) {
+          if (errorResponse.extra.fields[field]) {
+            // Output the value contained in the field
+            alert(`${field}: ${errorResponse.extra.fields[field]}`)
+            console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+            return
+          }
+        }
+      }
 
-  try {
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
+      alert('Property deleted successfully');
+      navigate(`/${role}/overview`);
+
+    } catch (error) {
+      console.error(error);
+      alert("An Error Occured: Unable to delete property", error);
+    } finally {
+      setIsLoading(false); // Set loading to false when the fetch operation completes
+    }
+  }
+  // --- ----------- END OF CODE ----------------------------
+
+
+ /* 
+    The block of code below contains the code for agencies
+    - This gets all the agencies on the platform
+    - Shows the agencies to the agencies tab in the customer's dashboard
+    - Contains data for agencies page.
+  */
+    useEffect(() => {
+      const getAllPropertyPurchases = async () => {
+        try {
+          const response = await fetch(apiEndpoint, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+  
+          const data = await response.json();
+          
+          setgetAllPropertyPurchases(data.results);
+          console.log("Property purchases data: ", data);
+        } catch (error) {
+          console.error('Error fetching property purchase data:', error);
+          alert('Error fetching property purchase data.');
+        } 
+      }
+  
+      getAllPropertyPurchases();
+    }, [accessToken, apiEndpoint]);
+
+
+    const gridPropertyImage = (props) => (
+      <div>
+        <img
+          className="rounded-xl h-20 md:ml-3"
+          src={props.ProductImage}
+          alt="order-item"
+        />
+      </div>
+    );
+    
+    const gridPropertyStatus = (props) => (
+      <button
+        type="button"
+        style={{ background: props.StatusBg }}
+        className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+      >
+        {props.Status}
+      </button>
+    );
+
+    const gridPropertyPurchaseReceipt = (props) => (
+      <div className="flex items-center justify-center gap-2">
+        <a href={`${props.Receipt}`} className=' underline text-blue-800'>Download Receipt</a>
+      </div>
+    );
+
+    const currencyFormatter = new Intl.NumberFormat('en-NG', {
+      style: 'currency',
+      currency: 'NGN', // Nigerian Naira
     });
 
 
-    if (!response.ok) {
-      const errorResponse = await response.json();
-
-      for (const field in errorResponse.extra.fields) {
-        if (errorResponse.extra.fields[field]) {
-          // Output the value contained in the field
-          alert(`${field}: ${errorResponse.extra.fields[field]}`)
-          console.log(`${field}: ${errorResponse.extra.fields[field]}`);
-          return
-        }
-      }
-    }
-
-    alert('Property deleted successfully');
-    navigate(`/${role}/overview`);
-
-  } catch (error) {
-    console.error(error);
-    alert("An Error Occured: Unable to delete property", error);
-  } finally {
-    setIsLoading(false); // Set loading to false when the fetch operation completes
-  }
-}
+    const propertyPurchaseGrid = [
+      {
+        headerText: 'Image',
+        template: gridPropertyImage,
+        textAlign: 'Center',
+        width: '120',
+      },
+      {
+        field: 'PropertyName',
+        headerText: 'Property',
+        width: '150',
+        editType: 'dropdownedit',
+        textAlign: 'Center',
+      },
+      { field: 'AgencyName',
+        headerText: 'Customer Name',
+        width: '150',
+        textAlign: 'Center',
+      },
+      {
+        field: 'TotalAmount',
+        headerText: 'Total Amount',
+        textAlign: 'Center',
+        editType: 'numericedit',
+        width: '150',
+      },
+      {
+        headerText: 'Status',
+        template: gridPropertyStatus,
+        field: 'OrderItems',
+        textAlign: 'Center',
+        width: '120',
+      },
+      {
+        field: 'propertyID',
+        headerText: 'Property ID',
+        width: '120',
+        textAlign: 'Center',
+      },
+    
+      {
+        //field: 'Receipt',
+        template: gridPropertyPurchaseReceipt,
+        headerText: 'Receipt',
+        width: '150',
+        textAlign: 'Center',
+      },
+    ];
 
 
   return {
@@ -417,6 +530,9 @@ const deleteProperty = async (propertyId) => {
     currentPage,
     totalPages,
     setCurrentPage,
+    propertyPurchaseGrid,
+    getAllPropertyPurchases,
+    currencyFormatter,
     navigate,
     openModal,
     navOptions,
