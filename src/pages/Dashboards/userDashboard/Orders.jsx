@@ -46,19 +46,6 @@ const Orders = () => {
   });
 
 
-  // const propertyPurchaseData = [
-  //   {
-  //     OrderID: 10248,
-  //     CustomerName: 'Vinet',
-  //     TotalAmount: 32.38,
-  //     OrderItems: 'Fresh Tomato',
-  //     Location: 'USA',
-  //     Status: 'pending',
-  //     StatusBg: '#FB9678',
-  //     ProductImage:
-  //     'https://cdn.shopclues.com/images1/thumbnails/104158/320/320/148648730-104158193-1592481791.jpg',
-  //   },
-  // ];
 
 
   return (

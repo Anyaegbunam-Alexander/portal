@@ -1,5 +1,5 @@
 import React from 'react';
-import { BsCurrencyDollar } from 'react-icons/bs';
+import { TbCurrencyNaira } from "react-icons/tb";
 import { GoDotFill } from 'react-icons/go';
 import { IoIosMore } from 'react-icons/io';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
@@ -11,7 +11,15 @@ import product9 from '../../../data/product9.jpg';
 
 const DropDown = ({ currentMode }) => (
   <div className="w-28 border-1 border-color px-2 py-1 rounded-md">
-    <DropDownListComponent id="time" fields={{ text: 'Time', value: 'Id' }} style={{ border: 'none', color: (currentMode === 'Dark') && 'white' }} value="1" dataSource={dropdownData} popupHeight="220px" popupWidth="120px" />
+    <DropDownListComponent 
+      id="time" 
+      fields={{ text: 'Time', value: 'Id' }} 
+      style={{ border: 'none', color: (currentMode === 'Dark') && 'white' }} 
+      value="1" 
+      dataSource={dropdownData} 
+      popupHeight="220px" 
+      popupWidth="120px" 
+    />
   </div>
 );
 
@@ -32,7 +40,7 @@ const Overview = () => {
               style={{ backgroundColor: currentColor }}
               className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
             >
-              <BsCurrencyDollar />
+              <TbCurrencyNaira />
             </button>
           </div>
           <div className="mt-6">

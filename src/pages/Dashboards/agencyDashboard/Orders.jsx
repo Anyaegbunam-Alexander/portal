@@ -13,28 +13,58 @@ import { GridComponent,
   Inject 
 } from '@syncfusion/ej2-react-grids';
 
-import { ordersData, contextMenuItems, ordersGrid } from '../../../data/dummy';
+
 import { Header } from '../../../components/dashboardComponents';
+import UsePropertyLogic from '../methods';
+
 
 const Orders = () => {
+  const {
+    getAllPropertyPurchases,
+    propertyPurchaseGridForAgency,
+    currencyFormatter,
+  } = UsePropertyLogic('https://realestate.api.sites.name.ng/purchases/properties/');
+
+  const propertyPurchaseData = getAllPropertyPurchases; 
+
+  console.log("Property new data: ", propertyPurchaseData);
+
+  // Map through agenciesData and transform each agency as needed
+  const mappedData = propertyPurchaseData.map((propertyPurchase) => {
+
+    return {
+      propertyID: propertyPurchase.property.id,
+      PropertyName: propertyPurchase.property ? propertyPurchase.property.name || propertyPurchase.property.type : '',
+      AgencyName: propertyPurchase.customer.last_name,
+      TotalAmount: currencyFormatter.format(propertyPurchase.property.price),
+      OrderItems: 'Fresh Tomato',
+      Teller: propertyPurchase.proof_of_payment,
+      Status: propertyPurchase.status,
+      StatusBg: '#FB9678',
+      ProductImage: propertyPurchase.property.images.length > 0 ? propertyPurchase.property.images[0].image : '',
+    };
+  });
+
+
+
+
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl mt-16">
       <Header category="Page" title="Orders"/>
-      <h1 className='text-5xl py-5'>Coming soon</h1>
-      <p>Purchased property will be shown here</p>
-      {/* <GridComponent
+      
+      <GridComponent
         id='gridcomp'
-        dataSource={ordersData}
+        dataSource={mappedData}
         allowPaging
         allowSorting
       >
         <ColumnsDirective>
-          {ordersGrid.map((item, index) => (
+          {propertyPurchaseGridForAgency.map((item, index) => (
             <ColumnDirective key={index} {...item}/>
           ))}
         </ColumnsDirective>
         <Inject services={[Resize, ContextMenu, ExcelExport, PdfExport, Sort, Edit, Page, Filter ]}/>
-      </GridComponent> */}
+      </GridComponent>
     </div>
   )
 }

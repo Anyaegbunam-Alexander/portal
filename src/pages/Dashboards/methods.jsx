@@ -64,6 +64,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     setIsModalOpen(false);
   };
 
+  // navigates to the show properties page.
   const navOptions = () => {
     if (role === 'agency') return `/${role}/listings/`
     else return `/${role}/properties/`
@@ -457,6 +458,26 @@ const UsePropertyLogic = (apiEndpoint) => {
       </div>
     );
 
+    const gridPropertyPurchaseOption = (props) => (
+      <div className="flex items-center justify-center gap-2">
+        <a href={`${props.Teller}`} className=' underline text-blue-800' target='_blank' rel="noreferrer">Download Teller</a>
+      </div>
+    );
+    const gridPropertyPurchaseViewButton = (props) => (
+      <div className="flex items-center justify-center gap-2">
+        {/* <a href={`${props.Teller}`} className=' underline text-blue-800' target='_blank' rel="noreferrer">Download Teller</a> */}
+        <button
+          className='py-3 w-full text-white outline-none rounded-lg'
+          style={{backgroundColor: currentColor}}
+          onClick={() => {
+            showProperty(props.propertyID)
+          }}
+        >
+          View Property
+        </button>
+      </div>
+    );
+
     const currencyFormatter = new Intl.NumberFormat('en-NG', {
       style: 'currency',
       currency: 'NGN', // Nigerian Naira
@@ -464,6 +485,54 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 
     const propertyPurchaseGrid = [
+      {
+        headerText: 'Image',
+        template: gridPropertyImage,
+        textAlign: 'Center',
+        width: '120',
+      },
+      {
+        field: 'PropertyName',
+        headerText: 'Property',
+        width: '150',
+        editType: 'dropdownedit',
+        textAlign: 'Center',
+      },
+      { field: 'AgencyName',
+        headerText: 'Agency Name',
+        width: '150',
+        textAlign: 'Center',
+      },
+      {
+        field: 'TotalAmount',
+        headerText: 'Total Amount',
+        textAlign: 'Center',
+        editType: 'numericedit',
+        width: '150',
+      },
+      {
+        headerText: 'Status',
+        template: gridPropertyStatus,
+        field: 'OrderItems',
+        textAlign: 'Center',
+        width: '120',
+      },
+      {
+        field: 'propertyID',
+        headerText: 'Property ID',
+        width: '120',
+        textAlign: 'Center',
+      },
+    
+      {
+        template: gridPropertyPurchaseReceipt,
+        headerText: 'Receipt',
+        width: '150',
+        textAlign: 'Center',
+      },
+    ];
+
+    const propertyPurchaseGridForAgency = [
       {
         headerText: 'Image',
         template: gridPropertyImage,
@@ -504,9 +573,14 @@ const UsePropertyLogic = (apiEndpoint) => {
       },
     
       {
-        //field: 'Receipt',
-        template: gridPropertyPurchaseReceipt,
-        headerText: 'Receipt',
+        template: gridPropertyPurchaseOption,
+        headerText: 'Teller',
+        width: '150',
+        textAlign: 'Center',
+      },
+      {
+        template: gridPropertyPurchaseViewButton,
+        headerText: 'View Property',
         width: '150',
         textAlign: 'Center',
       },
@@ -531,6 +605,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     totalPages,
     setCurrentPage,
     propertyPurchaseGrid,
+    propertyPurchaseGridForAgency,
     getAllPropertyPurchases,
     currencyFormatter,
     navigate,
