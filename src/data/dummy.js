@@ -489,10 +489,6 @@ export const links = [
         name: 'properties',
         icon: <BsHouse />,
       },
-      {
-        name: 'profile',
-        icon: <BiUser />,
-      },
     ],
   },
 
@@ -506,6 +502,10 @@ export const links = [
       {
         name: 'agencies',
         icon: <IoMdContacts />,
+      },
+      {
+        name: 'profile',
+        icon: <BiUser />,
       },
     ],
   },
