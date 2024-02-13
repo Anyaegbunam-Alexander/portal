@@ -20,6 +20,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [getAllAgencies, setgetAllAgencies] = useState([]); 
   const [getAllPropertyPurchases, setgetAllPropertyPurchases] = useState([]); 
   const [isLoading, setIsLoading] = useState(false); 
+  const [profile, setProfile] = useState([])
   const [propertyPurchaseFormData, setpropertyPurchaseFormData] = useState({
     property: '',
     proof_of_payment: '',
@@ -657,6 +658,29 @@ const UsePropertyLogic = (apiEndpoint) => {
     ];
 
 
+    useEffect(() => {
+      const getProfile = async () => {
+        try {
+          const response = await fetch(apiEndpoint, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+  
+          const data = await response.json();
+          setProfile(data);
+        } catch (error) {
+          console.error('Error fetching profile data:', error);
+          alert('Error fetching profile data.');
+        } 
+      }
+
+      getProfile();
+    }, [accessToken, apiEndpoint])
+    
+
+
   return {
     role,
     property,
@@ -679,6 +703,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     getAllPropertyPurchases,
     currencyFormatter,
     agencyCustomersGrid,
+    profile,
     navigate,
     openModal,
     navOptions,
