@@ -27,7 +27,6 @@ const Orders = () => {
 
   const propertyPurchaseData = getAllPropertyPurchases; 
 
-  console.log("Property new data: ", propertyPurchaseData);
 
   // Map through agenciesData and transform each agency as needed
   const mappedData = propertyPurchaseData.map((propertyPurchase) => {
@@ -44,8 +43,6 @@ const Orders = () => {
       ProductImage: propertyPurchase.property.images.length > 0 ? propertyPurchase.property.images[0].image : '',
     };
   });
-
-
 
 
   return (

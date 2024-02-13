@@ -147,6 +147,7 @@ const customerGridStatus = (props) => (
     <p>{props.Status}</p>
   </div>
 );
+
 export const areaPrimaryXAxis = {
   valueType: 'DateTime',
   labelFormat: 'y',
@@ -1672,6 +1673,8 @@ export const customersData = [
   },
 
 ];
+
+
 
 export const employeesData = [
   {

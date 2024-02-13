@@ -403,10 +403,10 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 
  /* 
-    The block of code below contains the code for agencies
-    - This gets all the agencies on the platform
-    - Shows the agencies to the agencies tab in the customer's dashboard
-    - Contains data for agencies page.
+    The block of code below contains the code for Orders in an agency
+    - This gets all the agencies orders on the platform
+    - Shows the agencies orders, payment info and customer's profile 
+    - Contains data for agencies orders page.
   */
     useEffect(() => {
       const getAllPropertyPurchases = async () => {
@@ -419,12 +419,10 @@ const UsePropertyLogic = (apiEndpoint) => {
           });
   
           const data = await response.json();
-          
           setgetAllPropertyPurchases(data.results);
-          console.log("Property purchases data: ", data);
         } catch (error) {
           console.error('Error fetching property purchase data:', error);
-          alert('Error fetching property purchase data.');
+          alert('Error fetching data.');
         } 
       }
   
@@ -463,6 +461,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         <a href={`${props.Teller}`} className=' underline text-blue-800' target='_blank' rel="noreferrer">Download Teller</a>
       </div>
     );
+
     const gridPropertyPurchaseViewButton = (props) => (
       <div className="flex items-center justify-center gap-2">
         {/* <a href={`${props.Teller}`} className=' underline text-blue-800' target='_blank' rel="noreferrer">Download Teller</a> */}
@@ -587,6 +586,77 @@ const UsePropertyLogic = (apiEndpoint) => {
     ];
 
 
+
+    /* 
+      The block of code below contains the code for customers page in the agencies dashboard
+      - This gets all the customers on the platform that has patronized or has interest 
+        in a property listed by the agency
+      - Contains data for agencies customers page.
+    */
+    const agencyCustomerGridImage = (props) => (
+      <div className="image flex gap-4">
+        <img
+          className="rounded-full w-10 h-10"
+          src={props.CustomerImage}
+          alt="customer"
+        />
+        <div>
+          <p>{props.CustomerName}</p>
+          <p>{props.CustomerEmail}</p>
+        </div>
+      </div>
+    );
+
+    const agencyCustomerGridStatus = (props) => (
+      <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
+        <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
+        <p>{props.Status}</p>
+      </div>
+    );
+
+
+    const agencyCustomersGrid = [
+      { type: 'checkbox', width: '50' },
+      { headerText: 'Name',
+        width: '150',
+        template: agencyCustomerGridImage,
+        textAlign: 'Center' },
+      { field: 'PropertyName',
+        headerText: 'Property Name',
+        width: '150',
+        textAlign: 'Center' },
+      { field: 'Status',
+        headerText: 'Status',
+        width: '130',
+        format: 'yMd',
+        textAlign: 'Center',
+        template: agencyCustomerGridStatus },
+      {
+        field: 'Availability',
+        headerText: 'Availability',
+        width: '100',
+        format: 'C2',
+        textAlign: 'Center' },
+      { field: 'Price',
+        headerText: 'Price',
+        width: '100',
+        textAlign: 'Center' 
+      },
+      { field: 'Location',
+        headerText: 'Location',
+        width: '150',
+        textAlign: 'Center' },
+    
+      { field: 'CustomerID',
+        headerText: 'Customer ID',
+        width: '120',
+        textAlign: 'Center',
+        isPrimaryKey: true,
+      },
+    
+    ];
+
+
   return {
     role,
     property,
@@ -608,6 +678,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     propertyPurchaseGridForAgency,
     getAllPropertyPurchases,
     currencyFormatter,
+    agencyCustomersGrid,
     navigate,
     openModal,
     navOptions,
