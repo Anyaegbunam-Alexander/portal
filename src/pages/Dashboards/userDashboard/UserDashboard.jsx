@@ -7,6 +7,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { Navbar, Footer, SideBar,ThemeSettings } from '../../../components/dashboardComponents/index';
 import {
   Properties, 
+  Profile,
   Orders,
   Calendar,
   Agencies, 

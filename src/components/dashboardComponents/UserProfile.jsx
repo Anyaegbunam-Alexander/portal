@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import { Button } from '../dashboardComponents';
-import { userProfileData } from '../../data/dummy';
+import { customerProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import avatar from '../../data/avatar.jpg';
 import { useAuth } from '../../contexts/AuthContext';
@@ -46,7 +46,7 @@ const UserProfile = () => {
         </div>
       </div>
       <div>
-        {userProfileData.map((item, index) => (
+        {customerProfileData.map((item, index) => (
           <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
             <button
               type="button"
@@ -67,7 +67,7 @@ const UserProfile = () => {
         <button
           type='button'
           onClick={(e) => {
-            console.log('Button clicked');
+            console.log('Logout button clicked');
             handleLogout(e);
           }}
           style={{ color: 'white', backgroundColor: currentColor, borderRadius: '10px' }}

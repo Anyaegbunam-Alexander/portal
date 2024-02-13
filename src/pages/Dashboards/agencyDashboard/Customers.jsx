@@ -38,7 +38,7 @@ const Customers = () => {
       CustomerName: customerInfo.customer.last_name || customerInfo.property.interested_customers.last_name,
       CustomerEmail: customerInfo.customer.email || customerInfo.property.interested_customers.email,
       CustomerImage: customerInfo ? customerInfo.customer.profile_picture || customerInfo.property.interested_customers.profile_picture :
-        'https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80',
+        'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       PropertyName: customerInfo.property ? customerInfo.property.name || customerInfo.property.type : '',
       Status: customerInfo.status,
       StatusBg: '#494D56',
