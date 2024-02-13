@@ -66,6 +66,7 @@ const UserDashboard = () => {
                         {/* Dashboard */}
                         <Route path="properties" element={<Properties />} />
                         <Route path="overview" element={<Overview />} />
+                        <Route path="profile" element={<Profile />} />
 
                         {/* Pages */}
                         <Route path="orders" element={<Orders />} />
