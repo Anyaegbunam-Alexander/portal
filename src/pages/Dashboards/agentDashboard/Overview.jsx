@@ -2,6 +2,7 @@ import React from 'react';
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { GoDotFill } from 'react-icons/go';
 import { IoIosMore } from 'react-icons/io';
+import { TbCurrencyNaira } from "react-icons/tb";
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 
 import { Stacked, Pie, Button, LineChart, SparkLine } from '../../../components/agentDashboardComponent';
@@ -25,14 +26,14 @@ const Overview = () => {
           <div className="flex justify-between items-center">
             <div>
               <p className="font-bold text-gray-400">Earnings</p>
-              <p className="text-2xl text-gray-800">$63,448.78</p>
+              <p className="text-2xl text-gray-800">₦0.00</p>
             </div>
             <button
               type="button"
               style={{ backgroundColor: currentColor }}
               className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
             >
-              <BsCurrencyDollar />
+              <TbCurrencyNaira />
             </button>
           </div>
           <div className="mt-6">
@@ -89,7 +90,7 @@ const Overview = () => {
             <div className=" border-r-1 border-color m-4 pr-10">
               <div>
                 <p>
-                  <span className="text-3xl font-semibold">$93,438</span>
+                  <span className="text-3xl font-semibold">₦0.00</span>
                   <span className="p-1.5 hover:drop-shadow-xl cursor-pointer rounded-full text-white bg-green-400 ml-3 text-xs">
                     23%
                   </span>
@@ -97,7 +98,7 @@ const Overview = () => {
                 <p className="text-gray-500 mt-1">Budget</p>
               </div>
               <div className="mt-8">
-                <p className="text-3xl font-semibold">$48,487</p>
+                <p className="text-3xl font-semibold">₦0.00</p>
 
                 <p className="text-gray-500 mt-1">Expense</p>
               </div>
@@ -128,7 +129,7 @@ const Overview = () => {
               <p className="font-semibold text-white text-2xl">Earnings</p>
 
               <div>
-                <p className="text-2xl text-white font-semibold mt-8">$63,448.78</p>
+                <p className="text-2xl text-white font-semibold mt-8">₦0.00</p>
                 <p className="text-gray-200">Monthly revenue</p>
               </div>
             </div>
@@ -140,7 +141,7 @@ const Overview = () => {
 
           <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl md:w-400 p-8 m-3 flex justify-center items-center gap-10">
             <div>
-              <p className="text-2xl font-semibold ">$43,246</p>
+              <p className="text-2xl font-semibold ">₦0.00</p>
               <p className="text-gray-400">Yearly sales</p>
             </div>
 
