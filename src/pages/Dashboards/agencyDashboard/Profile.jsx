@@ -15,8 +15,9 @@ const Profile = () => {
 
     const {
         profile
-    } = UsePropertyLogic('https://realestate.api.sites.name.ng/customers/profile/');
+    } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/profile/');
 
+    console.log("User data:", profile)
 
     return (
         <div className="mt-16">
@@ -29,11 +30,11 @@ const Profile = () => {
                 <div className="w-full mt-10">
                     <div className="text-center space-y-9">
                         <img
-                            src={profile.profile_picture !== null ? profile.profile_picture : "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE="}
+                            src={profile.logo !== null ? profile.logo : "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE="}
                             alt="profile"
                             className="rounded-full w-40 h-40 shadow-lg m-auto border-4 border-solid border-purple-800 hover:border-purple-500 hover:shadow-2xl"
                         />
-                        <h4 className="font-bold text-3xl mt-10">{profile.last_name} {profile.first_name}</h4>
+                        <h4 className="font-bold text-3xl mt-10">{profile.name}</h4>
                         <div className="flex items-center justify-center">
                             <GoLocation className="mr-2" />
                             <p>{profile.address && (profile.address.state || profile.address.city)}, {profile.address && profile.address.country}</p>
@@ -52,7 +53,7 @@ const Profile = () => {
                         <div className="space-y-3">
                             <div className="flex items-center space-x-2">
                                 <BiPin />
-                                <span className="font-medium text-sm">Customer Id:</span>
+                                <span className="font-medium text-sm">Agency Id:</span>
                             </div>
                             <h4 className="font-semibold text-lg">{profile.id}</h4>
                         </div>
@@ -60,7 +61,7 @@ const Profile = () => {
 
                     <div className="flex flex-col md:flex-row justify-around md:items-center space-y-9">
                         <div className="text-2xl md:text-4xl font-bold">
-                            <p>Profile Infomation</p>
+                            <p>Profile Information</p>
                         </div>
                         <div className="space-y-9">
                             <div className="">

@@ -567,6 +567,10 @@ export const agentlinks = [
         name: 'agencies',
         icon: <IoMdContacts />,
       },
+      {
+        name: 'profile',
+        icon: <BiUser />,
+      },
     ],
   },
   {
@@ -615,7 +619,7 @@ export const agencylinks = [
       },
       {
         name: 'listings',
-        icon: <FiShoppingBag />,
+        icon: <BsHouse />,
       },
     ],
   },
@@ -634,6 +638,10 @@ export const agencylinks = [
       {
         name: 'customers',
         icon: <RiContactsLine />,
+      },
+      {
+        name: 'profile',
+        icon: <BiUser />,
       },
     ],
   },
@@ -1023,6 +1031,7 @@ export const customerProfileData = [
   {
     icon: <BsCurrencyDollar />,
     title: 'My Profile',
+    link: '/customer/profile',
     desc: 'Account Settings',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
@@ -1030,6 +1039,7 @@ export const customerProfileData = [
   {
     icon: <BsShield />,
     title: 'My Inbox',
+    link: '',
     desc: 'Messages & Emails',
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
@@ -1040,6 +1050,7 @@ export const agentProfileData = [
   {
     icon: <BsCurrencyDollar />,
     title: 'My Profile',
+    link: '/agent/profile',
     desc: 'Account Settings',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
@@ -1047,6 +1058,7 @@ export const agentProfileData = [
   {
     icon: <BsShield />,
     title: 'My Inbox',
+    link: '',
     desc: 'Messages & Emails',
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
@@ -1054,6 +1066,7 @@ export const agentProfileData = [
   {
     icon: <FiCreditCard />,
     title: 'My Tasks',
+    link: '',
     desc: 'To-do and Daily Tasks',
     iconColor: 'rgb(255, 244, 229)',
     iconBg: 'rgb(254, 201, 15)',
@@ -1064,6 +1077,7 @@ export const agencyProfileData = [
   {
     icon: <BsCurrencyDollar />,
     title: 'Profile',
+    link: '/agency/profile',
     desc: 'Account Settings',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
@@ -1071,6 +1085,7 @@ export const agencyProfileData = [
   {
     icon: <BsShield />,
     title: 'Inbox',
+    link: '',
     desc: 'Messages & Emails',
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
@@ -1078,6 +1093,7 @@ export const agencyProfileData = [
   {
     icon: <FiCreditCard />,
     title: 'Tasks',
+    link: '',
     desc: 'To-do and Daily Tasks',
     iconColor: 'rgb(255, 244, 229)',
     iconBg: 'rgb(254, 201, 15)',

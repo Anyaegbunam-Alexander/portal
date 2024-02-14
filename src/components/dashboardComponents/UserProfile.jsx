@@ -5,6 +5,7 @@ import { customerProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import avatar from '../../data/avatar.jpg';
 import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const UserProfile = () => {
@@ -13,6 +14,7 @@ const UserProfile = () => {
   const lastname = localStorage.getItem('lastname');
   const role = localStorage.getItem('role');
   const email = localStorage.getItem('email');
+  const navigate = useNavigate();
   const { logout } = useAuth();
 
   const handleLogout = () => {
@@ -47,7 +49,11 @@ const UserProfile = () => {
       </div>
       <div>
         {customerProfileData.map((item, index) => (
-          <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+          <div
+            key={index} 
+            className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]"
+            onClick={() => navigate(item.link)}
+          >
             <button
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}

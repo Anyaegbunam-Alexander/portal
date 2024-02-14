@@ -7,6 +7,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { Navbar, Footer, SideBar,ThemeSettings } from '../../../components/agencyDashboardComponent/index';
 import {
   Properties, 
+  Profile,
   Orders, 
   Calendar, 
   Employees, 
@@ -75,6 +76,7 @@ const AgencyDashboard = () => {
                         {/* Dashboard */}
                         <Route path="listings" element={<Properties />} />
                         <Route path="overview" element={<Overview />} />
+                        <Route path="profile" element={<Profile />} />
 
                         {/* Pages */}
                         <Route path="orders" element={<Orders />} />

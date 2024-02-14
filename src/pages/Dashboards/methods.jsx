@@ -629,14 +629,12 @@ const UsePropertyLogic = (apiEndpoint) => {
       { field: 'Status',
         headerText: 'Status',
         width: '130',
-        format: 'yMd',
         textAlign: 'Center',
         template: agencyCustomerGridStatus },
       {
         field: 'Availability',
         headerText: 'Availability',
         width: '100',
-        format: 'C2',
         textAlign: 'Center' },
       { field: 'Price',
         headerText: 'Price',
@@ -670,6 +668,19 @@ const UsePropertyLogic = (apiEndpoint) => {
   
           const data = await response.json();
           setProfile(data);
+          
+          if (!response.ok) {
+            const errorResponse = await response.json();
+    
+            for (const field in errorResponse.extra.fields) {
+              if (errorResponse.extra.fields[field]) {
+                // Output the value contained in the field
+                alert(`${field}: ${errorResponse.extra.fields[field]}`)
+                console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+                return
+              }
+            }
+          }
         } catch (error) {
           console.error('Error fetching profile data:', error);
           alert('Error fetching profile data.');

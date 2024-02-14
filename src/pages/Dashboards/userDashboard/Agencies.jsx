@@ -10,7 +10,6 @@ import { GridComponent,
 
 import { Header } from '../../../components/dashboardComponents';
 import UsePropertyLogic from '../methods';
-import house from '../../../assets/1.png';
 
 const Agencies = () => {
   
@@ -18,6 +17,7 @@ const Agencies = () => {
     getAllAgencies,
     agenciesGrid,
   } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/');
+
 
   const agenciesData = getAllAgencies; 
 
@@ -30,7 +30,8 @@ const Agencies = () => {
       Address: agency.address.street_address,
       Country: agency.address.country,
       State: agency.address.state,
-      EmployeeImage: house,
+      EmployeeImage: 
+        'https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE=',
     };
   });
  

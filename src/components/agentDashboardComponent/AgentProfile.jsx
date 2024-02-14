@@ -5,6 +5,7 @@ import { agentProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import avatar from '../../data/avatar.jpg';
 import { useAuth } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const AgentProfile = () => {
@@ -13,6 +14,7 @@ const AgentProfile = () => {
   const lastname = localStorage.getItem('lastname');
   const role = localStorage.getItem('role');
   const email = localStorage.getItem('email');
+  const navigate = useNavigate();
   const { logout } = useAuth();
 
   const handleLogout = () => {
@@ -24,7 +26,7 @@ const AgentProfile = () => {
   return (
     <div className="nav-item absolute right-1 top-16 bg-white shadow-xl dark:bg-[#42464D] p-8 rounded-lg w-96">
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg dark:text-gray-200">User Profile</p>
+        <p className="font-semibold text-lg dark:text-gray-200">Agent Profile</p>
         <Button
           icon={<MdOutlineCancel />}
           color="rgb(153, 171, 180)"
@@ -47,7 +49,11 @@ const AgentProfile = () => {
       </div>
       <div>
         {agentProfileData.map((item, index) => (
-          <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]">
+          <div
+            key={index} 
+            className="flex gap-5 border-b-1 border-color p-4 hover:bg-light-gray cursor-pointer  dark:hover:bg-[#42464D]"
+            onClick={() => navigate(item.link)}
+          >
             <button
               type="button"
               style={{ color: item.iconColor, backgroundColor: item.iconBg }}

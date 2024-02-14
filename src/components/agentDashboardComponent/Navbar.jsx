@@ -4,8 +4,9 @@ import { BsChatLeft } from 'react-icons/bs';
 import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+import UsePropertyLogic from '../../pages/Dashboards/methods';
 
-import avatar from '../../data/avatar.jpg';
+
 import { AgentProfile, Chat, Notification } from '../agentDashboardComponent';
 import { useStateContext } from '../../contexts/ContextProvider';
 
@@ -29,6 +30,11 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
 const Navbar = () => {
   const { currentColor, activeMenu, setActiveMenu, handleClick, isClicked, setScreenSize, screenSize } = useStateContext();
   const lastname = localStorage.getItem('lastname');
+
+  const {
+    profile
+  } = UsePropertyLogic('https://realestate.api.sites.name.ng/agents/profile/');
+
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -64,7 +70,7 @@ const Navbar = () => {
           >
             <img
               className="rounded-full w-8 h-8"
-              src={avatar}
+              src={profile.profile_picture !== null ? profile.profile_picture : "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE="}
               alt="user-profile"
             />
             <p>

@@ -7,6 +7,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { Navbar, Footer, SideBar,ThemeSettings } from '../../../components/agentDashboardComponent/index';
 import {
   Properties, 
+  Profile,
   Referral,
   Calendar,
   Agencies, 
@@ -66,6 +67,7 @@ const UserDashboard = () => {
                         {/* Dashboard */}
                         <Route path="properties" element={<Properties />} />
                         <Route path="overview" element={<Overview />} />
+                        <Route path="profile" element={<Profile />} />
 
                         {/* Pages */}
                         <Route path="referral-link" element={<Referral />} />

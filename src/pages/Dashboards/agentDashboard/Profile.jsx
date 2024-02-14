@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Header } from '../../../components/dashboardComponents';
-import { GoHomeFill, GoLocation } from 'react-icons/go';
+import { GoLocation } from 'react-icons/go';
 import UsePropertyLogic from '../methods';
 import { BsMarkdown, BsPhone } from 'react-icons/bs';
 import { MdEdit, MdOutlineEmail } from 'react-icons/md';
@@ -15,7 +15,7 @@ const Profile = () => {
 
     const {
         profile
-    } = UsePropertyLogic('https://realestate.api.sites.name.ng/customers/profile/');
+    } = UsePropertyLogic('https://realestate.api.sites.name.ng/agents/profile/');
 
 
     return (
