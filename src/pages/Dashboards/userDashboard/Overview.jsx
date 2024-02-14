@@ -1,5 +1,6 @@
 import React from 'react';
-import { BsCurrencyDollar, BsHouseCheck } from 'react-icons/bs';
+import { BsHouseCheck } from 'react-icons/bs';
+import { TbCurrencyNaira } from "react-icons/tb";
 import { GoDotFill } from 'react-icons/go';
 import { HiOutlineRefresh } from 'react-icons/hi';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
@@ -54,7 +55,7 @@ const Overview = () => {
               style={{ backgroundColor: currentColor }}
               className="text-2xl opacity-0.9 text-white hover:drop-shadow-xl rounded-full  p-4"
             >
-              <BsCurrencyDollar />
+              <TbCurrencyNaira />
             </button>
           </div>
           <div className="mt-6">
