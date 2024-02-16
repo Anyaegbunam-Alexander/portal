@@ -203,13 +203,11 @@ const UsePropertyLogic = (apiEndpoint) => {
   const PurchaseProperty = async (e) => {
     e.preventDefault();
     console.log("Purchase property mounted");
-
     setIsLoading(true);
 
     try {
        // Ensure that the property ID is set
       const propertyId = propertyPurchaseFormData.property;
-      console.log("Testing: ", propertyId);
       if (propertyId !== localStorage.getItem('selectedPropertyId')) {
         console.error('Property ID is null or empty.');
         alert('Property ID is required.');
@@ -320,6 +318,22 @@ const UsePropertyLogic = (apiEndpoint) => {
       <a href={`${props.Profile}`} className=' underline text-blue-800'>Link to Profile</a>
     </div>
   );
+
+  const gridApplyAgencyBtn = (props) => (
+    <div className="flex items-center justify-center gap-2">
+      <button
+        className='py-3 w-full text-white outline-none rounded-lg'
+        style={{backgroundColor: currentColor}}
+        formTarget='_blank'
+        onClick={() => {
+          localStorage.setItem('agencyId', props.Apply)
+          navigate(`/agents/agency-applications/`)
+        }}
+      >
+        Apply Agency
+      </button>
+    </div>
+  );
   
   const agenciesGrid = [
     { headerText: 'Agencies',
@@ -358,6 +372,12 @@ const UsePropertyLogic = (apiEndpoint) => {
       width: '125',
       textAlign: 'Center',
       template: gridAgenciesProfileLink
+    },
+    { 
+      headerText: 'Apply',
+      width: '125',
+      textAlign: 'Center',
+      template: gridApplyAgencyBtn,
     },
   ];
   // -------------- END OF CODE ---------------------------- 

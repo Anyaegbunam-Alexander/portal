@@ -16,7 +16,6 @@ const PurchaseProperty = () => {
 
   const getPropertyId = () => {
     const storedPropertyId = localStorage.getItem('selectedPropertyId');
-    console.log("storedPropertyId: ", storedPropertyId);
     return storedPropertyId;
   }
 
@@ -27,9 +26,9 @@ const PurchaseProperty = () => {
         <LoadingSpinner />
       ) : (
         <>
-          <div className="min-h-screen flex items-center justify-center bg-gray-100">
+          <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8">
             <div className="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg w-full md:w-2/3 lg:w-1/2">
-              <h2 className="text-2xl font-semibold mb-6 text-center">Property Purchase Form</h2>
+              <h2 className="text-xl md:text-2xl font-semibold mb-6 text-center">Property Purchase Form</h2>
       
               <form onSubmit={PurchaseProperty} encType="multipart/form-data">
                 <div className="mb-4">

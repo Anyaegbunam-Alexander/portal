@@ -24,6 +24,7 @@ const Agencies = () => {
   const mappedData = agenciesData.map((agency) => {
     return {
       Profile: 'https://google.com',
+      Apply: agency.id,
       Name: agency.name,
       Email: agency.email,
       Address: agency.address.street_address,
