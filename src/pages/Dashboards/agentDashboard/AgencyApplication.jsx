@@ -42,6 +42,13 @@ const UseHandleAgentApplication = (apiEndpoint) => {
         body: formDataObj,
       });
 
+      if (response.ok) {
+        alert('Agency Application successful');
+        navigate(`/${role}/agencies`);
+      } else{
+        alert("An Error Occured: Unable to apply to Agency");
+      }
+
 
       if (!response.ok) {
         const errorResponse = await response.json();
@@ -54,9 +61,6 @@ const UseHandleAgentApplication = (apiEndpoint) => {
             return
           }
         }
-      } else {
-        alert('Agency Application successful');
-        navigate(`/${role}/agencies`);
       }
 
     } catch (error) {
@@ -87,9 +91,6 @@ const AgencyApplication = () => {
     applyAgency,
   } = UseHandleAgentApplication('https://realestate.api.sites.name.ng/agents/agency-applications/');
 
-  console.log(agentApplicationData)
-
-
 
   return (
     <div>
@@ -98,7 +99,6 @@ const AgencyApplication = () => {
       ) : (
         <>
           <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8">
-
             <div className="max-w-lg mx-auto p-8 bg-white shadow-lg rounded-lg w-full md:w-2/3 lg:w-1/2">
               <h2 className="text-xl md:text-2xl font-semibold mb-6 text-center">Agency Application Form</h2>
 
@@ -125,7 +125,7 @@ const AgencyApplication = () => {
                     value={agentApplicationData.notes}
                     onChange={handleFieldChange}
                     className="w-full p-3 border border-gray-300 rounded outline-none"
-                    rows="3"
+                    rows="6"
                     required
                   ></textarea>
                 </div>

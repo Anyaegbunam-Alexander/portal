@@ -48,7 +48,7 @@ const Orders = () => {
 
 
   return (
-    <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl mt-16">
+    <div className="m-6 md:m-10 p-6 md:p-10 bg-white rounded-3xl mt-16">
       <Header category="Page" title="Orders"/>
       
       <GridComponent
