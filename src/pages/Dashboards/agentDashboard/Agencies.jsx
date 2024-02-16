@@ -15,7 +15,7 @@ const Agencies = () => {
   
   const {
     getAllAgencies,
-    agenciesGrid,
+    agenciesGridForAgent,
   } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/');
 
   const agenciesData = getAllAgencies; 
@@ -23,8 +23,10 @@ const Agencies = () => {
   // Map through agenciesData and transform each agency as needed
   const mappedData = agenciesData.map((agency) => {
     return {
-      Profile: 'https://google.com',
+      Profile: '/',
       Apply: agency.id,
+      Status: 'Pending',
+      StatusBg: '#544A62',
       Name: agency.name,
       Email: agency.email,
       Address: agency.address.street_address,
@@ -46,7 +48,7 @@ const Agencies = () => {
         width="auto"
       >
         <ColumnsDirective>
-          {agenciesGrid.map((item, index) => (
+          {agenciesGridForAgent.map((item, index) => (
             <ColumnDirective key={index} {...item} />
           ))}
         </ColumnsDirective>

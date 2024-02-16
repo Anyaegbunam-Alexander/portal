@@ -37,7 +37,6 @@ const Orders = () => {
       PropertyName: propertyPurchase.property ? propertyPurchase.property.name || propertyPurchase.property.type : '',
       AgencyName: propertyPurchase.property.agency.name,
       TotalAmount: currencyFormatter.format(propertyPurchase.property.price),
-      OrderItems: 'Fresh Tomato',
       Receipt: 'https://google.com',
       Status: propertyPurchase.status,
       StatusBg: '#FB9678',

@@ -334,8 +334,15 @@ const UsePropertyLogic = (apiEndpoint) => {
       </button>
     </div>
   );
+
+  const agentApprovalGridStatus = (props) => (
+    <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
+      <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
+      <p>{props.Status}</p>
+    </div>
+  );
   
-  const agenciesGrid = [
+  const agenciesGridForAgent = [
     { headerText: 'Agencies',
       width: '150',
       template: gridAgenciesProfile,
@@ -378,6 +385,52 @@ const UsePropertyLogic = (apiEndpoint) => {
       width: '125',
       textAlign: 'Center',
       template: gridApplyAgencyBtn,
+    },
+    { field: 'Approval Status',
+      headerText: 'Status',
+      width: '130',
+      textAlign: 'Center',
+      template: agentApprovalGridStatus, 
+    },
+  ];
+
+  const agenciesGrid = [
+    { headerText: 'Agencies',
+      width: '150',
+      template: gridAgenciesProfile,
+      textAlign: 'Center' 
+    },
+    { field: 'Name',
+      headerText: '',
+      width: '0',
+      textAlign: 'Center',
+    },
+    { field: 'Email',
+      headerText: 'Emaail',
+      width: '120',
+      textAlign: 'Center',
+    },
+    { field: 'Address',
+      headerText: 'Address',
+      width: '170',
+      textAlign: 'Center',
+    },
+    { 
+      field: 'State',
+      headerText: 'State',
+      width: '120',
+      textAlign: 'Center', 
+    },
+    { headerText: 'Country',
+      width: '120',
+      textAlign: 'Center',
+      template: gridAgenciesCountry 
+    },    
+    { 
+      headerText: 'Profile',
+      width: '125',
+      textAlign: 'Center',
+      template: gridAgenciesProfileLink
     },
   ];
   // -------------- END OF CODE ---------------------------- 
@@ -650,7 +703,8 @@ const UsePropertyLogic = (apiEndpoint) => {
         headerText: 'Status',
         width: '130',
         textAlign: 'Center',
-        template: agencyCustomerGridStatus },
+        template: agencyCustomerGridStatus 
+      },
       {
         field: 'Availability',
         headerText: 'Availability',
@@ -734,6 +788,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     getAllPropertyPurchases,
     currencyFormatter,
     agencyCustomersGrid,
+    agenciesGridForAgent,
     profile,
     navigate,
     openModal,
