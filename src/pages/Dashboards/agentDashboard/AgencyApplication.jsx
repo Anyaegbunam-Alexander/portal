@@ -134,7 +134,7 @@ const AgencyApplication = () => {
                   type="submit"
                   className="w-full bg-purple-800 text-white py-3 px-4 rounded hover:bg-purple-500 focus:outline-none focus:shadow-outline-blue"
                 >
-                  Submit Purchase
+                  Submit Application
                 </button>
               </form>
             </div>
