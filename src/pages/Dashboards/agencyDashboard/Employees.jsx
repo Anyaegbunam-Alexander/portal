@@ -11,11 +11,14 @@ import { GridComponent,
 import { Header } from '../../../components/dashboardComponents';
 import { useNavigate } from 'react-router-dom';
 import { GrLocation } from 'react-icons/gr';
+import { useStateContext } from '../../../contexts/ContextProvider';
 
 
 const HandleAgentApplication = (apiEndpoint) => {
 
   const [getAgentApplication, setAgentApplication] = useState([]);
+  const { currentColor } = useStateContext();
+
 
   const navigate = useNavigate();
   const role = localStorage.getItem('role');
@@ -52,6 +55,29 @@ const HandleAgentApplication = (apiEndpoint) => {
     </div>
   );
 
+  const gridViewAgentApplicationBtn = (props) => (
+    <div className="flex items-center justify-center gap-2">
+      <button
+        className='py-3 w-full text-white outline-none rounded-lg'
+        style={{backgroundColor: currentColor}}
+        formTarget='_blank'
+        onClick={() => {
+          //localStorage.setItem('agentId', props.EmployeeID)
+          navigate(`/agencies/agents/${props.EmployeeID}/`)
+        }}
+      >
+        View Application
+      </button>
+    </div>
+  );
+
+  const agentApprovalGridStatus = (props) => (
+    <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
+      <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
+      <p>{props.Status}</p>
+    </div>
+  );
+
   const employeesGrid = [
     { headerText: 'Employee',
       width: '150',
@@ -63,8 +89,8 @@ const HandleAgentApplication = (apiEndpoint) => {
       width: '0',
       textAlign: 'Center',
     },
-    { field: 'Title',
-      headerText: 'Designation',
+    { field: 'Email',
+      headerText: 'Email',
       width: '170',
       textAlign: 'Center',
     },
@@ -74,20 +100,29 @@ const HandleAgentApplication = (apiEndpoint) => {
       template: gridEmployeeState
     },
   
-    { field: 'HireDate',
-      headerText: 'Hire Date',
-      width: '135',
+    { field: 'ApplicationDate',
+      headerText: 'Application Date',
+      width: '170',
       format: 'yMd',
       textAlign: 'Center' },
   
-    { field: 'ReportsTo',
-      headerText: 'Reports To',
+    { field: 'Status',
+      headerText: 'Status',
       width: '120',
-      textAlign: 'Center' },
+      textAlign: 'Center', 
+      template: agentApprovalGridStatus,
+    },
     { field: 'EmployeeID',
       headerText: 'Employee ID',
       width: '125',
-      textAlign: 'Center' },
+      textAlign: 'Center' 
+    },
+    { 
+      headerText: 'View Application',
+      width: '150',
+      textAlign: 'Center',
+      template: gridViewAgentApplicationBtn,
+    },
   ];
 
 
@@ -138,18 +173,19 @@ const Employees = () => {
     return {
       EmployeeID: agents.agent.id,
       Name: `${agents.agent.last_name} ${agents.agent.first_name}`,
-      Title: 'Sales Representative',
-      HireDate: '01/02/2021',
-      State: 'USA',
-      ReportsTo: 'Carson',
-      EmployeeImage:
+      Email: agents.agent.email,
+      ApplicationDate: new Date(agents.created).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      State: agents.agent.address.state,
+      Status: agents.status,
+      StatusBg: '#544A62',
+      EmployeeImage: agents.agent.profile_picture !== null ? agents.agent.profile_picture : 
       "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE=",
     }
   });
 
 
   return (
-    <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl mt-16">
+    <div className="m-6 md:m-10 p-6 md:p-10 bg-white rounded-3xl mt-16">
       <Header category="Page" title="Agents"/>
       <h1>Coming soon</h1>
       <GridComponent
