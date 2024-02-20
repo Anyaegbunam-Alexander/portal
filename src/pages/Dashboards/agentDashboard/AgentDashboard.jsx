@@ -20,6 +20,7 @@ import {
 } from './index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
+import AgencyApplication from './AgencyApplication';
 
 const UserDashboard = () => {
   const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();

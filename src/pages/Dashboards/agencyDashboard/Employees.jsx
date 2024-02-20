@@ -16,7 +16,7 @@ const Employees = () => {
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl mt-16">
       <Header category="Page" title="Agents"/>
       <h1>Coming soon</h1>
-      {/* <GridComponent
+      <GridComponent
         dataSource={employeesData}
         allowPaging
         allowSorting
@@ -29,7 +29,7 @@ const Employees = () => {
           ))}
         </ColumnsDirective>
         <Inject services={[ Page, Search, Toolbar ]}/>
-      </GridComponent> */}
+      </GridComponent>
     </div>
   )
 }
