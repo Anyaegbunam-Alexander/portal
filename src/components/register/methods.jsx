@@ -28,7 +28,6 @@ const useRegistrationMethod = (apiEndpoint) => {
           const result = await response.json();
           setData(result);
           
-          console.log(result[20]);
         } catch (error) {
           console.error('Error fetching data:', error);
         }

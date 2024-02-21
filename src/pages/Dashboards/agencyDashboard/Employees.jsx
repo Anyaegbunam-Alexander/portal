@@ -24,19 +24,6 @@ const HandleAgentApplication = (apiEndpoint) => {
   const role = localStorage.getItem('role');
   const accessToken = localStorage.getItem('token');
 
-  // const employeesData = [
-  //   {
-  //     EmployeeID: 1,
-  //     Name: 'Nancy Davolio',
-  //     Title: 'Sales Representative',
-  //     HireDate: '01/02/2021',
-  //     State: 'USA',
-  //     ReportsTo: 'Carson',
-  //     EmployeeImage:
-  //     profile.logo !== null ? profile.logo : "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE=",
-  //   }
-  // ];
-
   const gridEmployeeProfile = (props) => (
     <div className="flex items-center gap-2">
       <img
@@ -62,14 +49,15 @@ const HandleAgentApplication = (apiEndpoint) => {
         style={{backgroundColor: currentColor}}
         formTarget='_blank'
         onClick={() => {
-          //localStorage.setItem('agentId', props.EmployeeID)
-          navigate(`/agencies/agents/${props.EmployeeID}/`)
+          localStorage.setItem('agentApplicationId', props.ApplicationID)
+          navigate(`/agencies/agency-applications/${props.ApplicationID}/`)
         }}
       >
         View Application
       </button>
     </div>
   );
+
 
   const agentApprovalGridStatus = (props) => (
     <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
@@ -114,6 +102,11 @@ const HandleAgentApplication = (apiEndpoint) => {
     },
     { field: 'EmployeeID',
       headerText: 'Employee ID',
+      width: '125',
+      textAlign: 'Center' 
+    },
+    { field: 'ApplicationID',
+      headerText: 'Application ID',
       width: '125',
       textAlign: 'Center' 
     },
@@ -172,6 +165,7 @@ const Employees = () => {
   const mappedData = agentsData.map((agents) => {
     return {
       EmployeeID: agents.agent.id,
+      ApplicationID: agents.id,
       Name: `${agents.agent.last_name} ${agents.agent.first_name}`,
       Email: agents.agent.email,
       ApplicationDate: new Date(agents.created).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
