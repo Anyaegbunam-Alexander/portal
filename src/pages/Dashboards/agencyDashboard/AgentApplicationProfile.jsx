@@ -8,7 +8,6 @@ const HandleAgentApproval = (apiEndpoint) => {
     const accessToken = localStorage.getItem('token');
 
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('Pending');
   const [agentApplicationApproval, setagentApplicationApproval] = useState({
     status: '',
     agency_notes: '',
@@ -18,10 +17,6 @@ const HandleAgentApproval = (apiEndpoint) => {
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
     setagentApplicationApproval((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleOptionChange = (e) => {
-    setSelectedOption(e.target.value);
   };
 
   const approveAgent = async (e) => {
@@ -35,6 +30,13 @@ const HandleAgentApproval = (apiEndpoint) => {
       formDataObj.append('status', agentApplicationApproval.status);
       formDataObj.append('agency_notes', agentApplicationApproval.agency_notes);
 
+
+      // Log the FormData content before sending
+      for (const pair of formDataObj.entries()) {
+        console.log(pair[0], pair[1]);
+      }
+
+
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
@@ -44,11 +46,13 @@ const HandleAgentApproval = (apiEndpoint) => {
       });
 
 
-      if (response.ok) {
-        alert('Agent is now Approved');
-        navigate(`/${role}/agents`);
+      if(response.ok){
+        alert('Agent is now Approved', agentApplicationApproval.status);
+        //navigate(`/${role}/agents`);
+      } else {
+        alert('An error occured');
       }
-
+      
 
       if (!response.ok) {
         const errorResponse = await response.json();
@@ -63,6 +67,7 @@ const HandleAgentApproval = (apiEndpoint) => {
         }
       }
 
+
     } catch (error) {
       console.error(error);
       alert("An Error Occured: Unable to approve agent", error);
@@ -73,10 +78,8 @@ const HandleAgentApproval = (apiEndpoint) => {
 
   return {
     isLoading,
-    selectedOption,
     agentApplicationApproval,
     handleFieldChange,
-    handleOptionChange,
     approveAgent,
   }
 
@@ -88,10 +91,8 @@ const AgentApplicationProfile = () => {
     console.log(agentAppId)
     const {
         isLoading,
-        selectedOption,
         agentApplicationApproval,
         handleFieldChange,
-        handleOptionChange,
         approveAgent,
     } = HandleAgentApproval(`https://realestate.api.sites.name.ng/agencies/agency-applications/${agentAppId}`);
 
@@ -116,13 +117,13 @@ const AgentApplicationProfile = () => {
                     <select
                         id="status"
                         name="status"
-                        value={agentApplicationApproval.status = selectedOption}
+                        value={agentApplicationApproval.status}
                         onChange={handleFieldChange}
-                        className="my-4 bg-purple-600 text-white w-1/2 border-none p-3 text-base sm:text-sm rounded-md"
+                        className="my-4 bg-purple-600 text-white w-1/2 border-none outline-none p-3 text-base sm:text-sm rounded-md"
                     >
-                        <option value="Pending">Pending</option>
-                        <option value="Approved">Approved</option>
-                        <option value="Rejected">Rejected</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
                     </select>
                 </div>
 

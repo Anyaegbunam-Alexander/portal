@@ -53,7 +53,7 @@ const HandleAgentApplication = (apiEndpoint) => {
           navigate(`/agencies/agency-applications/${props.ApplicationID}/`)
         }}
       >
-        View Application
+        Take Decision
       </button>
     </div>
   );
@@ -171,7 +171,7 @@ const Employees = () => {
       ApplicationDate: new Date(agents.created).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
       State: agents.agent.address.state,
       Status: agents.status,
-      StatusBg: '#544A62',
+      StatusBg: agents.status === 'rejected' ? '#EF072F' : agents.status === 'approved' ? '#86BE59' : '#544A62',
       EmployeeImage: agents.agent.profile_picture !== null ? agents.agent.profile_picture : 
       "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE=",
     }
