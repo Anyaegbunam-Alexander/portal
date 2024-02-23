@@ -27,36 +27,20 @@ const HandleAgentApproval = (apiEndpoint) => {
     setIsLoading(true);
 
     try {
-      //const formDataObj = new FormData();
-      
-      // formDataObj.append('status', agentApplicationApproval.status);
-      // formDataObj.append('agency_notes', agentApplicationApproval.agency_notes);
-
-      console.log('FormData Content:', agentApplicationApproval);
-
-
-      // // Log the FormData content before sending
-      // for (const pair of formDataObj.entries()) {
-      //   console.log(pair[0], pair[1]);
-      // }
-
-
       const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
         },
         body: agentApplicationApproval,
       });
 
 
       if(response.ok){
-        alert('Agent is now Approved', agentApplicationApproval.status);
+        alert(`Agent application is ${agentApplicationApproval.status}`);
         navigate(`/${role}/agents`);
-      } 
-      
-
-      if (!response.ok) {
+      } else {
         const errorResponse = await response.json();
 
         for (const field in errorResponse.extra.fields) {
@@ -148,7 +132,7 @@ const AgentApplicationProfile = () => {
                   type="submit"
                   className="w-full bg-purple-800 text-white py-3 px-4 rounded hover:bg-purple-500 focus:outline-none focus:shadow-outline-blue"
                 >
-                  Approve application
+                  Submit
                 </button>
               </form>
             </div>
