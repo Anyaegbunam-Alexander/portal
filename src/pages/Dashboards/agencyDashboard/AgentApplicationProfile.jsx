@@ -16,6 +16,8 @@ const HandleAgentApproval = (apiEndpoint) => {
   //Handle change in the values of user's input
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
+    console.log("Name:", name); // Log the name of the field
+    console.log("Value:", value);
     setagentApplicationApproval((prevData) => ({ ...prevData, [name]: value }));
   };
 
@@ -25,16 +27,18 @@ const HandleAgentApproval = (apiEndpoint) => {
     setIsLoading(true);
 
     try {
-      const formDataObj = new FormData();
+      //const formDataObj = new FormData();
       
-      formDataObj.append('status', agentApplicationApproval.status);
-      formDataObj.append('agency_notes', agentApplicationApproval.agency_notes);
+      // formDataObj.append('status', agentApplicationApproval.status);
+      // formDataObj.append('agency_notes', agentApplicationApproval.agency_notes);
+
+      console.log('FormData Content:', agentApplicationApproval);
 
 
-      // Log the FormData content before sending
-      for (const pair of formDataObj.entries()) {
-        console.log(pair[0], pair[1]);
-      }
+      // // Log the FormData content before sending
+      // for (const pair of formDataObj.entries()) {
+      //   console.log(pair[0], pair[1]);
+      // }
 
 
       const response = await fetch(apiEndpoint, {
@@ -42,16 +46,14 @@ const HandleAgentApproval = (apiEndpoint) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-        body: formDataObj,
+        body: agentApplicationApproval,
       });
 
 
       if(response.ok){
         alert('Agent is now Approved', agentApplicationApproval.status);
-        //navigate(`/${role}/agents`);
-      } else {
-        alert('An error occured');
-      }
+        navigate(`/${role}/agents`);
+      } 
       
 
       if (!response.ok) {
@@ -120,6 +122,7 @@ const AgentApplicationProfile = () => {
                         value={agentApplicationApproval.status}
                         onChange={handleFieldChange}
                         className="my-4 bg-purple-600 text-white w-1/2 border-none outline-none p-3 text-base sm:text-sm rounded-md"
+                        required
                     >
                         <option value="pending">Pending</option>
                         <option value="approved">Approved</option>

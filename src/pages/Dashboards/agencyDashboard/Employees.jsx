@@ -181,7 +181,7 @@ const Employees = () => {
   return (
     <div className="m-6 md:m-10 p-6 md:p-10 bg-white rounded-3xl mt-16">
       <Header category="Page" title="Agents"/>
-      <h1>Coming soon</h1>
+
       <GridComponent
         dataSource={mappedData}
         allowPaging
