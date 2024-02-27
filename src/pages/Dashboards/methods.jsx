@@ -741,8 +741,8 @@ const UsePropertyLogic = (apiEndpoint) => {
             },
           });
   
-          const data = await response.json();
           if (response.ok) {
+            const data = await response.json();
             setProfile(data);
           } else {
             const errorResponse = await response.json();
