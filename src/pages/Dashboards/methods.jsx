@@ -315,7 +315,8 @@ const UsePropertyLogic = (apiEndpoint) => {
 
   const gridAgenciesProfileLink = (props) => (
     <div className="flex items-center justify-center gap-2">
-      <a href={`${props.Profile}`} className=' underline text-blue-800'>Link to Profile</a>
+      {localStorage.setItem("profileId", props.Profile)}
+      <a href={`/customers/${props.Profile}`} className=' underline text-blue-800'>Link to Profile</a>
     </div>
   );
 
@@ -741,9 +742,9 @@ const UsePropertyLogic = (apiEndpoint) => {
           });
   
           const data = await response.json();
-          setProfile(data);
-          
-          if (!response.ok) {
+          if (response.ok) {
+            setProfile(data);
+          } else {
             const errorResponse = await response.json();
     
             for (const field in errorResponse.extra.fields) {
@@ -763,6 +764,7 @@ const UsePropertyLogic = (apiEndpoint) => {
 
       getProfile();
     }, [accessToken, apiEndpoint])
+
     
 
 
