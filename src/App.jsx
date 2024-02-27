@@ -59,7 +59,7 @@ const App = () => {
       <Route path={`/agents/agency-applications/`} element={<AgencyApplication />} />
       <Route path={`/${role}/listings/show-property/:propertyId`} element={<PropertyDetails />} />
       <Route path={`/agencies/agency-applications/:id/`} element={<AgentApplicationProfile />} />
-      <Route path={`/customers/:id/`} element={<GeneralProfile />} />
+      <Route path={`/${role}/agencies/:id/`} element={<GeneralProfile />} />
 
 
       {/* 404 Route - Catch-all */}

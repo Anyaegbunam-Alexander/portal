@@ -7,6 +7,7 @@ import { BsMarkdown, BsPhone } from 'react-icons/bs';
 import { MdEdit, MdOutlineEmail } from 'react-icons/md';
 import { BiPin, BiUser } from 'react-icons/bi';
 import { useStateContext } from '../../contexts/ContextProvider';
+import { IoReturnDownBackOutline } from 'react-icons/io5';
 
 
 const useSingleProfile = (apiEndpoint) => {
@@ -14,7 +15,6 @@ const useSingleProfile = (apiEndpoint) => {
 
 
   const accessToken = localStorage.getItem('token');
-
 
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const useSingleProfile = (apiEndpoint) => {
 
 
       return{
-        singleProfile,
+        singleProfile
       }
 
 }
@@ -62,27 +62,36 @@ const useSingleProfile = (apiEndpoint) => {
 
 const GeneralProfile = () => {
     const { currentColor } = useStateContext();
+    const role = localStorage.getItem('role');
     const profileId = localStorage.getItem('profileId');
     
 
     const {
         singleProfile
-    } = useSingleProfile(`https://realestate.api.sites.name.ng/customers/${profileId}`);
+    } = useSingleProfile(`https://realestate.api.sites.name.ng/agencies/${profileId}`);
 
 
     return (
         <div className="mt-16">
             <div className="m-6 md:m-10 p-6 md:p-10 rounded-3xl bg-white">
-                <Header category="Page" title="Profile" />
-                
+                <div className="flex items-center justify-between">
+                    <Header category="Page" title="Profile" />
+                    
+                    {/* Back link */}
+                    <div className=' max-md:px-5'>
+                        <a href={`/${role}/agencies`} className='flex items-center text-lg mb-4'>
+                        <IoReturnDownBackOutline className=' mr-2'/> Back
+                        </a>
+                    </div>
+                </div>
                 <div className="w-full mt-10">
                     <div className="text-center space-y-9">
                         <img
-                            src={singleProfile.profile_picture !== null ? singleProfile.profile_picture : "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE="}
+                            src={singleProfile.logo !== null ? singleProfile.logo : "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE="}
                             alt="profile"
                             className="rounded-full w-40 h-40 shadow-lg m-auto border-4 border-solid border-purple-800 hover:border-purple-500 hover:shadow-2xl"
                         />
-                        <h4 className="font-bold text-3xl mt-10">{singleProfile.last_name} {singleProfile.first_name}</h4>
+                        <h4 className="font-bold text-3xl mt-10">{singleProfile.name}</h4>
                         <div className="flex items-center justify-center">
                             <GoLocation className="mr-2" />
                             <p>{singleProfile.address && (singleProfile.address.state || singleProfile.address.city)}, {singleProfile.address && singleProfile.address.country}</p>
