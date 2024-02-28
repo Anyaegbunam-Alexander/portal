@@ -647,7 +647,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       {
         headerText: 'Status',
         template: gridPropertyStatus,
-        field: 'OrderItems',
+        field: 'Status',
         textAlign: 'Center',
         width: '120',
       },
@@ -703,15 +703,17 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 
     const agencyCustomersGrid = [
-      { type: 'checkbox', width: '50' },
-      { headerText: 'Name',
-        width: '150',
+      // { type: 'checkbox', width: '50' },
+      { headerText: 'Customer Details',
+        width: '200',
         template: agencyCustomerGridImage,
-        textAlign: 'Center' },
+        textAlign: 'left' 
+      },
       { field: 'PropertyName',
         headerText: 'Property Name',
         width: '150',
-        textAlign: 'Center' },
+        textAlign: 'Center' 
+      },
       { field: 'Status',
         headerText: 'Status',
         width: '130',
@@ -725,7 +727,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         textAlign: 'Center' },
       { field: 'Price',
         headerText: 'Price',
-        width: '100',
+        width: '170',
         textAlign: 'Center' 
       },
       { field: 'Location',

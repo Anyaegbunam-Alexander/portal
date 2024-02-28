@@ -6,7 +6,6 @@ import { GridComponent,
   Page, 
   Selection, 
   Inject, 
-  Edit, 
   Toolbar,
   Sort, 
   Filter 
@@ -40,7 +39,7 @@ const Customers = () => {
         'https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE=',
       PropertyName: customerInfo.property ? customerInfo.property.name || customerInfo.property.type : '',
       Status: customerInfo.status,
-      StatusBg: '#494D56',
+      StatusBg: customerInfo.status === 'rejected' ? '#EF072F' : customerInfo.status === 'approved' ? '#86BE59' : '#544A62',
       Availability: new Date(customerInfo.property.availability).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
       Price: currencyFormatter.format(customerInfo.property.price),
       Location: customerInfo.customer.address.state || customerInfo.property.interested_customers.address.state,
@@ -57,8 +56,8 @@ const Customers = () => {
         dataSource={mappedData}
         allowPaging
         allowSorting
-        toolbar={['Delete']}
-        editSettings={{allowDeleting: true, allowEditing: true}}
+        // toolbar={['Delete']}
+        // editSettings={{allowDeleting: true, allowEditing: true}}
         width="auto"
       >
         <ColumnsDirective>
@@ -66,7 +65,7 @@ const Customers = () => {
             <ColumnDirective key={index} {...item} />
           ))}
         </ColumnsDirective>
-        <Inject services={[ Page, Toolbar, Selection, Edit, Sort, Filter ]}/>
+        <Inject services={[ Page, Toolbar, Selection, Sort, Filter ]}/>
       </GridComponent>
     </div>
   )
