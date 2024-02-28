@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { Header } from '../../components/dashboardComponents';
 import { GoLocation } from 'react-icons/go';
-import UsePropertyLogic from './methods';
 import { BsMarkdown, BsPhone } from 'react-icons/bs';
-import { MdEdit, MdOutlineEmail } from 'react-icons/md';
+import { MdOutlineEmail } from 'react-icons/md';
 import { BiPin, BiUser } from 'react-icons/bi';
 import { useStateContext } from '../../contexts/ContextProvider';
 import { IoReturnDownBackOutline } from 'react-icons/io5';
@@ -60,7 +59,7 @@ const useSingleProfile = (apiEndpoint) => {
 }
 
 
-const GeneralProfile = () => {
+const GetAgencyProfile = () => {
     const { currentColor } = useStateContext();
     const role = localStorage.getItem('role');
     const profileId = localStorage.getItem('profileId');
@@ -150,4 +149,4 @@ const GeneralProfile = () => {
     );
 }
 
-export default GeneralProfile;
+export default GetAgencyProfile;

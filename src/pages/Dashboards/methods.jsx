@@ -315,8 +315,13 @@ const UsePropertyLogic = (apiEndpoint) => {
 
   const gridAgenciesProfileLink = (props) => (
     <div className="flex items-center justify-center gap-2">
-      {localStorage.setItem("profileId", props.Profile)}
-      <a href={`/${role}/agencies/${props.Profile}`} className=' underline text-blue-800'>Link to Profile</a>
+      <a 
+        href={`/${role}/agencies/${props.Profile}`} 
+        onClick={localStorage.setItem('profileId', props.Profile)} 
+        className=' underline text-blue-800'
+      >
+        Link to Profile
+      </a>
     </div>
   );
 

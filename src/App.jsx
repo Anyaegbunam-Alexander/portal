@@ -18,7 +18,7 @@ import AgentDashboard from './pages/Dashboards/agentDashboard/AgentDashboard';
 import AgencyDashboard from './pages/Dashboards/agencyDashboard/agencyDashboard';
 import { PropertyDetails } from './pages/Dashboards/agencyDashboard';
 import PurchaseProperty from './pages/Dashboards/PurchaseProperty';
-import GeneralProfile from './pages/Dashboards/GeneralProfile';
+import GetAgencyProfile from './pages/Dashboards/GetAgencyProfile';
 import AgencyApplication from './pages/Dashboards/agentDashboard/AgencyApplication';
 import AgentApplicationProfile from './pages/Dashboards/agencyDashboard/AgentApplicationProfile';
 
@@ -59,7 +59,7 @@ const App = () => {
       <Route path={`/agents/agency-applications/`} element={<AgencyApplication />} />
       <Route path={`/${role}/listings/show-property/:propertyId`} element={<PropertyDetails />} />
       <Route path={`/agencies/agency-applications/:id/`} element={<AgentApplicationProfile />} />
-      <Route path={`/${role}/agencies/:id/`} element={<GeneralProfile />} />
+      <Route path={`/${role}/agencies/:id/`} element={<GetAgencyProfile />} />
 
 
       {/* 404 Route - Catch-all */}

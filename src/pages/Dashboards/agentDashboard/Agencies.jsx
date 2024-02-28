@@ -23,7 +23,7 @@ const Agencies = () => {
   // Map through agenciesData and transform each agency as needed
   const mappedData = agenciesData.map((agency) => {
     return {
-      Profile: '/',
+      Profile: agency.id,
       Apply: agency.id,
       Status: 'Pending',
       StatusBg: '#544A62',
@@ -32,7 +32,7 @@ const Agencies = () => {
       Address: agency.address.street_address,
       Country: agency.address.country,
       State: agency.address.state,
-      EmployeeImage: 
+      EmployeeImage: agency.logo !== null ? agency.logo :
       'https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE=',
     };
   });
