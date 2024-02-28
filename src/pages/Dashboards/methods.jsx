@@ -420,7 +420,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     },
     { field: 'Email',
       headerText: 'Email',
-      width: '120',
+      width: '200',
       textAlign: 'Center',
     },
     { field: 'Address',

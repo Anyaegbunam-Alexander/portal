@@ -78,8 +78,12 @@ const GetAgencyProfile = () => {
                     
                     {/* Back link */}
                     <div className=' max-md:px-5'>
-                        <a href={`/${role}/agencies`} className='flex items-center text-lg mb-4'>
-                        <IoReturnDownBackOutline className=' mr-2'/> Back
+                        <a 
+                            href={`/${role}/agencies`} 
+                            className='flex items-center text-lg mb-4'
+                            onClick={() => {localStorage.removeItem('profileId')}}
+                        >
+                            <IoReturnDownBackOutline className=' mr-2'/> Back
                         </a>
                     </div>
                 </div>
