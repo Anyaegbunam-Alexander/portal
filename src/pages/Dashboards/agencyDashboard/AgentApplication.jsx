@@ -49,8 +49,8 @@ const HandleAgentApplication = (apiEndpoint) => {
         style={{backgroundColor: currentColor}}
         formTarget='_blank'
         onClick={() => {
-          localStorage.setItem('agentApplicationId', props.ApplicationID)
-          navigate(`/agencies/agency-applications/${props.ApplicationID}/`)
+          localStorage.setItem('agentApplicationId', props.ApplicationID);
+          navigate(`/agencies/agency-applications/${props.ApplicationID}/`);
         }}
       >
         Take Decision
@@ -82,7 +82,7 @@ const HandleAgentApplication = (apiEndpoint) => {
       width: '170',
       textAlign: 'Center',
     },
-    { headerText: 'Country',
+    { headerText: 'State',
       width: '120',
       textAlign: 'Center',
       template: gridEmployeeState
@@ -149,7 +149,7 @@ const HandleAgentApplication = (apiEndpoint) => {
 
 }
 
-const Employees = () => {
+const AgentApplication = () => {
 
   const {
     employeesGrid,
@@ -200,4 +200,4 @@ const Employees = () => {
   )
 }
 
-export default Employees
+export default AgentApplication;

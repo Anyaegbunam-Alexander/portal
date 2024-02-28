@@ -632,7 +632,11 @@ export const agencylinks = [
         icon: <AiOutlineShoppingCart />,
       },
       {
-        name: 'Agents',
+        name: 'agents-application',
+        icon: <IoMdContacts />,
+      },
+      {
+        name: 'agents',
         icon: <IoMdContacts />,
       },
       {

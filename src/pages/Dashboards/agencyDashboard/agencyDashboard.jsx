@@ -10,7 +10,7 @@ import {
   Profile,
   Orders, 
   Calendar, 
-  Employees, 
+  AgentApplication, 
   Overview,
   Stacked, 
   Pyramid, 
@@ -24,6 +24,7 @@ import {
   ColorPicker, 
   ColorMapping, 
   AddProperty,
+  Agents,
 } from '../../Dashboards/agencyDashboard/index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
@@ -80,7 +81,8 @@ const AgencyDashboard = () => {
 
                         {/* Pages */}
                         <Route path="orders" element={<Orders />} />
-                        <Route path="agents" element={<Employees />} />
+                        <Route path="agents-application" element={<AgentApplication />} />
+                        <Route path="agents" element={<Agents />} />
                         <Route path="customers" element={<Customers />} />
 
                         {/* Apps */}

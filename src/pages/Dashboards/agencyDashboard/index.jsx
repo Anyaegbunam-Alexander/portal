@@ -1,7 +1,8 @@
 export { default as Properties } from './Properties';
 export { default as Kanban } from './Kanban';
 export { default as Orders } from './Orders';
-export { default as Employees } from './Employees';
+export { default as AgentApplication } from './AgentApplication';
+export { default as Agents } from './Agents';
 export { default as AddProperty } from './AddProperty';
 export { default as Customers } from './Customers';
 export { default as Profile } from './Profile';
