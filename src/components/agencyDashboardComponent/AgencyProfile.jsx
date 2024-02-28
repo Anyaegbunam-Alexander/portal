@@ -3,9 +3,9 @@ import { MdOutlineCancel } from 'react-icons/md';
 import { Button } from '../agencyDashboardComponent';
 import { agencyProfileData } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
-import avatar from '../../data/avatar.jpg';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import UsePropertyLogic from '../../pages/Dashboards/methods';
 
 
 const AgencyProfile = () => {
@@ -20,6 +20,10 @@ const AgencyProfile = () => {
     logout();
     alert('Logout successful');
   };
+
+  const {
+    profile
+  } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/profile/');
   
 
   return (
@@ -37,7 +41,7 @@ const AgencyProfile = () => {
       <div className="flex gap-5 items-center mt-6 border-color border-b-1 pb-6">
         <img
           className="rounded-full h-24 w-24"
-          src={avatar}
+          src={profile.logo !== null ? profile.logo : "https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE="}
           alt="user-profile"
         />
         <div>
