@@ -313,17 +313,24 @@ const UsePropertyLogic = (apiEndpoint) => {
     </div>
   );
 
-  const gridAgenciesProfileLink = (props) => (
-    <div className="flex items-center justify-center gap-2">
-      <a 
-        href={`/${role}/agencies/${props.Profile}`} 
-        onClick={localStorage.setItem('profileId', props.Profile)} 
-        className=' underline text-blue-800'
-      >
-        Link to Profile
-      </a>
-    </div>
-  );
+  const gridAgenciesProfileLink = (props) => {
+    const handleClick = () => {
+      localStorage.setItem('profileId', props.Profile);
+    };
+
+
+    return(
+      <div className="flex items-center justify-center gap-2">
+        <a 
+          href={`/${role}/agencies/${props.Profile}`} 
+          onClick={handleClick} 
+          className=' underline text-blue-800'
+        >
+          Link to Profile
+        </a>
+      </div>
+    )
+  };
 
   const gridApplyAgencyBtn = (props) => (
     <div className="flex items-center justify-center gap-2">
