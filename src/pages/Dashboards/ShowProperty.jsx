@@ -26,11 +26,14 @@ const PropertyDetails = () => {
     property, 
     selectedImage,
     isModalOpen, 
+    navigate,
     openModal,
     closeModal,
     navOptions,
     propertyPurchaseNav,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/${propertyId}`);
+
+  console.log(property);
   
 
   return (

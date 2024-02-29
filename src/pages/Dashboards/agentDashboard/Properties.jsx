@@ -1,49 +1,238 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IoIosMore } from 'react-icons/io';
+import { LuBedDouble } from "react-icons/lu";
+import { LuShowerHead } from "react-icons/lu";
+import { SlSizeFullscreen } from "react-icons/sl";
+import { IoFilter } from "react-icons/io5";
+import { GrLinkPrevious } from "react-icons/gr";
+import { GrLinkNext } from "react-icons/gr";
+import { IoSearchOutline } from "react-icons/io5";
+import { CiViewTimeline } from "react-icons/ci";
+import { CiShare2 } from "react-icons/ci";
 
 
-import { Button } from '../../../components/agentDashboardComponent';
-import { useStateContext } from '../../../contexts/ContextProvider';
-import house1 from '../../../data/company_x-1.jpg';
+import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+import UsePropertyLogic from '../methods';
+import LoadingSpinner from '../../../components/loader/LoadingSpinner';
+
 
 const Properties = () => {
-  const { currentColor } = useStateContext();
+  
+  const{
+    totalPages,
+    currentPage,
+    paginationLinks,
+    properties,
+    dropdownPosition, 
+    showDropdown,
+    currentColor,
+    isLoading,
+    showProperty,
+    UsehandleDropdown,
+    handlePagination,
+  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
+  useEffect(() => {
+    // Store the current page number in local storage
+    localStorage.setItem('currentPage', currentPage);
+  }, [currentPage]);
+
+  localStorage.setItem('nextPageLink', paginationLinks?.next);
+  localStorage.setItem('prevPageLink', paginationLinks?.previous);
 
   return (
     <div className="mt-16">
-      <div className='flex flex-wrap justify-center'>
-        <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
-          <div className="flex justify-between">
-            <p className="text-xl font-semibold">Listing</p>
-            <button type="button" className="text-xl font-semibold text-gray-500">
-              <IoIosMore />
-            </button>
-          </div>
-          <div className="mt-10">
-            <img
-              className="md:w-96 h-50 "
-              src={house1}
-              alt=""
-            />
-            <div className="mt-8">
-              <p className="font-semibold text-lg"> Semi-detached Dupluex</p>
-              <p className="text-gray-400 ">Agency 1</p>
-              <p className="mt-8 text-sm text-gray-400">
-                This will be the small description for the news you have shown
-                here. There could be some great info.
-              </p>
-              <div className="mt-3">
-                <Button
-                  color="white"
-                  bgColor={currentColor}
-                  text="View Property"
-                  borderRadius="10px"
-                />
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <div
+            className=" rounded-2xl w-500 p-4 m-4 shadow-lg"
+            style={{ backgroundColor: currentColor }}
+          >
+            <div className="text-center text-white space-y-4 mt-8">
+              <p className="font-bold text-3xl md:text-5xl">Looking for a property?</p>
+              <p className=' tracking-widest'>Amazing properties are listed just for you!</p>
+            </div>
+            
+            <div className="flex justify-center items-center my-10 w-full">
+              <div className="bg-white p-4 m-auto rounded-xl lg:w-3/4">
+                <div className="flex outline-none border-solid border-2 border-[#8840E6]-500 rounded-lg">
+                  <input 
+                    type="text" 
+                    className='w-full outline-none p-2 text-slate-700' 
+                    placeholder='Filter your properties...'
+                  />
+
+                  <button 
+                    type="button" 
+                    className={`p-4 text-white font-semibold outline-none hover:opacity-75 flex items-center`}
+                    style={{ backgroundColor: currentColor }}
+                    onClick={() => {alert('currently under maintenance')}}
+                  >
+                    <IoSearchOutline className=' text-2xl mr-2'/>
+                    Search
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <TooltipComponent content="Filter" position='Top'>
+                  <IoFilter 
+                    className='text-white text-2xl hover:opacity-80 lg:mr-12 max-sm:hidden'
+                    onClick={() => {alert('currently under maintenance')}}
+                  />
+                </TooltipComponent>
               </div>
             </div>
+
           </div>
-        </div>
-      </div>
+          
+          <div className='flex flex-wrap flex-1 justify-around'>
+            {properties && properties.length > 0 ? (
+              properties.map(property => (
+                <div key={property.id} className="w-500 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+                  {/* Card dropdown */}
+                  <div className="flex justify-between">
+                    <p className="text-lg font-medium">{property.agency.name}</p>
+                    <button type="button" className="text-xl font-semibold text-gray-500 outline-none" onClick={UsehandleDropdown}>
+                      <IoIosMore />
+                    </button>
+                    {showDropdown && (
+                      <div
+                        className="absolute z-10 bg-white shadow-sm rounded-md mt-2 p-4 w-40"
+                        style={{ top: dropdownPosition.top, left: dropdownPosition.left }}
+                      >
+                        {/* Dropdown content goes here */}
+                        <div>
+                          <ul className="space-y-4">
+                            <li className='flex items-center border-b border-solid py-3'>
+                              <CiShare2 className='text-xl mr-3'/> Share
+                            </li>
+                            <li className='flex items-center'>
+                              <CiViewTimeline className='text-xl mr-3'/> View
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Card containing property details */}
+                  <div className="mt-10">
+                    {/* Used a container with a fixed height */}
+                    <div className="image-container relative" style={{ height: '200px', overflow: 'hidden' }}>
+                      {property.images && property.images.length > 0 && (
+                        <img
+                          className="md:w-96 h-full w-full object-cover transform transition-transform duration-600 ease-in-out hover:scale-110"
+                          src={property.images[0].image}
+                          alt="Property"
+                        />
+                      )}
+                      {/* "For Sale" tag */}
+                      <div className="absolute bottom-0 right-0 bg-green-600 text-white px-3 py-2 rounded-sm">
+                        <p>For {property.transaction_type}</p>
+                      </div>
+                    </div>
+
+                    <div className="mt-8">
+                      <p className="font-bold text-xl hover:text-gray-600 w-80"> {property.name || property.type}</p>
+                      <p className="py-4 font-normal">
+                        Added: 
+                        <span className="ml-2 text-gray-400">
+                          {
+                            new Date(property.availability).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+                          }
+                        </span>
+                      </p>
+
+                      <div className="py-2">
+                        <div className="flex items-center space-x-6">
+                          <div>
+                            <p className='font-semibold'>Bedrooms</p>
+                            <div className='flex items-center space-x-4 py-3'>
+                              <LuBedDouble className='text-3xl'/>
+                              <span>{property.bedrooms}</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p className='font-semibold'>Bathrooms</p>
+                            <div className='flex items-center space-x-4 py-3'>
+                              <LuShowerHead className='text-3xl'/>
+                              <span>{property.bathrooms}</span>
+                            </div>
+                          </div>
+
+                          <div>
+                            <p className='font-semibold'>Size</p>
+                            <div className='flex items-center space-x-4 py-3'>
+                              <SlSizeFullscreen className='text-2xl'/>
+                              <span>{property.square_footage} sqft</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className='py-3'>
+                        <p className='text-base'>For {property.transaction_type}</p>
+                        <p className="text-xl font-medium text-gray-800 dark:text-gray-200">
+                          {new Intl.NumberFormat('en-NG', {
+                            style: 'currency',
+                            currency: 'NGN',
+                          }).format(property.price)}
+                        </p>
+                      </div>
+
+                      <div className="py-4">
+                        <button 
+                          type="button"
+                          className={`rounded-xl text-white p-4`}
+                          style={{ backgroundColor: currentColor }}
+                          onClick={() => showProperty(property.id)}
+                        >
+                          View Property
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )) 
+            ) : (
+                <div className='flex items-center justify-center h-screen w-full -mt-16'>
+                  <div className="text-center">
+                    <p className="mb-4 text-xl dark:text-gray-200">Kindly reload this page</p>
+                  </div>
+                </div>
+            )}
+          </div>
+
+
+          {/* Pagination */}
+          <div>
+            {paginationLinks && (
+              <div className="flex justify-center items-center my-10 space-x-4">
+                <button 
+                  onClick={() => handlePagination()} disabled={!paginationLinks?.previous}
+                  className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
+                >
+                  <GrLinkPrevious className='mr-4'/>
+                  Previous
+                </button>
+                
+                <span>{`page ${currentPage} of ${totalPages}`}</span>
+
+                <button 
+                  onClick={() => handlePagination()} disabled={!paginationLinks.next}
+                  className={`cursor-pointer p-4 font-semibold rounded-lg shadow-md hover:opacity-80 flex items-center`}
+                >
+                  Next
+                  <GrLinkNext className='ml-4'/>
+                </button>
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   )
 }

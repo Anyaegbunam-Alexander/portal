@@ -74,7 +74,6 @@ const HandleAgentApproval = (apiEndpoint) => {
 const AgentApplicationProfile = () => {
     const agentAppId = localStorage.getItem('agentApplicationId');
 
-    console.log(agentAppId)
     const {
         isLoading,
         agentApplicationApproval,

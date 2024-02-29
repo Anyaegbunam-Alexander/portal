@@ -47,10 +47,13 @@ const HandleAgentApplication = (apiEndpoint) => {
       <button
         className='py-3 w-full text-white outline-none rounded-lg'
         style={{backgroundColor: currentColor}}
-        formTarget='_blank'
         onClick={() => {
           localStorage.setItem('agentApplicationId', props.ApplicationID);
-          navigate(`/agencies/agency-applications/${props.ApplicationID}/`);
+          if (props.Status === 'approved') {
+            alert(`Agent status can no longer be updated once approved. Kindly contact admin for further assistance.`);
+          } else{
+            navigate(`/agencies/agency-applications/${props.ApplicationID}/`);
+          }
         }}
       >
         Take Decision
