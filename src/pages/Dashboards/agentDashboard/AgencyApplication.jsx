@@ -46,6 +46,11 @@ const UseHandleAgentApplication = (apiEndpoint) => {
         alert('Agency Application successful');
         navigate(`/${role}/agencies`);
       } else{
+        alert('Already applied to agency');
+        navigate(`/${role}/apply-agencies`);
+      }
+
+      if (!response.ok) {
         const errorResponse = await response.json();
 
         for (const field in errorResponse.extra.fields) {

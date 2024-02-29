@@ -228,9 +228,9 @@ const UsePropertyLogic = (apiEndpoint) => {
 
 
       // Log the FormData content before sending
-       for (const pair of formDataObj.entries()) {
-        console.log(pair[0], pair[1]);
-      }
+      //  for (const pair of formDataObj.entries()) {
+      //   console.log(pair[0], pair[1]);
+      // }
 
       const response = await fetch(apiEndpoint, {
         method: 'POST',
@@ -404,6 +404,51 @@ const UsePropertyLogic = (apiEndpoint) => {
       width: '125',
       textAlign: 'Center',
       template: gridApplyAgencyBtn,
+    },
+  ];
+
+  const linkedAgenciesGridForAgent = [
+    { headerText: 'Agencies',
+      width: '150',
+      template: gridAgenciesProfile,
+      textAlign: 'Center' 
+    },
+    { field: 'Name',
+      headerText: '',
+      width: '0',
+      textAlign: 'Center',
+    },
+    { field: 'Email',
+      headerText: 'Email',
+      width: '120',
+      textAlign: 'Center',
+    },
+    { field: 'Phone',
+      headerText: 'Phone Numbers',
+      width: '150',
+      textAlign: 'Center',
+    },
+    { field: 'Address',
+      headerText: 'Address',
+      width: '170',
+      textAlign: 'Center',
+    },
+    { 
+      field: 'State',
+      headerText: 'State',
+      width: '120',
+      textAlign: 'Center', 
+    },
+    { headerText: 'Country',
+      width: '120',
+      textAlign: 'Center',
+      template: gridAgenciesCountry 
+    },    
+    { 
+      headerText: 'Profile',
+      width: '125',
+      textAlign: 'Center',
+      template: gridAgenciesProfileLink
     },
   ];
 
@@ -805,6 +850,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     currencyFormatter,
     agencyCustomersGrid,
     agenciesGridForAgent,
+    linkedAgenciesGridForAgent,
     profile,
     navigate,
     openModal,
