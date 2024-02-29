@@ -134,8 +134,6 @@ const Agents = () => {
     getAgentApplication,
   } = HandleAgentApplication('https://realestate.api.sites.name.ng/agencies/agents/');
 
-  console.log('Agents test', getAgentApplication);
-
 
   const agentsData = getAgentApplication; 
 

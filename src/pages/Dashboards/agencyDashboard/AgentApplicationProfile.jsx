@@ -33,7 +33,7 @@ const HandleAgentApproval = (apiEndpoint) => {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
         },
-        body: agentApplicationApproval,
+        body: JSON.stringify(agentApplicationApproval),
       });
 
 
@@ -80,7 +80,7 @@ const AgentApplicationProfile = () => {
         agentApplicationApproval,
         handleFieldChange,
         approveAgent,
-    } = HandleAgentApproval(`https://realestate.api.sites.name.ng/agencies/agency-applications/${agentAppId}`);
+    } = HandleAgentApproval(`https://realestate.api.sites.name.ng/agencies/agency-applications/${agentAppId}/`);
 
 
 

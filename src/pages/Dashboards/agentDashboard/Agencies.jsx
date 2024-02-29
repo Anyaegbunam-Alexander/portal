@@ -15,8 +15,10 @@ const Agencies = () => {
   
   const {
     getAllAgencies,
+    getAgentApprovalStatus,
     agenciesGridForAgent,
   } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/');
+
 
   const agenciesData = getAllAgencies; 
 
@@ -25,7 +27,7 @@ const Agencies = () => {
     return {
       Profile: agency.id,
       Apply: agency.id,
-      Status: 'Pending',
+      Status: getAgentApprovalStatus,
       StatusBg: '#544A62',
       Name: agency.name,
       Email: agency.email,

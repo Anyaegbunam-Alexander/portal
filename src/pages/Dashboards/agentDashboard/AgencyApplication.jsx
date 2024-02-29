@@ -46,11 +46,6 @@ const UseHandleAgentApplication = (apiEndpoint) => {
         alert('Agency Application successful');
         navigate(`/${role}/agencies`);
       } else{
-        alert("An Error Occured: Unable to apply to Agency");
-      }
-
-
-      if (!response.ok) {
         const errorResponse = await response.json();
 
         for (const field in errorResponse.extra.fields) {
@@ -62,6 +57,7 @@ const UseHandleAgentApplication = (apiEndpoint) => {
           }
         }
       }
+
 
     } catch (error) {
       console.error(error);

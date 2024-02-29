@@ -18,6 +18,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [getAllAgencies, setgetAllAgencies] = useState([]); 
+  const [getAgentApprovalStatus, setgetAgentApprovalStatus] = useState([]); 
   const [getAllPropertyPurchases, setgetAllPropertyPurchases] = useState([]); 
   const [isLoading, setIsLoading] = useState(false); 
   const [profile, setProfile] = useState([])
@@ -241,7 +242,10 @@ const UsePropertyLogic = (apiEndpoint) => {
       });
 
       
-      if (!response.ok) {
+      if (response.ok) {
+        navigate(`/${role}/orders`);
+        alert('Property purchase successful, a customer representative from the agency will reach out to you shortly to confirm your payment.');
+      } else {
         const errorResponse = await response.json();
 
         for (const field in errorResponse.extra.fields) {
@@ -252,10 +256,7 @@ const UsePropertyLogic = (apiEndpoint) => {
             return
           }
         }
-      }
-
-      navigate(`/${role}/orders`);
-      alert('Property purchase successful, a customer representative from the agency will reach out to you shortly to confirm your payment.');
+      } 
 
     } catch (error) {
       // Handle errors (display an error message to the user, log the error, etc.)
@@ -284,9 +285,22 @@ const UsePropertyLogic = (apiEndpoint) => {
           },
         });
 
-        const data = await response.json();
-        
-        setgetAllAgencies(data.results);
+
+        if (response.ok) {
+          const data = await response.json();
+          setgetAllAgencies(data.results);
+        } else {
+          const errorResponse = await response.json();
+  
+          for (const field in errorResponse.extra.fields) {
+            if (errorResponse.extra.fields[field]) {
+              // Output the value contained in the field
+              alert(`${field}: ${errorResponse.extra.fields[field]}`)
+              console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+              return
+            }
+          }
+        }
       } catch (error) {
         console.error('Error fetching properties:', error);
       } 
@@ -348,12 +362,50 @@ const UsePropertyLogic = (apiEndpoint) => {
     </div>
   );
 
-  const agentApprovalGridStatus = (props) => (
-    <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
-      <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
-      <p>{props.Status}</p>
-    </div>
-  );
+  const useAgentApprovalGridStatus = (props) => {
+
+    useEffect(() => {
+      const getAgentApprovalStatus = async () => {
+        try {
+          const response = await fetch(`https://realestate.api.sites.name.ng/agents/agency-applications/${props.Profile}/`, {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+  
+  
+          if (response.ok) {
+            const data = await response.json();
+            console.log('test Data: ', data);
+            setgetAgentApprovalStatus(data.results);
+          } else {
+            const errorResponse = await response.json();
+    
+            for (const field in errorResponse.extra.fields) {
+              if (errorResponse.extra.fields[field]) {
+                // Output the value contained in the field
+                alert(`${field}: ${errorResponse.extra.fields[field]}`)
+                console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+                return
+              }
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching properties:', error);
+        } 
+      }
+  
+      getAgentApprovalStatus();
+    }, [props.Profile]);
+
+    return(
+      <div className="flex gap-2 justify-center items-center text-gray-700 capitalize">
+        <p style={{ background: props.StatusBg }} className="rounded-full h-3 w-3" />
+        <p>{props.Status}</p>
+      </div>
+    )
+  };
   
   const agenciesGridForAgent = [
     { headerText: 'Agencies',
@@ -403,7 +455,7 @@ const UsePropertyLogic = (apiEndpoint) => {
       headerText: 'Approval Status',
       width: '130',
       textAlign: 'Center',
-      template: agentApprovalGridStatus, 
+      template: useAgentApprovalGridStatus, 
     },
   ];
 
@@ -806,6 +858,7 @@ const UsePropertyLogic = (apiEndpoint) => {
     agencyCustomersGrid,
     agenciesGridForAgent,
     profile,
+    getAgentApprovalStatus,
     navigate,
     openModal,
     navOptions,
