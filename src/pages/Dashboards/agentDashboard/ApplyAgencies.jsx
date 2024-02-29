@@ -11,7 +11,7 @@ import { GridComponent,
 import { Header } from '../../../components/dashboardComponents';
 import UsePropertyLogic from '../methods';
 
-const Agencies = () => {
+const ApplyAgencies = () => {
   
   const {
     getAllAgencies,
@@ -57,4 +57,4 @@ const Agencies = () => {
   )
 }
 
-export default Agencies;
+export default ApplyAgencies;

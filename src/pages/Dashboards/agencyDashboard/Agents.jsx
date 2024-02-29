@@ -9,19 +9,14 @@ import { GridComponent,
 } from '@syncfusion/ej2-react-grids';
 
 import { Header } from '../../../components/dashboardComponents';
-import { useNavigate } from 'react-router-dom';
 import { GrLocation } from 'react-icons/gr';
-import { useStateContext } from '../../../contexts/ContextProvider';
 
 
 const HandleAgentApplication = (apiEndpoint) => {
 
   const [getAgentApplication, setAgentApplication] = useState([]);
-  const { currentColor } = useStateContext();
 
 
-  const navigate = useNavigate();
-  const role = localStorage.getItem('role');
   const accessToken = localStorage.getItem('token');
 
   const gridEmployeeProfile = (props) => (

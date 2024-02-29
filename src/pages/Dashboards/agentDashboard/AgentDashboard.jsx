@@ -10,6 +10,7 @@ import {
   Profile,
   Referral,
   Calendar,
+  ApplyAgencies, 
   Agencies, 
   Overview,
   Line, 
@@ -20,7 +21,6 @@ import {
 } from './index';
 
 import { useStateContext } from '../../../contexts/ContextProvider';
-import AgencyApplication from './AgencyApplication';
 
 const UserDashboard = () => {
   const { activeMenu, themeSettings, setThemeSettings, currentColor, currentMode } = useStateContext();
@@ -72,6 +72,7 @@ const UserDashboard = () => {
 
                         {/* Pages */}
                         <Route path="referral-link" element={<Referral />} />
+                        <Route path="apply-agencies" element={<ApplyAgencies />} />
                         <Route path="agencies" element={<Agencies />} />
 
                         {/* Apps */}
