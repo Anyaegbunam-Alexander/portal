@@ -1,10 +1,13 @@
 import {useCallback, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../contexts/ContextProvider';
+import Modal from 'react-modal';
+
 
 
 // Icons
 import { GrLocation } from 'react-icons/gr';
+import { MdOutlineCancel } from 'react-icons/md';
 
 
 
@@ -633,11 +636,29 @@ const UsePropertyLogic = (apiEndpoint) => {
           style={{backgroundColor: props.Status === 'approved' ? '#86BE59' : props.Status === 'rejected' ? 'red' : currentColor}}
           onClick={() => {
             localStorage.setItem('property-id', props.purchaseID);
-            navigate(`/${role}/purchases/properties/${props.purchaseID}/`);
+            if (props.Status === 'approved' || props.Status === 'rejected') {
+              alert(`Property Purchase status can no longer be updated once ${props.Status}. Kindly contact admin for further assistance.`);
+            } else{
+              navigate(`/${role}/purchases/properties/${props.purchaseID}/`);
+            }
           }}
-          disabled={props.Status === 'approved' || props.Status === 'rejected'}
         >
           {props.Status === 'approved' || props.Status === 'rejected' ? `Already ${props.Status}` : 'Approve Property'}
+        </button>
+      </div>
+    );
+
+    const gridPropertyPurchaseAgencyNote = (props) => (
+      <div className="text-gray-700 capitalize">
+        <button 
+          className="note-button"
+          onClick={() => {
+            {alert(props.agencyNote)}
+          }}
+        >
+          <p>
+            {props.agencyNote !== '' || props.agencyNote !== null ? props.agencyNote : 'null' }
+          </p>
         </button>
       </div>
     );
@@ -677,7 +698,12 @@ const UsePropertyLogic = (apiEndpoint) => {
       {
         headerText: 'Status',
         template: gridPropertyStatus,
-        field: 'OrderItems',
+        textAlign: 'Center',
+        width: '120',
+      },
+      {
+        headerText: 'Agency Note',
+        template: gridPropertyPurchaseAgencyNote,
         textAlign: 'Center',
         width: '120',
       },
@@ -784,6 +810,21 @@ const UsePropertyLogic = (apiEndpoint) => {
       </div>
     );
 
+    const agencyCustomerGridNote = (props) => (
+      <div className="text-gray-700 capitalize">
+        <button 
+          className="note-button"
+          onClick={() => {
+            {alert(props.customerNote)}
+          }}
+        >
+          <p>
+            {props.customerNote !== '' ? props.customerNote : 'null' }
+          </p>
+        </button>
+      </div>
+    );
+
 
     const agencyCustomersGrid = [
       // { type: 'checkbox', width: '50' },
@@ -804,10 +845,18 @@ const UsePropertyLogic = (apiEndpoint) => {
         template: agencyCustomerGridStatus 
       },
       {
+        // field: 'customerNote',
+        headerText: 'Customer Note',
+        width: '120',
+        template: agencyCustomerGridNote,
+        textAlign: 'Center' 
+      },
+      {
         field: 'Availability',
         headerText: 'Availability',
-        width: '100',
-        textAlign: 'Center' },
+        width: '120',
+        textAlign: 'Center' 
+      },
       { field: 'Price',
         headerText: 'Price',
         width: '170',

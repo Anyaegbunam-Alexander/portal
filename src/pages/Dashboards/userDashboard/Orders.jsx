@@ -34,6 +34,7 @@ const Orders = () => {
 
     return {
       propertyID: propertyPurchase.property.id,
+      agencyNote: propertyPurchase.agency_notes,
       PropertyName: propertyPurchase.property ? propertyPurchase.property.name || propertyPurchase.property.type : '',
       AgencyName: propertyPurchase.property.agency.name,
       TotalAmount: currencyFormatter.format(propertyPurchase.property.price),

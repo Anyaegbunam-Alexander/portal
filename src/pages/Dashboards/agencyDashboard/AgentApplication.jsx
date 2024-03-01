@@ -48,8 +48,8 @@ const HandleAgentApplication = (apiEndpoint) => {
         style={{backgroundColor: props.Status === 'approved' ? '#86BE59' : props.Status === 'rejected' ? 'red' : currentColor}}
         onClick={() => {
           localStorage.setItem('agentApplicationId', props.ApplicationID);
-          if (props.Status === 'approved') {
-            alert(`Agent status can no longer be updated once approved. Kindly contact admin for further assistance.`);
+          if (props.Status === 'approved' || props.Status === 'rejected') {
+            alert(`Agent status can no longer be updated once ${props.Status}. Kindly contact admin for further assistance.`);
           } else{
             navigate(`/agencies/agency-applications/${props.ApplicationID}/`);
           }

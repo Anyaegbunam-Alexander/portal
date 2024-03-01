@@ -26,7 +26,6 @@ const Customers = () => {
 
   const customersData = getAllPropertyPurchases;
 
-  console.log("Customers new data: ", customersData);
 
   // Map through agenciesData and transform each agency as needed
   const mappedData = customersData.map((customerInfo) => {
@@ -35,6 +34,7 @@ const Customers = () => {
       CustomerID: customerInfo.customer.id || customerInfo.property.interested_customers.id,
       CustomerName: customerInfo.customer.last_name || customerInfo.property.interested_customers.last_name,
       CustomerEmail: customerInfo.customer.email || customerInfo.property.interested_customers.email,
+      customerNote: customerInfo.customer_notes,
       CustomerImage: customerInfo.customer.profile_picture !== null ? customerInfo.customer.profile_picture || customerInfo.property.interested_customers.profile_picture :
         'https://media.istockphoto.com/id/1316420668/vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol.jpg?s=612x612&w=0&k=20&c=AhqW2ssX8EeI2IYFm6-ASQ7rfeBWfrFFV4E87SaFhJE=',
       PropertyName: customerInfo.property ? customerInfo.property.name || customerInfo.property.type : '',
