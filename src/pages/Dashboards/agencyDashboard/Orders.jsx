@@ -27,6 +27,7 @@ const Orders = () => {
 
   const propertyPurchaseData = getAllPropertyPurchases; 
 
+  console.log('propertyPurchaseData:', propertyPurchaseData)
 
   // Map through agenciesData and transform each agency as needed
   const mappedData = propertyPurchaseData.map((propertyPurchase) => {
@@ -36,10 +37,9 @@ const Orders = () => {
       PropertyName: propertyPurchase.property ? propertyPurchase.property.name || propertyPurchase.property.type : '',
       AgencyName: propertyPurchase.customer.last_name,
       TotalAmount: currencyFormatter.format(propertyPurchase.property.price),
-      OrderItems: 'Fresh Tomato',
       Teller: propertyPurchase.proof_of_payment,
       Status: propertyPurchase.status,
-      StatusBg: '#FB9678',
+      StatusBg: propertyPurchase.status === 'rejected' ? '#EF072F' : propertyPurchase.status === 'approved' ? '#86BE59' : '#544A62',
       ProductImage: propertyPurchase.property.images.length > 0 ? propertyPurchase.property.images[0].image : '',
     };
   });

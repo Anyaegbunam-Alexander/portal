@@ -21,7 +21,6 @@ const HandleAgentApplication = (apiEndpoint) => {
 
 
   const navigate = useNavigate();
-  const role = localStorage.getItem('role');
   const accessToken = localStorage.getItem('token');
 
   const gridEmployeeProfile = (props) => (

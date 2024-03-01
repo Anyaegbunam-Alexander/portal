@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import UsePropertyLogic from './methods';
 import { useParams } from 'react-router-dom';
 import Modal from 'react-modal';
@@ -22,11 +22,9 @@ const PropertyDetails = () => {
   const { propertyId } = useParams();
 
   const { 
-    role,
     property, 
     selectedImage,
     isModalOpen, 
-    navigate,
     openModal,
     closeModal,
     navOptions,

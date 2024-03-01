@@ -582,9 +582,42 @@ const UsePropertyLogic = (apiEndpoint) => {
       </button>
     );
 
+
+    // const gridPropertyStatus = (props) => {
+    //   // Options for the dropdown
+    //   const statusOptions = ['pending', 'approved', 'rejected'];
+    
+    //   return (
+    //     <select
+    //       className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+    //       value={props.Status}
+    //       onChange={(e) => props.onStatusChange(props.rowData, e.target.value)}
+    //       style={{ background: props.StatusBg }}
+    //     >
+    //       {statusOptions.map((option) => (
+    //         <option key={option} value={option}>
+    //           {option}
+    //         </option>
+    //       ))}
+    //     </select>
+    //   );
+    // };
+
+
     const gridPropertyPurchaseReceipt = (props) => (
       <div className="flex items-center justify-center gap-2">
-        <a href={`${props.Receipt}`} className=' underline text-blue-800'>Download Receipt</a>
+        <a 
+          href={`${props.Receipt}`} 
+          className='underline text-blue-800'
+          onClick={(e) => {
+            if (props.Status === 'pending' || props.Status === 'rejected') {
+              e.preventDefault(); // Prevent the default action (following the link)
+              alert('Property purchase is not yet approved by this agency');
+            }
+          }}
+        >
+          Download Receipt
+        </a>
       </div>
     );
 

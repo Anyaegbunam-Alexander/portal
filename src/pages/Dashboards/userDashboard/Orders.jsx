@@ -37,9 +37,9 @@ const Orders = () => {
       PropertyName: propertyPurchase.property ? propertyPurchase.property.name || propertyPurchase.property.type : '',
       AgencyName: propertyPurchase.property.agency.name,
       TotalAmount: currencyFormatter.format(propertyPurchase.property.price),
-      Receipt: 'https://google.com',
+      Receipt: '/customer/orders',
       Status: propertyPurchase.status,
-      StatusBg: '#FB9678',
+      StatusBg: propertyPurchase.status === 'rejected' ? '#EF072F' : propertyPurchase.status === 'approved' ? '#86BE59' : '#544A62',
       ProductImage: propertyPurchase.property.images.length > 0 ? propertyPurchase.property.images[0].image : '',
     };
   });
