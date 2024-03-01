@@ -34,8 +34,9 @@ const Orders = () => {
 
     return {
       propertyID: propertyPurchase.property.id,
+      purchaseID: propertyPurchase.id,
       PropertyName: propertyPurchase.property ? propertyPurchase.property.name || propertyPurchase.property.type : '',
-      AgencyName: propertyPurchase.customer.last_name,
+      customerName: `${propertyPurchase.customer.last_name} ${propertyPurchase.customer.first_name}`,
       TotalAmount: currencyFormatter.format(propertyPurchase.property.price),
       Teller: propertyPurchase.proof_of_payment,
       Status: propertyPurchase.status,
@@ -54,6 +55,7 @@ const Orders = () => {
         dataSource={mappedData}
         allowPaging
         allowSorting
+        className='absolute left-0 top-0 w-full'
       >
         <ColumnsDirective>
           {propertyPurchaseGridForAgency.map((item, index) => (

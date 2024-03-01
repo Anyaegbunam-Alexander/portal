@@ -45,7 +45,7 @@ const HandleAgentApplication = (apiEndpoint) => {
     <div className="flex items-center justify-center gap-2">
       <button
         className='py-3 w-full text-white outline-none rounded-lg'
-        style={{backgroundColor: currentColor}}
+        style={{backgroundColor: props.Status === 'approved' ? '#86BE59' : props.Status === 'rejected' ? 'red' : currentColor}}
         onClick={() => {
           localStorage.setItem('agentApplicationId', props.ApplicationID);
           if (props.Status === 'approved') {
@@ -55,7 +55,7 @@ const HandleAgentApplication = (apiEndpoint) => {
           }
         }}
       >
-        Take Decision
+        {props.Status === 'approved' || props.Status === 'rejected' ? `Already ${props.Status}` : 'Take Decision'}
       </button>
     </div>
   );

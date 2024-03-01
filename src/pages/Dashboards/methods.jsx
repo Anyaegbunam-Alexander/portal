@@ -2,8 +2,10 @@ import {useCallback, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../contexts/ContextProvider';
 
+
 // Icons
 import { GrLocation } from 'react-icons/gr';
+
 
 
 const UsePropertyLogic = (apiEndpoint) => {
@@ -577,31 +579,13 @@ const UsePropertyLogic = (apiEndpoint) => {
         type="button"
         style={{ background: props.StatusBg }}
         className="text-white py-1 px-2 capitalize rounded-2xl text-md"
+        onClick={() => {
+          
+        }}
       >
         {props.Status}
       </button>
     );
-
-
-    // const gridPropertyStatus = (props) => {
-    //   // Options for the dropdown
-    //   const statusOptions = ['pending', 'approved', 'rejected'];
-    
-    //   return (
-    //     <select
-    //       className="text-white py-1 px-2 capitalize rounded-2xl text-md"
-    //       value={props.Status}
-    //       onChange={(e) => props.onStatusChange(props.rowData, e.target.value)}
-    //       style={{ background: props.StatusBg }}
-    //     >
-    //       {statusOptions.map((option) => (
-    //         <option key={option} value={option}>
-    //           {option}
-    //         </option>
-    //       ))}
-    //     </select>
-    //   );
-    // };
 
 
     const gridPropertyPurchaseReceipt = (props) => (
@@ -638,6 +622,22 @@ const UsePropertyLogic = (apiEndpoint) => {
           }}
         >
           View Property
+        </button>
+      </div>
+    );
+    const gridPropertyPurchaseDecisionButton = (props) => (
+      <div className="flex items-center justify-center gap-2">
+        {/* <a href={`${props.Teller}`} className=' underline text-blue-800' target='_blank' rel="noreferrer">Download Teller</a> */}
+        <button
+          className='py-3 w-full text-white outline-none rounded-lg'
+          style={{backgroundColor: props.Status === 'approved' ? '#86BE59' : props.Status === 'rejected' ? 'red' : currentColor}}
+          onClick={() => {
+            localStorage.setItem('property-id', props.purchaseID);
+            navigate(`/${role}/purchases/properties/${props.purchaseID}/`);
+          }}
+          disabled={props.Status === 'approved' || props.Status === 'rejected'}
+        >
+          {props.Status === 'approved' || props.Status === 'rejected' ? `Already ${props.Status}` : 'Approve Property'}
         </button>
       </div>
     );
@@ -710,7 +710,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         editType: 'dropdownedit',
         textAlign: 'Center',
       },
-      { field: 'AgencyName',
+      { field: 'customerName',
         headerText: 'Customer Name',
         width: '150',
         textAlign: 'Center',
@@ -730,12 +730,17 @@ const UsePropertyLogic = (apiEndpoint) => {
         width: '120',
       },
       {
+        template: gridPropertyPurchaseDecisionButton,
+        headerText: 'Approve Property',
+        width: '170',
+        textAlign: 'Center',
+      },
+      {
         field: 'propertyID',
         headerText: 'Property ID',
         width: '120',
         textAlign: 'Center',
       },
-    
       {
         template: gridPropertyPurchaseOption,
         headerText: 'Teller',

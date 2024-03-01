@@ -21,6 +21,7 @@ import PurchaseProperty from './pages/Dashboards/PurchaseProperty';
 import GetAgencyProfile from './pages/Dashboards/GetAgencyProfile';
 import AgencyApplication from './pages/Dashboards/agentDashboard/AgencyApplication';
 import AgentApplicationProfile from './pages/Dashboards/agencyDashboard/AgentApplicationProfile';
+import ApprovePurchase from './pages/Dashboards/agencyDashboard/ApprovePurchase';
 
 
 const App = () => {
@@ -60,6 +61,7 @@ const App = () => {
       <Route path={`/${role}/listings/show-property/:propertyId`} element={<PropertyDetails />} />
       <Route path={`/agencies/agency-applications/:id/`} element={<AgentApplicationProfile />} />
       <Route path={`/${role}/agencies/:id/`} element={<GetAgencyProfile />} />
+      <Route path={`/${role}/purchases/properties/:id/`} element={<ApprovePurchase />} />
 
 
       {/* 404 Route - Catch-all */}
