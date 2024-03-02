@@ -90,9 +90,9 @@ const EditAgencyProfile = () => {
                 <div className="p-8">
                     <div className="uppercase tracking-wide text-lg md:text-xl text-center text-purple-500 font-semibold">Edit Profile</div>
     
-                    <div className="mt-4 space-y-6">
+                    <div className="mt-6 space-y-6">
                       {/* Upload logo */}
-                      <div className="mt-2">
+                      <div className="my-6">
                           <label className="block text-gray-700 text-sm mb-2">Agency Logo</label>
                           <div className="flex items-center justify-between w-full">
                               <label htmlFor="logo" className="cursor-pointer bg-purple-500 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded flex items-center">
@@ -106,7 +106,7 @@ const EditAgencyProfile = () => {
                           <input id="logo" type="file" name="logo" onChange={handleChange} className="hidden"  accept="image/*"/>
                       </div>
 
-                      <input type="text" name="description" value={formData.description} onChange={handleChange} className="form-input outline-none w-full border-b-2 p-2" placeholder="Agency Description"/>
+                      <textarea type="text" name="description" value={formData.description} onChange={handleChange} rows='6' className="form-input outline-none w-full border-2 p-2" placeholder="Agency Description"></textarea>
                       <input type="link" name="link" value={formData.link} onChange={handleChange} className="form-input outline-none w-full border-b-2 p-2" placeholder="www.example.com"/>
                     </div>
                 

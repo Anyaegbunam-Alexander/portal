@@ -24,6 +24,7 @@ import AgentApplicationProfile from './pages/Dashboards/agencyDashboard/AgentApp
 import ApprovePurchase from './pages/Dashboards/agencyDashboard/ApprovePurchase';
 import EditProfile from './pages/Dashboards/userDashboard/EditProfile';
 import EditAgencyProfile from './pages/Dashboards/agencyDashboard/EditAgencyProfile';
+import EditAgentProfile from './pages/Dashboards/agentDashboard/EditProfile';
 
 
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
       <Route path={`/${role}/purchases/properties/:id/`} element={<ApprovePurchase />} />
       <Route path={`/${role}/customers/profile/`} element={<EditProfile />} />
       <Route path={`/${role}/agencies/profile/`} element={<EditAgencyProfile />} />
+      <Route path={`/${role}/agents/profile/`} element={<EditAgentProfile />} />
 
 
       {/* 404 Route - Catch-all */}
