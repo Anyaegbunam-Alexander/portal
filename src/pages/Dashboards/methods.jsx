@@ -85,26 +85,24 @@ const UsePropertyLogic = (apiEndpoint) => {
         },
       });
 
-      const data = await response.json();
+      if (response.ok) {
+        const data = await response.json();
   
+        // gets all properties
+        setProperties(data.results);
+        
+        setTotalPages(data.page_count);
+        
+        // gets single property
+        setproperty(data);
 
-      // gets all properties
-      setProperties(data.results);
-      
-      setTotalPages(data.page_count);
-      
-      // gets single property
-      setproperty(data);
-      console.log("Single Property Data: ", data.id);
-
-      // pagination links
-      setPaginationLinks({
-        previous: data.links?.previous,
-        next: data.links?.next,
-      });
-
-
-      if (!response.ok) {
+        // pagination links
+        setPaginationLinks({
+          previous: data.links?.previous,
+          next: data.links?.next,
+        });
+  
+      } else {
         const errorResponse = await response.json();
 
         for (const field in errorResponse.extra.fields) {
@@ -116,9 +114,10 @@ const UsePropertyLogic = (apiEndpoint) => {
           }
         }
       }
+
     } catch (error) {
       console.error(error);
-      alert("An Error Occured: Unable to fetch properties", error);
+      alert("An Error Occured: Unable to fetch properties, please try again", error);
     } finally {
       setIsLoading(false); // Set loading to false when the fetch operation completes
     }

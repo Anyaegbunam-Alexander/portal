@@ -19,6 +19,7 @@ import LoadingSpinner from '../../../components/loader/LoadingSpinner';
 const Properties = () => {
   
   const{
+    role,
     totalPages,
     currentPage,
     paginationLinks,
@@ -31,6 +32,9 @@ const Properties = () => {
     UsehandleDropdown,
     handlePagination,
   } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
+
+  console.log('Property: ', properties)
+
   useEffect(() => {
     // Store the current page number in local storage
     localStorage.setItem('currentPage', currentPage);
@@ -38,6 +42,21 @@ const Properties = () => {
 
   localStorage.setItem('nextPageLink', paginationLinks?.next);
   localStorage.setItem('prevPageLink', paginationLinks?.previous);
+
+  const handleShareButtonClick = (property) => {
+    const shareUrl = `https://companyx.sites.name.ng/${role}/listings/show-property/${property.id}?ref=${property.agent.referral_code}`;
+    if (navigator.share) {
+      navigator.share({
+        title: `${property.name || property.type}`,
+        text: property.description,
+        url: shareUrl,
+      })
+      .then(() => alert('Shared successfully'))
+      .catch(error => alert('Error sharing:', error));
+    } else {
+      alert('Sharing is not supported on this device/browser.');
+    }
+  };
 
   return (
     <div className="mt-16">
@@ -105,7 +124,10 @@ const Properties = () => {
                         {/* Dropdown content goes here */}
                         <div>
                           <ul className="space-y-4">
-                            <li className='flex items-center border-b border-solid py-3'>
+                            <li 
+                              className='flex items-center border-b border-solid py-3'
+                              onClick={() => {handleShareButtonClick(property)}}
+                            >
                               <CiShare2 className='text-xl mr-3'/> Share
                             </li>
                             <li className='flex items-center'>
