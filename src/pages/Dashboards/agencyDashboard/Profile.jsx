@@ -16,7 +16,7 @@ const Profile = () => {
     const {
         role,
         profile
-    } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/profile/');
+    } = UsePropertyLogic('https://realestate.api.mvcsites.name.ng/agencies/profile/');
 
     console.log("User data:", profile)
 

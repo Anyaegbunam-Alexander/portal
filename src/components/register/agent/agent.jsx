@@ -31,7 +31,7 @@ const Agent = () => {
     confirmPassword_show_hide,
     handleSubmit,
     closePopup,
-  } = useRegistrationMethod('https://realestate.api.sites.name.ng/auth/agents/signup/');
+  } = useRegistrationMethod('https://realestate.api.mvcsites.name.ng/auth/agents/signup/');
 
   return (
     <div className="register--container">    

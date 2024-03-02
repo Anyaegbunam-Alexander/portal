@@ -11,7 +11,7 @@ const PurchaseProperty = () => {
     PurchaseProperty,
     handleFieldChange,
     handleTellerChange,
-  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/purchases/properties/`);
+  } = UsePropertyLogic(`https://realestate.api.mvcsites.name.ng/purchases/properties/`);
 
 
   const getPropertyId = () => {

@@ -156,7 +156,7 @@ const AgentApplication = () => {
   const {
     employeesGrid,
     getAgentApplication,
-  } = HandleAgentApplication('https://realestate.api.sites.name.ng/agencies/agency-applications/');
+  } = HandleAgentApplication('https://realestate.api.mvcsites.name.ng/agencies/agency-applications/');
 
   console.log('test', getAgentApplication);
 

@@ -29,7 +29,7 @@ const PropertyDetails = () => {
     closeModal,
     navOptions,
     propertyPurchaseNav,
-  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/${propertyId}`);
+  } = UsePropertyLogic(`https://realestate.api.mvcsites.name.ng/properties/${propertyId}`);
 
   console.log(property);
   

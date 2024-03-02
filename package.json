@@ -1,7 +1,7 @@
 {
   "name": "portal",
   "version": "0.1.0",
-  "homepage": "https://companyx.sites.name.ng",
+  "homepage": "https://companyx.mvcsites.name.ng",
   "main": "src/index.js",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
     "@syncfusion/ej2": "^19.4.48",
+    "@syncfusion/ej2-inputs": "^24.2.7",
     "@syncfusion/ej2-react-calendars": "^19.4.48",
     "@syncfusion/ej2-react-charts": "^19.4.50",
     "@syncfusion/ej2-react-dropdowns": "^19.4.52",

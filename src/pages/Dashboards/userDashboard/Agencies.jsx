@@ -16,7 +16,7 @@ const Agencies = () => {
   const {
     getAllAgencies,
     agenciesGrid,
-  } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/');
+  } = UsePropertyLogic('https://realestate.api.mvcsites.name.ng/agencies/');
 
 
   const agenciesData = getAllAgencies; 

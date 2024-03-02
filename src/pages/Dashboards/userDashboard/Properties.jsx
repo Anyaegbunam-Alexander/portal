@@ -30,8 +30,7 @@ const Properties = () => {
     showProperty,
     UsehandleDropdown,
     handlePagination,
-  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`); //?page=${localStorage.getItem('currentPage') || 1}
-
+  } = UsePropertyLogic(`https://realestate.api.mvcsites.name.ng/properties/`); 
 
   useEffect(() => {
     // Store the current page number in local storage

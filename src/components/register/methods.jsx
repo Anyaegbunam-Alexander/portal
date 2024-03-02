@@ -232,7 +232,7 @@ const useRegistrationMethod = (apiEndpoint) => {
         const response = await fetch(apiEndpoint, {
           method: 'POST',
           headers: {
-            "Referer": "https://realestate.api.sites.name.ng/",
+            "Referer": "https://realestate.api.mvcsites.name.ng/",
             "X-CSRFToken": "VdU9qyALJzBsZb0oH9RuMdLbkowgWCKi"
           },
           body: formDataObj,

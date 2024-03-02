@@ -79,7 +79,7 @@ const ApprovePurchase = () => {
         propertyPurchaseApproval,
         handleFieldChange,
         approvePropertyPurchase,
-    } = HandlePropertyPurchaseApproval(`https://realestate.api.sites.name.ng/purchases/properties/${propertyId}/`);
+    } = HandlePropertyPurchaseApproval(`https://realestate.api.mvcsites.name.ng/purchases/properties/${propertyId}/`);
 
 
 

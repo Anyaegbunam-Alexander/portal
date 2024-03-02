@@ -67,7 +67,7 @@ const GetAgencyProfile = () => {
 
     const {
         singleProfile
-    } = useSingleProfile(`https://realestate.api.sites.name.ng/agencies/${profileId}`);
+    } = useSingleProfile(`https://realestate.api.mvcsites.name.ng/agencies/${profileId}`);
 
 
     return (

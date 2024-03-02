@@ -36,7 +36,7 @@ const Properties = () => {
     UsehandleDropdown,
     handlePagination,
     deleteProperty,
-  } = UsePropertyLogic(`https://realestate.api.sites.name.ng/properties/`);
+  } = UsePropertyLogic(`https://realestate.api.mvcsites.name.ng/properties/`);
 
 
 

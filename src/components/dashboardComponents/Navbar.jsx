@@ -35,7 +35,7 @@ const Navbar = () => {
 
   const {
     profile
-  } = UsePropertyLogic('https://realestate.api.sites.name.ng/customers/profile/');
+  } = UsePropertyLogic('https://realestate.api.mvcsites.name.ng/customers/profile/');
 
 
   useEffect(() => {

@@ -90,7 +90,7 @@ const AgencyApplication = () => {
     agencyId,
     handleFieldChange,
     applyAgency,
-  } = UseHandleAgentApplication('https://realestate.api.sites.name.ng/agents/agency-applications/');
+  } = UseHandleAgentApplication('https://realestate.api.mvcsites.name.ng/agents/agency-applications/');
 
 
   return (

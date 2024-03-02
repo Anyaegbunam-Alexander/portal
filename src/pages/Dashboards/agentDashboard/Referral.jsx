@@ -10,7 +10,7 @@ const Referral = () => {
   useEffect(() => {
     const fetchReferralCode = async () => {
       try {
-        const response = await fetch('https://realestate.api.sites.name.ng/agents/profile/', {
+        const response = await fetch('https://realestate.api.mvcsites.name.ng/agents/profile/', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${accessToken}`,

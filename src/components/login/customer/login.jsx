@@ -23,7 +23,7 @@ const Login = () => {
     handleChange,
     password_show_hide,
     useHandleLogin,
-  } = useLoginLogic('https://realestate.api.sites.name.ng/auth/customers/login/');
+  } = useLoginLogic('https://realestate.api.mvcsites.name.ng/auth/customers/login/');
 
 
   return (

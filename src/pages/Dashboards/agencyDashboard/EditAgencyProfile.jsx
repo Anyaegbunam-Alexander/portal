@@ -44,7 +44,7 @@ const EditAgencyProfile = () => {
     formDataToSend.append('logo', formData.logo);
 
     try {
-      const response = await fetch('https://realestate.api.sites.name.ng/agencies/profile/', {
+      const response = await fetch('https://realestate.api.mvcsites.name.ng/agencies/profile/', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${accessToken}`,

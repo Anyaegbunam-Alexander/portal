@@ -30,7 +30,7 @@ const CustomerRegistration = () => {
     confirmPassword_show_hide,
     handleSubmit,
     closePopup,
-  } = useRegistrationMethod('https://realestate.api.sites.name.ng/auth/customers/signup/');
+  } = useRegistrationMethod('https://realestate.api.mvcsites.name.ng/auth/customers/signup/');
 
 
 

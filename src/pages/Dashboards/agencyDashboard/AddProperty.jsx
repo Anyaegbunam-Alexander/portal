@@ -163,7 +163,7 @@ const AddProperties = () => {
     try {
       setIsLoading(true);
 
-      const response = await fetch('https://realestate.api.sites.name.ng/properties/', {
+      const response = await fetch('https://realestate.api.mvcsites.name.ng/properties/', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${accessToken}`,

@@ -33,7 +33,7 @@ const Navbar = () => {
 
   const {
     profile
-  } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/profile/');
+  } = UsePropertyLogic('https://realestate.api.mvcsites.name.ng/agencies/profile/');
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);

@@ -26,7 +26,7 @@ const AgentProfile = () => {
 
   const {
     profile
-  } = UsePropertyLogic('https://realestate.api.sites.name.ng/agents/profile/');
+  } = UsePropertyLogic('https://realestate.api.mvcsites.name.ng/agents/profile/');
   
 
   return (

@@ -498,7 +498,7 @@ const UsePropertyLogic = (apiEndpoint) => {
   // Fetch properties from your API here
   const deleteProperty = async (propertyId) => {
     setIsLoading(true);
-    const url = `https://realestate.api.sites.name.ng/properties/${propertyId}`;
+    const url = `https://realestate.api.mvcsites.name.ng/properties/${propertyId}`;
 
     try {
       const response = await fetch(url, {

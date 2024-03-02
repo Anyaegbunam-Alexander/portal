@@ -79,7 +79,7 @@ const AgentApplicationProfile = () => {
         agentApplicationApproval,
         handleFieldChange,
         approveAgent,
-    } = HandleAgentApproval(`https://realestate.api.sites.name.ng/agencies/agency-applications/${agentAppId}/`);
+    } = HandleAgentApproval(`https://realestate.api.mvcsites.name.ng/agencies/agency-applications/${agentAppId}/`);
 
 
 
