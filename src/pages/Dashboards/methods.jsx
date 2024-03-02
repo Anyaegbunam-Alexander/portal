@@ -1,13 +1,10 @@
 import {useCallback, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../../contexts/ContextProvider';
-import Modal from 'react-modal';
-
 
 
 // Icons
 import { GrLocation } from 'react-icons/gr';
-import { MdOutlineCancel } from 'react-icons/md';
 
 
 
@@ -653,7 +650,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         <button 
           className="note-button"
           onClick={() => {
-            {alert(props.agencyNote)}
+            alert(props.agencyNote)
           }}
         >
           <p>
@@ -815,7 +812,7 @@ const UsePropertyLogic = (apiEndpoint) => {
         <button 
           className="note-button"
           onClick={() => {
-            {alert(props.customerNote)}
+            alert(props.customerNote)
           }}
         >
           <p>

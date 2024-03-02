@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Header } from '../../../components/dashboardComponents';
-import { GoHomeFill, GoLocation } from 'react-icons/go';
+import { GoLocation } from 'react-icons/go';
 import UsePropertyLogic from '../methods';
 import { BsMarkdown, BsPhone } from 'react-icons/bs';
 import { MdEdit, MdOutlineEmail } from 'react-icons/md';
@@ -14,6 +14,7 @@ const Profile = () => {
     const { currentColor } = useStateContext();
 
     const {
+        role,
         profile
     } = UsePropertyLogic('https://realestate.api.sites.name.ng/agencies/profile/');
 
@@ -25,7 +26,7 @@ const Profile = () => {
                 <Header category="Page" title="Profile" />
                 <div className="flex items-center justify-end space-x-2 my-3 hover:text-purple-500">
                     <MdEdit />
-                    <a href="/">Edit Profile</a>
+                    <a href={`/${role}/agencies/profile/`}>Edit Profile</a>
                 </div>
                 <div className="w-full mt-10">
                     <div className="text-center space-y-9">
@@ -60,8 +61,9 @@ const Profile = () => {
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-around md:items-center space-y-9">
-                        <div className="text-2xl md:text-4xl font-bold">
-                            <p>Profile Information</p>
+                        <div className="">
+                            <p className="text-xl md:text-3xl font-bold">Profile Information</p>
+                            <p className=' space-y-4'>{profile.description}</p>
                         </div>
                         <div className="space-y-9">
                             <div className="">

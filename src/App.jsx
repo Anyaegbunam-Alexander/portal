@@ -22,6 +22,8 @@ import GetAgencyProfile from './pages/Dashboards/GetAgencyProfile';
 import AgencyApplication from './pages/Dashboards/agentDashboard/AgencyApplication';
 import AgentApplicationProfile from './pages/Dashboards/agencyDashboard/AgentApplicationProfile';
 import ApprovePurchase from './pages/Dashboards/agencyDashboard/ApprovePurchase';
+import EditProfile from './pages/Dashboards/userDashboard/EditProfile';
+import EditAgencyProfile from './pages/Dashboards/agencyDashboard/EditAgencyProfile';
 
 
 const App = () => {
@@ -62,6 +64,8 @@ const App = () => {
       <Route path={`/agencies/agency-applications/:id/`} element={<AgentApplicationProfile />} />
       <Route path={`/${role}/agencies/:id/`} element={<GetAgencyProfile />} />
       <Route path={`/${role}/purchases/properties/:id/`} element={<ApprovePurchase />} />
+      <Route path={`/${role}/customers/profile/`} element={<EditProfile />} />
+      <Route path={`/${role}/agencies/profile/`} element={<EditAgencyProfile />} />
 
 
       {/* 404 Route - Catch-all */}

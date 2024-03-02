@@ -14,6 +14,7 @@ const Profile = () => {
     const { currentColor } = useStateContext();
 
     const {
+        role,
         profile
     } = UsePropertyLogic('https://realestate.api.sites.name.ng/customers/profile/');
 
@@ -24,7 +25,7 @@ const Profile = () => {
                 <Header category="Page" title="Profile" />
                 <div className="flex items-center justify-end space-x-2 my-3 hover:text-purple-500">
                     <MdEdit />
-                    <a href="/">Edit Profile</a>
+                    <a href={`/${role}/customers/profile/`}>Edit Profile</a>
                 </div>
                 <div className="w-full mt-10">
                     <div className="text-center space-y-9">
