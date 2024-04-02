@@ -112,7 +112,7 @@ const Agency = () => {
                   <input type="checkbox" id="login-remember"/>
                   <label htmlFor="login-remember"> Remember me.</label>
                 </div>
-                <a href="#!">Forgot password?</a>
+                <a href="/forgot-password">Forgot password?</a>
               </div>
 
               <button type="submit">Login</button>

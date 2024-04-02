@@ -25,6 +25,7 @@ import ApprovePurchase from './pages/Dashboards/agencyDashboard/ApprovePurchase'
 import EditProfile from './pages/Dashboards/userDashboard/EditProfile';
 import EditAgencyProfile from './pages/Dashboards/agencyDashboard/EditAgencyProfile';
 import EditAgentProfile from './pages/Dashboards/agentDashboard/EditProfile';
+import ForgotPassword from './components/forgot-password/forgotPassword';
 
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
       <Route path="/register/customer" element={<Customer />} />
       <Route path="/register/agent" element={<Agent />} />
       <Route path="/register/agency" element={<Agency />} />
+      <Route path="/forgot-password/" element={<ForgotPassword />} />
 
 
       {/* Show single property */}
@@ -71,7 +73,7 @@ const App = () => {
 
 
       {/* 404 Route - Catch-all */}
-      <Route path="/*" element={<NotFound />} />
+      <Route path={"/*"} element={<NotFound />} />
     </Routes>
   );
 }
