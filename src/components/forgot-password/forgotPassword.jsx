@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
+  const [passwordResetForm, setPasswordResetForm] = useState({
+    email: '',
+    url: 'http://companyx.sites.name.ng/reset-password'// /reset-password
+  });
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const { name, value } = e.target;
+    setPasswordResetForm(
+      (prevData) => (
+        { ...prevData, [name]: value }
+      )
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -20,17 +28,27 @@ const ForgotPassword = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(passwordResetForm),
       });
 
-      const data = await response.json();
+      //console.log(JSON.stringify(passwordResetForm))
 
-      console.log(data);
+      const data = await response.json();
 
       if (response.ok) {
         setMessage(data.message);
       } else {
         setMessage(data.error);
+        const errorResponse = await response.json();
+  
+        for (const field in errorResponse.extra.fields) {
+            if (errorResponse.extra.fields[field]) {
+                // Output the value contained in the field
+                alert(`${field}: ${errorResponse.extra.fields[field]}`)
+                console.log(`${field}: ${errorResponse.extra.fields[field]}`);
+                return
+            }
+        }
       }
     } catch (error) {
       console.error('Error:', error);
@@ -44,9 +62,13 @@ const ForgotPassword = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        
+        </div>
+        <div>
+          <h2 className="mt-6 text-center text-2xl md:text-3xl font-extrabold text-gray-900">
             Forgot Password
           </h2>
+          <p className=' text-center text-sm mt-4'>Kindly enter your email below to reset your password.</p>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
@@ -62,7 +84,7 @@ const ForgotPassword = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
-                value={email}
+                value={passwordResetForm.email}
                 onChange={handleEmailChange}
               />
             </div>

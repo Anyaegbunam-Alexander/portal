@@ -26,6 +26,7 @@ import EditProfile from './pages/Dashboards/userDashboard/EditProfile';
 import EditAgencyProfile from './pages/Dashboards/agencyDashboard/EditAgencyProfile';
 import EditAgentProfile from './pages/Dashboards/agentDashboard/EditProfile';
 import ForgotPassword from './components/forgot-password/forgotPassword';
+import PasswordReset from './components/forgot-password/PasswordReset';
 
 
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
       <Route path="/register/agent" element={<Agent />} />
       <Route path="/register/agency" element={<Agency />} />
       <Route path="/forgot-password/" element={<ForgotPassword />} />
+      <Route path="/reset-password/" element={<PasswordReset />} />
 
 
       {/* Show single property */}
