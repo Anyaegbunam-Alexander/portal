@@ -99,7 +99,7 @@ const Referral = () => {
       <div className=" mt-12">
         <h1 className=' text-center text-xl font-bold my-6'>Commission</h1>
 
-        <div className=' col columns-2'>
+        <div className=' col md:columns-2'>
           <div className=' bg-purple-800 rounded-lg text-white p-4'>
             <div className=' space-y-6'>
               <p className=' text-lg md:text-xl font-semibold'>Earned commission</p>
