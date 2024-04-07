@@ -95,6 +95,23 @@ const Referral = () => {
           </div>
         </div>
       )}
+
+      <div className=" mt-12">
+        <h1>Commission</h1>
+
+        <div className='col col-span-2 md:columns-2'>
+          <div className=' bg-purple-800 rounded-lg text-white p-4'>
+            <div className=' space-y-6'>
+              <p className=' text-lg md:text-xl font-semibold'>Earned commission</p>
+              <p className='text-2xl font-bold'>₦00.00 Earned</p>
+              <p className=' text-base'>From property purchase</p>
+            </div>
+          </div>
+          <div className=''>
+            <p>Paid commission</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
