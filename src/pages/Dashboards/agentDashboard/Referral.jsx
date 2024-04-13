@@ -100,14 +100,14 @@ const Referral = () => {
         <h1 className=' text-center text-xl font-bold my-6'>Commission</h1>
 
         <div className=' col md:columns-2'>
-          <div className=' bg-purple-800 rounded-lg text-white p-4'>
+          <div className=' bg-purple-800 rounded-lg text-white p-10'>
             <div className=' space-y-6'>
               <p className=' text-lg md:text-xl font-semibold'>Earned commission</p>
               <p className='text-2xl font-bold'>₦00.00 <span className=' text-sm text-gray-200'>Earned</span></p>
               {/* <p className=' text-base'>From property purchase</p> */}
             </div>
           </div>
-          <div className=' bg-slate-100 rounded-lg p-4'>
+          <div className=' bg-slate-100 rounded-lg p-10'>
             <div className=' space-y-6'>
               <p className=' text-lg md:text-xl font-semibold'>Paid commission</p>
               <p className='text-2xl font-bold'>₦00.00 <span className=' text-sm text-green-600'>Paid</span></p>
